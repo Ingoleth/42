@@ -1,0 +1,73 @@
+{
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "gcc build active file",
+            "command": "/usr/bin/gcc",
+            "args": [
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}"
+            ],
+            "options": {
+                "cwd": "/usr/bin"
+            }
+		},
+		{
+            "type": "shell",
+            "label": "compile cub3d",
+            "command": "/usr/bin/gcc",
+            "args": [
+                "-g",				
+                "/home/user42/Documents/cub3d/*.c",
+                "/home/user42/Documents/cub3d/file_reading/*.c",
+                "/home/user42/Documents/cub3d/rendering/*.c",
+                "/home/user42/Documents/cub3d/Libft/*.c",
+                "-o",
+				"${fileDirname}/${fileBasenameNoExtension}"
+            ],
+            "options": {
+                "cwd": "/usr/bin"
+            }
+		},
+		{
+            "type": "shell",
+            "label": "compile test 42tester",
+            "command": "/usr/bin/gcc",
+            "args": [
+                "-g",
+                //"${file}",
+				"/home/user42/Documents/get_next_line_v3/42TESTERS-GNL/srcs/gnl_tester.c",
+				"/home/user42/Documents/get_next_line_v3/get_next_line.c",
+				"/home/user42/Documents/get_next_line_v3/get_next_line_utils.c",
+				"-I ../",
+                "-o",
+				"${fileDirname}/${fileBasenameNoExtension}"
+            ],
+            "options": {
+                "cwd": "/usr/bin"
+            }
+		},
+		{
+            "type": "shell",
+            "label": "compile test 42tester_bonus",
+            "command": "/usr/bin/gcc",
+            "args": [
+                "-g",
+				//"${file}",
+				"${fileDirname}/42TESTERS-GNL/srcs/gnl_tester_bonus.c",
+				"${fileDirname}/get_next_line.c",
+				"${fileDirname}/get_next_line_utils.c",
+                "-I ../",
+                "-D BUFFER_SIZE=3",
+                "-o",
+				"${fileDirname}/${fileBasenameNoExtension}"
+            ],
+            "options": {
+                "cwd": "/usr/bin"
+            }
+        }
+    ],
+    "version": "2.0.0"
+}
