@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 22:45:57 by user42            #+#    #+#             */
-/*   Updated: 2020/10/03 10:56:12 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/08 12:08:56 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,14 @@ void draw_tiles(t_data *map_img, char **map, int tile_size, int line_size)
 void    render_map(char **map, s_mlx *mlx_data, int res_x, int res_y)
 {
     int tile_size;
-    t_data *map_img;
-    t_data *cursor;
        
 
     tile_size = get_tile_size(map, res_x < res_y ? res_x : res_y, &res_x, &res_y);
-    map_img = initialize_image(mlx_data->mlx_ptr, res_x * tile_size, res_y *tile_size);
-    //draw_pixel_area(map_img, set_draw_coords(0, 0, res_x * tile_size, res_y * tile_size), BLACK);
-    draw_tiles(map_img, map, tile_size, tile_size / LINE_WIDTH);
-    mlx_put_image_to_window(mlx_data->mlx_ptr, mlx_data->win_ptr, map_img->img, 0, 0);
-    cursor = initialize_xpm_image(mlx_data->mlx_ptr, "./textures/cursor/cursor_north.xpm");
-    mlx_put_image_to_window(mlx_data->mlx_ptr, mlx_data->win_ptr, cursor->img, 31 * tile_size + 4, 4 *tile_size + 2);
+    mlx_data->map = initialize_image(mlx_data->mlx_ptr, res_x * tile_size, res_y *tile_size);
+    //draw_pixel_area(mlx_data->map, set_draw_coords(0, 0, res_x * tile_size, res_y * tile_size), BLACK);
+    draw_tiles(mlx_data->map, map, tile_size, tile_size / LINE_WIDTH);
+    mlx_put_image_to_window(mlx_data->mlx_ptr, mlx_data->win_ptr, mlx_data->map->img, 0, 0);
+    load_cursor(mlx_data);
+    //initialize_xpm_image(mlx_data->mlx_ptr, "./textures/cursor/cursor_north.xpm");
+    mlx_put_image_to_window(mlx_data->mlx_ptr, mlx_data->win_ptr, mlx_data->cursor.north, 31 * tile_size + 4, 4 *tile_size + 2);
 }

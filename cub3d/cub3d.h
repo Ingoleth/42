@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/10/07 17:14:46 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/08 12:12:29 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,6 @@ typedef struct      s_file_descriptor
     char            *path;
 }                   s_file_descriptor;
 
-typedef struct      mlx
-{
-    void            *mlx_ptr;
-    void            *win_ptr;
-}                   s_mlx;
-
-
 typedef struct  s_data {
     void        *img;
     char        *addr;
@@ -80,6 +73,27 @@ typedef struct  s_data {
     int         line_length;
     int         endian;
 }               t_data;
+
+typedef struct cursor
+{
+    t_data      *north;
+    t_data      *north_east;
+    t_data      *east;
+    t_data      *south_east;
+    t_data      *south;
+    t_data      *south_west;
+    t_data      *west;
+    t_data      *north_west;
+}               s_cursor;
+
+typedef struct      mlx
+{
+    void            *mlx_ptr;
+    void            *win_ptr;
+    t_data          *background;
+    t_data          *map;
+    s_cursor        cursor;
+}                   s_mlx;
 
 typedef struct s_write_coords
 {
@@ -89,13 +103,21 @@ typedef struct s_write_coords
     int         end_y;
 }               s_coords;
 
-typedef struct s_map_render
+typedef struct map_render
 {
     t_data      *map;
     t_data      **cursor;
     int         tile_size;
 }               s_map_render;
 
+#define CURSOR_NORTH "./textures/cursor/cursor_north.xpm"
+#define CURSOR_NORTH_EAST "./textures/cursor/cursor_north_east.xpm"
+#define CURSOR_EAST "./textures/cursor/cursor_east.xpm"
+#define CURSOR_SOUTH_EAST "./textures/cursor/cursor_south_east.xpm"
+#define CURSOR_SOUTH "./textures/cursor/cursor_south.xpm"
+#define CURSOR_SOUTH_WEST "./textures/cursor/cursor_south_west.xpm"
+#define CURSOR_WEST "./textures/cursor/cursor_west.xpm"
+#define CURSOR_NORTH_WEST "./textures/cursor/cursor_north_west.xpm"
 
 #define PI 3.141593
 
@@ -131,8 +153,10 @@ void            draw_pixel(t_data *image, int x, int y, int color);
 void            render_floor_ceiling(s_render_data *render_data, s_mlx *mlx_data);
 s_coords        set_draw_coords(int x, int y, int end_x, int end_y);
 void    render_map(char **map, s_mlx *mlx_data, int res_x, int res_y);
-t_data          *initialize_xpm_image(void *mlx_ptr, char *path);
+t_data          *load_xpm_image(void *mlx_ptr, char *path);
 int             get_pixel_value(t_data *image, int x, int y);
+int             load_cursor(s_mlx *mlx_data);
+int             initialize_render_data(s_mlx *mlx_data, s_render_data *render_data);
 
 int		        get_rgb(int t, int r, int g, int b);
 int		        get_t(int trgb);

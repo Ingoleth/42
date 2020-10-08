@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 10:23:24 by user42            #+#    #+#             */
-/*   Updated: 2020/09/24 13:26:24 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/08 12:30:17 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ s_render_data   *read_file (char *data_file)
 	int i;
 
 	if (!(render_data = ft_calloc(1, sizeof(s_render_data))))
-		return (0); //Should probably change these to something else?
+		return (0);
 	if (!(error = ft_calloc(1, sizeof(s_error))))
-		return (free_render_data(render_data)); //Should probably change these to something else?
+		return (free_render_data(render_data));
 	if((fd = open(data_file, O_RDONLY)) && fd == -1)
 		error->error_id = 2;
 	while(!(error->error_id && print_error(error)))

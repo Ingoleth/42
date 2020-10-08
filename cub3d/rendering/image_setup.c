@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 20:28:46 by user42            #+#    #+#             */
-/*   Updated: 2020/10/03 10:31:16 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/08 12:08:49 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,13 @@ s_coords    set_draw_coords(int x, int y, int end_x, int end_y)
 
 void render_floor_ceiling(s_render_data *render_data, s_mlx *mlx_data)
 {
-    t_data *image;
     int half_point;
 
     half_point = render_data->res_y / 2;
-    image = initialize_image(mlx_data->mlx_ptr, render_data->res_x, render_data->res_y);
-    draw_pixel_area(image, set_draw_coords(0, 0, render_data->res_x, half_point), render_data->c_rgb);
-    draw_pixel_area(image, set_draw_coords(0, half_point, render_data->res_x, render_data->res_y), render_data->f_rgb);
-    mlx_put_image_to_window(mlx_data->mlx_ptr, mlx_data->win_ptr, image->img, 0, 0);
-    //free(image);
+    mlx_data->background = initialize_image(mlx_data->mlx_ptr, render_data->res_x, render_data->res_y);
+    draw_pixel_area(mlx_data->background, set_draw_coords(0, 0, render_data->res_x, half_point), render_data->c_rgb);
+    draw_pixel_area(mlx_data->background, set_draw_coords(0, half_point, render_data->res_x, render_data->res_y), render_data->f_rgb);
+    mlx_put_image_to_window(mlx_data->mlx_ptr, mlx_data->win_ptr, mlx_data->background->img, 0, 0);
 }
 
 t_data *initialize_image(void *mlx_ptr, int size_x, int size_y)
@@ -74,7 +72,7 @@ void    draw_pixel_area(t_data *image, s_coords coords, int color)
     }
 }
 
-t_data    *initialize_xpm_image(void *mlx_ptr, char *path)
+t_data    *load_xpm_image(void *mlx_ptr, char *path)
 {
     t_data *image;
     int width;

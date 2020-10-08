@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 19:26:29 by user42            #+#    #+#             */
-/*   Updated: 2020/10/02 20:07:38 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/08 12:29:21 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ int check_render_data(s_render_data *render_data, void *mlx_ptr)
 {
     int x;
     int y;
-    
+    if(!render_data)
+        return (0);
     if(check_textures(render_data))
         return (1);
     if(!render_data->map)

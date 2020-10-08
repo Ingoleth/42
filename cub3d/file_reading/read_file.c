@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 10:23:24 by user42            #+#    #+#             */
-/*   Updated: 2020/10/02 21:47:04 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/08 12:30:53 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ s_render_data	*free_render_data(s_render_data *render_data)
 		free_textures(render_data);
 		free(render_data);
 	}
+	
 	return (0);
 }
 

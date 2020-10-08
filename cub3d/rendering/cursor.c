@@ -6,24 +6,25 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 09:35:38 by user42            #+#    #+#             */
-/*   Updated: 2020/10/03 10:42:05 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/08 12:13:01 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-t_data  **initialize_cursor(void *mlx_ptr)
+int load_cursor(s_mlx *mlx_data) //Should probably check if image...
 {
-    t_data **cursor;
-    if(!(cursor = ft_calloc(8, sizeof(t_data *))))
-        return (0);
-    cursor[0] = initialize_xpm_image(mlx_ptr, "./textures/cursor/cursor_north.xpm");
-    cursor[1] = initialize_xpm_image(mlx_ptr, "./textures/cursor/cursor_north_east.xpm");
-    cursor[2] = initialize_xpm_image(mlx_ptr, "./textures/cursor/cursor_east.xpm");
-    cursor[3] = initialize_xpm_image(mlx_ptr, "./textures/cursor/cursor_south_east.xpm");
-    cursor[4] = initialize_xpm_image(mlx_ptr, "./textures/cursor/cursor_south.xpm");
-    cursor[5] = initialize_xpm_image(mlx_ptr, "./textures/cursor/cursor_south_west.xpm");
-    cursor[6] = initialize_xpm_image(mlx_ptr, "./textures/cursor/cursor_west.xpm");
-    cursor[7] = initialize_xpm_image(mlx_ptr, "./textures/cursor/cursor_north_west.xpm");
-    return(cursor);
+    mlx_data->cursor.north = load_xpm_image(mlx_data->mlx_ptr, CURSOR_NORTH);
+    mlx_data->cursor.north_west = load_xpm_image(mlx_data->mlx_ptr,
+    CURSOR_NORTH_EAST);
+    mlx_data->cursor.south = load_xpm_image(mlx_data->mlx_ptr, CURSOR_EAST);
+    mlx_data->cursor.south_east = load_xpm_image(mlx_data->mlx_ptr,
+    CURSOR_SOUTH_EAST);
+    mlx_data->cursor.south = load_xpm_image(mlx_data->mlx_ptr, CURSOR_SOUTH);
+    mlx_data->cursor.south_west = load_xpm_image(mlx_data->mlx_ptr,
+    CURSOR_SOUTH_WEST);
+    mlx_data->cursor.west = load_xpm_image(mlx_data->mlx_ptr, CURSOR_WEST);
+    mlx_data->cursor.north_west = load_xpm_image(mlx_data->mlx_ptr,
+    CURSOR_NORTH_WEST);
+    return (0);
 }
