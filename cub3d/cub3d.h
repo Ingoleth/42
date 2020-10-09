@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/10/08 14:32:48 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/09 16:36:20 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ typedef struct s_write_coords
 typedef struct cub3d
 {
     s_render_data *render_data;
-    s_mlx         *mlx_data;
+    s_mlx         mlx_data;
 }               cub3d;
 
 
@@ -122,6 +122,7 @@ typedef struct cub3d
 #define CURSOR_NORTH_WEST "./textures/cursor/cursor_north_west.xpm"
 
 #define PI 3.141593
+#define PI2 6.283186
 #define PI_4 0.785398
 #define PI_2 1.570796
 #define PI3_4 2.3562
@@ -129,10 +130,20 @@ typedef struct cub3d
 #define PI1_1_2 4.71238865359
 #define PI1_3_4 5.494793
 
+#define PI_8 0.392699
+#define PI3_8 1.178097
+#define PI5_8 1.963495
+#define PI7_8 2.748893
+#define PI1_1_8 3.534292
+#define PI1_3_8 4.319690
+#define PI1_5_8 5.105088
+#define PI1_7_8 5.890487
+
 #define TILE_MINIMUM 10
 #define MAP_RATIO 2 
 #define LINE_WIDTH 8
 #define MAX_OFFSET 10
+#define PLAYER_SPEED 5
 
 #define TRANSPARENT 0xf000
 #define BLACK 0
@@ -140,6 +151,12 @@ typedef struct cub3d
 #define GREY  0x2b2b2b
 
 #define ESC 65307
+#define FORWARD 65362
+#define BACKWARDS 65364
+#define STRAFE_LEFT 65361
+#define STRAFE_RIGHT 65363
+#define A 97
+#define D 100
 
 s_render_data   *read_file (char *data_file);
 int		        fill_resolution(char *line, s_render_data *render_data, s_error *error);
@@ -162,10 +179,11 @@ void            render_floor_ceiling(s_render_data *render_data, s_mlx *mlx_data
 s_coords        set_draw_coords(int x, int y, int end_x, int end_y);
 t_data          *load_xpm_image(void *mlx_ptr, char *path);
 int             get_pixel_value(t_data *image, int x, int y);
-int             load_cursor(s_mlx *mlx_data);
-int             initialize_render_data(s_mlx *mlx_data, s_render_data *render_data);
+int             load_cursor(s_mlx *mlx_data, float angle);
+s_render_data   *initialize_render_data(s_mlx *mlx_data);
 int             redraw_screen(cub3d *data);
 void            render_cursor(s_mlx *mlx_data, s_render_data *render_data);
+int             set_cursor(float angle);
 
 int		        get_rgb(int t, int r, int g, int b);
 int		        get_t(int trgb);
@@ -173,6 +191,6 @@ int		        get_r(int trgb);
 int		        get_g(int trgb);
 int		        get_b(int trgb);
 
-int             close_window (int keycode, cub3d *data);
+int             handle_keys (int keycode, cub3d *data);
 
  #endif

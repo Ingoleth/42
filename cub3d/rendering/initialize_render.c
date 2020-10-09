@@ -73,16 +73,18 @@ void    render_map(char **map, s_mlx *mlx_data, int res_x, int res_y)
     //draw_pixel_area(mlx_data->map, set_draw_coords(0, 0, res_x * tile_size, res_y * tile_size), BLACK);
     draw_tiles(mlx_data->map, map, tile_size, tile_size / LINE_WIDTH);
     mlx_put_image_to_window(mlx_data->mlx_ptr, mlx_data->win_ptr, mlx_data->map->img, 0, 0);
-    load_cursor(mlx_data);
 }
 
-int initialize_render_data(s_mlx *mlx_data, s_render_data *render_data)
+s_render_data *initialize_render_data(s_mlx *mlx_data)
 {
+    s_render_data *render_data;
+
     if (!(render_data = read_file("/home/user42/Documents/42/cub3d/map")) ||
 	check_render_data(render_data, mlx_data->mlx_ptr))
-		return ((int)free_render_data(render_data));
+		return (free_render_data(render_data));
     mlx_data->win_ptr = mlx_new_window(mlx_data->mlx_ptr, render_data->res_x, render_data->res_y, "Cub3d");
 	render_floor_ceiling(render_data, mlx_data);
 	render_map(render_data->map, mlx_data, render_data->res_x, render_data->res_y);
-    return(1);
+    load_cursor(mlx_data, render_data->view_angle);
+    return(render_data);
 }
