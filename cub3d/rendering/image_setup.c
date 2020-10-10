@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 20:28:46 by user42            #+#    #+#             */
-/*   Updated: 2020/10/08 12:08:49 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/10 11:38:09 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ s_coords    set_draw_coords(int x, int y, int end_x, int end_y)
     return (coords);
 }
 
-void render_floor_ceiling(s_render_data *render_data, s_mlx *mlx_data)
+void load_floor_ceiling(s_render_data *render_data, s_mlx *mlx_data)
 {
     int half_point;
 
@@ -31,7 +31,6 @@ void render_floor_ceiling(s_render_data *render_data, s_mlx *mlx_data)
     mlx_data->background = initialize_image(mlx_data->mlx_ptr, render_data->res_x, render_data->res_y);
     draw_pixel_area(mlx_data->background, set_draw_coords(0, 0, render_data->res_x, half_point), render_data->c_rgb);
     draw_pixel_area(mlx_data->background, set_draw_coords(0, half_point, render_data->res_x, render_data->res_y), render_data->f_rgb);
-    mlx_put_image_to_window(mlx_data->mlx_ptr, mlx_data->win_ptr, mlx_data->background->img, 0, 0);
 }
 
 t_data *initialize_image(void *mlx_ptr, int size_x, int size_y)

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/10/09 16:36:20 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/10 11:54:36 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ typedef struct cub3d
 #define MAP_RATIO 2 
 #define LINE_WIDTH 8
 #define MAX_OFFSET 10
-#define PLAYER_SPEED 5
+#define PLAYER_SPEED 1
 
 #define TRANSPARENT 0xf000
 #define BLACK 0
@@ -175,12 +175,12 @@ int             check_render_data(s_render_data *render_data, void *mlx_ptr);
 t_data          *initialize_image(void *mlx_ptr, int size_x, int size_y);
 void            draw_pixel_area(t_data *image, s_coords coords, int color);
 void            draw_pixel(t_data *image, int x, int y, int color);
-void            render_floor_ceiling(s_render_data *render_data, s_mlx *mlx_data);
+void            load_floor_ceiling(s_render_data *render_data, s_mlx *mlx_data);
 s_coords        set_draw_coords(int x, int y, int end_x, int end_y);
 t_data          *load_xpm_image(void *mlx_ptr, char *path);
 int             get_pixel_value(t_data *image, int x, int y);
 int             load_cursor(s_mlx *mlx_data, float angle);
-s_render_data   *initialize_render_data(s_mlx *mlx_data);
+s_render_data   *initialize_render_data(s_mlx *mlx_data, cub3d *data);
 int             redraw_screen(cub3d *data);
 void            render_cursor(s_mlx *mlx_data, s_render_data *render_data);
 int             set_cursor(float angle);

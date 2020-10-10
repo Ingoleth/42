@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:33:22 by user42            #+#    #+#             */
-/*   Updated: 2020/10/08 13:07:55 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/10 12:05:38 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void draw_tiles(t_data *map_img, char **map, int tile_size, int line_size)
     }
 }
 
-void    render_map(char **map, s_mlx *mlx_data, int res_x, int res_y)
+void    load_map(char **map, s_mlx *mlx_data, int res_x, int res_y)
 {
     int tile_size;
        
@@ -72,10 +72,9 @@ void    render_map(char **map, s_mlx *mlx_data, int res_x, int res_y)
     mlx_data->map = initialize_image(mlx_data->mlx_ptr, res_x * tile_size, res_y *tile_size);
     //draw_pixel_area(mlx_data->map, set_draw_coords(0, 0, res_x * tile_size, res_y * tile_size), BLACK);
     draw_tiles(mlx_data->map, map, tile_size, tile_size / LINE_WIDTH);
-    mlx_put_image_to_window(mlx_data->mlx_ptr, mlx_data->win_ptr, mlx_data->map->img, 0, 0);
 }
 
-s_render_data *initialize_render_data(s_mlx *mlx_data)
+s_render_data *initialize_render_data(s_mlx *mlx_data, cub3d *data)
 {
     s_render_data *render_data;
 
@@ -83,8 +82,10 @@ s_render_data *initialize_render_data(s_mlx *mlx_data)
 	check_render_data(render_data, mlx_data->mlx_ptr))
 		return (free_render_data(render_data));
     mlx_data->win_ptr = mlx_new_window(mlx_data->mlx_ptr, render_data->res_x, render_data->res_y, "Cub3d");
-	render_floor_ceiling(render_data, mlx_data);
-	render_map(render_data->map, mlx_data, render_data->res_x, render_data->res_y);
+	load_floor_ceiling(render_data, mlx_data);
+	load_map(render_data->map, mlx_data, render_data->res_x, render_data->res_y);
     load_cursor(mlx_data, render_data->view_angle);
+    data->render_data = render_data;
+    redraw_screen(data);
     return(render_data);
 }
