@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 14:07:13 by user42            #+#    #+#             */
-/*   Updated: 2020/10/10 11:29:57 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/10 14:16:57 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,7 @@ int handle_keys (int keycode, cub3d *data)
     if (data->render_data->view_angle > PI2 || data->render_data->view_angle < 0)
         data->render_data->view_angle = 0;
 	if (keycode == ESC)
-	{
-		mlx_destroy_window(mlx_data->mlx_ptr, mlx_data->win_ptr);
-		exit(0); //Remember to free memory and all that!
-	}
-		redraw_screen(data);
+        close_window(mlx_data->mlx_ptr, mlx_data->win_ptr);
+	redraw_screen(data);
 	return(0);
 }
