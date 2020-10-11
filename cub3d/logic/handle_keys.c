@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 14:07:13 by user42            #+#    #+#             */
-/*   Updated: 2020/10/10 14:16:57 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/11 12:11:16 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,14 @@ void handle_movement(int keycode, s_render_data *render_data)
 int handle_keys (int keycode, cub3d *data)
 {
 	s_mlx *mlx_data;
+
 	mlx_data = &data->mlx_data;
+    
     if (movement_keys(keycode))
         handle_movement(keycode, data->render_data);
-    if (keycode == A)
-        set_cursor(data->render_data->view_angle += 0.4);
-    if (keycode == D)
+    if (keycode == LOOK_LEFT)
+        set_cursor(data->render_data->view_angle -= 0.4);
+    if (keycode == LOOK_RIGHT)
         set_cursor(data->render_data->view_angle += 0.4);
     if (data->render_data->view_angle > PI2 || data->render_data->view_angle < 0)
         data->render_data->view_angle = 0;

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 09:35:38 by user42            #+#    #+#             */
-/*   Updated: 2020/10/10 11:57:09 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/10 14:39:56 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int set_cursor(float angle)
 {
-    printf("%f\n", angle);
     if (angle > PI1_7_8 || angle < PI_8)
         return(0);
     if (angle >= PI_8 && angle < PI3_8)

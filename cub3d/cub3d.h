@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/10/10 14:20:31 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/11 12:04:56 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,18 +74,6 @@ typedef struct  s_data {
     int         endian;
 }               t_data;
 
-typedef struct cursor
-{
-    t_data      *north;
-    t_data      *north_east;
-    t_data      *east;
-    t_data      *south_east;
-    t_data      *south;
-    t_data      *south_west;
-    t_data      *west;
-    t_data      *north_west;
-}               s_cursor;
-
 typedef struct      mlx
 {
     void            *mlx_ptr;
@@ -95,6 +83,7 @@ typedef struct      mlx
     t_data          **cursor;
     int             current_cursor;
     int             tile_size;
+    int             is_key_held;
 }                   s_mlx;
 
 typedef struct s_write_coords
@@ -151,12 +140,12 @@ typedef struct cub3d
 #define GREY  0x2b2b2b
 
 #define ESC 65307
-#define FORWARD 65362
-#define BACKWARDS 65364
-#define STRAFE_LEFT 65361
-#define STRAFE_RIGHT 65363
-#define A 97
-#define D 100
+#define FORWARD 119
+#define BACKWARDS 115
+#define STRAFE_LEFT 97
+#define STRAFE_RIGHT 100
+#define LOOK_LEFT 65361
+#define LOOK_RIGHT 65363
 
 s_render_data   *read_file (char *data_file);
 int		        fill_resolution(char *line, s_render_data *render_data, s_error *error);
