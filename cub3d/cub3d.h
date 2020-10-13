@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/10/13 13:02:57 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/13 16:41:57 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,5 +195,8 @@ int		        get_b(int trgb);
 int             handle_keys (int keycode, cub3d *data);
 int             handle_mouse(cub3d *data);
 int             close_window(void *mlx_ptr, void *win_ptr);
+
+void            update_sector(int sector, s_ray_tracing *ray_trc);
+void            update_angle_info(int keycode, cub3d *data);
 
  #endif
