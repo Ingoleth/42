@@ -6,19 +6,12 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 19:44:52 by user42            #+#    #+#             */
-/*   Updated: 2020/10/12 16:44:21 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/13 11:38:32 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "stdio.h"
-
-int print_msg(cub3d *data)
-{
-	printf("A key has been pressed!\n");
-	data++;
-	return (0);
-}
 
 int main (void)
 {

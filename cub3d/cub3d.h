@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/10/11 12:04:56 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/13 13:02:57 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ typedef struct      mlx
     t_data          **cursor;
     int             current_cursor;
     int             tile_size;
-    int             is_key_held;
 }                   s_mlx;
 
 typedef struct s_write_coords
@@ -94,11 +93,24 @@ typedef struct s_write_coords
     int         end_y;
 }               s_coords;
 
+typedef struct ray_tracing
+{
+    float angle;
+    int         tileStepX;
+    int         tileStepY;
+    float       xStep;
+    float       yStep;
+    int         sector;
+    float       sector_pos;
+}               s_ray_tracing;
+
+
 typedef struct cub3d
 {
-    s_render_data *render_data;
-    s_mlx         mlx_data;
-}               cub3d;
+    s_render_data   *render_data;
+    s_mlx           mlx_data;
+    s_ray_tracing   ray_trc;
+}                   cub3d;
 
 
 #define CURSOR_NORTH "./textures/cursor/cursor_north.xpm"
