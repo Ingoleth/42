@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/10/14 12:16:43 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/14 17:05:53 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ typedef struct cub3d
 #define LINE_WIDTH 8
 #define MAX_OFFSET 10
 #define PLAYER_SPEED 1
-#define ROTATION_SPEED 0.4
+#define ROTATION_SPEED 0.2
 
 #define TRANSPARENT 0xf000
 #define BLACK 0
@@ -201,5 +201,6 @@ int             close_window(void *mlx_ptr, void *win_ptr);
 void            update_sector(int sector, s_ray_tracing *ray_trc);
 void            update_angle_info(int keycode, cub3d *data);
 void            calculate_step(s_ray_tracing * ray_trc);
+float           rad_to_degrees(float angle);
 
  #endif

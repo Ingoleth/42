@@ -6,11 +6,16 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 13:00:56 by user42            #+#    #+#             */
-/*   Updated: 2020/10/14 16:55:34 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/14 17:13:59 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+float rad_to_degrees(float angle)
+{
+    return (angle * 180 / PI);
+}
 
 void    update_sector(int sector, s_ray_tracing *ray_trc)
 {
@@ -36,20 +41,19 @@ void    update_angle_info(int keycode, cub3d *data)
 {
     float *angle;
 
-    printf("Angle = %f; Sector = %i; Sector pos = %f;\n", data->render_data->view_angle, data->ray_trc.sector, data->ray_trc.sector_pos);
     angle = &data->render_data->view_angle;
     if (keycode == LOOK_RIGHT)
     {
         *angle -= ROTATION_SPEED;
         if (*angle < 0)
-            *angle = PI2 - *angle;
+            *angle = PI2 + *angle;
         data->ray_trc.sector_pos -= ROTATION_SPEED;
     }
     if (keycode == LOOK_LEFT)
     {
         *angle += ROTATION_SPEED;
-        if (*angle > PI2)
-            *angle = 0 + *angle - PI2;
+        if (*angle >= PI2)
+            *angle = *angle - PI2;
         data->ray_trc.sector_pos += ROTATION_SPEED;
     }
     if (data->ray_trc.sector_pos >= PI_2)
