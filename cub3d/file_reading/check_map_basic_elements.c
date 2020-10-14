@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 16:17:13 by user42            #+#    #+#             */
-/*   Updated: 2020/10/07 17:06:25 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/14 16:38:21 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ char *line, int i)
 	if (map_info->player_pos_x || map_info->player_pos_y)
 		return ((error->error_id = 8) &&
 				(error->row = i));
-	if (line[i] == 'N')
-		map_info->view_angle = 0;
 	if (line[i] == 'E')
-		map_info->view_angle = PI / 2;
-	if (line[i] == 'S')
-		map_info->view_angle = PI;
+		map_info->view_angle = 0;
+	if (line[i] == 'N')
+		map_info->view_angle = PI_2;
 	if (line[i] == 'W')
-		map_info->view_angle = (3 * PI) / 2;
+		map_info->view_angle = PI;
+	if (line[i] == 'S')
+		map_info->view_angle = PI1_1_2;
 	line[i] = '0';
 	map_info->player_pos_x = i;
 	map_info->player_pos_y = error->line - map_info->top_one;
