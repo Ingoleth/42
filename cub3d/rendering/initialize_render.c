@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:33:22 by user42            #+#    #+#             */
-/*   Updated: 2020/10/14 16:50:27 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/15 13:52:38 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,7 @@ s_render_data *initialize_render_data(s_mlx *mlx_data, cub3d *data)
 	load_floor_ceiling(render_data, mlx_data);
 	load_map(render_data->map, mlx_data, render_data->res_x, render_data->res_y);
     load_cursor(mlx_data, render_data->view_angle);
-    data->ray_trc.sector_pos = PI_2;
-    update_sector(render_data->view_angle / PI_2, &data->ray_trc);
     data->render_data = render_data;
-     printf("Angle = %f; Sector = %i; Sector pos = %f;\n", render_data->view_angle, data->ray_trc.sector, data->ray_trc.sector_pos);
     redraw_screen(data);
     return(render_data);
 }

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/10/14 17:05:53 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/15 13:53:14 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,9 +198,7 @@ int             handle_mouse(cub3d *data);
 void            handle_movement(int keycode, cub3d *data);
 int             close_window(void *mlx_ptr, void *win_ptr);
 
-void            update_sector(int sector, s_ray_tracing *ray_trc);
 void            update_angle_info(int keycode, cub3d *data);
-void            calculate_step(s_ray_tracing * ray_trc);
 float           rad_to_degrees(float angle);
 
  #endif
