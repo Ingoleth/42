@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/10/15 13:53:14 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/16 12:16:57 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,9 @@ typedef struct s_write_coords
 
 typedef struct ray_tracing
 {
-    float angle;
+    float       angle;
+    float       xIntercept;
+    float       yIntercept;
     int         tileStepX;
     int         tileStepY;
     float       xStep;
@@ -200,5 +202,6 @@ int             close_window(void *mlx_ptr, void *win_ptr);
 
 void            update_angle_info(int keycode, cub3d *data);
 float           rad_to_degrees(float angle);
+void            get_sector_info(float angle, s_ray_tracing *ray_trc);
 
  #endif

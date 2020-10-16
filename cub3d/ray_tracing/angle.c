@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 13:00:56 by user42            #+#    #+#             */
-/*   Updated: 2020/10/15 14:02:19 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/16 12:16:05 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,18 +67,18 @@ void get_sector_info(float angle, s_ray_tracing *ray_trc) //Double check
     }
     else if (sector = 2)
     {
-        ray_trc->xStep = -1/tan(angle);
-        ray_trc->yStep = tan(angle);
+        ray_trc->xStep = 1/tan(angle);
+        ray_trc->yStep = -tan(angle);
     }
     else if (sector = 3)
     {
         ray_trc->xStep = -1/tan(angle);
-        ray_trc->yStep = -tan(angle);
+        ray_trc->yStep = tan(angle);
     }
     else
     {
-        ray_trc->xStep = 1/tan(angle);
-        ray_trc->yStep = -tan(angle);
+        ray_trc->xStep = -1/tan(angle);
+        ray_trc->yStep = tan(angle);
     }  
 }
 
