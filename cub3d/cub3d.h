@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/10/17 11:11:16 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/17 19:23:37 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,5 +208,5 @@ float           rad_to_degrees(float angle);
 void            get_sector_info(float angle, s_ray_tracing *ray_trc);
 
 int             calculate_collision(float angle, s_render_data *render_data, s_ray_tracing *ray_trc); //
-
+int             calculate_collision_y(int * x, int * y, s_ray_tracing *ray_trc, char **map);
  #endif

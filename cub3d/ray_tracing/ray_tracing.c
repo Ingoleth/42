@@ -6,31 +6,31 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 12:13:52 by user42            #+#    #+#             */
-/*   Updated: 2020/10/17 10:48:46 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/17 19:51:40 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
     tileStepx/y = +-1;
     x/yStep = tan(a) / 1/tan(a);
-    xIntercept = x + dx + dy/tan();
+    xIntercept = x + dx + dy/tan(); The x position wherein the ray intercepts with the vertical tile;
     YIntercept = y + dy + dy/tan();
 */
 
 #include "../cub3d.h"
 
 /*
- Checks whether the ray interception is within the boundaries of the current y tile
+ Checks the y coordinate of the next horizontal intersection
  (hence the + 1 on the ray going downwards)
 */
 
 int calculate_collision_x(int * x, int * y, s_ray_tracing *ray_trc, char **map) //Check values, might need an equal sign...
 {
-    printf("Checking on x!\n");
-    if (ray_trc->angle < PI)
-        while (ray_trc->yIntercept > *y)
+    printf("X: Angle = %f, Y intercept = %f, x = %i, y = %i\n", rad_to_degrees(ray_trc->angle), ray_trc->yIntercept, *x, *y);
+    if (ray_trc->sector == 0 || ray_trc->sector == 1)
+        while (ray_trc->yIntercept >= *y)
         {
-            if (map[*x][(int)ray_trc->yIntercept] == '1')
+            if (map[(int)ray_trc->yIntercept][*x] == '1') //Double check
             {
                 *y = ray_trc->yIntercept;
                 ray_trc->yIntercept = 0;
@@ -38,11 +38,12 @@ int calculate_collision_x(int * x, int * y, s_ray_tracing *ray_trc, char **map) 
             }
             *x += ray_trc->tileStepX;
             ray_trc->yIntercept += ray_trc->yStep;
+            printf("X: Angle = %f, Y intercept = %f, x = %i, y = %i\n", rad_to_degrees(ray_trc->angle), ray_trc->yIntercept, *x, *y);
         }
     else
-        while (ray_trc->yIntercept < *y + 1)
+        while (ray_trc->yIntercept <= *y)
         {
-            if (map[*x][(int)ray_trc->yIntercept] == '1')
+            if (map[(int)ray_trc->yIntercept][*x] == '1')
             {
                 *y = ray_trc->yIntercept;
                 ray_trc->yIntercept = 0;
@@ -51,7 +52,7 @@ int calculate_collision_x(int * x, int * y, s_ray_tracing *ray_trc, char **map) 
             *x += ray_trc->tileStepX;
             ray_trc->yIntercept += ray_trc->yStep;
         }
-    return (0);
+    return (calculate_collision_y(x, y, ray_trc, map));
 }
 
 
@@ -62,31 +63,35 @@ int calculate_collision_x(int * x, int * y, s_ray_tracing *ray_trc, char **map) 
 
 int calculate_collision_y(int * x, int * y, s_ray_tracing *ray_trc, char **map)
 {
-    if (ray_trc->angle > PI1_1_2 || ray_trc->angle < PI_2)
-        while (ray_trc->xIntercept < *x + 1)
+    printf("Y/// X intercept = %f, x, x = %i, y = %i\n", ray_trc->xIntercept, *x, *y);
+    if (ray_trc->sector == 0 || ray_trc->sector == 3)
+        while (ray_trc->xIntercept <= *x)
         {
-            if (map[(int)ray_trc->xIntercept][*y] == '1')
+            if (map[*y][(int)ray_trc->xIntercept] == '1')
             {
                 *x = ray_trc->xIntercept;
                 ray_trc->xIntercept = 0;
                 return (1); //Change to de adequate function
             }
-            *x += ray_trc->tileStepX;
-            ray_trc->xIntercept += ray_trc->yStep;
+            *y += ray_trc->tileStepX;
+            ray_trc->xIntercept += ray_trc->xStep;
+            printf("%i, %f\n", *y, ray_trc->xIntercept);
         }
     else
-        while (ray_trc->xIntercept > *x)
+        while (ray_trc->xIntercept >= *x)
         {
-            if (map[(int)ray_trc->xIntercept][*y] == '1')
+            printf("Hello\n");
+            if (map[*y][(int)ray_trc->xIntercept + 1] == '1')
             {
                 *x = ray_trc->xIntercept;
                 ray_trc->xIntercept = 0;
                 return (1); //Change to de adequate function
             }
-            *x += ray_trc->tileStepX;
-           ray_trc->xIntercept += ray_trc->yStep;
+            *y += ray_trc->tileStepX;
+           ray_trc->xIntercept += ray_trc->xStep;
         }
-    return (0);
+    return (0); //Remove when done!
+    return (calculate_collision_x(x, x, ray_trc, map));
 }
 
 void set_ray_casting_data(float angle, s_ray_tracing *ray_trc, s_render_data *render_data)
@@ -98,30 +103,31 @@ void set_ray_casting_data(float angle, s_ray_tracing *ray_trc, s_render_data *re
 
     x = render_data->player_x;
     y = render_data->player_y;
+    get_sector_info(angle, ray_trc);
     offset_y = render_data->offset_y / MAX_OFFSET;
     offset_x = render_data->offset_x / MAX_OFFSET;
-    ray_trc->xIntercept = x + offset_x + offset_y * ray_trc->yStep;
-    ray_trc->yIntercept = x + offset_x + offset_y * ray_trc->yStep;
-    get_sector_info(angle, ray_trc);
+    if (ray_trc->sector == 2 || ray_trc->sector == 3)
+        ray_trc->xIntercept = x + offset_x + offset_y * ray_trc->xStep;
+    else
+        ray_trc->xIntercept = x + offset_x + (1 - offset_y) * ray_trc->xStep;
+    if (ray_trc->sector == 1 || ray_trc->sector == 2)
+        ray_trc->yIntercept = y + offset_y + offset_x * ray_trc->yStep;
+    else
+        ray_trc->yIntercept = y + offset_y + (1 - offset_x) * ray_trc->yStep;
+    printf("Ray casting data: x = %i; y offset = %f; x offset = %f, xStep = %f\n\n\n", x, offset_y, offset_x, ray_trc->xStep);
 }
 
 int calculate_collision(float angle, s_render_data *render_data, s_ray_tracing *ray_trc)
 {
     int x;
     int y;
-    int i;
 
     x = render_data->player_x;
     y = render_data->player_y;
     set_ray_casting_data(angle, ray_trc, render_data);
-    i = 0;
-    while (i)
-    {
-        i = calculate_collision_x(&x, &y, ray_trc, render_data->map);
-        i = calculate_collision_y(&x, &y, ray_trc, render_data->map);
-    }
+    calculate_collision_x(&x, &y, ray_trc, render_data->map);
     printf("Found a wall!\n At %i, %i\n", x, y);
-    
+
     return(0);
 }
 

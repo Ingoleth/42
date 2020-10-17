@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 13:00:56 by user42            #+#    #+#             */
-/*   Updated: 2020/10/17 09:36:24 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/17 16:16:00 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ void set_step(s_ray_tracing * ray_trc, int sector)
     if (sector == 0)
     {
         ray_trc->tileStepX = 1;
-        ray_trc->tileStepY = 1;
+        ray_trc->tileStepY = -1;
     }
     if (sector == 1)
     {
         ray_trc->tileStepX = -1;
-        ray_trc->tileStepY = 1;
+        ray_trc->tileStepY = -1;
     }
     if (sector == 2)
     {
         ray_trc->tileStepX = -1;
-        ray_trc->tileStepY = -1;
+        ray_trc->tileStepY = 1;
     }
     else
     {
@@ -63,7 +63,7 @@ void get_sector_info(float angle, s_ray_tracing *ray_trc) //Double check
     if (sector == 0)
     {
         ray_trc->xStep = 1/tan(angle);
-        ray_trc->yStep = tan(angle);
+        ray_trc->yStep = -tan(angle);
     }
     else if (sector == 1)
     {
