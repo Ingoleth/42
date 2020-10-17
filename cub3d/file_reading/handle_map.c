@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 11:24:55 by user42            #+#    #+#             */
-/*   Updated: 2020/10/07 17:03:14 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/17 12:18:05 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,5 @@ char *str, s_file_descriptor *file)
 	render_data->view_angle = map_info->view_angle;
 	render_data->map = copy_map(map_info, file);
 	free(map_info);
-	if (check_map_coherence(render_data->map, error))
-		return ;
+	check_map_coherence(render_data->map, error);
 }

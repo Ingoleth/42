@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 10:23:24 by user42            #+#    #+#             */
-/*   Updated: 2020/10/08 12:30:53 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/17 11:44:34 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,15 @@ int				read_actual_file(s_render_data *render_data,
 s_error *error, char **line, char *data_file)
 {
 	s_file_descriptor	file;
-	s_file_descriptor	*file_ptr;
 	int					i;
 
-	file_ptr = &file;
-	file_ptr->path = data_file;
-	if ((file_ptr->fd = open(data_file, O_RDONLY)) && file_ptr->fd == -1)
+	file.path = data_file;
+	if ((file.fd = open(data_file, O_RDONLY)) && file.fd == -1)
 		error->error_id = 2;
 	while (!(error->error_id && print_error(error)))
 	{
-		i = get_next_line(file_ptr->fd, line);
-		fill_render_struct(render_data, *line, error, file_ptr);
+		i = get_next_line(file.fd, line);
+		fill_render_struct(render_data, *line, error, &file);
 		if (!error->error_id)
 		{
 			error->line++;
@@ -72,7 +70,7 @@ s_error *error, char **line, char *data_file)
 		if (!i)
 			break ;
 	}
-	return (file_ptr->fd);
+	return (file.fd);
 }
 
 void			end_get_next_line(char *line, int fd)

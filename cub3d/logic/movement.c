@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 11:19:11 by user42            #+#    #+#             */
-/*   Updated: 2020/10/14 11:40:22 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/17 09:27:47 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,4 @@ void handle_movement(int keycode, cub3d *data)
         data->render_data->offset_x += PLAYER_SPEED;
     handle_x_move(data->render_data);
     handle_y_move(data->render_data);
-    calculate_step(&data->ray_trc);
 }

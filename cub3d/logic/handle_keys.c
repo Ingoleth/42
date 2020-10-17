@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 14:07:13 by user42            #+#    #+#             */
-/*   Updated: 2020/10/14 12:11:29 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/17 12:20:31 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,14 @@ int handle_keys (int keycode, cub3d *data)
     
     if (movement_keys(keycode))
         handle_movement(keycode, data);
-    if (keycode == LOOK_LEFT || keycode == LOOK_RIGHT)
+    else if (keycode == LOOK_LEFT || keycode == LOOK_RIGHT)
         update_angle_info(keycode, data);
-	if (keycode == ESC)
+    else if (keycode == ENTER)
+        calculate_collision(data->render_data->view_angle, data->render_data, &data->ray_trc);
+	else if (keycode == ESC)
         close_window(mlx_data->mlx_ptr, mlx_data->win_ptr);
-	redraw_screen(data);
+    else
+        printf("A key has been pressed!\n Keycode = %i\n", keycode); //Remove when done
+        redraw_screen(data);
 	return(0);
 }

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/10/16 12:16:57 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/17 11:11:16 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct      mlx
     t_data          **cursor;
     int             current_cursor;
     int             tile_size;
+    int             render;
 }                   s_mlx;
 
 typedef struct s_write_coords
@@ -148,6 +149,7 @@ typedef struct cub3d
 #define MAX_OFFSET 10
 #define PLAYER_SPEED 1
 #define ROTATION_SPEED 0.2
+#define REFRESH_RATE 300
 
 #define TRANSPARENT 0xf000
 #define BLACK 0
@@ -155,6 +157,7 @@ typedef struct cub3d
 #define GREY  0x2b2b2b
 
 #define ESC 65307
+#define ENTER 65293
 #define FORWARD 119
 #define BACKWARDS 115
 #define STRAFE_LEFT 97
@@ -203,5 +206,7 @@ int             close_window(void *mlx_ptr, void *win_ptr);
 void            update_angle_info(int keycode, cub3d *data);
 float           rad_to_degrees(float angle);
 void            get_sector_info(float angle, s_ray_tracing *ray_trc);
+
+int             calculate_collision(float angle, s_render_data *render_data, s_ray_tracing *ray_trc); //
 
  #endif

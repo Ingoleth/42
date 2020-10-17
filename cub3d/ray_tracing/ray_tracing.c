@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 12:13:52 by user42            #+#    #+#             */
-/*   Updated: 2020/10/16 13:05:55 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/17 10:48:46 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,89 +20,113 @@
 #include "../cub3d.h"
 
 /*
-/* Checks whether the ray interception is within the boundaries of the current y tile
-/* (hence the + 1 on the ray going downwards)
+ Checks whether the ray interception is within the boundaries of the current y tile
+ (hence the + 1 on the ray going downwards)
 */
 
-calculate_collision_x(int * x, int * y, float yIntercept, char **map) //Check values, might need an equal sign...
+int calculate_collision_x(int * x, int * y, s_ray_tracing *ray_trc, char **map) //Check values, might need an equal sign...
 {
-    if (data->ray_trc.angle > PI1_1_2 || data->ray_trc.angle < PI_2)
-        while (yIntercept > *y)
+    printf("Checking on x!\n");
+    if (ray_trc->angle < PI)
+        while (ray_trc->yIntercept > *y)
         {
-            if (map[*x][(int)yIntercept])
+            if (map[*x][(int)ray_trc->yIntercept] == '1')
+            {
+                *y = ray_trc->yIntercept;
+                ray_trc->yIntercept = 0;
                 return (1); //Change to de adequate function
-            *x += data->ray_trc.tileStepX;
-            yIntercept += data->ray_trc.yStep;
+            }
+            *x += ray_trc->tileStepX;
+            ray_trc->yIntercept += ray_trc->yStep;
         }
     else
-        while (yIntercept < *y + 1)
+        while (ray_trc->yIntercept < *y + 1)
         {
-            if (map[*x][(int)yIntercept])
+            if (map[*x][(int)ray_trc->yIntercept] == '1')
+            {
+                *y = ray_trc->yIntercept;
+                ray_trc->yIntercept = 0;
                 return (1); //Change to de adequate function
-            *x += data->ray_trc.tileStepX;
-            yIntercept += data->ray_trc.yStep;
-        } 
+            }
+            *x += ray_trc->tileStepX;
+            ray_trc->yIntercept += ray_trc->yStep;
+        }
+    return (0);
 }
 
 
 /*
-/* Checks whether the ray interception is within the boundaries of the current x tile
-/* (hence the + 1 on the ray going right)
+ Checks whether the ray interception is within the boundaries of the current x tile
+ (hence the + 1 on the ray going right)
 */
 
-calculate_collision_y(int *x, int *y, float xIntercept, char **map)
+int calculate_collision_y(int * x, int * y, s_ray_tracing *ray_trc, char **map)
 {
-    if (data->ray_trc.angle > PI1_1_2 || data->ray_trc.angle < PI_2)
-        while (xIntercept < *x + 1)
+    if (ray_trc->angle > PI1_1_2 || ray_trc->angle < PI_2)
+        while (ray_trc->xIntercept < *x + 1)
         {
-            if (data->render_data->map[(int)xIntercept][*y])
+            if (map[(int)ray_trc->xIntercept][*y] == '1')
+            {
+                *x = ray_trc->xIntercept;
+                ray_trc->xIntercept = 0;
                 return (1); //Change to de adequate function
-            *x += data->ray_trc.tileStepX;
-            xIntercept += data->ray_trc.yStep;
+            }
+            *x += ray_trc->tileStepX;
+            ray_trc->xIntercept += ray_trc->yStep;
         }
     else
-        while (xIntercept > *x)
+        while (ray_trc->xIntercept > *x)
         {
-            if (data->render_data->map[*x][*y])
+            if (map[(int)ray_trc->xIntercept][*y] == '1')
+            {
+                *x = ray_trc->xIntercept;
+                ray_trc->xIntercept = 0;
                 return (1); //Change to de adequate function
-            *x += data->ray_trc.tileStepX;
-            xIntercept += data->ray_trc.yStep;
-        } 
+            }
+            *x += ray_trc->tileStepX;
+           ray_trc->xIntercept += ray_trc->yStep;
+        }
+    return (0);
 }
 
-set_ray_casting_data(float angle, cub3d *data)
+void set_ray_casting_data(float angle, s_ray_tracing *ray_trc, s_render_data *render_data)
 {
     int x;
     int y;
     float offset_y;
     float offset_x;
 
-    x = data->render_data->player_x;
-    y = data->render_data->player_y;
-    offset_y = data->render_data->offset_y / MAX_OFFSET;
-    offset_x = data->render_data->offset_x / MAX_OFFSET;
-    data->ray_trc.xIntercept = x + offset_x + offset_y * data->ray_trc.yStep;
-    data->ray_trc.yIntercept = x + offset_x + offset_y * data->ray_trc.yStep;
-    get_sector_info(angle, &data->ray_trc);
+    x = render_data->player_x;
+    y = render_data->player_y;
+    offset_y = render_data->offset_y / MAX_OFFSET;
+    offset_x = render_data->offset_x / MAX_OFFSET;
+    ray_trc->xIntercept = x + offset_x + offset_y * ray_trc->yStep;
+    ray_trc->yIntercept = x + offset_x + offset_y * ray_trc->yStep;
+    get_sector_info(angle, ray_trc);
 }
 
-int calculate_colision(float angle, s_render_data *render_data, s_ray_tracing *ray_trc)
+int calculate_collision(float angle, s_render_data *render_data, s_ray_tracing *ray_trc)
 {
     int x;
     int y;
+    int i;
 
-    set_ray_casting_data(angle, ray_trc);
-    while (x)
+    x = render_data->player_x;
+    y = render_data->player_y;
+    set_ray_casting_data(angle, ray_trc, render_data);
+    i = 0;
+    while (i)
     {
-            calculate_collision_x(&x, &y, ray_trc->yIntercept, render_data->map);
-            calculate_collision_y(&x, &y, ray_trc->xIntercept, render_data->map);
+        i = calculate_collision_x(&x, &y, ray_trc, render_data->map);
+        i = calculate_collision_y(&x, &y, ray_trc, render_data->map);
     }
+    printf("Found a wall!\n At %i, %i\n", x, y);
     
     return(0);
 }
 
 void    ray_trace(cub3d *data)
 {
-    calculate_colision(1, data->render_data, &data->ray_trc);
+    calculate_collision(1, data->render_data, &data->ray_trc);
 
 }

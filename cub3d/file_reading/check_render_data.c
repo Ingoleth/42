@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 19:26:29 by user42            #+#    #+#             */
-/*   Updated: 2020/10/08 12:29:21 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/17 12:53:57 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,14 @@ int check_render_data(s_render_data *render_data, void *mlx_ptr)
     }
     mlx_get_screen_size(mlx_ptr, &x, &y);
     if (render_data->res_x > x)
+    {
+        ft_putstr_fd("Warning:\nX resolution is bigger than screen size!\nSetting to screen size...", 1);
         render_data->res_x = x;
+    }
     if (render_data->res_y > y)
+    {
+        ft_putstr_fd("Warning:\nY resolution is bigger than screen size!\nSetting to screen size...", 1);
         render_data->res_y = y;
+    }
     return (0);
 }
