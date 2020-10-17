@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 10:23:24 by user42            #+#    #+#             */
-/*   Updated: 2020/10/17 11:44:34 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/17 13:07:47 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,23 +86,20 @@ void			end_get_next_line(char *line, int fd)
 s_render_data	*read_file(char *data_file)
 {
 	s_render_data	*render_data;
-	s_error			*error;
+	s_error			error;
 	char			*line;
 	int				fd;
 
 	if (!(render_data = ft_calloc(1, sizeof(s_render_data))))
 		return (0);
-	if (!(error = ft_calloc(1, sizeof(s_error))))
-		return (free_render_data(render_data));
-	fd = read_actual_file(render_data, error, &line, data_file);
-	if (error->error_id)
+	ft_memset(&error, 0, sizeof(error));
+	fd = read_actual_file(render_data, &error, &line, data_file);
+	if (error.error_id)
 	{
 		if (fd != -1)
 			end_get_next_line(line, fd);
-		free(error);
 		free_render_data(render_data);
 		return (0);
 	}
-	free(error);
 	return (render_data);
 }

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 11:44:33 by user42            #+#    #+#             */
-/*   Updated: 2020/09/25 15:21:17 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/17 13:09:15 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int		print_error(s_error *error)
 	print_error_description(error);
 	if (error->error_id > 2 && error->error_id != 7)
 	{
-		s = ft_itoa(error->line);
+		s = ft_itoa(error->line + 1);
 		ft_putstr_fd("At line: ", 1);
 		ft_putstr_fd(s, 1);
 		free(s);
