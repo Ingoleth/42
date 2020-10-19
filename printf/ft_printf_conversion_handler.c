@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 13:52:16 by user42            #+#    #+#             */
-/*   Updated: 2020/09/12 13:57:28 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/19 10:11:34 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_printf_list *flags, int *i)
 	else if (**s == 'u')
 		str = ft_itoa(va_arg(ap, unsigned));
 	else if (**s == 'x' || **s == 'X')
-		str = handle_hex(va_arg(ap, int), **s);
+		str = handle_hex(va_arg(ap, unsigned long int), **s);
 	else if (**s == '%')
 		str = handle_char('%');
 	else
@@ -72,7 +72,7 @@ char	*handle_ptr(char *ptr, int precision)
 
 	if (!ptr)
 		return (ft_strdup("(nil)"));
-	p = handle_hex_long((long int)ptr, 'x');
+	p = handle_hex((unsigned long int)ptr, 'x');
 	str_lenght = ft_strlen(p);
 	if (precision > str_lenght)
 	{
