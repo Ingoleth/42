@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 13:00:56 by user42            #+#    #+#             */
-/*   Updated: 2020/10/17 16:16:00 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/20 11:20:06 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ void set_step(s_ray_tracing * ray_trc, int sector)
         ray_trc->tileStepX = 1;
         ray_trc->tileStepY = -1;
     }
-    if (sector == 1)
+    else if (sector == 1)
     {
         ray_trc->tileStepX = -1;
         ray_trc->tileStepY = -1;
     }
-    if (sector == 2)
+    else if (sector == 2)
     {
         ray_trc->tileStepX = -1;
         ray_trc->tileStepY = 1;
@@ -45,57 +45,93 @@ int get_sector(float angle)
 {
     if (angle <= PI_2)
         return (0);
-    if (angle <= PI)
+    else if (angle <= PI)
         return (1);
-    if (angle < PI1_1_2)
+    else if (angle < PI1_1_2)
         return (2);
     else 
         return (3);
 }
 
-void get_sector_info(float angle, s_ray_tracing *ray_trc) //Double check
+void set_tan_step(float tang, float tang_div, s_ray_tracing *ray_trc)
 {
-    int sector;
-    
-    sector = get_sector(angle);
-    ray_trc->angle = angle;
-    set_step(ray_trc, sector);
-    if (sector == 0)
+    printf("---\ntang = %f, Tang_div = %f\n---\n", tang, tang_div);
+    if (ray_trc->sector == 0)
     {
-        ray_trc->xStep = 1/tan(angle);
-        ray_trc->yStep = -tan(angle);
+        ray_trc->xStep = tang_div;
+        ray_trc->yStep = -tang;
     }
-    else if (sector == 1)
+    else if (ray_trc->sector == 1)
     {
-        ray_trc->xStep = 1/tan(angle);
-        ray_trc->yStep = -tan(angle);
+        ray_trc->xStep = tang_div;
+        ray_trc->yStep = tang;
     }
-    else if (sector == 2)
+    else if (ray_trc->sector == 2)
     {
-        ray_trc->xStep = -1/tan(angle);
-        ray_trc->yStep = tan(angle);
+        ray_trc->xStep = -tang_div;
+        ray_trc->yStep = tang;
     }
     else
     {
-        ray_trc->xStep = -1/tan(angle);
-        ray_trc->yStep = tan(angle);
-    }  
+        ray_trc->xStep = tang_div;
+        ray_trc->yStep = tang;
+    }
 }
 
-void    update_angle_info(int keycode, cub3d *data)
+void handle_tan(float angle, float minimum, s_ray_tracing *ray_trc)
 {
-    float *angle;
+    float tang;
+    float tang_div;
+    if (angle > TOP_MIN && angle < TOP_MAX)
+    {
+        ray_trc->xStep = 0;
+        ray_trc->yStep = -1;
+        return ;
+    }
+    else if (angle > BOT_MIN && angle < BOT_MAX)
+    {
+        ray_trc->xStep = 0;
+        ray_trc->yStep = 1;
+        return ;
+    }
+    printf("---\nMinimum = %f, Tan = %f\n---\n", minimum, (float)tan(angle));
+    tang = (float) tan(angle);
+    if (tang > 0)
+        tang = tang < minimum ? minimum : tang;
+    else
+        tang = tang > -minimum ? minimum : tang;
+    tang_div = 1 / tang;
+    set_tan_step(tang, tang_div, ray_trc);
+}
 
-    angle = &data->render_data->view_angle;
+void get_sector_info(float angle, s_ray_tracing *ray_trc) //Double check
+{
+    float minimum;
+
+    ray_trc->sector = get_sector(angle);
+    printf("sector = %i; Angle = %f\n", ray_trc->sector, angle);
+    set_step(ray_trc, ray_trc->sector);
+    ray_trc->angle = angle;
+    minimum = 1;
+    minimum /= (2 * MAX_OFFSET);
+    handle_tan(angle, minimum, ray_trc);
+}
+
+void    update_angle_info(int keycode, float *angle)
+{
+    static float ang = 0;
+
+    if (!ang)
+        ang = ANGLE_1 * ROTATION_SPEED;
     if (keycode == LOOK_RIGHT)
     {
-        *angle -= ROTATION_SPEED;
+        *angle -= ang;
         if (*angle < 0)
             *angle = PI2 + *angle;
     }
     if (keycode == LOOK_LEFT)
     {
-        *angle += ROTATION_SPEED;
+        *angle += ang;
         if (*angle >= PI2)
             *angle = *angle - PI2;
     }

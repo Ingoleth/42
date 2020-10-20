@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 14:07:13 by user42            #+#    #+#             */
-/*   Updated: 2020/10/17 12:20:31 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/19 18:27:56 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int handle_keys (int keycode, cub3d *data)
     if (movement_keys(keycode))
         handle_movement(keycode, data);
     else if (keycode == LOOK_LEFT || keycode == LOOK_RIGHT)
-        update_angle_info(keycode, data);
+        update_angle_info(keycode, &data->render_data->view_angle);
     else if (keycode == ENTER)
         calculate_collision(data->render_data->view_angle, data->render_data, &data->ray_trc);
 	else if (keycode == ESC)

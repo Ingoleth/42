@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/10/17 19:23:37 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/20 10:48:20 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,30 +125,36 @@ typedef struct cub3d
 #define CURSOR_WEST "./textures/cursor/cursor_west.xpm"
 #define CURSOR_NORTH_WEST "./textures/cursor/cursor_north_west.xpm"
 
-#define PI 3.141593
-#define PI2 6.283186
-#define PI_4 0.785398
-#define PI_2 1.570796
-#define PI3_4 2.3562
-#define PI1_1_4 3.926990
-#define PI1_1_2 4.71238865359
-#define PI1_3_4 5.494793
+#define PI 3.141593F
+#define PI2 6.283186F
+#define PI_4 0.785398F
+#define PI_2 1.570796F
+#define PI3_4 2.3562F
+#define PI1_1_4 3.926990F
+#define PI1_1_2 4.7123887F
+#define PI1_3_4 5.494793F
 
-#define PI_8 0.392699
-#define PI3_8 1.178097
-#define PI5_8 1.963495
-#define PI7_8 2.748893
-#define PI1_1_8 3.534292
-#define PI1_3_8 4.319690
-#define PI1_5_8 5.105088
-#define PI1_7_8 5.890487
+#define PI_8 0.392699F
+#define PI3_8 1.178097F
+#define PI5_8 1.963495F
+#define PI7_8 2.748893F
+#define PI1_1_8 3.534292F
+#define PI1_3_8 4.319690F
+#define PI1_5_8 5.105088F
+#define PI1_7_8 5.890487F
+
+#define ANGLE_1 0.02F
+#define TOP_MAX 1.590796F
+#define TOP_MIN 1.550796F
+#define BOT_MAX 4.7323887F
+#define BOT_MIN 4.6923887F
 
 #define TILE_MINIMUM 10
 #define MAP_RATIO 2 
 #define LINE_WIDTH 8
 #define MAX_OFFSET 10
 #define PLAYER_SPEED 1
-#define ROTATION_SPEED 0.2
+#define ROTATION_SPEED 10
 #define REFRESH_RATE 300
 
 #define TRANSPARENT 0xf000
@@ -203,7 +209,7 @@ int             handle_mouse(cub3d *data);
 void            handle_movement(int keycode, cub3d *data);
 int             close_window(void *mlx_ptr, void *win_ptr);
 
-void            update_angle_info(int keycode, cub3d *data);
+void            update_angle_info(int keycode, float *data);
 float           rad_to_degrees(float angle);
 void            get_sector_info(float angle, s_ray_tracing *ray_trc);
 
