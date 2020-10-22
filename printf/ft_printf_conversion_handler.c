@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_conversion_handler.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aiglesia <aiglesia@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:47:45 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/10/22 13:16:34 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/10/22 16:47:19 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
