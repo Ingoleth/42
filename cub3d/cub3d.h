@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/10/20 10:48:20 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/20 18:31:38 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,14 @@ typedef struct  s_data {
     int         endian;
 }               t_data;
 
+typedef struct      collision
+{
+    t_data          *image;
+    t_collision     *next;
+    int             x;
+    int             y;
+}                   t_collision;
+
 typedef struct      mlx
 {
     void            *mlx_ptr;
@@ -84,6 +92,7 @@ typedef struct      mlx
     int             current_cursor;
     int             tile_size;
     int             render;
+    t_collision     *c_tiles;
 }                   s_mlx;
 
 typedef struct s_write_coords
@@ -155,7 +164,7 @@ typedef struct cub3d
 #define MAX_OFFSET 10
 #define PLAYER_SPEED 1
 #define ROTATION_SPEED 10
-#define REFRESH_RATE 300
+#define POV 30
 
 #define TRANSPARENT 0xf000
 #define BLACK 0
@@ -213,6 +222,6 @@ void            update_angle_info(int keycode, float *data);
 float           rad_to_degrees(float angle);
 void            get_sector_info(float angle, s_ray_tracing *ray_trc);
 
-int             calculate_collision(float angle, s_render_data *render_data, s_ray_tracing *ray_trc); //
+void            ray_trace(cub3d *data);
 int             calculate_collision_y(int * x, int * y, s_ray_tracing *ray_trc, char **map);
  #endif

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:33:22 by user42            #+#    #+#             */
-/*   Updated: 2020/10/17 12:23:10 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/20 18:31:16 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,10 @@ void    load_map(char **map, s_mlx *mlx_data, int res_x, int res_y)
 {
     int tile_size;
        
-
     tile_size = get_tile_size(map, res_x < res_y ? res_x : res_y, &res_x, &res_y);
 	mlx_data->tile_size = tile_size;
     mlx_data->map = initialize_image(mlx_data->mlx_ptr, res_x * tile_size, res_y *tile_size);
+    mlx_data->c_tiles = 0; //I still need to figure out how to draw transparent images.
     //draw_pixel_area(mlx_data->map, set_draw_coords(0, 0, res_x * tile_size, res_y * tile_size), BLACK);
     draw_tiles(mlx_data->map, map, tile_size, tile_size / LINE_WIDTH);
 }

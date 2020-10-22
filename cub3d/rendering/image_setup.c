@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 20:28:46 by user42            #+#    #+#             */
-/*   Updated: 2020/10/10 11:38:09 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/20 17:29:51 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void    draw_pixel_area(t_data *image, s_coords coords, int color)
     int aux;
 
     aux = coords.x;
-    //printf("Coords: %i->%i, %i->%i;\n", coords.x, coords.end_x, coords.y, coords.end_y);
     while (coords.y < coords.end_y)
     {
         while (coords.x < coords.end_x)

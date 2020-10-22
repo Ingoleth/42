@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aiglesia <aiglesia@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 10:18:19 by user42            #+#    #+#             */
-/*   Updated: 2020/09/16 10:21:41 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/21 13:33:59 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ t_gnl	*find_struct(t_gnl *str, int fd)
 	return (str);
 }
 
-void		free_struct(t_gnl **str, t_gnl *ptr)
+int		free_struct(t_gnl **str, t_gnl *ptr)
 {
 	t_gnl *str_temp;
 
 	str_temp = *str;
 	if (str_temp == 0 || ptr == 0)
-		return ;
+		return (-1);
 	if (str_temp != ptr)
 	{
 		while (str_temp->next != ptr)
@@ -56,6 +56,7 @@ void		free_struct(t_gnl **str, t_gnl *ptr)
 	free(ptr);
 	if (ptr == *str)
 		*str = 0;
+	return (-1);
 }
 
 int			create_line(char **line, t_gnl **str, int bytes_read, int fd)
@@ -63,9 +64,9 @@ int			create_line(char **line, t_gnl **str, int bytes_read, int fd)
 	char		*p;
 	t_gnl	*str_pt;
 
-	if (bytes_read == -1)
-		return (-1);
 	str_pt = find_struct(*str, fd);
+	if (bytes_read == -1)
+		return (free_struct(str, str_pt));
 	if ((p = ft_strchr(str_pt->line, 10)))
 	{
 		if (!(*line = ft_strncat_in(0, str_pt->line, p - (char*)str_pt->line)))

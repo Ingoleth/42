@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_mouse.c                                     :+:      :+:    :+:   */
+/*   collision_tile.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/10 13:30:50 by user42            #+#    #+#             */
-/*   Updated: 2020/10/10 14:08:40 by user42           ###   ########.fr       */
+/*   Created: 2020/10/20 18:37:13 by user42            #+#    #+#             */
+/*   Updated: 2020/10/20 18:39:15 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int handle_mouse(cub3d *data)
+void add_collision_tile()
 {
-    printf("The eagle has left the nest!\n");
-    data++;
-    return (0);
+
+}
+
+void free_collision_tile()
+{
+
+}
+
+render_collision_tile()
+{
+    
 }

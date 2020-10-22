@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aiglesia <aiglesia@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 10:23:24 by user42            #+#    #+#             */
-/*   Updated: 2020/10/17 13:07:47 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/21 13:48:28 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,8 @@ s_error *error, char **line, char *data_file)
 
 void			end_get_next_line(char *line, int fd)
 {
-	while (get_next_line(fd, &line))
-	{
-		free(line);
-	}
-	if (line)
-		free(line);
+	close(fd);
+	get_next_line(line, fd);
 }
 
 s_render_data	*read_file(char *data_file)
