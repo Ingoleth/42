@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:47:45 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/10/22 12:50:17 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/10/22 13:16:34 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ char	*handle_ptr(char *ptr, int precision, int prec_bool)
 	if (precision > str_lenght)
 	{
 		ptr = handle_precision(p, 'i', precision);
-		free(p);
 		p = ptr;
 	}
 	ptr = ft_strjoin("0x", p);

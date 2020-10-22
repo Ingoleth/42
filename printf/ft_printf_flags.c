@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 13:41:38 by user42            #+#    #+#             */
-/*   Updated: 2020/10/22 12:18:00 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/10/22 14:30:47 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ char current_type)
 	{
 		if (flags->precision)
 		{
-			if (!flags->precision_value
-			&& ft_atoi(str) == 0 && current_type != 'p')
+			if (!flags->precision_value && (current_type == 's' ||
+			((hextoi(str) == 0) && current_type != 'p')))
 				str = precision_special_case(str);
 			else if (flags->precision_value)
 				str = handle_precision(str,
