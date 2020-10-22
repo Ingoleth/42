@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aiglesia <aiglesia@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 18:44:13 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/10/19 10:14:24 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/22 12:45:24 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char			*handle_long_nmb(long int nmb);
 char			*handle_hex(unsigned long int nmb, char c);
 char			hex_c(int i, char c);
 int				get_hex_lenght(long int nmb);
-char			*handle_ptr(char	*ptr, int precision);
+char			*handle_ptr(char	*ptr, int precision, int prc_bool);
 int				ft_findchr(const char *s, int c);
 char			*ft_ftoa(float nmb);
 int				ft_isdigit(int c);

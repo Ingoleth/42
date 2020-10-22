@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aiglesia <aiglesia@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/12 13:52:16 by user42            #+#    #+#             */
-/*   Updated: 2020/10/22 12:00:47 by aiglesia         ###   ########.fr       */
+/*   Created: 2020/10/22 12:47:45 by aiglesia          #+#    #+#             */
+/*   Updated: 2020/10/22 12:50:17 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ t_printf_list *flags, int *i)
 	else if (**s == 's')
 		str = handle_string(va_arg(ap, char *));
 	else if (**s == 'p')
-		str = handle_ptr(va_arg(ap, char *), flags->precision_value);
+		str = handle_ptr(va_arg(ap, char *), flags->precision_value,
+		flags->precision);
 	else if (**s == 'i' || **s == 'd')
 		str = ft_itoa(va_arg(ap, int));
 	else if (**s == 'u')
@@ -63,12 +64,18 @@ char	*handle_string(char *s)
 		return (ft_strdup("(null)"));
 }
 
-char	*handle_ptr(char *ptr, int precision)
+char	*handle_ptr(char *ptr, int precision, int prec_bool)
 {
 	char	*p;
 	int		str_lenght;
+
 	if (!ptr)
-		p = ft_strdup("0");
+	{
+		if (prec_bool && precision == 0)
+			p = ft_strdup("");
+		else
+			p = ft_strdup("0");
+	}
 	else
 		p = handle_hex((unsigned long int)ptr, 'x');
 	str_lenght = ft_strlen(p);
