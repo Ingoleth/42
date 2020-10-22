@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/02 20:45:15 by user42            #+#    #+#             */
-/*   Updated: 2020/10/22 10:09:43 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/10/22 12:11:04 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ int		ft_printf(const char *format_string, ...)
 	{
 		flags = get_flags(&format_string, ap);
 		if ((str = handle_conversions(&format_string, ap, flags, &i))
-		&& (*format_string != 'c' && *format_string != '%'))
+		&& *format_string != 'c')
 		{
 			str = handle_flags(str, flags, *format_string);
 			i += print_final(str);
 			format_string++;
 		}
-		else if (*format_string == 'c' || *format_string == '%')
+		else if (*format_string == 'c')
 			i += print_char(&format_string, str, flags->width);
 		free(flags);
 	}

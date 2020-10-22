@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_flags_1.c                                :+:      :+:    :+:   */
+/*   ft_printf_flags.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aiglesia <aiglesia@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 13:41:38 by user42            #+#    #+#             */
-/*   Updated: 2020/09/12 13:47:07 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/22 12:18:00 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ va_list ap)
 char			*handle_flags(char *str, t_printf_list *flags,
 char current_type)
 {
-	if (!(str[0] == '%' && !ft_findchr("sc", current_type)))
+	if (!(current_type == 'c'))
 	{
 		if (flags->precision)
 		{
