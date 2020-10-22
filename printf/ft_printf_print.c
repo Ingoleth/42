@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/04 12:37:42 by user42            #+#    #+#             */
-/*   Updated: 2020/10/22 15:12:08 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/10/22 15:27:05 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,39 +60,9 @@ const char	*print_str(const char *s, int *pi)
 	{
 		if (s[j] == '%')
 			return (&s[j] + 1);
-		if (s[j] == '\\')
-		{
-			j++;
-			*pi = *pi + 1;
-			ft_print_backlash(s[j]);
-		}
 		write(1, &s[j], 1);
 		*pi = *pi + 1;
 		j++;
 	}
 	return (0);
-}
-
-void		ft_print_backlash(char c)
-{
-	if (c == 'a')
-		ft_putchar_fd('\a', 1);
-	else if (c == 'b')
-		ft_putchar_fd('\b', 1);
-	else if (c == 'r')
-		ft_putchar_fd('\r', 1);
-	else if (c == 't')
-		ft_putchar_fd('\t', 1);
-	else if (c == '"')
-		ft_putchar_fd('"', 1);
-	else if (c == '\\')
-		ft_putchar_fd('\\', 1);
-	else if (c == '\\')
-		ft_putchar_fd('\\', 1);
-	else if (c == 'v')
-		ft_putchar_fd('\v', 1);
-	else if (c == 'n')
-		ft_putchar_fd('\n', 1);
-	else
-		ft_putchar_fd(c, 1);
 }
