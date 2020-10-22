@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_precision_width_handler.c                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aiglesia <aiglesia@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 14:01:54 by user42            #+#    #+#             */
-/*   Updated: 2020/09/12 14:34:03 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/22 11:20:05 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	*handle_precision_string(char *str, int precision)
 {
 	char	*precision_str;
 
-	if (!ft_strncmp(str, "(null)", 6) && precision < 6)
+	if (!ft_strncmp(str, "(null)", 6))
 	{
 		free(str);
 		return (ft_strdup(""));

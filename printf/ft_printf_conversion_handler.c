@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 13:52:16 by user42            #+#    #+#             */
-/*   Updated: 2020/10/22 10:05:05 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/10/22 11:18:50 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,10 @@ char	*handle_ptr(char *ptr, int precision)
 {
 	char	*p;
 	int		str_lenght;
-
-	p = handle_hex((unsigned long int)ptr, 'x');
+	if (!ptr)
+		p = ft_strdup("0");
+	else
+		p = handle_hex((unsigned long int)ptr, 'x');
 	str_lenght = ft_strlen(p);
 	if (precision > str_lenght)
 	{
