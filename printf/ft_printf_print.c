@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/04 12:37:42 by user42            #+#    #+#             */
-/*   Updated: 2020/10/22 12:08:19 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/10/22 15:12:08 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ void		ft_print_backlash(char c)
 		ft_putchar_fd('\t', 1);
 	else if (c == '"')
 		ft_putchar_fd('"', 1);
-	else if (c == '\'')
-		ft_putchar_fd('\'', 1);
+	else if (c == '\\')
+		ft_putchar_fd('\\', 1);
 	else if (c == '\\')
 		ft_putchar_fd('\\', 1);
 	else if (c == 'v')
