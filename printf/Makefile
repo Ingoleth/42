@@ -3,16 +3,27 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
+#    By: aiglesia <aiglesia@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/11/21 18:09:12 by rprieto-          #+#    #+#              #
-#    Updated: 2020/09/12 14:28:36 by user42           ###   ########.fr        #
+#    Created: 2019/11/21 18:09:12 by aiglesia          #+#    #+#              #
+#    Updated: 2020/10/21 12:36:11 by aiglesia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 EXTRA = libftprintf.a
-SRCS = ft_printf.c ft_printf_atoi.c ft_printf_compare.c ft_printf_libft_string.c printf_memory_handling.c printf_misc.c printf_write.c ft_printf_print.c ft_printf_handle_hex.c ft_printf_flags_1.c ft_printf_conversion_handler.c ft_printf_precision_width_handler.c
+SRCS = ft_printf.c							\
+       ft_printf_atoi.c						\
+	   ft_printf_compare.c					\
+	   ft_printf_libft_string.c				\
+	   ft_printf_memory_handling.c			\
+	   ft_printf_misc.c 					\
+	   ft_printf_write.c					\
+	   ft_printf_print.c					\
+	   ft_printf_handle_hex.c				\
+	   ft_printf_flags.c					\
+	   ft_printf_conversion_handler.c		\
+	   ft_printf_precision_width_handler.c
 OBJS = ${SRCS:.c=.o};
 CC = gcc -c
 CFLAGS = -Wall -Werror -Wextra

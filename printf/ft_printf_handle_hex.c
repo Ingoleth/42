@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/04 12:49:30 by user42            #+#    #+#             */
-/*   Updated: 2020/10/19 10:24:42 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/21 11:59:01 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@ char	*handle_hex_uppercase(unsigned long int nmb)
 	char	temp[get_hex_lenght(nmb)];
 
 	i = 0;
-	while(nmb != 0)
-    {
-        str[i] = (str[i] = nmb % 16) > 9 ? str[i] - 10 + 'A' : str[i] + '0';
-        nmb /= 16;
+	while (nmb != 0)
+	{
+		str[i] = nmb % 16;
+		str[i] = str[i] > 9 ? str[i] - 10 + 'A' : str[i] + '0';
+		nmb /= 16;
 		i++;
-    }
+	}
 	str[i] = 0;
 	aux = i - 1;
 	while (aux >= 0)
@@ -44,17 +45,16 @@ char	*handle_hex(unsigned long int nmb, char c)
 	char	str[get_hex_lenght(nmb)];
 	char	temp[get_hex_lenght(nmb)];
 
-	if (nmb == 0)
-		return(ft_strdup("0"));
-	if (c == 'X')
-		return(handle_hex_uppercase(nmb));
+	if (nmb == 0 || c == 'X')
+		return (nmb == 0 ? ft_strdup("0") : handle_hex_uppercase(nmb));
 	i = 0;
-	while(nmb != 0)
-    {
-        str[i] = (str[i] = nmb % 16) > 9 ? str[i] - 10 + 'a' : str[i] + '0';
-        nmb /= 16;
+	while (nmb != 0)
+	{
+		str[i] = nmb % 16;
+		str[i] = str[i] > 9 ? str[i] - 10 + 'a' : str[i] + '0';
+		nmb /= 16;
 		i++;
-    }
+	}
 	str[i] = 0;
 	aux = i - 1;
 	while (aux >= 0)
