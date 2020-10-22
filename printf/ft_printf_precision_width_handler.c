@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 14:01:54 by user42            #+#    #+#             */
-/*   Updated: 2020/10/22 11:20:05 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/10/22 12:34:35 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,19 +68,11 @@ char	*handle_precision_string(char *str, int precision)
 {
 	char	*precision_str;
 
-	if (!ft_strncmp(str, "(null)", 6))
-	{
-		free(str);
-		return (ft_strdup(""));
-	}
-	else
-	{
 		if (!(precision_str = malloc(precision + 1)))
 			return (0);
 		ft_strlcpy(precision_str, str, precision + 1);
 		free(str);
 		return (precision_str);
-	}
 }
 
 char	*handle_width_left(char *str, int width)
