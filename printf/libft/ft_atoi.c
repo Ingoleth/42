@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:36:50 by rprieto-          #+#    #+#             */
-/*   Updated: 2020/10/23 14:47:45 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/10/23 14:52:49 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,3 @@ int				ft_atoi(const char *str)
 	}
 	return (number * sign);
 }
-
