@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:36:50 by rprieto-          #+#    #+#             */
-/*   Updated: 2020/10/08 12:33:34 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/23 14:47:45 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_atoi(const char *str)
+int				ft_atoi(const char *str)
 {
 	int			i;
 	int			sign;
@@ -35,3 +35,4 @@ int		ft_atoi(const char *str)
 	}
 	return (number * sign);
 }
+
