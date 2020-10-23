@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:47:27 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/10/23 17:11:53 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/10/23 17:30:38 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ char current_type)
 		if ((flags->append == '+' || flags->append == ' ') && *str != '-')
 		{
 			aux = malloc(flags->zeroes + 1);
+			str_length = str_length ? str_length : 1;
 			aux[0] = flags->append;
 			ft_memset(aux + 1, '0', flags->zeroes - str_length);
 			ft_strlcpy(&aux[flags->zeroes - str_length + 1],
