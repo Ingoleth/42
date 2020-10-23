@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 13:41:38 by user42            #+#    #+#             */
-/*   Updated: 2020/10/23 13:31:39 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/10/23 16:45:22 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ char current_type)
 			str = handle_width_left(str, flags->width);
 		if (flags->width < 0)
 			str = handle_width_right(str, -flags->width);
-		else if (flags->zeroes > 0)
+		else if (flags->zeroes > 0 && current_type != 's')
 			str = handle_width_zeroes(str, flags, current_type);
 	}
 	return (str);
