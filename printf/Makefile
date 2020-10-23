@@ -6,7 +6,7 @@
 #    By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/21 18:09:12 by aiglesia          #+#    #+#              #
-#    Updated: 2020/10/23 12:56:24 by aiglesia         ###   ########.fr        #
+#    Updated: 2020/10/23 14:38:50 by aiglesia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRCS =	ft_printf_conversion_handler.c		\
 		ft_printf_print.c					\
 	    ft_printf.c							
 OBJS = ${SRCS:.c=.o};
-LIB_DIR = ./Libft/
+LIB_DIR = ./libft/
 LIBFT_A = libft.a
 LIBFT_BONUS = ft_lstadd_back_bonus.o ft_lstnew_bonus.o ft_lstlast_bonus.o ft_lstadd_front_bonus.o ft_lstsize_bonus.o ft_lstdelone_bonus.o ft_lstiter_bonus.o ft_lstclear_bonus.o ft_lstmap_bonus.o
 CC = gcc -c

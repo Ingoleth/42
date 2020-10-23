@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 18:44:13 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/10/23 13:32:13 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/10/23 14:38:39 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include "./Libft/libft.h"
+# include "./libft/libft.h"
 # define TRUE 1
 # define FALSE 0
 # define PRECISION '.'
