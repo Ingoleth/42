@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 12:42:43 by rprieto-          #+#    #+#             */
-/*   Updated: 2020/10/23 13:50:59 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/10/23 14:34:21 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ typedef struct		s_gnl
 
 typedef enum	e_bool
 {false, true}	t_bool;
-
 
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
