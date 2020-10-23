@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:47:27 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/10/23 17:33:26 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/10/23 18:13:22 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ char current_type)
 	str_length = ft_strlen(str);
 	if (str_length < flags->zeroes)
 	{
-		if ((flags->append == '+' || flags->append == ' ') && *str != '-')
+		if (current_type != 's'  && *str != '-'
+		&& (flags->append == '+' || flags->append == ' '))
 		{
 			aux = malloc(flags->zeroes + 1);
 			aux[0] = flags->append;
