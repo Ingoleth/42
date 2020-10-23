@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncat_in.c                                    :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/16 10:05:42 by user42            #+#    #+#             */
-/*   Updated: 2020/10/22 18:06:50 by aiglesia         ###   ########.fr       */
+/*   Created: 2019/11/04 16:32:20 by rprieto-          #+#    #+#             */
+/*   Updated: 2020/09/16 10:02:29 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strncat_in(char *s1, char *s2, int n)
+size_t	ft_strlen(const char *s)
 {
-	size_t	dstsize;
-	int		i;
-	char	*s;
+	size_t i;
 
 	i = 0;
-	dstsize = ft_strlen(s1) + n + 1;
-	if (!(s = malloc(dstsize)))
+	if (s == 0)
 		return (0);
-	if (!s1 && !s2)
-		s[0] = 0;
-	if (s1)
-		i = ft_strlcpy(s, s1, ft_strlen(s1) + 1);
-	if (s2)
-		ft_strlcpy(s + i, s2, n + 1);
-	return (s);
+	while (s[i])
+	{
+		i++;
+	}
+	return (i);
 }

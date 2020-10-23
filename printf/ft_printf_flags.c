@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 13:41:38 by user42            #+#    #+#             */
-/*   Updated: 2020/10/22 16:47:35 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/10/23 13:31:39 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ va_list ap)
 {
 	if (**s == LEFT_MARGIN && !flags->width)
 		flags->zeroes = set_flag_value(s, ap);
-	if (**s == PRECISION && (flags->precision = 1))
+	if (**s == PRECISION && (flags->precision = true))
 		flags->precision_value = set_flag_value(s, ap);
 	if (**s == RIGHT_MARGIN)
 		if ((flags->width = set_flag_value(s, ap)) && flags->width > 0)
@@ -69,7 +69,7 @@ va_list ap)
 	if (flags->zeroes < 0)
 		flags->width = flags->zeroes;
 	if (flags->precision_value < 0)
-		flags->precision = 0;
+		flags->precision = false;
 }
 
 char			*handle_flags(char *str, t_printf_list *flags,

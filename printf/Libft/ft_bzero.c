@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rprieto- <rprieto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/05 10:26:38 by rprieto-          #+#    #+#             */
-/*   Updated: 2020/10/23 13:20:08 by aiglesia         ###   ########.fr       */
+/*   Created: 2019/11/12 11:38:13 by rprieto-          #+#    #+#             */
+/*   Updated: 2019/11/29 11:47:10 by rprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_bool	ft_isascii(int c)
+void	ft_bzero(void *s, size_t n)
 {
-	return (c >= 0 && c <= 127) ? true : false;
+	unsigned char *pointer;
+
+	pointer = (unsigned char*)s;
+	while (n > 0)
+	{
+		*(pointer++) = '\0';
+		n--;
+	}
 }

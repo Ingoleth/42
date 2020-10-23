@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_compare.c                                :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/02 19:30:41 by user42            #+#    #+#             */
-/*   Updated: 2020/09/12 10:35:13 by user42           ###   ########.fr       */
+/*   Created: 2019/11/04 16:33:34 by rprieto-          #+#    #+#             */
+/*   Updated: 2020/10/23 13:17:35 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int		ft_isspace(int c)
-{
-	return (c == '\t' || c == '\n' || c == '\v' || c == '\f' ||
-	c == '\r' || c == ' ') ? TRUE : FALSE;
-}
-
-int		ft_isdigit(int c)
-{
-	return (c >= '0' && c <= '9') ? TRUE : FALSE;
-}
-
-int		ft_isalpha(int c)
+t_bool		ft_isalpha(int c)
 {
 	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
-		return (TRUE);
+		return (true);
 	else
-		return (FALSE);
+		return (false);
 }

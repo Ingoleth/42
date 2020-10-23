@@ -1,28 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf_misc.c                                      :+:      :+:    :+:   */
+/*   ft_printf_misc.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/02 19:40:18 by user42            #+#    #+#             */
-/*   Updated: 2020/09/12 14:00:32 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/22 17:47:37 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-void	ft_bzero(void *s, size_t n)
-{
-	unsigned char *pointer;
-
-	pointer = (unsigned char*)s;
-	while (n > 0)
-	{
-		*(pointer++) = '\0';
-		n--;
-	}
-}
 
 char	hex_c(int i, char c)
 {

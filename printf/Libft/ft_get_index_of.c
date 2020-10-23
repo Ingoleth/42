@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   ft_get_index_of.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rprieto- <rprieto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/05 10:26:38 by rprieto-          #+#    #+#             */
-/*   Updated: 2020/10/23 13:20:08 by aiglesia         ###   ########.fr       */
+/*   Created: 2019/11/22 19:24:45 by rprieto-          #+#    #+#             */
+/*   Updated: 2019/12/02 13:13:51 by rprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-t_bool	ft_isascii(int c)
+int		ft_get_index_of(char *string, char c)
 {
-	return (c >= 0 && c <= 127) ? true : false;
+	int index;
+
+	index = 0;
+	while (string[index])
+	{
+		if (string[index] == c)
+			return (index);
+		index++;
+	}
+	return (-1);
 }

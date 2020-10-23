@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_checkchar.c                                     :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rprieto- <rprieto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/18 11:54:24 by rprieto-          #+#    #+#             */
-/*   Updated: 2020/10/23 13:17:51 by aiglesia         ###   ########.fr       */
+/*   Created: 2019/11/12 11:57:02 by rprieto-          #+#    #+#             */
+/*   Updated: 2019/11/22 16:43:16 by rprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_bool	ft_checkchar(char c, char *set)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	int i;
+	unsigned char	*dest;
+	unsigned char	*source;
+	unsigned int	i;
 
 	i = 0;
-	while (set[i])
+	source = (unsigned char *)src;
+	dest = (unsigned char *)dst;
+	if (dst == NULL && src == NULL)
+		return (NULL);
+	while (i < n)
 	{
-		if (set[i] == c)
-			return (true);
+		dest[i] = source[i];
 		i++;
 	}
-	return (false);
+	return (dst);
 }

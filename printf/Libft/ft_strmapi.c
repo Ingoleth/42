@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_checkchar.c                                     :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rprieto- <rprieto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/18 11:54:24 by rprieto-          #+#    #+#             */
-/*   Updated: 2020/10/23 13:17:51 by aiglesia         ###   ########.fr       */
+/*   Created: 2019/11/10 18:00:14 by rprieto-          #+#    #+#             */
+/*   Updated: 2019/11/27 16:40:22 by rprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_bool	ft_checkchar(char c, char *set)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	int i;
+	int		i;
+	char	*new_s;
 
 	i = 0;
-	while (set[i])
+	if (!s)
+		return (NULL);
+	if (!(new_s = (char*)malloc(sizeof(char) * (ft_strlen(s) + 1))))
+		return (NULL);
+	while (s[i])
 	{
-		if (set[i] == c)
-			return (true);
+		new_s[i] = f(i, s[i]);
 		i++;
 	}
-	return (false);
+	new_s[i] = '\0';
+	return (new_s);
 }

@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:47:45 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/10/22 16:47:19 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/10/23 13:31:42 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char	*handle_ptr(char *ptr, int precision, int prec_bool)
 
 	if (!ptr)
 	{
-		if (prec_bool && precision == 0)
+		if (prec_bool && precision == false)
 			p = ft_strdup("");
 		else
 			p = ft_strdup("0");

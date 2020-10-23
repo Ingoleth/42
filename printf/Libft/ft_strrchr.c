@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rprieto- <rprieto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/05 11:28:47 by rprieto-          #+#    #+#             */
-/*   Updated: 2020/10/22 17:44:59 by aiglesia         ###   ########.fr       */
+/*   Created: 2019/11/05 11:50:14 by rprieto-          #+#    #+#             */
+/*   Updated: 2019/11/22 12:21:40 by rprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strrchr(const char *s, int c)
 {
 	int		i;
+	int		last_ocurrence;
 	char	*string;
 
-	i = 0;
 	string = (char*)s;
+	i = 0;
+	last_ocurrence = -1;
 	while (string[i])
 	{
 		if (string[i] == c)
-			return (&string[i]);
+			last_ocurrence = i;
 		i++;
 	}
-	return (c == '\0') ? (&string[i]) : NULL;
+	if (c == '\0')
+		return (&string[i]);
+	return (last_ocurrence != -1) ? &string[last_ocurrence] : NULL;
 }

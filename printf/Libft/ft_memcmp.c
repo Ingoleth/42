@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_checkchar.c                                     :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rprieto- <rprieto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/18 11:54:24 by rprieto-          #+#    #+#             */
-/*   Updated: 2020/10/23 13:17:51 by aiglesia         ###   ########.fr       */
+/*   Created: 2019/11/13 12:31:26 by rprieto-          #+#    #+#             */
+/*   Updated: 2019/11/22 12:49:47 by rprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_bool	ft_checkchar(char c, char *set)
+int		ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	int i;
+	unsigned char	*string1;
+	unsigned char	*string2;
+	unsigned int	i;
 
+	string1 = (unsigned char*)s1;
+	string2 = (unsigned char*)s2;
 	i = 0;
-	while (set[i])
+	while (i < n)
 	{
-		if (set[i] == c)
-			return (true);
+		if (string1[i] != string2[i])
+			return (string1[i] - string2[i]);
 		i++;
 	}
-	return (false);
+	return (0);
 }

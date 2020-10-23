@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rprieto- <rprieto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/05 10:26:38 by rprieto-          #+#    #+#             */
-/*   Updated: 2020/10/23 13:20:08 by aiglesia         ###   ########.fr       */
+/*   Created: 2019/11/13 17:51:33 by rprieto-          #+#    #+#             */
+/*   Updated: 2019/11/25 16:32:04 by rprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_bool	ft_isascii(int c)
+char	*ft_strdup(const char *s1)
 {
-	return (c >= 0 && c <= 127) ? true : false;
+	char *string;
+	char *new_string;
+
+	string = (char*)s1;
+	if (!(new_string = (char*)malloc((ft_strlen(string) + 1) * sizeof(char))))
+		return (NULL);
+	else
+		return (ft_memcpy(new_string, string, ft_strlen(string) + 1));
 }

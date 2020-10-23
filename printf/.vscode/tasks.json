@@ -21,7 +21,8 @@
             "command": "/usr/bin/gcc",
             "args": [
                 "-g",
-                "$/home/user42/Documents/42/printf/*.c",
+                "$/home/user42/Documents/42/printf/main.c",
+                "$/home/user42/Documents/42/Libft/*.c",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],

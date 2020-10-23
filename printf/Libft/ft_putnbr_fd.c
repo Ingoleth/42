@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf_write.c                                     :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rprieto- <rprieto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/02 19:38:52 by user42            #+#    #+#             */
-/*   Updated: 2020/09/04 13:11:19 by user42           ###   ########.fr       */
+/*   Created: 2019/11/10 18:24:48 by rprieto-          #+#    #+#             */
+/*   Updated: 2019/11/28 15:50:52 by rprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
 void	ft_putnbr_fd(int n, int fd)
 {
@@ -29,15 +29,4 @@ void	ft_putnbr_fd(int n, int fd)
 	}
 	else
 		ft_putchar_fd(n_copy + 48, fd);
-}
-
-void	ft_putstr_fd(char *s, int fd)
-{
-	if (s)
-		write(fd, s, ft_strlen(s));
-}
-
-void	ft_putchar_fd(char c, int fd)
-{
-	write(fd, &c, 1);
 }

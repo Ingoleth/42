@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 18:44:13 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/10/22 16:47:04 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/10/23 13:32:13 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,17 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include "./Libft/libft.h"
 # define TRUE 1
 # define FALSE 0
 # define PRECISION '.'
 # define LEFT_MARGIN '0'
 # define RIGHT_MARGIN '-'
 
-typedef struct	s_list
+typedef struct	s_flags
 {
 	int			width;
-	int			precision;
+	t_bool		precision;
 	int			precision_value;
 	int			append;
 	int			zeroes;
@@ -64,28 +65,6 @@ char			hex_c(int i, char c);
 int				get_hex_lenght(long int nmb);
 char			*handle_ptr(char	*ptr, int precision, int prc_bool);
 int				ft_findchr(const char *s, int c);
-char			*ft_ftoa(float nmb);
-int				ft_isdigit(int c);
-int				ft_isspace(int c);
-int				ft_isalpha(int c);
-void			ft_bzero(void *s, size_t n);
-char			*ft_strdup(const char *s1);
-void			ft_putchar_fd(char c, int fd);
-void			ft_putstr_fd(char *s, int fd);
-void			*ft_calloc(size_t count, size_t size);
-char			*ft_strchr(const char *s, int c);
-unsigned int	ft_strlen(const char *s);
-size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
-size_t			ft_strlcat(char *dst, const char *src, size_t dstsize);
-void			ft_putnbr_fd(int n, int fd);
-int				ft_nbrlen(int n);
-int				ft_atoi(const char *str);
-unsigned int	get_digits(long int n);
-char			*ft_itoa(long int n);
-void			*ft_memcpy(void *dst, const void *src, size_t n);
-char			*ft_strjoin(char const *s1, char const *s2);
-void			*ft_memset(void *b, int c, size_t len);
-int				ft_strncmp(const char *s1, const char *s2, size_t n);
 int				ft_power(int root, int exponent);
 int				hextoi(char *s);
 
