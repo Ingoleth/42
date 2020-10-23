@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 13:41:38 by user42            #+#    #+#             */
-/*   Updated: 2020/10/23 17:29:01 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/10/23 17:54:15 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		set_flag_value(const char **s, va_list ap)
 
 void	get_flags(const char **s, va_list ap, t_printf_list *flags)
 {
-	ft_memset(flags, 0, sizeof(flags));
+	ft_memset(flags, 0, sizeof(t_printf_list));
 	while (ft_findchr("-.0+# *123456789", **s) || ft_isdigit(**s))
 	{
 		if (**s == '#' || **s == '+' || (**s == ' ' && !flags->append))
@@ -87,7 +87,7 @@ char	*handle_flags(char *str, t_printf_list *flags, char current_type)
 			str = handle_width_left(str, flags->width);
 		if (flags->width < 0)
 			str = handle_width_right(str, -flags->width);
-		else if (flags->zeroes > 0)
+		else if (flags->zeroes > 0 && current_type != 's')
 			str = handle_width_zeroes(str, flags, current_type);
 	}
 	return (str);
