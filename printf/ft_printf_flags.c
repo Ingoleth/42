@@ -6,13 +6,13 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 13:41:38 by user42            #+#    #+#             */
-/*   Updated: 2020/10/23 16:45:22 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/10/23 17:11:32 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int				set_flag_value(const char **s, va_list ap)
+int		set_flag_value(const char **s, va_list ap)
 {
 	int i;
 
@@ -26,12 +26,9 @@ int				set_flag_value(const char **s, va_list ap)
 	return (i);
 }
 
-t_printf_list	*get_flags(const char **s, va_list ap)
+void	get_flags(const char **s, va_list ap, t_printf_list *flags)
 {
-	t_printf_list	*flags;
-
-	if (!(flags = ft_calloc(1, sizeof(t_printf_list))))
-		return (0);
+	ft_memset(flags, 0, sizeof(flags));
 	while (ft_findchr("-.0+# *123456789", **s) || ft_isdigit(**s))
 	{
 		if (**s == '#' || **s == '+' || (**s == ' ' && !flags->append))
@@ -51,11 +48,9 @@ t_printf_list	*get_flags(const char **s, va_list ap)
 				*s = *s + 1;
 		}
 	}
-	return (flags);
 }
 
-void			get_special_flags(const char **s, t_printf_list *flags,
-va_list ap)
+void	get_special_flags(const char **s, t_printf_list *flags, va_list ap)
 {
 	if (**s == LEFT_MARGIN && !flags->width)
 		flags->zeroes = set_flag_value(s, ap);
@@ -72,8 +67,7 @@ va_list ap)
 		flags->precision = false;
 }
 
-char			*handle_flags(char *str, t_printf_list *flags,
-char current_type)
+char	*handle_flags(char *str, t_printf_list *flags, char current_type)
 {
 	if (!(current_type == 'c'))
 	{

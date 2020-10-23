@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 18:44:13 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/10/23 14:38:39 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/10/23 17:12:39 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct	s_flags
 
 int				ft_printf(const char *format_string, ...);
 const char		*print_str (const char *s, int *pi);
-t_printf_list	*get_flags(const char **s, va_list ap);
+void			get_flags(const char **s, va_list ap, t_printf_list *flags);
 void			get_special_flags(const char **s, t_printf_list
 				*flags, va_list ap);
 int				set_flag_value(const char **s, va_list ap);

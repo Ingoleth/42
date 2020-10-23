@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 12:47:27 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/10/23 16:50:56 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/10/23 17:11:53 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,23 @@ int		ft_printf(const char *format_string, ...)
 {
 	int				i;
 	va_list			ap;
-	t_printf_list	*flags;
+	t_printf_list	flags;
 	char			*str;
 
 	i = 0;
 	va_start(ap, format_string);
 	while ((format_string = print_str(format_string, &i)))
 	{
-		flags = get_flags(&format_string, ap);
-		if ((str = handle_conversions(&format_string, ap, flags, &i))
+		get_flags(&format_string, ap, &flags);
+		if ((str = handle_conversions(&format_string, ap, &flags, &i))
 		&& *format_string != 'c')
 		{
-			str = handle_flags(str, flags, *format_string);
+			str = handle_flags(str, &flags, *format_string);
 			i += print_final(str);
 			format_string++;
 		}
 		else if (*format_string == 'c')
-			i += print_char(&format_string, str, flags->width);
-		free(flags);
+			i += print_char(&format_string, str, flags.width);
 	}
 	return (i);
 }
