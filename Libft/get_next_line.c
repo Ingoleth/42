@@ -6,13 +6,13 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 10:18:19 by user42            #+#    #+#             */
-/*   Updated: 2020/10/22 18:12:25 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/10/24 13:44:40 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_gnl	*find_struct(t_gnl *str, int fd)
+static t_gnl	*find_struct(t_gnl *str, int fd)
 {
 	t_gnl *temp;
 
@@ -36,7 +36,7 @@ t_gnl	*find_struct(t_gnl *str, int fd)
 	return (str);
 }
 
-int		free_struct(t_gnl **str, t_gnl *ptr)
+static int		free_struct(t_gnl **str, t_gnl *ptr)
 {
 	t_gnl *str_temp;
 
@@ -59,7 +59,7 @@ int		free_struct(t_gnl **str, t_gnl *ptr)
 	return (-1);
 }
 
-int		create_line(char **line, t_gnl **str, int bytes_read, int fd)
+static int		create_line(char **line, t_gnl **str, int bytes_read, int fd)
 {
 	char	*p;
 	t_gnl	*str_pt;
@@ -86,7 +86,7 @@ int		create_line(char **line, t_gnl **str, int bytes_read, int fd)
 	return (1);
 }
 
-int		read_line(t_gnl **str, int fd)
+static int		read_line(t_gnl **str, int fd)
 {
 	int			bytes_read;
 	char		aux[BUFFER_SIZE + 1];
