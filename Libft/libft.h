@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 12:42:43 by rprieto-          #+#    #+#             */
-/*   Updated: 2020/10/23 14:33:41 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/10/24 17:21:24 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ typedef struct		s_gnl
 	int				fd;
 	struct s_gnl	*next;
 }					t_gnl;
+
+typedef struct		s_gnl_bf
+{
+	char			*line;
+	struct s_gnl_bf	*next;
+}					t_gnl_buffer;
 
 typedef enum	e_bool
 {false, true}	t_bool;
@@ -85,4 +91,7 @@ void				ft_lstiter(t_list *lst, void (*f)(void *));
 int					ft_get_index_of(char *string, char c);
 int					ft_nbrlen(int n);
 int					get_next_line	(int fd, char **line);
+void				end_get_next_line(int fd);
+int					gnl_buffer(int fd, int n, t_gnl_buffer **buffer);
+void				free_gnl_buffer(t_gnl_buffer *buffer);
 #endif

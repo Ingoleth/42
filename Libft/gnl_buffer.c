@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 13:12:36 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/10/24 15:10:38 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/10/24 17:20:53 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ static int	fill_gnl_buffer(t_gnl_buffer **buffer, char *line)
 {
 	t_gnl_buffer	*aux;
 
-	if(!*buffer)
+	if (!*buffer)
 	{
-		if(!(*buffer = ft_calloc(1, sizeof(t_gnl_buffer))))
+		if (!(*buffer = ft_calloc(1, sizeof(t_gnl_buffer))))
 			return (0);
 		(*buffer)->line = line;
 	}
@@ -27,7 +27,7 @@ static int	fill_gnl_buffer(t_gnl_buffer **buffer, char *line)
 		aux = *buffer;
 		while (aux->next)
 			aux = aux->next;
-		if (!(aux->next = ft_calloc( 1, sizeof(t_gnl_buffer))))
+		if (!(aux->next = ft_calloc(1, sizeof(t_gnl_buffer))))
 			return (0);
 		aux->next->line = line;
 	}
@@ -36,11 +36,11 @@ static int	fill_gnl_buffer(t_gnl_buffer **buffer, char *line)
 
 void		free_gnl_buffer(t_gnl_buffer *buffer)
 {
-	if(buffer)
+	if (buffer)
 	{
-		if(buffer->line)
+		if (buffer->line)
 			free(buffer->line);
-		if(buffer->next)
+		if (buffer->next)
 			free_gnl_buffer(buffer->next);
 		free(buffer);
 	}
@@ -48,15 +48,16 @@ void		free_gnl_buffer(t_gnl_buffer *buffer)
 
 int			gnl_buffer(int fd, int n, t_gnl_buffer **buffer)
 {
-	char 	*line;
+	char	*line;
 	int		continuous;
 	int		i;
-	if(n < 0)
+
+	if (n < 0)
 		return (-1);
 	continuous = n ? 0 : 1;
 	while ((n > 0 || continuous) && (i = get_next_line(fd, &line)) >= 0)
 	{
-		if(!fill_gnl_buffer(buffer, line))
+		if (!fill_gnl_buffer(buffer, line))
 		{
 			free_gnl_buffer(*buffer);
 			return (-1);
@@ -65,13 +66,17 @@ int			gnl_buffer(int fd, int n, t_gnl_buffer **buffer)
 		if (i == 0)
 			break ;
 	}
-	return(0);
+	return (0);
 }
+
+/*
+** WARNING: only use if close is allowed!
+*/
 
 void		end_get_next_line(int fd)
 {
 	char *line;
-	
+
 	close(fd);
 	get_next_line(fd, &line);
 }

@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 10:18:19 by user42            #+#    #+#             */
-/*   Updated: 2020/10/24 13:44:40 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/10/24 17:22:05 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ static int		read_line(t_gnl **str, int fd)
 	return (bytes_read);
 }
 
-int		get_next_line(int fd, char **line)
+int				get_next_line(int fd, char **line)
 {
 	int				bytes_read;
 	static t_gnl	*str = 0;
