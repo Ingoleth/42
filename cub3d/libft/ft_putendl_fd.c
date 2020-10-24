@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   collision_tile.c                                   :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rprieto- <rprieto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/20 18:37:13 by user42            #+#    #+#             */
-/*   Updated: 2020/10/24 12:59:12 by aiglesia         ###   ########.fr       */
+/*   Created: 2019/11/10 18:22:44 by rprieto-          #+#    #+#             */
+/*   Updated: 2019/11/28 13:06:19 by rprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "libft.h"
 
-void add_collision_tile()
+void	ft_putendl_fd(char *s, int fd)
 {
-
-}
-
-void free_collision_tile()
-{
-
-}
-
-void render_collision_tile()
-{
-    
+	if (s)
+	{
+		write(fd, s, ft_strlen(s));
+		ft_putchar_fd('\n', fd);
+	}
 }

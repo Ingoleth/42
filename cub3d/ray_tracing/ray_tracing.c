@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_tracing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 12:13:52 by user42            #+#    #+#             */
-/*   Updated: 2020/10/20 18:36:49 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/24 11:47:11 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int calculate_collision(float angle, cub3d *data)
     set_ray_casting_data(angle, &data->ray_trc, data->render_data);
     calculate_collision_x(&x, &y, &data->ray_trc, data->render_data->map);
     printf("Found a wall!\n At %i, %i\n", x, y);
-    add_collision_tile(x, y, &data->mlx_data);
+    //add_collision_tile(x, y, &data->mlx_data);
     return(0);
 }
 

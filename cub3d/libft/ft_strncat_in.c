@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   collision_tile.c                                   :+:      :+:    :+:   */
+/*   ft_strncat_in.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/20 18:37:13 by user42            #+#    #+#             */
-/*   Updated: 2020/10/24 12:59:12 by aiglesia         ###   ########.fr       */
+/*   Created: 2020/09/16 10:05:42 by user42            #+#    #+#             */
+/*   Updated: 2020/10/22 18:06:50 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "libft.h"
 
-void add_collision_tile()
+char	*ft_strncat_in(char *s1, char *s2, int n)
 {
+	size_t	dstsize;
+	int		i;
+	char	*s;
 
-}
-
-void free_collision_tile()
-{
-
-}
-
-void render_collision_tile()
-{
-    
+	i = 0;
+	dstsize = ft_strlen(s1) + n + 1;
+	if (!(s = malloc(dstsize)))
+		return (0);
+	if (!s1 && !s2)
+		s[0] = 0;
+	if (s1)
+		i = ft_strlcpy(s, s1, ft_strlen(s1) + 1);
+	if (s2)
+		ft_strlcpy(s + i, s2, n + 1);
+	return (s);
 }

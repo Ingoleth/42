@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   collision_tile.c                                   :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rprieto- <rprieto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/20 18:37:13 by user42            #+#    #+#             */
-/*   Updated: 2020/10/24 12:59:12 by aiglesia         ###   ########.fr       */
+/*   Created: 2019/11/11 10:05:06 by rprieto-          #+#    #+#             */
+/*   Updated: 2019/11/25 18:17:09 by rprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "libft.h"
 
-void add_collision_tile()
+void	*ft_calloc(size_t count, size_t size)
 {
+	char	*array;
 
-}
-
-void free_collision_tile()
-{
-
-}
-
-void render_collision_tile()
-{
-    
+	if (!(array = malloc(count * size)))
+		return (NULL);
+	if ((int)count == 0 || (int)size == 0)
+		return (array);
+	ft_bzero(array, count * size);
+	return ((void*)array);
 }

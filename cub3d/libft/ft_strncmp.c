@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   collision_tile.c                                   :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rprieto- <rprieto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/20 18:37:13 by user42            #+#    #+#             */
-/*   Updated: 2020/10/24 12:59:12 by aiglesia         ###   ########.fr       */
+/*   Created: 2019/11/05 13:38:41 by rprieto-          #+#    #+#             */
+/*   Updated: 2019/11/25 11:50:47 by rprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "libft.h"
 
-void add_collision_tile()
+int		ft_strncmp(const char *s1, const char *s2, size_t n)
 {
+	unsigned int	i;
 
-}
-
-void free_collision_tile()
-{
-
-}
-
-void render_collision_tile()
-{
-    
+	i = 0;
+	while ((s1[i] || s2[i]) && i < n)
+	{
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
+	}
+	return (0);
 }

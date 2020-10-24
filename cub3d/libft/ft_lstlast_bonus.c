@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   collision_tile.c                                   :+:      :+:    :+:   */
+/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rprieto- <rprieto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/20 18:37:13 by user42            #+#    #+#             */
-/*   Updated: 2020/10/24 12:59:12 by aiglesia         ###   ########.fr       */
+/*   Created: 2019/11/21 11:54:00 by rprieto-          #+#    #+#             */
+/*   Updated: 2019/12/03 19:01:33 by rprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "libft.h"
 
-void add_collision_tile()
+t_list	*ft_lstlast(t_list *lst)
 {
-
-}
-
-void free_collision_tile()
-{
-
-}
-
-void render_collision_tile()
-{
-    
+	if (lst == 0)
+		return (lst);
+	else
+		while (lst->next != 0)
+			lst = lst->next;
+	return (lst);
 }

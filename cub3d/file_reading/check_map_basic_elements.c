@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_basic_elements.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 16:17:13 by user42            #+#    #+#             */
-/*   Updated: 2020/10/17 12:55:57 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/24 19:00:48 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,40 +56,28 @@ char *line, int i)
 	return (0);
 }
 
-s_map_bearings	*free_map_bearings(s_map_bearings *map_info, char *line)
+int check_map_basic_elements(s_map_bearings *map_info, s_error *error)
 {
-	if (line)
-		free(line);
-	if (map_info)
-		free(map_info);
-	return (0);
-}
-
-s_map_bearings	*check_map_basic_elements(char *line, s_error *error, int fd)
-{
-	s_map_bearings	*map_info;
+	t_gnl_buffer	*aux;
 	int				i;
 
-	if (!(map_info = ft_calloc(1, sizeof(s_map_bearings))))
-		return (map_info + !(error->error_id = 1));
-	while (*line)
+	aux = map_info->map_struct;
+	while (aux->next)
 	{
 		i = 0;
-		while (line[i])
+		while (aux->line[i])
 		{
-			if (fill_map_bearings(map_info, error, line, i))
-				return (free_map_bearings(map_info, line));
+			if (fill_map_bearings(map_info, error, aux->line, i))
+				return (0);
 			i++;
 		}
 		error->line++;
-		free(line);
-		get_next_line(fd, &line);
+		aux = aux->next;
 	}
-	free(line);
 	if (!map_info->bot_one && !map_info->left_one && !map_info->right_one
 		&& !map_info->top_one)
-		return (free_map_bearings(map_info, 0) + !(error->error_id = 6));
+		return (!(error->error_id = 6));
 	if (!map_info->player_pos_x || !map_info->player_pos_y)
-		return (free_map_bearings(map_info, 0) + !(error->error_id = 7));
-	return (map_info);
+		return (!(error->error_id = 7));
+	return (1);
 }

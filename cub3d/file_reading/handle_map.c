@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 11:24:55 by user42            #+#    #+#             */
-/*   Updated: 2020/10/17 12:18:05 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/24 19:16:09 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,31 +29,26 @@ s_map_bearings *map_info, char **line)
 	return (i);
 }
 
-char	**copy_map(s_map_bearings *map_info, s_file_descriptor *file)
+char	**copy_map(s_map_bearings *map_info)
 {
 	char	**map;
-	char	*line;
 	int		i;
-	int		j;
-	int		player_pos_absolute;
+	t_gnl_buffer *buffer;
 
-	j = 0;
-	player_pos_absolute = map_info->top_one + map_info->player_pos_y;
+	i = 0;
 	if (!(map = ft_calloc(map_info->bot_one - map_info->top_one + 2,
 	sizeof(char*))))
 		return (0);
-	i = set_starting_copy_position(file, map_info, &line);
-	while (i < map_info->bot_one + 1)
+	buffer = map_info->map_struct;
+	while (buffer)
 	{
-		get_next_line(file->fd, &line);
-		if (i == player_pos_absolute)
-			line[map_info->player_pos_x] = '0';
-		map[j] = line;
+		if (i == map_info->player_pos_y)
+			buffer->line[map_info->player_pos_x] = '0';
+		map[i] = buffer->line;
 		i++;
-		j++;
+		buffer = buffer->next;
 	}
-	get_next_line(file->fd, &line);
-	free(line);
+	free_gnl_buffer(map_info->map_struct);
 	return (map);
 }
 
@@ -112,19 +107,21 @@ int		check_map_coherence(char **map, s_error *error)
 void	handle_map(s_render_data *render_data, s_error *error,
 char *str, s_file_descriptor *file)
 {
-	s_map_bearings *map_info;
-
-	if (!(map_info = check_map_basic_elements(str, error, file->fd)))
+	s_map_bearings map_info;
+	
+	ft_memset(&map_info, 0, sizeof(s_map_bearings));
+	fill_gnl_buffer(&map_info.map_struct, str);
+	gnl_buffer(file->fd, 0, &map_info.map_struct);
+	if (!check_map_basic_elements(&map_info, error))
 	{
-		end_get_next_line(str, file->fd);
+		free_gnl_buffer(map_info.map_struct);
 		return ;
 	}
-	render_data->player_x = map_info->player_pos_x;
-	render_data->player_y = map_info->player_pos_y;
+	render_data->player_x = map_info.player_pos_x;
+	render_data->player_y = map_info.player_pos_y;
 	render_data->offset_x = MAX_OFFSET / 2;
 	render_data->offset_y = MAX_OFFSET / 2;
-	render_data->view_angle = map_info->view_angle;
-	render_data->map = copy_map(map_info, file);
-	free(map_info);
+	render_data->view_angle = map_info.view_angle;
+	render_data->map = copy_map(&map_info);
 	check_map_coherence(render_data->map, error);
 }

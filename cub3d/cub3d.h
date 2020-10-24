@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/10/20 18:31:38 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/24 18:08:28 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  #include <stdio.h>
  #include <errno.h>
  #include <mlx.h>
- #include "../Libft/libft.h"
+ #include "../libft/libft.h"
  #include <math.h>
 
 typedef struct		s_render_data
@@ -58,6 +58,7 @@ typedef struct      s_map_bearings
     int             player_pos_x;
     int             player_pos_y;
     float           view_angle;
+    t_gnl_buffer    *map_struct;
 }                   s_map_bearings;
 
 typedef struct      s_file_descriptor
@@ -66,18 +67,19 @@ typedef struct      s_file_descriptor
     char            *path;
 }                   s_file_descriptor;
 
-typedef struct  s_data {
-    void        *img;
-    char        *addr;
-    int         bits_per_pixel;
-    int         line_length;
-    int         endian;
-}               t_data;
+typedef struct      s_data 
+{
+    void            *img;
+    char            *addr;
+    int             bits_per_pixel;
+    int             line_length;
+    int             endian;
+}                   t_data;
 
-typedef struct      collision
+typedef struct      s_col
 {
     t_data          *image;
-    t_collision     *next;
+    struct s_col    *next;
     int             x;
     int             y;
 }                   t_collision;
@@ -115,7 +117,6 @@ typedef struct ray_tracing
     int         sector;
     float       sector_pos;
 }               s_ray_tracing;
-
 
 typedef struct cub3d
 {
@@ -190,8 +191,7 @@ int             print_error(s_error * error);
 int             check_map_coherence(char **map, s_error *error);
 s_render_data   *free_render_data(s_render_data *render_data);
 int             set_error_value(int id, int i, int j, s_error *error);
-void			end_get_next_line(char *line, int fd);
-s_map_bearings	*check_map_basic_elements(char *line, s_error *error, int fd);
+int         	check_map_basic_elements(s_map_bearings *map_info, s_error *error);
 int             check_render_data(s_render_data *render_data, void *mlx_ptr);
 
 t_data          *initialize_image(void *mlx_ptr, int size_x, int size_y);

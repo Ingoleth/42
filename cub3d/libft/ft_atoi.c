@@ -1,28 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   collision_tile.c                                   :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/20 18:37:13 by user42            #+#    #+#             */
-/*   Updated: 2020/10/24 12:59:12 by aiglesia         ###   ########.fr       */
+/*   Created: 2019/11/05 13:36:50 by rprieto-          #+#    #+#             */
+/*   Updated: 2020/10/23 14:53:13 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "libft.h"
 
-void add_collision_tile()
+int				ft_atoi(const char *str)
 {
+	int			i;
+	int			sign;
+	long int	number;
 
-}
-
-void free_collision_tile()
-{
-
-}
-
-void render_collision_tile()
-{
-    
+	i = 0;
+	sign = 1;
+	number = 0;
+	while (ft_isspace(str[i]))
+		i++;
+	if (str[i] == '+' || str[i] == '-')
+		sign *= (str[i++] == '-') ? -1 : 1;
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		if (number == 0)
+			number = str[i] - 48;
+		else
+			number = number * 10 + str[i] - 48;
+		i++;
+	}
+	return (number * sign);
 }

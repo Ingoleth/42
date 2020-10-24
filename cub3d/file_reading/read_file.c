@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aiglesia <aiglesia@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 10:23:24 by user42            #+#    #+#             */
-/*   Updated: 2020/10/21 13:48:28 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/10/24 17:35:14 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,6 @@ s_error *error, char **line, char *data_file)
 	return (file.fd);
 }
 
-void			end_get_next_line(char *line, int fd)
-{
-	close(fd);
-	get_next_line(line, fd);
-}
-
 s_render_data	*read_file(char *data_file)
 {
 	s_render_data	*render_data;
@@ -93,7 +87,7 @@ s_render_data	*read_file(char *data_file)
 	if (error.error_id)
 	{
 		if (fd != -1)
-			end_get_next_line(line, fd);
+			end_get_next_line(fd);
 		free_render_data(render_data);
 		return (0);
 	}
