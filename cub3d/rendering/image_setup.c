@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image_setup.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 20:28:46 by user42            #+#    #+#             */
-/*   Updated: 2020/10/20 17:29:51 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/30 12:36:25 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,10 @@ t_data    *load_xpm_image(void *mlx_ptr, char *path)
             return (0);
     image->addr = mlx_get_data_addr(image->img, &image->bits_per_pixel, &image->line_length, &image->endian);
     return (image);
+}
+
+void    free_image( void *mlx_ptr, t_data *image)
+{
+    mlx_destroy_image(mlx_ptr, image->img);
+    free(image);
 }

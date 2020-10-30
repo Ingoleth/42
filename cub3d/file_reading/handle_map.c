@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 11:24:55 by user42            #+#    #+#             */
-/*   Updated: 2020/10/30 10:57:40 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/10/30 11:05:14 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,19 +51,6 @@ char	**copy_map(s_map_bearings *map_info)
 	i = 0;
 
 	free_gnl_buffer(map_info->map_struct, false);
-	while (map[i])
-	{
-		printf("%s\n", map[i]);
-		i++;
-	}
-	return (map);
-	i = 0;
-
-	while (map[i])
-	{
-		printf("%s\n", map[i]);
-		i++;
-	}
 	return (map);
 }
 

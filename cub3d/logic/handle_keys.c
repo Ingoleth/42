@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_keys.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 14:07:13 by user42            #+#    #+#             */
-/*   Updated: 2020/10/20 18:13:45 by user42           ###   ########.fr       */
+/*   Updated: 2020/10/30 11:25:05 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int handle_keys (int keycode, cub3d *data)
     else if (keycode == ENTER)
         ray_trace(data);
 	else if (keycode == ESC)
-        close_window(mlx_data->mlx_ptr, mlx_data->win_ptr);
+        cleanup(data);
     else
         printf("A key has been pressed!\n Keycode = %i\n", keycode); //Remove when done
         redraw_screen(data);
