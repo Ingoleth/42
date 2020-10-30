@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/24 19:16:58 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/10/30 10:14:29 by aiglesia         ###   ########.fr       */
+/*   Created: 2019/11/05 11:28:47 by rprieto-          #+#    #+#             */
+/*   Updated: 2020/10/22 17:44:59 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int main (void)
+char	*ft_strchr(const char *s, int c)
 {
-	s_render_data *render_data = read_file("/home/user42/Documents/42/cub3d/map");
-	free_render_data(render_data);
+	int		i;
+	char	*string;
+
+	i = 0;
+	string = (char*)s;
+	while (string[i])
+	{
+		if (string[i] == c)
+			return (&string[i]);
+		i++;
+	}
+	return (c == '\0') ? (&string[i]) : NULL;
 }

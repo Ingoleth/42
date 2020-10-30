@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_nbrlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/24 19:16:58 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/10/30 10:14:29 by aiglesia         ###   ########.fr       */
+/*   Created: 2019/11/28 11:44:29 by rprieto-          #+#    #+#             */
+/*   Updated: 2020/10/23 14:48:11 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-
-int main (void)
+int				ft_nbrlen(int n)
 {
-	s_render_data *render_data = read_file("/home/user42/Documents/42/cub3d/map");
-	free_render_data(render_data);
+	long	nbr;
+	int		len;
+
+	len = 0;
+	nbr = (n < 0) ? -n : n;
+	while (nbr != 0)
+	{
+		nbr /= 10;
+		len++;
+	}
+	return (len);
 }

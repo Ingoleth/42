@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rprieto- <rprieto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/24 19:16:58 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/10/30 10:14:29 by aiglesia         ###   ########.fr       */
+/*   Created: 2019/11/21 11:46:41 by rprieto-          #+#    #+#             */
+/*   Updated: 2019/11/26 17:56:41 by rprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int main (void)
+int		ft_lstsize(t_list *lst)
 {
-	s_render_data *render_data = read_file("/home/user42/Documents/42/cub3d/map");
-	free_render_data(render_data);
+	int		size;
+
+	size = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		size++;
+	}
+	return (size);
 }

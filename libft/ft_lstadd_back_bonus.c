@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rprieto- <rprieto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/24 19:16:58 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/10/30 10:14:29 by aiglesia         ###   ########.fr       */
+/*   Created: 2019/11/21 17:51:34 by rprieto-          #+#    #+#             */
+/*   Updated: 2019/12/03 18:58:56 by rprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int main (void)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	s_render_data *render_data = read_file("/home/user42/Documents/42/cub3d/map");
-	free_render_data(render_data);
+	t_list	*p;
+
+	p = *lst;
+	if (!p)
+		*lst = new;
+	else
+	{
+		p = ft_lstlast(p);
+		p->next = new;
+	}
 }

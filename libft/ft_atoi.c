@@ -1,19 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/24 19:16:58 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/10/30 10:14:29 by aiglesia         ###   ########.fr       */
+/*   Created: 2019/11/05 13:36:50 by rprieto-          #+#    #+#             */
+/*   Updated: 2020/10/23 14:53:13 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int main (void)
+int				ft_atoi(const char *str)
 {
-	s_render_data *render_data = read_file("/home/user42/Documents/42/cub3d/map");
-	free_render_data(render_data);
+	int			i;
+	int			sign;
+	long int	number;
+
+	i = 0;
+	sign = 1;
+	number = 0;
+	while (ft_isspace(str[i]))
+		i++;
+	if (str[i] == '+' || str[i] == '-')
+		sign *= (str[i++] == '-') ? -1 : 1;
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		if (number == 0)
+			number = str[i] - 48;
+		else
+			number = number * 10 + str[i] - 48;
+		i++;
+	}
+	return (number * sign);
 }

@@ -6,7 +6,7 @@
 #    By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/21 18:09:12 by aiglesia          #+#    #+#              #
-#    Updated: 2020/10/23 14:38:50 by aiglesia         ###   ########.fr        #
+#    Updated: 2020/10/29 11:57:25 by aiglesia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,10 +41,9 @@ clean:
 		${RM} ${OBJS}
 fclean:	clean
 
-		${RM} ${LIBFT_BONUS}
-		${RM} ${LIB_DIR}${LIBFT_A}
+		make -c $(LIB_DIR) fclean
 		${RM} ${NAME}
-re: fclean 
+re: fclean all
 echo: 
 		${ECHO} ${SRCS}
 .PHONY:     all clean fclean bonus

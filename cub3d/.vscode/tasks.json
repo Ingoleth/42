@@ -20,12 +20,15 @@
             "command": "/usr/bin/gcc",
             "args": [
                 "-g",				
-                "/home/user42/Documents/cub3d/*.c",
-                "/home/user42/Documents/cub3d/file_reading/*.c",
-                "/home/user42/Documents/cub3d/rendering/*.c",
-                "/home/user42/Documents/cub3d/Libft/*.c",
-                "-o",
-				"${fileDirname}/${fileBasenameNoExtension}"
+                "/home/user42/Documents/42/cub3d/test.c",
+                "/home/user42/Documents/42/cub3d/file_reading/add_texture.c",
+                "/home/user42/Documents/42/cub3d/file_reading/check_map_basic_elements.c",
+                "/home/user42/Documents/42/cub3d/file_reading/fill_render_struct.c",
+                "/home/user42/Documents/42/cub3d/file_reading/handle_map.c",
+                "/home/user42/Documents/42/cub3d/file_reading/read_file_error.c",
+                "/home/user42/Documents/42/cub3d/file_reading/read_file.c",
+                "/home/user42/Documents/42/cub3d/rendering/colour.c",
+                "/home/user42/Documents/42/cub3d/libft.a",
             ],
             "options": {
                 "cwd": "/usr/bin"

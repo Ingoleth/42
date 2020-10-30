@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 11:24:55 by user42            #+#    #+#             */
-/*   Updated: 2020/10/24 19:16:09 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/10/30 10:57:40 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	**copy_map(s_map_bearings *map_info)
 	t_gnl_buffer *buffer;
 
 	i = 0;
-	if (!(map = ft_calloc(map_info->bot_one - map_info->top_one + 2,
+	if (!(map = ft_calloc(map_info->bot_one - map_info->top_one + 3,
 	sizeof(char*))))
 		return (0);
 	buffer = map_info->map_struct;
@@ -48,7 +48,22 @@ char	**copy_map(s_map_bearings *map_info)
 		i++;
 		buffer = buffer->next;
 	}
-	free_gnl_buffer(map_info->map_struct);
+	i = 0;
+
+	free_gnl_buffer(map_info->map_struct, false);
+	while (map[i])
+	{
+		printf("%s\n", map[i]);
+		i++;
+	}
+	return (map);
+	i = 0;
+
+	while (map[i])
+	{
+		printf("%s\n", map[i]);
+		i++;
+	}
 	return (map);
 }
 
@@ -114,7 +129,7 @@ char *str, s_file_descriptor *file)
 	gnl_buffer(file->fd, 0, &map_info.map_struct);
 	if (!check_map_basic_elements(&map_info, error))
 	{
-		free_gnl_buffer(map_info.map_struct);
+		free_gnl_buffer(map_info.map_struct, 1);
 		return ;
 	}
 	render_data->player_x = map_info.player_pos_x;
