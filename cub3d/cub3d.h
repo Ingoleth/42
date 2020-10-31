@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/10/30 12:27:26 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/10/31 10:39:13 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ typedef struct      s_data
     int             bits_per_pixel;
     int             line_length;
     int             endian;
+    int             height;
+    int             width;
 }                   t_data;
 
 typedef struct      s_col

@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 20:28:46 by user42            #+#    #+#             */
-/*   Updated: 2020/10/30 12:36:25 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/10/31 11:14:43 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,11 @@ void    draw_pixel_area(t_data *image, s_coords coords, int color)
 t_data    *load_xpm_image(void *mlx_ptr, char *path)
 {
     t_data *image;
-    int width;
-    int height;
     
     if (!(image = ft_calloc(1, sizeof(t_data))))
         return (0);
-    image->img = mlx_xpm_file_to_image(mlx_ptr, path, &width, &height);
-    if(image->img == 0)
+    if (!(image->img = mlx_xpm_file_to_image(mlx_ptr, path, &image->width,
+    &image->height)))
             return (0);
     image->addr = mlx_get_data_addr(image->img, &image->bits_per_pixel, &image->line_length, &image->endian);
     return (image);
