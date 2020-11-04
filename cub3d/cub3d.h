@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/10/31 10:39:13 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/04 09:13:38 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,10 @@ typedef struct      s_data
 
 typedef struct      s_col
 {
-    t_data          *image;
     struct s_col    *next;
     int             x;
     int             y;
+    t_bool          not_dirty;
 }                   t_collision;
 
 typedef struct      mlx
@@ -118,6 +118,7 @@ typedef struct ray_tracing
     float       yStep;
     int         sector;
     float       sector_pos;
+    int         cardinal_collision;
 }               s_ray_tracing;
 
 typedef struct cub3d
@@ -155,6 +156,7 @@ typedef struct cub3d
 #define PI1_5_8 5.105088F
 #define PI1_7_8 5.890487F
 
+#define ANGLE_0_5 0.01F
 #define ANGLE_1 0.02F
 #define TOP_MAX 1.590796F
 #define TOP_MIN 1.550796F
@@ -167,12 +169,13 @@ typedef struct cub3d
 #define MAX_OFFSET 10
 #define PLAYER_SPEED 1
 #define ROTATION_SPEED 10
-#define POV 30
+#define POV 90
 
-#define TRANSPARENT 0xf000
+#define TRANSPARENT -1
 #define BLACK 0
 #define WHITE 0xffefdb
 #define GREY  0x2b2b2b
+#define RED   0x8B0000
 
 #define ESC 65307
 #define ENTER 65293
@@ -182,6 +185,11 @@ typedef struct cub3d
 #define STRAFE_RIGHT 100
 #define LOOK_LEFT 65361
 #define LOOK_RIGHT 65363
+
+#define NORTH 0
+#define EAST 1
+#define SOUTH 2
+#define WEST 3
 
 s_render_data   *read_file (char *data_file);
 int		        fill_resolution(char *line, s_render_data *render_data, s_error *error);
@@ -228,4 +236,10 @@ void            get_sector_info(float angle, s_ray_tracing *ray_trc);
 
 void            ray_trace(cub3d *data);
 int             calculate_collision_y(int * x, int * y, s_ray_tracing *ray_trc, char **map);
+void 	        add_collision_tile(t_collision **ptr, int x, int y);
+void 	        free_collision_tile(t_collision **str);
+void 	        render_collision_tile(t_collision *str, s_mlx *mlx_data);
+void	        remove_collision_tile(t_collision **str, t_collision **aux);
+void	        clean_collision_tiles(t_collision **str, s_mlx *mlx_data);
+
  #endif

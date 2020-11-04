@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 12:13:52 by user42            #+#    #+#             */
-/*   Updated: 2020/10/24 11:47:11 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/04 09:42:11 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int calculate_collision_x(int * x, int * y, s_ray_tracing *ray_trc, char **map) 
         {
             if (map[*y][*x] == '1') //Double check
             {
-                ray_trc->yIntercept = 0;
-                return (1); //Change to de adequate function
+                ray_trc->xIntercept = 0;
+                return (ray_trc->cardinal_collision = NORTH); //Change to de adequate function
             }
             *x += ray_trc->tileStepX;
             ray_trc->yIntercept += ray_trc->yStep;
@@ -42,8 +42,8 @@ int calculate_collision_x(int * x, int * y, s_ray_tracing *ray_trc, char **map) 
         {
             if (map[*y][*x] == '1')
             {
-                ray_trc->yIntercept = 0;
-                return (1); //Change to de adequate function
+                ray_trc->xIntercept = 0;
+                return (ray_trc->cardinal_collision = SOUTH); //Change to de adequate function
             }
             *x += ray_trc->tileStepX;
             ray_trc->yIntercept += ray_trc->yStep;
@@ -63,10 +63,7 @@ int calculate_collision_y(int * x, int * y, s_ray_tracing *ray_trc, char **map)
         while (ray_trc->xIntercept < *x + 1) 
         {
             if (map[*y][*x] == '1')
-            {
-                ray_trc->xIntercept = 0;
-                return (1);
-            }
+                return (ray_trc->cardinal_collision = EAST);
             *y += ray_trc->tileStepY;
             ray_trc->xIntercept += ray_trc->xStep;
         }
@@ -74,10 +71,7 @@ int calculate_collision_y(int * x, int * y, s_ray_tracing *ray_trc, char **map)
         while (ray_trc->xIntercept > *x)
         {
             if (map[*y][*x + 1] == '1')
-            {
-                ray_trc->xIntercept = 0;
-                return (1);
-            }
+                return(ray_trc->cardinal_collision = WEST);
             *y += ray_trc->tileStepY;
            ray_trc->xIntercept += ray_trc->xStep;
         }
@@ -106,18 +100,23 @@ void set_ray_casting_data(float angle, s_ray_tracing *ray_trc, s_render_data *re
         ray_trc->yIntercept = y + offset_y + (1 - offset_x) * ray_trc->yStep;
 }
 
-int calculate_collision(float angle, cub3d *data)
+float calculate_collision(float angle, cub3d *data)
 {
     int x;
     int y;
+    float distance;
 
     x = data->render_data->player_x;
     y = data->render_data->player_y;
     set_ray_casting_data(angle, &data->ray_trc, data->render_data);
     calculate_collision_x(&x, &y, &data->ray_trc, data->render_data->map);
-    printf("Found a wall!\n At %i, %i\n", x, y);
-    //add_collision_tile(x, y, &data->mlx_data);
-    return(0);
+    distance = (data->ray_trc.xIntercept - (float)(data->render_data->player_x + (float)(data->render_data->offset_x / MAX_OFFSET))) * cos(data->render_data->view_angle); //Set to abs!
+    distance += (data->ray_trc.yIntercept - (float)(data->render_data->player_y + (float)(data->render_data->offset_y) / MAX_OFFSET)) * sin(data->render_data->view_angle);
+    printf("Player x position: %f; xIntercept: %f, diff: %f\n", (float)(data->render_data->player_x + (float)(data->render_data->offset_x / MAX_OFFSET)), data->ray_trc.xIntercept, (data->ray_trc.xIntercept - (data->render_data->player_x + data->render_data->offset_x)));
+    printf("Player y position: %f; yIntercept: %f, diff: %f\n", (float)(data->render_data->player_y + (float)(data->render_data->offset_y / MAX_OFFSET)), data->ray_trc.yIntercept, (data->ray_trc.yIntercept - (data->render_data->player_y + data->render_data->offset_y)));
+    printf("Angle: %f, Distance = %f\n", angle, distance);
+    printf("X: %i, Y: %i\n", x, y);
+    return(distance);
 }
 
 void    ray_trace(cub3d *data)
@@ -125,15 +124,13 @@ void    ray_trace(cub3d *data)
     int i;
     float angle;
 
-    i = 0;
-    printf("Initial angle: %f\n", rad_to_degrees(data->render_data->view_angle));
-    angle = data->render_data->view_angle - (POV / 2) * ANGLE_1;
-    while (i < POV)
+    i = data->render_data->res_x - 1;
+    angle = data->render_data->view_angle + (POV / 2);
+    /*while (i >= 0)
     {
-        printf("%i.- Angle = %f\n", i, rad_to_degrees(angle));
         calculate_collision(angle, data);
-        angle += ANGLE_1;
-        i++;
-    }
-    
+        angle -= POV / data->render_data->res_x;
+        i--;
+    }*/
+    calculate_collision(angle, data);
 }
