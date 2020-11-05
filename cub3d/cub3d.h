@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/11/04 09:13:38 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/04 16:21:33 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,8 @@ typedef struct		s_render_data
 {
     int             res_x;
     int             res_y;
-    int             player_x;
-    int             player_y;
-    int             offset_x;
-    int             offset_y;
+    float           player_x;
+    float           player_y;
     float           view_angle;
     char            *north_texture;
     char            *west_texture;
@@ -110,14 +108,9 @@ typedef struct s_write_coords
 typedef struct ray_tracing
 {
     float       angle;
-    float       xIntercept;
-    float       yIntercept;
-    int         tileStepX;
-    int         tileStepY;
-    float       xStep;
-    float       yStep;
+    float       x_collision;
+    float       y_collision;
     int         sector;
-    float       sector_pos;
     int         cardinal_collision;
 }               s_ray_tracing;
 
@@ -232,14 +225,15 @@ int             close_window(void *mlx_ptr, void *win_ptr);
 
 void            update_angle_info(int keycode, float *data);
 float           rad_to_degrees(float angle);
-void            get_sector_info(float angle, s_ray_tracing *ray_trc);
+float           handle_tan(float angle);
+int             get_sector(float angle);
 
 void            ray_trace(cub3d *data);
 int             calculate_collision_y(int * x, int * y, s_ray_tracing *ray_trc, char **map);
-void 	        add_collision_tile(t_collision **ptr, int x, int y);
-void 	        free_collision_tile(t_collision **str);
-void 	        render_collision_tile(t_collision *str, s_mlx *mlx_data);
-void	        remove_collision_tile(t_collision **str, t_collision **aux);
-void	        clean_collision_tiles(t_collision **str, s_mlx *mlx_data);
+int             calculate_collision_0(float *x, float *y, s_ray_tracing *ray_trc, char **map);
+int             calculate_collision_1(float *x, float *y, s_ray_tracing *ray_trc, char **map);
+int             calculate_collision_2(float *x, float *y, s_ray_tracing *ray_trc, char **map);
+int             calculate_collision_3(float *x, float *y, s_ray_tracing *ray_trc, char **map);
+
 
  #endif

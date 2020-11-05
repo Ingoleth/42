@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cursor.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 09:35:38 by user42            #+#    #+#             */
-/*   Updated: 2020/10/14 16:45:08 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/04 16:25:38 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void render_cursor(s_mlx *mlx_data, s_render_data *render_data)
     t_data    *image;
     mlx_data->current_cursor = set_cursor(render_data->view_angle);
     image = mlx_data->cursor[mlx_data->current_cursor];
-    x = render_data->player_x * mlx_data->tile_size + render_data->offset_x * (mlx_data->tile_size / MAX_OFFSET);
-    y = render_data->player_y * mlx_data->tile_size + render_data->offset_y * (mlx_data->tile_size / MAX_OFFSET);
+    x = (int)(render_data->player_x * mlx_data->tile_size);
+    y = (int)(render_data->player_y * mlx_data->tile_size);
     mlx_put_image_to_window(mlx_data->mlx_ptr, mlx_data->win_ptr, image->img, x, y);
 }

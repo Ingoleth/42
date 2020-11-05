@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 19:16:58 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/11/01 13:34:50 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/04 18:32:08 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,44 +14,24 @@
 
 int main (void)
 {
-	t_collision *str;
-	t_collision *aux;
-	str = 0;
-	add_collision_tile(&str, 2, 1);
-	add_collision_tile(&str, 1, 2);
-	add_collision_tile(&str, 3, 1);
-	add_collision_tile(&str, 1, 3);
-	add_collision_tile(&str, 4, 1);
-	add_collision_tile(&str, 1, 4);
-	aux = str;
-	while (aux)
+	float angle;
+	int res_x = 50;
+	int i = 0;
+	float res_x_2 = res_x / 2; 
+	float aux;
+	while (i < res_x / 2)
 	{
-		printf("x = %i; y = %i; Dirty: %i\n", aux->x, aux->y, aux->not_dirty);
-		aux = aux->next;
+		aux = (res_x_2 - (float)i) / res_x_2;
+		angle = acos(aux); //*POV/180
+		printf("%f; %f, res_x_2 = %f, I = %i\n", rad_to_degrees(angle), aux, res_x_2, i);
+		i++;
 	}
-	printf("---\n");
-	clean_dirty_collision_tiles(&str);
-	aux = str;
-	while (aux)
+	//Si la resolución es impar, lanzar angle a 90(*POV/180);
+	while (i <= res_x)
 	{
-		printf("x = %i; y = %i; Dirty: %i\n", aux->x, aux->y, aux->not_dirty);
-		aux = aux->next;
-	}
-	printf("---\n");
-	str->not_dirty = 1;
-	str->next->next->not_dirty = 1;
-	aux = str;
-	while (aux)
-	{
-		printf("x = %i; y = %i; Dirty: %i\n", aux->x, aux->y, aux->not_dirty);
-		aux = aux->next;
-	}
-	printf("---\n");
-	clean_dirty_collision_tiles(&str);
-	aux = str;
-	while (aux)
-	{
-		printf("x = %i; y = %i; Dirty: %i\n", aux->x, aux->y, aux->not_dirty);
-		aux = aux->next;
+		aux = (res_x_2 - (float)i) / res_x_2;
+		angle = acos(aux);
+		printf("%f; %f, res_x_2 = %f, I = %i\n", rad_to_degrees(angle), aux, res_x_2, i);
+		i++;
 	}
 }

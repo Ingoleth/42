@@ -6,28 +6,11 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 11:24:55 by user42            #+#    #+#             */
-/*   Updated: 2020/10/30 11:05:14 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/04 16:22:41 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-int		set_starting_copy_position(s_file_descriptor *file,
-s_map_bearings *map_info, char **line)
-{
-	int i;
-
-	i = 0;
-	close(file->fd);
-	file->fd = open(file->path, O_RDONLY);
-	while (i < map_info->top_one)
-	{
-		get_next_line(file->fd, line);
-		free(*line);
-		i++;
-	}
-	return (i);
-}
 
 char	**copy_map(s_map_bearings *map_info)
 {
@@ -119,10 +102,8 @@ char *str, s_file_descriptor *file)
 		free_gnl_buffer(map_info.map_struct, 1);
 		return ;
 	}
-	render_data->player_x = map_info.player_pos_x;
-	render_data->player_y = map_info.player_pos_y;
-	render_data->offset_x = MAX_OFFSET / 2;
-	render_data->offset_y = MAX_OFFSET / 2;
+	render_data->player_x = map_info.player_pos_x + 0.5;
+	render_data->player_y = map_info.player_pos_y + 0.5;
 	render_data->view_angle = map_info.view_angle;
 	render_data->map = copy_map(&map_info);
 	check_map_coherence(render_data->map, error);
