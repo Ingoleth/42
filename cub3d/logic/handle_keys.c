@@ -6,17 +6,11 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 14:07:13 by user42            #+#    #+#             */
-/*   Updated: 2020/10/30 11:25:05 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/05 13:05:35 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-int movement_keys(int keycode)
-{
-    return((keycode == FORWARD || keycode == BACKWARDS || keycode == STRAFE_LEFT
-    || keycode == STRAFE_RIGHT));
-}
 
 int handle_keys (int keycode, cub3d *data)
 {
@@ -24,8 +18,8 @@ int handle_keys (int keycode, cub3d *data)
 
 	mlx_data = &data->mlx_data;
     
-    if (movement_keys(keycode))
-        handle_movement(keycode, data);
+    if (keycode == FORWARD || keycode == BACKWARDS)
+        handle_movement(keycode, data->render_data);
     else if (keycode == LOOK_LEFT || keycode == LOOK_RIGHT)
         update_angle_info(keycode, &data->render_data->view_angle);
     else if (keycode == ENTER)

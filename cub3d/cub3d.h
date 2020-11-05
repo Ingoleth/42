@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/11/04 16:21:33 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/05 13:39:17 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ typedef struct cub3d
 #define MAP_RATIO 2 
 #define LINE_WIDTH 8
 #define MAX_OFFSET 10
-#define PLAYER_SPEED 1
+#define PLAYER_SPEED 0.3
 #define ROTATION_SPEED 10
 #define POV 90
 
@@ -172,10 +172,8 @@ typedef struct cub3d
 
 #define ESC 65307
 #define ENTER 65293
-#define FORWARD 119
-#define BACKWARDS 115
-#define STRAFE_LEFT 97
-#define STRAFE_RIGHT 100
+#define FORWARD 65362
+#define BACKWARDS 65364
 #define LOOK_LEFT 65361
 #define LOOK_RIGHT 65363
 
@@ -220,7 +218,7 @@ int		        get_b(int trgb);
 
 int             handle_keys (int keycode, cub3d *data);
 int             handle_mouse(cub3d *data);
-void            handle_movement(int keycode, cub3d *data);
+void            handle_movement(int keycode, s_render_data *s_render_data);
 int             close_window(void *mlx_ptr, void *win_ptr);
 
 void            update_angle_info(int keycode, float *data);
@@ -229,7 +227,7 @@ float           handle_tan(float angle);
 int             get_sector(float angle);
 
 void            ray_trace(cub3d *data);
-int             calculate_collision_y(int * x, int * y, s_ray_tracing *ray_trc, char **map);
+float           calculate_collision(float angle, cub3d *data);
 int             calculate_collision_0(float *x, float *y, s_ray_tracing *ray_trc, char **map);
 int             calculate_collision_1(float *x, float *y, s_ray_tracing *ray_trc, char **map);
 int             calculate_collision_2(float *x, float *y, s_ray_tracing *ray_trc, char **map);
