@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/11/07 08:56:29 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/07 19:21:44 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
  #include <mlx.h>
  #include "../libft/libft.h"
  #include <math.h>
+ #include <time.h> //Remove when done!
 
 typedef struct		s_render_data
 {
@@ -114,6 +115,7 @@ typedef struct ray_tracing
     int         cardinal_collision;
     float       tan_x;
     float       tan_y;
+    float       column_height;
 }               s_ray_tracing;
 
 typedef struct cub3d
@@ -163,8 +165,8 @@ typedef struct cub3d
 #define LINE_WIDTH 8
 #define MAX_OFFSET 10
 #define PLAYER_SPEED 0.3
-#define ROTATION_SPEED 10
-#define POV 90
+#define ROTATION_SPEED 1
+#define FOV 1,0472
 
 #define TRANSPARENT -1
 #define BLACK 0
@@ -179,10 +181,10 @@ typedef struct cub3d
 #define LOOK_LEFT 65361
 #define LOOK_RIGHT 65363
 
-#define NORTH 0
-#define EAST 1
-#define SOUTH 2
-#define WEST 3
+#define EAST 0
+#define NORTH 1
+#define WEST 2
+#define SOUTH 3
 
 s_render_data   *read_file (char *data_file);
 int		        fill_resolution(char *line, s_render_data *render_data, s_error *error);
@@ -199,6 +201,7 @@ int             check_render_data(s_render_data *render_data, void *mlx_ptr);
 void            cleanup(cub3d *data);
 
 t_data          *initialize_image(void *mlx_ptr, int size_x, int size_y);
+unsigned int    get_pixel(t_data *image, int x, int y);
 void            draw_pixel_area(t_data *image, s_coords coords, int color);
 void            draw_pixel(t_data *image, int x, int y, int color);
 void            free_image(void *mlx_ptr, t_data *image);
@@ -234,6 +237,7 @@ int             calculate_collision_0(float *x, float *y, s_ray_tracing *ray_trc
 int             calculate_collision_1(float *x, float *y, s_ray_tracing *ray_trc, char **map);
 int             calculate_collision_2(float *x, float *y, s_ray_tracing *ray_trc, char **map);
 int             calculate_collision_3(float *x, float *y, s_ray_tracing *ray_trc, char **map);
+void            draw_column(int i, float distance, cub3d *data);
 
 
  #endif

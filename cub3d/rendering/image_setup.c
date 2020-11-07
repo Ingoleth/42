@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 20:28:46 by user42            #+#    #+#             */
-/*   Updated: 2020/10/31 11:14:43 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/07 17:07:30 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,17 @@ t_data *initialize_image(void *mlx_ptr, int size_x, int size_y)
     return(image);
 }
 
+unsigned int    get_pixel(t_data *image, int x, int y)
+{
+    return (*((unsigned int*)(image->addr + (y * image->line_length + x * (image->bits_per_pixel / 8)))));
+}
+
 void    draw_pixel(t_data *image, int x, int y, int color)
 {
-    char    *dst;
+    //char    *dst;
 
-    dst = image->addr + (y * image->line_length + x * (image->bits_per_pixel / 8));
-    *(unsigned int*)dst = color;
+    //dst = image->addr + (y * image->line_length + x * (image->bits_per_pixel / 8));
+    *(unsigned int*)(image->addr + (y * image->line_length + x * (image->bits_per_pixel / 8))) = color;
 }
 
 void    draw_pixel_area(t_data *image, s_coords coords, int color)

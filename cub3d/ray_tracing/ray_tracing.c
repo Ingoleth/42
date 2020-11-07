@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 12:13:52 by user42            #+#    #+#             */
-/*   Updated: 2020/11/07 09:29:12 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/07 17:27:29 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,17 @@ void    ray_trace(cub3d *data)
 {
     int i;
     float angle;
-
-    i = data->render_data->res_x - 1;
-    angle = data->render_data->view_angle + (POV / 2);
-    /*while (i >= 0)
+    double time;
+    double end_time;
+    i = 0;
+    time = (double)clock()/CLOCKS_PER_SEC;
+    while (i < data->render_data->res_x - 1)
     {
-        calculate_collision(angle, data);
-        angle -= POV / data->render_data->res_x;
-        i--;
-    }*/
-    angle = calculate_collision(data->render_data->view_angle, data);
-    printf("Distance = %f\n", angle);
-    
+        angle = data->render_data->view_angle - atan(tan((FOV / 2.0) * (2.0 * i / data->render_data->res_x - 1.0)));
+        angle = calculate_collision(angle, data);
+        draw_column(i, angle, data);
+        i++;
+    }
+    end_time = (double)clock()/CLOCKS_PER_SEC;
+    printf("Elapsed_time = %f\n", end_time - time);
 }
