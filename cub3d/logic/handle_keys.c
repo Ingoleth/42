@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 14:07:13 by user42            #+#    #+#             */
-/*   Updated: 2020/11/05 13:05:35 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/06 09:30:40 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int handle_keys (int keycode, cub3d *data)
 	mlx_data = &data->mlx_data;
     
     if (keycode == FORWARD || keycode == BACKWARDS)
-        handle_movement(keycode, data->render_data);
+        handle_movement(keycode, data);
     else if (keycode == LOOK_LEFT || keycode == LOOK_RIGHT)
         update_angle_info(keycode, &data->render_data->view_angle);
     else if (keycode == ENTER)

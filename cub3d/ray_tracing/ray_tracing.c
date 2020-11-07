@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 12:13:52 by user42            #+#    #+#             */
-/*   Updated: 2020/11/05 13:51:13 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/07 09:29:12 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,12 @@ float calculate_collision(float angle, cub3d *data)
 {
     float x;
     float y;
-    float distance;
     int sector;
 
     x = data->render_data->player_x;
     y = data->render_data->player_y;
     sector = get_sector(angle);
     data->ray_trc.angle = angle;
-    printf("Sector: %i\n", sector);
     if (sector == 0)
         calculate_collision_0(&x,&y, &data->ray_trc, data->render_data->map);
     else if (sector == 1)
@@ -39,9 +37,9 @@ float calculate_collision(float angle, cub3d *data)
         calculate_collision_2(&x,&y, &data->ray_trc, data->render_data->map);
     else if (sector == 3)
         calculate_collision_3(&x,&y, &data->ray_trc, data->render_data->map);
-    distance = 0;
-    printf("Found a wall! At: %f, %f\n", x, y);
-    return(distance);
+    x = fabsf((data->ray_trc.x_collision - data->render_data->player_x) * cosf(data->render_data->view_angle));
+    y = fabsf((data->ray_trc.y_collision - data->render_data->player_y) * sinf(data->render_data->view_angle));
+    return(x + y);
 }
 
 void    ray_trace(cub3d *data)
@@ -57,5 +55,7 @@ void    ray_trace(cub3d *data)
         angle -= POV / data->render_data->res_x;
         i--;
     }*/
-    calculate_collision(data->render_data->view_angle, data);
+    angle = calculate_collision(data->render_data->view_angle, data);
+    printf("Distance = %f\n", angle);
+    
 }

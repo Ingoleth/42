@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/11/05 13:39:17 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/07 08:56:29 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ typedef struct ray_tracing
     float       y_collision;
     int         sector;
     int         cardinal_collision;
+    float       tan_x;
+    float       tan_y;
 }               s_ray_tracing;
 
 typedef struct cub3d
@@ -218,7 +220,7 @@ int		        get_b(int trgb);
 
 int             handle_keys (int keycode, cub3d *data);
 int             handle_mouse(cub3d *data);
-void            handle_movement(int keycode, s_render_data *s_render_data);
+void            handle_movement(int keycode, cub3d *data);
 int             close_window(void *mlx_ptr, void *win_ptr);
 
 void            update_angle_info(int keycode, float *data);
