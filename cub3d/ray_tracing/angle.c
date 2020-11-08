@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 13:00:56 by user42            #+#    #+#             */
-/*   Updated: 2020/11/07 19:21:50 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/08 17:45:38 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,14 @@ float handle_tan(float angle)
 {
     float tang;
 
-    if (angle > TOP_MIN && angle < TOP_MAX)
-        return(60);
-    else if (angle > BOT_MIN && angle < BOT_MAX)
-        return (-60);
-    tang = (float) tan(angle);
-    if (tang > 0)
-        tang = tang < 0.01 ? 0.01 : tang;
+    if (angle == 0 || angle == PI)
+        tang = 0.01;
+    else if (angle == PI_2 || angle == PI1_1_2)
+        tang = 60;
     else
-        tang = tang > -0.01 ? -0.01 : tang;
-    if (angle == 0)
-        tang = 0;
+        tang = fabs(tan(angle));
+    if (tang > 0.999 && fabsf(tang) < 1.001)
+        tang = 1.001;
     return (tang);
 }
 

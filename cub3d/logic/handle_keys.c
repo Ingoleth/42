@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 14:07:13 by user42            #+#    #+#             */
-/*   Updated: 2020/11/07 18:13:16 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/08 17:07:45 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int handle_keys (int keycode, cub3d *data)
         update_angle_info(keycode, &data->render_data->view_angle);
     else if (keycode == ENTER)
     {
-        float distance = calculate_collision(data->render_data->view_angle, data);
+        float distance = calculate_collision(2.356194, data);
         printf("Collision found at: %f, %f. Distance = %f; Collision direction = %i, sector = %i\n", data->ray_trc.x_collision, data->ray_trc.y_collision, distance, data->ray_trc.cardinal_collision, get_sector(data->render_data->view_angle));
     }
 	else if (keycode == ESC)

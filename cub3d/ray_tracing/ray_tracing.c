@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 12:13:52 by user42            #+#    #+#             */
-/*   Updated: 2020/11/08 11:17:47 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/08 17:07:29 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,18 @@ float calculate_collision(float angle, cub3d *data)
 {
     float x;
     float y;
-    int sector;
 
     x = data->render_data->player_x;
     y = data->render_data->player_y;
-    sector = get_sector(angle);
+    data->ray_trc.sector = get_sector(angle);
     data->ray_trc.angle = angle;
-    if (sector == 0)
+    if (data->ray_trc.sector == 0)
         calculate_collision_0(&x,&y, &data->ray_trc, data->render_data->map);
-    else if (sector == 1)
+    else if (data->ray_trc.sector == 1)
         calculate_collision_1(&x,&y, &data->ray_trc, data->render_data->map);
-    else if (sector == 2)
+    else if (data->ray_trc.sector == 2)
         calculate_collision_2(&x,&y, &data->ray_trc, data->render_data->map);
-    else if (sector == 3)
+    else if (data->ray_trc.sector == 3)
         calculate_collision_3(&x,&y, &data->ray_trc, data->render_data->map);
     x = fabsf((data->ray_trc.x_collision - data->render_data->player_x) * cosf(data->render_data->view_angle));
     y = fabsf((data->ray_trc.y_collision - data->render_data->player_y) * sinf(data->render_data->view_angle));
@@ -48,6 +47,7 @@ void    ray_trace(cub3d *data)
     float angle;
     double time;
     double end_time;
+    
     i = 0;
     time = (double)clock()/CLOCKS_PER_SEC;
     while (i < data->render_data->res_x - 1)
