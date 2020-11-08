@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/11/07 19:21:44 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/08 11:16:37 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,13 +166,16 @@ typedef struct cub3d
 #define MAX_OFFSET 10
 #define PLAYER_SPEED 0.3
 #define ROTATION_SPEED 1
-#define FOV 1,0472
+#define FOV 1.0472
 
 #define TRANSPARENT -1
 #define BLACK 0
 #define WHITE 0xffefdb
 #define GREY  0x2b2b2b
 #define RED   0x8B0000
+#define CYAN  0x00ffff
+#define YELLOW 0xffff00 
+#define PURPLE 0x800080	
 
 #define ESC 65307
 #define ENTER 65293

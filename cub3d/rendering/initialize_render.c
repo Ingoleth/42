@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:33:22 by user42            #+#    #+#             */
-/*   Updated: 2020/11/07 17:27:54 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/08 11:08:57 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ void    load_map(char **map, s_mlx *mlx_data, int res_x, int res_y)
     tile_size = get_tile_size(map, res_x < res_y ? res_x : res_y, &res_x, &res_y);
 	mlx_data->tile_size = tile_size;
     mlx_data->map = initialize_image(mlx_data->mlx_ptr, res_x * tile_size, res_y *tile_size);
-    mlx_data->c_tiles = 0; //I still need to figure out how to draw transparent images.
-    //draw_pixel_area(mlx_data->map, set_draw_coords(0, 0, res_x * tile_size, res_y * tile_size), BLACK);
     draw_tiles(mlx_data->map, map, tile_size, tile_size / LINE_WIDTH);
 }
 
@@ -86,8 +84,7 @@ s_render_data *initialize_render_data(s_mlx *mlx_data, cub3d *data)
 	load_map(render_data->map, mlx_data, render_data->res_x, render_data->res_y);
     load_cursor(mlx_data, render_data->view_angle);
     data->render_data = render_data;
-    data->ray_trc.column_height = 30;
-    printf("Column factor: %f\n", data->ray_trc.column_height);
+    data->ray_trc.column_height = render_data->res_y / 4;
     redraw_screen(data);
     return(render_data);
 }
