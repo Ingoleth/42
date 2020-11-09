@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 14:07:13 by user42            #+#    #+#             */
-/*   Updated: 2020/11/09 12:30:51 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/09 13:25:30 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,7 @@ int		on_key_pressed(int keycode, cub3d *data)
 		data->mlx_data.keys_pressed.right = true;
     if (keycode == ESC)
         cleanup(data);
-    else
-        printf("A key has been pressed!\n Keycode = %i\n Colour image = %u, c_rgb = %u\n", keycode, get_pixel(data->mlx_data.background, 0, 0), data->render_data->c_rgb); //Remove when done
-	return (0);
+    return (0);
 }
 
 int		on_key_released(int keycode, s_mlx *mlx_data)

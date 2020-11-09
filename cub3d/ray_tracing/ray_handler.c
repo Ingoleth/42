@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 14:26:03 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/11/09 09:44:20 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/09 14:36:55 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int calculate_collision_0(float *x, float *y, s_ray_tracing *ray_trc, char **map
 		{
 			(*x)++;
 			if(map[(int)*y][(int)*x] == '1')
-				return((ray_trc->cardinal_collision = WEST) && (ray_trc->x_collision = *x));
+				return((ray_trc->cardinal_collision = WEST) && (ray_trc->x_collision = *x - 1));
 			ray_trc->y_collision -= tan_y;
 		}
 	}
@@ -96,7 +96,7 @@ int calculate_collision_2(float *x, float *y, s_ray_tracing *ray_trc, char **map
 		{
 			(*y)++;
 			if(map[(int)*y][(int)*x] == '1')
-				return((ray_trc->cardinal_collision = NORTH) && (ray_trc->y_collision = *y));
+				return((ray_trc->cardinal_collision = NORTH) && (ray_trc->y_collision = *y - 1));
 			ray_trc->x_collision -= tan_x;
 		}
 		while (ray_trc->y_collision <= *y + 1)
@@ -130,14 +130,14 @@ int calculate_collision_3(float *x, float *y, s_ray_tracing *ray_trc, char **map
 		{
 			(*y)++;
 			if(map[(int)*y][(int)*x] == '1')
-				return((ray_trc->cardinal_collision = NORTH) && (ray_trc->y_collision = *y));
+				return((ray_trc->cardinal_collision = NORTH) && (ray_trc->y_collision = *y - 1));
 			ray_trc->x_collision += tan_x;
 		}
 		while (ray_trc->y_collision <= *y + 1)
 		{
 			(*x)++;
 			if(map[(int)*y][(int)*x] == '1')
-				return((ray_trc->cardinal_collision = WEST) && (ray_trc->x_collision = *x));
+				return((ray_trc->cardinal_collision = WEST) && (ray_trc->x_collision = *x - 1));
 			ray_trc->y_collision += tan_y;
 		}
 	}
