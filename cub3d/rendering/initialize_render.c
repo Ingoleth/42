@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:33:22 by user42            #+#    #+#             */
-/*   Updated: 2020/11/09 12:44:22 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/09 19:51:25 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ s_render_data *initialize_render_data(s_mlx *mlx_data, cub3d *data)
 {
     s_render_data *render_data;
 
-    if (!(render_data = read_file("/home/user42/Documents/42_2/cub3d/map")) ||
+    if (!(render_data = read_file("/home/user42/Documents/42_2/cub3d/map", mlx_data->mlx_ptr)) ||
 	check_render_data(render_data, mlx_data->mlx_ptr))
 		return (free_render_data(render_data));
     mlx_data->win_ptr = mlx_new_window(mlx_data->mlx_ptr, render_data->res_x, render_data->res_y, "Cub3d");
@@ -84,7 +84,7 @@ s_render_data *initialize_render_data(s_mlx *mlx_data, cub3d *data)
 	load_map(render_data->map, mlx_data, render_data->res_x, render_data->res_y);
     load_cursor(mlx_data, render_data->view_angle);
     data->render_data = render_data;
-    data->ray_trc.column_height = render_data->res_y / 6;
+    data->ray_trc.column_height = render_data->res_y / 2;
     ft_memset(&data->mlx_data.keys_pressed, 0, sizeof(t_keys));
     redraw_screen(data);
     return(render_data);

@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 11:19:11 by user42            #+#    #+#             */
-/*   Updated: 2020/11/09 14:35:15 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/09 14:51:50 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void handle_wall_collision(float angle, cub3d *data)
 
         data->render_data->player_x = data->ray_trc.x_collision;
         data->render_data->player_y = data->ray_trc.y_collision;
+        data->render_data->player_x -= data->ray_trc.cardinal_collision == WEST ? 0.001 : 0;
+        data->render_data->player_y -= data->ray_trc.cardinal_collision == NORTH ? 0.001 : 0;
         remaining = (PLAYER_SPEED - cos(angle) * fabsf(data->render_data->player_x - data->ray_trc.x_collision)) / 4;
         return;
         angle = get_collision_right_angle(get_sector(angle), data->ray_trc.cardinal_collision);

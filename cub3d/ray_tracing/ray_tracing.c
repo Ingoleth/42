@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 12:13:52 by user42            #+#    #+#             */
-/*   Updated: 2020/11/09 10:01:33 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/09 15:02:49 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,4 @@ void    ray_trace(cub3d *data)
         i++;
     }
     end_time = (double)clock()/CLOCKS_PER_SEC;
-    printf("Elapsed time: %f\n", end_time - time);
 }

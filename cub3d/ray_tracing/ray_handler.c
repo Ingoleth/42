@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 14:26:03 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/11/09 14:43:56 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/09 15:05:12 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int calculate_collision_0(float *x, float *y, s_ray_tracing *ray_trc, char **map
 	ray_trc->y_collision = *y - (1 - *x + (int)*x) * tan_y;
 	*x = (int)*x;
 	*y = (int)*y;
+	float time = (double)clock()/CLOCKS_PER_SEC;
 	while (x)
 	{
 		while (ray_trc->x_collision <= *x + 1)
@@ -40,10 +41,12 @@ int calculate_collision_0(float *x, float *y, s_ray_tracing *ray_trc, char **map
 		{
 			(*x)++;
 			if(map[(int)*y][(int)*x] == '1')
-				return((ray_trc->cardinal_collision = WEST) && (ray_trc->x_collision = *x - 1));
+				return((ray_trc->cardinal_collision = WEST) && (ray_trc->x_collision = *x));
 			ray_trc->y_collision -= tan_y;
 		}
 	}
+	if((double)clock()/CLOCKS_PER_SEC - time > 1)
+		return(printf("X = %f, xIntercept = %f; y = %f, yIntercept = %f; Angle = %f Tan = %f\n", *x, ray_trc->x_collision, *y, ray_trc->y_collision, ray_trc->angle, tan_y));
 	return(0);
 }
 
@@ -58,6 +61,7 @@ int calculate_collision_1(float *x, float *y, s_ray_tracing *ray_trc, char **map
 	ray_trc->y_collision = *y - (*x - (int)*x) * tan_y;
 	*x = (int)*x;
 	*y = (int)*y;
+	float time = (double)clock()/CLOCKS_PER_SEC;
 	while (x)
 	{
 		while (ray_trc->x_collision >= *x)
@@ -74,6 +78,8 @@ int calculate_collision_1(float *x, float *y, s_ray_tracing *ray_trc, char **map
 				return((!(ray_trc->cardinal_collision = EAST)) && (ray_trc->x_collision = *x + 1));
 			ray_trc->y_collision -= tan_y;
 		}
+		if((double)clock()/CLOCKS_PER_SEC - time > 1)
+			return(printf("X = %f, xIntercept = %f; y = %f, yIntercept = %f; Angle = %f Tan = %f\n", *x, ray_trc->x_collision, *y, ray_trc->y_collision, ray_trc->angle, tan_y));
 	}
 	return(0);
 }
@@ -89,14 +95,14 @@ int calculate_collision_2(float *x, float *y, s_ray_tracing *ray_trc, char **map
 	ray_trc->y_collision = *y + (*x - (int)*x) * tan_y;
 	*x = (int)*x;
 	*y = (int)*y;
-		float time = (double)clock()/CLOCKS_PER_SEC;
+	float time = (double)clock()/CLOCKS_PER_SEC;
 	while (x)
 	{
 		while (ray_trc->x_collision >= *x)
 		{
 			(*y)++;
 			if(map[(int)*y][(int)*x] == '1')
-				return((ray_trc->cardinal_collision = NORTH) && (ray_trc->y_collision = *y - 1));
+				return((ray_trc->cardinal_collision = NORTH) && (ray_trc->y_collision = *y));
 			ray_trc->x_collision -= tan_x;
 		}
 		while (ray_trc->y_collision <= *y + 1)
@@ -108,7 +114,6 @@ int calculate_collision_2(float *x, float *y, s_ray_tracing *ray_trc, char **map
 		}
 		if((double)clock()/CLOCKS_PER_SEC - time > 1)
 			return(printf("X = %f, xIntercept = %f; y = %f, yIntercept = %f; Angle = %f Tan = %f\n", *x, ray_trc->x_collision, *y, ray_trc->y_collision, ray_trc->angle, tan_y));
-
 	}
 	return(0);
 }
@@ -124,22 +129,25 @@ int calculate_collision_3(float *x, float *y, s_ray_tracing *ray_trc, char **map
 	ray_trc->y_collision = *y + (1 - *x + (int)*x) * tan_y;
 	*x = (int)*x;
 	*y = (int)*y;
+		float time = (double)clock()/CLOCKS_PER_SEC;
 	while (x)
 	{
 		while (ray_trc->x_collision <= *x + 1)
 		{
 			(*y)++;
 			if(map[(int)*y][(int)*x] == '1')
-				return((ray_trc->cardinal_collision = NORTH) && (ray_trc->y_collision = *y - 1));
+				return((ray_trc->cardinal_collision = NORTH) && (ray_trc->y_collision = *y));
 			ray_trc->x_collision += tan_x;
 		}
 		while (ray_trc->y_collision <= *y + 1)
 		{
 			(*x)++;
 			if(map[(int)*y][(int)*x] == '1')
-				return((ray_trc->cardinal_collision = WEST) && (ray_trc->x_collision = *x - 1));
+				return((ray_trc->cardinal_collision = WEST) && (ray_trc->x_collision = *x));
 			ray_trc->y_collision += tan_y;
 		}
+		if((double)clock()/CLOCKS_PER_SEC - time > 1)
+			return(printf("X = %f, xIntercept = %f; y = %f, yIntercept = %f; Angle = %f Tan = %f\n", *x, ray_trc->x_collision, *y, ray_trc->y_collision, ray_trc->angle, tan_y));
 	}
 	return(0);
 }

@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 19:26:29 by user42            #+#    #+#             */
-/*   Updated: 2020/11/09 13:25:20 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/09 18:21:27 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ int check_textures(s_render_data *render_data)
     char *aux;
 
     aux = 0;
-    if(!render_data->north_texture)
+    if(!render_data->north_texture.img)
         aux = "north";
-     if(!render_data->north_texture)
+     if(!render_data->east_texture.img)
         aux = "east";
-    if(!render_data->north_texture)
+    if(!render_data->south_texture.img)
         aux = "south";
-    if(!render_data->north_texture)
+    if(!render_data->west_texture.img)
         aux = "west";
-    if(!render_data->north_texture)
+    if(!render_data->sprite.img)
         aux = "sprite";
     if (aux)
     {

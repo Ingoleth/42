@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/11/09 13:50:31 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/09 19:57:18 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,17 @@
  #include <math.h>
  #include <time.h> //Remove when done!
 
+typedef struct      s_data 
+{
+    void            *img;
+    char            *addr;
+    int             bits_per_pixel;
+    int             line_length;
+    int             endian;
+    int             height;
+    int             width;
+}                   t_data;
+
 typedef struct		s_render_data
 {
     int             res_x;
@@ -31,11 +42,12 @@ typedef struct		s_render_data
     float           player_x;
     float           player_y;
     float           view_angle;
-    char            *north_texture;
-    char            *west_texture;
-    char            *east_texture;
-    char            *south_texture;
-    char            *sprite;
+    t_data          north_texture;
+    t_data          west_texture;
+    t_data          east_texture;
+    t_data          south_texture;
+    t_data          sprite;
+    void            *mlx_ptr;
     unsigned int    c_rgb;
     unsigned int    f_rgb;
     char            **map;
@@ -65,17 +77,6 @@ typedef struct      s_file_descriptor
     int             fd;
     char            *path;
 }                   s_file_descriptor;
-
-typedef struct      s_data 
-{
-    void            *img;
-    char            *addr;
-    int             bits_per_pixel;
-    int             line_length;
-    int             endian;
-    int             height;
-    int             width;
-}                   t_data;
 
 typedef struct      s_col
 {
@@ -173,8 +174,8 @@ typedef struct cub3d
 #define MAP_RATIO 2 
 #define LINE_WIDTH 8
 #define MAX_OFFSET 10
-#define PLAYER_SPEED 0.008
-#define ROTATION_SPEED 0.01
+#define PLAYER_SPEED 0.08
+#define ROTATION_SPEED 0.5
 #define FOV 0.785398
 
 #define TRANSPARENT -1
@@ -198,12 +199,12 @@ typedef struct cub3d
 #define WEST 2
 #define SOUTH 3
 
-s_render_data   *read_file (char *data_file);
+s_render_data   *read_file (char *data_file, void *mlx_data);
 int		        fill_resolution(char *line, s_render_data *render_data, s_error *error);
 void            fill_render_struct(s_render_data *render_data, char *line, s_error *error, s_file_descriptor *file);
 void	        handle_map(s_render_data *render_data, s_error *error, char *str, s_file_descriptor *file);
 void	        advance_file_line(char **line, s_error *error);
-void            add_texture(char **fd, char *line, s_error *s_error);
+void            add_texture(t_data *image, void *mlx_data, char *line, s_error *s_error);
 int             print_error(s_error * error);
 int             check_map_coherence(char **map, s_error *error);
 s_render_data   *free_render_data(s_render_data *render_data);
@@ -220,7 +221,6 @@ void            free_image(void *mlx_ptr, t_data *image);
 void            load_floor_ceiling(s_render_data *render_data, s_mlx *mlx_data);
 s_coords        set_draw_coords(int x, int y, int end_x, int end_y);
 t_data          *load_xpm_image(void *mlx_ptr, char *path);
-int             get_pixel_value(t_data *image, int x, int y);
 int             load_cursor(s_mlx *mlx_data, float angle);
 s_render_data   *initialize_render_data(s_mlx *mlx_data, cub3d *data);
 int             redraw_screen(cub3d *data);

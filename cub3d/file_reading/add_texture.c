@@ -3,64 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   add_texture.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 12:15:44 by user42            #+#    #+#             */
-/*   Updated: 2020/09/25 14:21:51 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/09 19:14:47 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int		check_if_image(char *str)
+void	add_texture(t_data *image, void *mlx_ptr, char *line, s_error *error)
 {
-	if (!ft_strncmp(str, "\x89PNG\r\n\x1a\n", 8) ||
-			!ft_strncmp(str, "\xff\xd8\xff", 3))
-		return (1);
-	return (0);
-}
-
-int		get_texture_size(int fd, char *path)
-{
-	int		size;
-	int		bytes_read;
-	char	str[9];
-
-	size = 0;
-	str[8] = 0;
-	if ((open(path, O_RDONLY) == -1))
-		return (-1);
-	while ((bytes_read = read(fd, str, 8)))
+	image->img = mlx_xpm_file_to_image(mlx_ptr, line, &image->width, &image->height);
+	if (!image->img)
 	{
-		size += bytes_read;
-		if (size == 8 && !check_if_image(str))
-			return (-1);
-	}
-	return (size ? size : -1);
-}
-
-void	add_texture(char **texture, char *line, s_error *error)
-{
-	int fd;
-	int size;
-
-	if (*texture)
-	{
-		error->error_id = 3;
-		return ;
-	}
-	while (ft_isspace(*line))
-		line++;
-	fd = open(line, O_RDONLY);
-	if ((size = get_texture_size(fd, line)) == -1)
-	{
+		printf("%s\n", line);
 		error->error_id = 10;
 		return ;
 	}
-	close(fd);
-	fd = open(line, O_RDONLY);
-	if (!(*texture = ft_calloc(1, size + 1)))
-		error->error_id = 1;
-	read(fd, *texture, size);
-	return ;
+	image->addr = mlx_get_data_addr(image->img, &image->bits_per_pixel, &image->line_length, &image->endian);
 }

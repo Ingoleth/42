@@ -6,24 +6,24 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 10:23:24 by user42            #+#    #+#             */
-/*   Updated: 2020/10/24 17:35:14 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/09 18:33:17 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void			free_textures(s_render_data *render_data)
+void			free_textures(s_render_data *render_data) //TODO change to destroy!
 {
-	if (render_data->east_texture)
-		free(render_data->east_texture);
-	if (render_data->north_texture)
-		free(render_data->north_texture);
-	if (render_data->west_texture)
-		free(render_data->west_texture);
-	if (render_data->south_texture)
-		free(render_data->south_texture);
-	if (render_data->sprite)
-		free(render_data->sprite);
+	if (render_data->east_texture.img)
+		free(render_data->east_texture.img);
+	if (render_data->north_texture.img)
+		free(render_data->north_texture.img);
+	if (render_data->west_texture.img)
+		free(render_data->west_texture.img);
+	if (render_data->south_texture.img)
+		free(render_data->south_texture.img);
+	if (render_data->sprite.img)
+		free(render_data->sprite.img);
 }
 
 s_render_data	*free_render_data(s_render_data *render_data)
@@ -73,7 +73,7 @@ s_error *error, char **line, char *data_file)
 	return (file.fd);
 }
 
-s_render_data	*read_file(char *data_file)
+s_render_data	*read_file(char *data_file, void *mlx_ptr)
 {
 	s_render_data	*render_data;
 	s_error			error;
@@ -83,6 +83,7 @@ s_render_data	*read_file(char *data_file)
 	if (!(render_data = ft_calloc(1, sizeof(s_render_data))))
 		return (0);
 	ft_memset(&error, 0, sizeof(error));
+	render_data->mlx_ptr = mlx_ptr;
 	fd = read_actual_file(render_data, &error, &line, data_file);
 	if (error.error_id)
 	{
