@@ -6,18 +6,18 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 11:19:11 by user42            #+#    #+#             */
-/*   Updated: 2020/11/07 09:01:14 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/09 12:40:14 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void handle_movement(int keycode, cub3d *data)
+void handle_movement(cub3d *data)
 {
     float distance;
     float angle;
 
-    if (keycode == BACKWARDS)
+    if (data->mlx_data.keys_pressed.backwards)
         if (data->render_data->view_angle > PI)
             angle = data->render_data->view_angle - PI;
         else

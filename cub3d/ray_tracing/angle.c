@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 13:00:56 by user42            #+#    #+#             */
-/*   Updated: 2020/11/08 17:45:38 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/09 12:35:46 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,19 @@ float handle_tan(float angle)
     return (tang);
 }
 
-void    update_angle_info(int keycode, float *angle)
+void    update_angle_info(t_keys *keys, float *angle)
 {
     static float ang = 0;
 
     if (!ang)
         ang = ANGLE_1 * ROTATION_SPEED;
-    if (keycode == LOOK_RIGHT)
+    if (keys->right)
     {
         *angle -= ang;
         if (*angle < 0)
             *angle = PI2 + *angle;
     }
-    if (keycode == LOOK_LEFT)
+    if (keys->left)
     {
         *angle += ang;
         if (*angle >= PI2)

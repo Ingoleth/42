@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 19:44:52 by user42            #+#    #+#             */
-/*   Updated: 2020/11/02 10:51:04 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/09 12:30:22 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ int main (void)
 	if (!(data.render_data))
 		exit(-1);
 	mlx_mouse_hide(data.mlx_data.mlx_ptr, data.mlx_data.win_ptr);
-	mlx_hook(data.mlx_data.win_ptr, 2, 1L<<0, handle_keys, &data);
+	mlx_hook(data.mlx_data.win_ptr, 2, 1L<<0, on_key_pressed, &data);
+	mlx_hook(data.mlx_data.win_ptr, 3, 1L<<1, on_key_released, &data.mlx_data);
 	mlx_hook(data.mlx_data.win_ptr, 17, 1L<<2, close_window, &data);
+	mlx_loop_hook(data.mlx_data.mlx_ptr, check_keys, &data);
 	mlx_loop(data.mlx_data.mlx_ptr);
+
 }

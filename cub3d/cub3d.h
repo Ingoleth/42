@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/11/08 16:35:08 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/09 12:45:35 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,14 @@ typedef struct      s_col
     t_bool          not_dirty;
 }                   t_collision;
 
+typedef struct      keys
+{
+    t_bool          forward;
+    t_bool          backwards;
+    t_bool          left;
+    t_bool          right;
+}                   t_keys;
+
 typedef struct      mlx
 {
     void            *mlx_ptr;
@@ -95,6 +103,7 @@ typedef struct      mlx
     int             current_cursor;
     int             tile_size;
     int             render;
+    t_keys          keys_pressed;
     t_collision     *c_tiles;
 }                   s_mlx;
 
@@ -164,7 +173,7 @@ typedef struct cub3d
 #define MAP_RATIO 2 
 #define LINE_WIDTH 8
 #define MAX_OFFSET 10
-#define PLAYER_SPEED 0.3
+#define PLAYER_SPEED 0.03
 #define ROTATION_SPEED 1
 #define FOV 0.785398
 
@@ -224,12 +233,13 @@ int		        get_r(int trgb);
 int		        get_g(int trgb);
 int		        get_b(int trgb);
 
-int             handle_keys (int keycode, cub3d *data);
-int             handle_mouse(cub3d *data);
-void            handle_movement(int keycode, cub3d *data);
+int		        on_key_pressed(int keycode, cub3d *data);
+int		        on_key_released(int keycode, s_mlx *mlx_data);
+int             check_keys (cub3d *data);
+void            handle_movement(cub3d *data);
 int             close_window(void *mlx_ptr, void *win_ptr);
 
-void            update_angle_info(int keycode, float *data);
+void            update_angle_info(t_keys *key, float *data);
 float           rad_to_degrees(float angle);
 float           handle_tan(float angle);
 int             get_sector(float angle);
