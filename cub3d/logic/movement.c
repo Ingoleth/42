@@ -6,53 +6,74 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 11:19:11 by user42            #+#    #+#             */
-/*   Updated: 2020/11/09 14:51:50 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/10 21:48:30 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-float get_collision_right_angle(int sector, int face)
+t_bool  check_wall_distance(cub3d *data, float temp_x, float temp_y)
 {
-    if(face == NORTH)
-        return(sector == 0 ? 0 : PI);
-    else if(face == EAST)
-        return(sector == 0 ? PI_2 : PI1_1_2);
-    else if (face == SOUTH)
-        return(sector == 3 ? 0 : PI);
-    else
-        return(sector == 2 ? PI_2 : PI1_1_2);
+    if(data->ray_trc.cardinal_collision == NORTH || data->ray_trc.cardinal_collision == SOUTH)
+    {
+        if(fabsf(temp_y - data->ray_trc.y_collision) < WALL_DISTANCE)
+            return (true);
+    }
+    else if (data->ray_trc.cardinal_collision == EAST || data->ray_trc.cardinal_collision == WEST)
+    {
+        if(fabsf(temp_x - data->ray_trc.x_collision) < WALL_DISTANCE)
+            return (true);
+    }
+    return (false);
 }
 
-void handle_wall_collision(float angle, cub3d *data)
+void move_from_wall(cub3d *data, float x, float y)
 {
-    float remaining;
-    float distance;
-
-        data->render_data->player_x = data->ray_trc.x_collision;
-        data->render_data->player_y = data->ray_trc.y_collision;
-        data->render_data->player_x -= data->ray_trc.cardinal_collision == WEST ? 0.001 : 0;
-        data->render_data->player_y -= data->ray_trc.cardinal_collision == NORTH ? 0.001 : 0;
-        remaining = (PLAYER_SPEED - cos(angle) * fabsf(data->render_data->player_x - data->ray_trc.x_collision)) / 4;
-        return;
-        angle = get_collision_right_angle(get_sector(angle), data->ray_trc.cardinal_collision);
-        distance = calculate_collision(angle, data);
-        if (distance > remaining)
+    if (check_wall_distance(data, x, y))
+    {
+        if (data->ray_trc.cardinal_collision == SOUTH)
         {
-            data->render_data->player_x = data->render_data->player_x + remaining * cosf(angle);
-            data->render_data->player_y = data->render_data->player_y + remaining * -sinf(angle); 
+            y = (y - (int)y < WALL_DISTANCE) ? (int)y + WALL_DISTANCE : y;
+            if (data->ray_trc.sector == 0 && data->render_data->map[(int)y][(int)x + 1] == '1')
+                x = (x - (int)x > 1 - WALL_DISTANCE) ? (int) x + 1 - WALL_DISTANCE : x;
+            else if (data->ray_trc.sector == 1 && data->render_data->map[(int)y][(int)x - 1] == '1')
+                x = (x - (int)x < WALL_DISTANCE) ? (int) x + WALL_DISTANCE : x;
+        }
+        else if (data->ray_trc.cardinal_collision == EAST)
+        {
+            x = (x - (int)x < WALL_DISTANCE) ? (int) x + WALL_DISTANCE : x;
+            if (data->ray_trc.sector == 1 && data->render_data->map[(int)y - 1][(int)x] == '1')
+                y = (y - (int)y < WALL_DISTANCE) ? (int) y + WALL_DISTANCE : y;
+            else if (data->ray_trc.sector == 2 && data->render_data->map[(int)y + 1][(int)x] == '1')
+                 y = (y - (int)y > 1 - WALL_DISTANCE) ? (int) y + 1 - WALL_DISTANCE : y;
+        }
+        else if (data->ray_trc.cardinal_collision == NORTH)
+        {
+             y = (y - (int)y > 1 - WALL_DISTANCE) ? (int)y + 1 - WALL_DISTANCE : y;
+            if (data->ray_trc.sector == 2 && data->render_data->map[(int)y][(int)x - 1] == '1')
+                x = (x - (int)x < WALL_DISTANCE) ? (int) x + WALL_DISTANCE : x;
+            else if (data->ray_trc.sector == 3 && data->render_data->map[(int)y][(int)x + 1] == '1')
+                x = (x - (int)x > 1 - WALL_DISTANCE) ? (int) x + 1 - WALL_DISTANCE : x;
         }
         else
         {
-            data->render_data->player_x = data->ray_trc.x_collision;
-            data->render_data->player_y = data->ray_trc.y_collision;
-        }   
+            x = (x - (int)x > 1 - WALL_DISTANCE) ? (int)x + 1 - WALL_DISTANCE : x;
+            if (data->ray_trc.sector == 0 && data->render_data->map[(int)y + 1][(int)x] == '1')
+                y = (y - (int)y < WALL_DISTANCE) ? (int) y + WALL_DISTANCE : y;
+            else if (data->ray_trc.sector == 3 && data->render_data->map[(int)y - 1][(int)x] == '1')
+                 y = (y - (int)y > 1 - WALL_DISTANCE) ? (int) y + 1 - WALL_DISTANCE : y;
+        }
+    }
+    data->render_data->player_x = x; 
+    data->render_data->player_y = y; 
 }
 
 void handle_movement(cub3d *data)
 {
     float distance;
     float angle;
+    float temp_x;
+    float temp_y;
     if (data->mlx_data.keys_pressed.backwards)
     {
         if (data->render_data->view_angle > PI)
@@ -64,10 +85,14 @@ void handle_movement(cub3d *data)
         angle = data->render_data->view_angle;
     distance = calculate_collision(angle, data);
     if (distance < PLAYER_SPEED)
-        handle_wall_collision(angle, data);
+    {
+        temp_x = data->ray_trc.x_collision;
+        temp_y = data->ray_trc.y_collision;
+    } 
     else
     {
-        data->render_data->player_x = data->render_data->player_x + PLAYER_SPEED * cosf(angle);
-        data->render_data->player_y = data->render_data->player_y + PLAYER_SPEED * -sinf(angle);
+        temp_x = data->render_data->player_x + PLAYER_SPEED * cosf(angle);
+        temp_y = data->render_data->player_y + PLAYER_SPEED * -sinf(angle);
     }
+    move_from_wall(data, temp_x, temp_y);
 }

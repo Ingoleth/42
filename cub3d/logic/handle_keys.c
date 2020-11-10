@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 14:07:13 by user42            #+#    #+#             */
-/*   Updated: 2020/11/09 13:25:30 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/10 18:41:13 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,20 @@ int		on_key_released(int keycode, s_mlx *mlx_data)
 	return (0);
 }
 
+t_bool is_key_pressed(t_keys *keys)
+{
+	if(keys->forward || keys->backwards || keys->left || keys->right)
+		return (true);
+	else
+		return (false);
+}
+
 int check_keys (cub3d *data)
 {
 	s_mlx *mlx_data;
 
 	mlx_data = &data->mlx_data;
-    if(data->mlx_data.keys_pressed.forward || data->mlx_data.keys_pressed.backwards || data->mlx_data.keys_pressed.left || data->mlx_data.keys_pressed.right)
+    if(is_key_pressed(&data->mlx_data.keys_pressed))
     {
         if (data->mlx_data.keys_pressed.forward || data->mlx_data.keys_pressed.backwards)
             handle_movement(data);

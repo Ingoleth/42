@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 14:26:03 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/11/09 15:05:12 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/10 19:10:52 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int calculate_collision_0(float *x, float *y, s_ray_tracing *ray_trc, char **map
 		}
 	}
 	if((double)clock()/CLOCKS_PER_SEC - time > 1)
-		return(printf("X = %f, xIntercept = %f; y = %f, yIntercept = %f; Angle = %f Tan = %f\n", *x, ray_trc->x_collision, *y, ray_trc->y_collision, ray_trc->angle, tan_y));
+		return(printf("X = %f, xIntercept = %f; y = %f, yIntercept = %f; Angle = %f Sector = %i Tan = %f\n", *x, ray_trc->x_collision, *y, ray_trc->y_collision, ray_trc->angle, ray_trc->sector, tan_y));
 	return(0);
 }
 
@@ -79,7 +79,7 @@ int calculate_collision_1(float *x, float *y, s_ray_tracing *ray_trc, char **map
 			ray_trc->y_collision -= tan_y;
 		}
 		if((double)clock()/CLOCKS_PER_SEC - time > 1)
-			return(printf("X = %f, xIntercept = %f; y = %f, yIntercept = %f; Angle = %f Tan = %f\n", *x, ray_trc->x_collision, *y, ray_trc->y_collision, ray_trc->angle, tan_y));
+			return(printf("X = %f, xIntercept = %f; y = %f, yIntercept = %f; Angle = %f Sector = %i Tan = %f\n", *x, ray_trc->x_collision, *y, ray_trc->y_collision, ray_trc->angle, ray_trc->sector, tan_y));
 	}
 	return(0);
 }
@@ -113,7 +113,7 @@ int calculate_collision_2(float *x, float *y, s_ray_tracing *ray_trc, char **map
 			ray_trc->y_collision += tan_y;
 		}
 		if((double)clock()/CLOCKS_PER_SEC - time > 1)
-			return(printf("X = %f, xIntercept = %f; y = %f, yIntercept = %f; Angle = %f Tan = %f\n", *x, ray_trc->x_collision, *y, ray_trc->y_collision, ray_trc->angle, tan_y));
+			return(printf("X = %f, xIntercept = %f; y = %f, yIntercept = %f; Angle = %f Sector: %i Tan = %f\n", *x, ray_trc->x_collision, *y, ray_trc->y_collision, ray_trc->angle, ray_trc->sector, tan_y));
 	}
 	return(0);
 }
@@ -147,7 +147,7 @@ int calculate_collision_3(float *x, float *y, s_ray_tracing *ray_trc, char **map
 			ray_trc->y_collision += tan_y;
 		}
 		if((double)clock()/CLOCKS_PER_SEC - time > 1)
-			return(printf("X = %f, xIntercept = %f; y = %f, yIntercept = %f; Angle = %f Tan = %f\n", *x, ray_trc->x_collision, *y, ray_trc->y_collision, ray_trc->angle, tan_y));
+			return(printf("X = %f, xIntercept = %f; y = %f, yIntercept = %f; Angle = %f Sector: %i Tan = %f\n", *x, ray_trc->x_collision, *y, ray_trc->y_collision, ray_trc->angle, ray_trc->sector, tan_y));
 	}
 	return(0);
 }
