@@ -6,11 +6,28 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 09:57:41 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/11/10 20:11:20 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/11 17:10:34 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+
+unsigned int		add_shade(unsigned int colour, double distance)
+{
+	int r, g, b;
+	r = get_r(colour);
+	g = get_g(colour);
+	b = get_b(colour);
+
+	if (distance > SHADE_DISTANCE)
+		distance = SHADE_DISTANCE;
+	distance /= SHADE_DISTANCE + 0.2;
+	r = r - (r * distance);
+	g = g - (g * distance);
+	b = b - (b * distance);
+	return (get_trgb(get_t(colour), r, g, b));
+}
 
 unsigned int get_image_colour(cub3d *data, int column_size, int img_y)
 {
@@ -48,8 +65,8 @@ void draw_column(int i, float distance, cub3d *data)
 	j = 0;
 	while (j < max_draw_height)
 	{
-		draw_pixel(data->mlx_data.background, i, y_axis + j, get_image_colour(data, column_size, j));
-		draw_pixel(data->mlx_data.background, i, y_axis - j, get_image_colour(data, column_size, -j));
+		draw_pixel(data->mlx_data.background, i, y_axis + j, add_shade(get_image_colour(data, column_size, j), distance));
+		draw_pixel(data->mlx_data.background, i, y_axis - j, add_shade(get_image_colour(data, column_size, -j), distance));
 		j++;
 	}
 	while (get_pixel(data->mlx_data.background, i, y_axis - j) != data->render_data->c_rgb && j < y_axis)

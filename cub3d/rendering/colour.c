@@ -3,58 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   colour.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 20:20:12 by user42            #+#    #+#             */
-/*   Updated: 2020/10/02 22:33:04 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/11 17:01:42 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		get_rgb(int t, int r, int g, int b)
+int		get_trgb(int t, int r, int g, int b)
 {
-	int rgb;
-	unsigned char *aux;
-
-	aux = (unsigned char*)&rgb;
-	*aux = t;
-	aux++;
-	*aux = r;
-	aux++;
-	*aux = g;
-	aux++;
-	*aux = b;
-	return (rgb);
+	return(t << 24 | r << 16 | g << 8 | b);
 }
 
 int		get_t(int trgb)
 {
-	unsigned char *aux;
-
-	aux = (unsigned char*)&trgb;
-	return (*aux);
+	return ((trgb & (0xFF << 24)) >> 24);
 }
 
 int		get_r(int trgb)
 {
-	unsigned char *aux;
-
-	aux = (unsigned char*)&trgb;
-	return (*(aux + 1));
+	return ((trgb & (0xFF << 16)) >> 16);
 }
 
 int		get_g(int trgb)
 {
-	unsigned char *aux;
-
-	aux = (unsigned char*)&trgb;
-	return (*(aux + 2));
+	return ((trgb & (0xFF << 8)) >> 8);
 }
 
 int		get_b(int trgb)
 {
-	unsigned char *aux;
-
-	aux = (unsigned char*)&trgb;
-	return (*(aux + 3));
+	return (trgb & 0xFF);
 }
-

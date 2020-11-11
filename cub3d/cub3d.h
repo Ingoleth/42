@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/11/10 19:24:12 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/11 17:08:03 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,10 +174,11 @@ typedef struct cub3d
 #define MAP_RATIO 2 
 #define LINE_WIDTH 8
 #define MAX_OFFSET 10
-#define PLAYER_SPEED 0.08
-#define ROTATION_SPEED 0.5
+#define PLAYER_SPEED 0.1
+#define ROTATION_SPEED 0.8
 #define FOV 0.785398
 #define WALL_DISTANCE 0.1
+#define SHADE_DISTANCE 10
 
 #define TRANSPARENT -1
 #define BLACK 0
@@ -228,11 +229,11 @@ int             redraw_screen(cub3d *data);
 void            render_cursor(s_mlx *mlx_data, s_render_data *render_data);
 int             set_cursor(float angle);
 
-int		        get_rgb(int t, int r, int g, int b);
-int		        get_t(int trgb);
-int		        get_r(int trgb);
-int		        get_g(int trgb);
-int		        get_b(int trgb);
+unsigned int		        get_trgb(int t, int r, int g, int b);
+unsigned int		        get_t(int trgb);
+unsigned int		        get_r(int trgb);
+unsigned int		        get_g(int trgb);
+unsigned int		        get_b(int trgb);
 
 int		        on_key_pressed(int keycode, cub3d *data);
 int		        on_key_released(int keycode, s_mlx *mlx_data);
