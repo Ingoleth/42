@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/11/11 17:08:03 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/11 17:33:19 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ typedef struct cub3d
 #define PLAYER_SPEED 0.1
 #define ROTATION_SPEED 0.8
 #define FOV 0.785398
-#define WALL_DISTANCE 0.1
+#define WALL_DISTANCE 0.1f
 #define SHADE_DISTANCE 10
 
 #define TRANSPARENT -1
@@ -253,6 +253,8 @@ int             calculate_collision_1(float *x, float *y, s_ray_tracing *ray_trc
 int             calculate_collision_2(float *x, float *y, s_ray_tracing *ray_trc, char **map);
 int             calculate_collision_3(float *x, float *y, s_ray_tracing *ray_trc, char **map);
 void            draw_column(int i, float distance, cub3d *data);
+void            move_from_wall(cub3d *data, float x, float y);
+t_bool          check_wall_distance(cub3d *data, float temp_x, float temp_y);
 
 
  #endif
