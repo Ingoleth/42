@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 12:13:52 by user42            #+#    #+#             */
-/*   Updated: 2020/11/11 16:21:33 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/12 14:19:22 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ float calculate_collision(float angle, cub3d *data)
         calculate_collision_3(&x,&y, &data->ray_trc, data->render_data->map);
     x = fabsf((data->ray_trc.x_collision - data->render_data->player_x) * cosf(data->render_data->view_angle));
     y = fabsf((data->ray_trc.y_collision - data->render_data->player_y) * sinf(data->render_data->view_angle));
+    if (data->ray_trc.sprite)
+        printf("Found a sprite at %f, %f\n", data->ray_trc.sprite_x, data->ray_trc.sprite_y);
+    data->ray_trc.sprite = false; //Remember to remove it when done!
     return(x + y);
 }
 

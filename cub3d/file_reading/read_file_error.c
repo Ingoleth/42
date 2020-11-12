@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file_error.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 11:44:33 by user42            #+#    #+#             */
-/*   Updated: 2020/10/17 13:09:15 by user42           ###   ########.fr       */
+/*   Updated: 2020/11/12 14:22:18 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	print_error_description(s_error *error)
 	else if (error->error_id == 5)
 		ft_putstr_fd("Wrong input!\n", 1);
 	else if (error->error_id == 6)
-		ft_putstr_fd("Wrong map input!\n", 1);
+		ft_putstr_fd("Wrong map input!\n", 1); //You, mister seg fault...
 	else if (error->error_id == 7)
 		ft_putstr_fd("No player position!\n", 1);
 	else if (error->error_id == 8)

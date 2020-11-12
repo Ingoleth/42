@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/11/11 17:33:19 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/12 14:10:58 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,10 @@ typedef struct ray_tracing
     float       tan_x;
     float       tan_y;
     float       column_height;
+    t_bool      sprite;
+    float       sprite_x;
+    float       sprite_y;
+    float       sprite_plane_lenght;
 }               s_ray_tracing;
 
 typedef struct cub3d
@@ -252,9 +256,11 @@ int             calculate_collision_0(float *x, float *y, s_ray_tracing *ray_trc
 int             calculate_collision_1(float *x, float *y, s_ray_tracing *ray_trc, char **map);
 int             calculate_collision_2(float *x, float *y, s_ray_tracing *ray_trc, char **map);
 int             calculate_collision_3(float *x, float *y, s_ray_tracing *ray_trc, char **map);
+t_bool          check_sprite_collision(int x, int y, char **map, s_ray_tracing * ray_trc);
 void            draw_column(int i, float distance, cub3d *data);
 void            move_from_wall(cub3d *data, float x, float y);
 t_bool          check_wall_distance(cub3d *data, float temp_x, float temp_y);
-
+t_bool          check_sprite(cub3d *data);
+void            draw_sprite(int i, int j, cub3d *data);
 
  #endif
