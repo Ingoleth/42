@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/11/12 14:10:58 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/12 16:37:55 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,10 +252,10 @@ int             get_sector(float angle);
 
 void            ray_trace(cub3d *data);
 float           calculate_collision(float angle, cub3d *data);
-int             calculate_collision_0(float *x, float *y, s_ray_tracing *ray_trc, char **map);
-int             calculate_collision_1(float *x, float *y, s_ray_tracing *ray_trc, char **map);
-int             calculate_collision_2(float *x, float *y, s_ray_tracing *ray_trc, char **map);
-int             calculate_collision_3(float *x, float *y, s_ray_tracing *ray_trc, char **map);
+int             calculate_collision_0(float p_x, float p_y, s_ray_tracing *ray_trc, char **map);
+int             calculate_collision_1(float p_x, float p_y, s_ray_tracing *ray_trc, char **map);
+int             calculate_collision_2(float p_x, float p_y, s_ray_tracing *ray_trc, char **map);
+int             calculate_collision_3(float p_x, float p_y, s_ray_tracing *ray_trc, char **map);
 t_bool          check_sprite_collision(int x, int y, char **map, s_ray_tracing * ray_trc);
 void            draw_column(int i, float distance, cub3d *data);
 void            move_from_wall(cub3d *data, float x, float y);
