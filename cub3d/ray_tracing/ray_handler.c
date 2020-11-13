@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 14:26:03 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/11/12 20:43:31 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/12 21:09:52 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,16 @@ char **map)
 	ray_trc->y_collision = p_y - (1 - p_x + x) * ray_trc->tan_y;
 	while (x)
 	{
-		while ((ray_trc->x_collision - x) <= (1 + y - ray_trc->y_collision))
+		while (ray_trc->x_collision - x <= 1 + y - ray_trc->y_collision)
 		{
-			if (map[--y][x] == '1')
+			if (check_wall_collision(x, --y, map, ray_trc))
 				return ((ray_trc->cardinal_collision = SOUTH) &&
 				(ray_trc->y_collision = y + 1));
 				ray_trc->x_collision += ray_trc->tan_x;
 		}
-		while ((ray_trc->x_collision - x) > (1 + y - ray_trc->y_collision))
+		while (ray_trc->x_collision - x > 1 + y - ray_trc->y_collision)
 		{
-			if (map[y][(++x)] == '1')
+			if (check_wall_collision(++x, y, map, ray_trc))
 				return ((ray_trc->cardinal_collision = WEST) &&
 				(ray_trc->x_collision = x));
 				ray_trc->y_collision -= ray_trc->tan_y;
@@ -58,16 +58,16 @@ char **map)
 	ray_trc->y_collision = p_y - (p_x - x) * ray_trc->tan_y;
 	while (x)
 	{
-		while ((1 + x - ray_trc->x_collision) <= (1 + y - ray_trc->y_collision))
+		while (1 + x - ray_trc->x_collision <= 1 + y - ray_trc->y_collision)
 		{
-			if (map[--y][x] == '1')
+			if (check_wall_collision(x, --y, map, ray_trc))
 				return ((ray_trc->cardinal_collision = SOUTH) &&
 				(ray_trc->y_collision = y + 1));
 				ray_trc->x_collision -= ray_trc->tan_x;
 		}
-		while ((1 + x - ray_trc->x_collision) > (1 + y - ray_trc->y_collision))
+		while (1 + x - ray_trc->x_collision > 1 + y - ray_trc->y_collision)
 		{
-			if (map[y][--x] == '1')
+			if (check_wall_collision(--x, y, map, ray_trc))
 				return ((!(ray_trc->cardinal_collision = EAST)) &&
 				(ray_trc->x_collision = x + 1));
 				ray_trc->y_collision -= ray_trc->tan_y;
@@ -88,16 +88,16 @@ char **map)
 	ray_trc->y_collision = p_y + (p_x - x) * ray_trc->tan_y;
 	while (x)
 	{
-		while ((1 + x - ray_trc->x_collision) <= (ray_trc->y_collision - y))
+		while (1 + x - ray_trc->x_collision <= ray_trc->y_collision - y)
 		{
-			if (map[++y][x] == '1')
+			if (check_wall_collision(x, ++y, map, ray_trc))
 				return ((ray_trc->cardinal_collision = NORTH) &&
 				(ray_trc->y_collision = y));
 				ray_trc->x_collision -= ray_trc->tan_x;
 		}
-		while ((1 + x - ray_trc->x_collision) > (ray_trc->y_collision - y))
+		while (1 + x - ray_trc->x_collision > ray_trc->y_collision - y)
 		{
-			if (map[y][--x] == '1')
+			if (check_wall_collision(--x, y, map, ray_trc))
 				return ((!(ray_trc->cardinal_collision = EAST)) &&
 				(ray_trc->x_collision = x + 1));
 				ray_trc->y_collision += ray_trc->tan_y;
@@ -118,16 +118,16 @@ char **map)
 	ray_trc->y_collision = p_y + (1 - p_x + x) * ray_trc->tan_y;
 	while (x)
 	{
-		while ((ray_trc->x_collision - x) <= (ray_trc->y_collision - y))
+		while (ray_trc->x_collision - x <= ray_trc->y_collision - y)
 		{
-			if (map[++y][x] == '1')
+			if (check_wall_collision(x, ++y, map, ray_trc))
 				return ((ray_trc->cardinal_collision = NORTH) &&
 				(ray_trc->y_collision = y));
 				ray_trc->x_collision += ray_trc->tan_x;
 		}
-		while ((ray_trc->x_collision - x) > (ray_trc->y_collision - y))
+		while (ray_trc->x_collision - x > ray_trc->y_collision - y)
 		{
-			if (map[y][++x] == '1')
+			if (check_wall_collision(++x, y, map, ray_trc))
 				return ((ray_trc->cardinal_collision = WEST) &&
 				(ray_trc->x_collision = x));
 				ray_trc->y_collision += ray_trc->tan_y;

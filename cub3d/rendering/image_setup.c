@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 20:28:46 by user42            #+#    #+#             */
-/*   Updated: 2020/11/07 17:07:30 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/13 00:09:59 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,6 @@ unsigned int    get_pixel(t_data *image, int x, int y)
 
 void    draw_pixel(t_data *image, int x, int y, int color)
 {
-    //char    *dst;
-
-    //dst = image->addr + (y * image->line_length + x * (image->bits_per_pixel / 8));
     *(unsigned int*)(image->addr + (y * image->line_length + x * (image->bits_per_pixel / 8))) = color;
 }
 
