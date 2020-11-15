@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 12:13:52 by user42            #+#    #+#             */
-/*   Updated: 2020/11/13 00:10:01 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/15 12:16:40 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,10 @@ void    ray_trace(cub3d *data)
         angle = data->render_data->view_angle - atan(tan((FOV / 2.0) * (2.0 * i / data->render_data->res_x - 1.0)));
         angle = angle < 0 ? PI2 + angle : angle;
         angle = angle > PI2 ? angle - PI2 : angle;
+        data->ray_trc.sprite = 0;
         draw_column(i, calculate_collision(angle, data), data);
-        if(data->ray_trc.sprite)
-        {
-            draw_sprite_column(i, data);
-            data->ray_trc.sprite = false;
-        }
+        if(data->ray_trc.sprite != 0)
+            printf("Sprite at %f, %f\n", data->ray_trc.sprite_x, data->ray_trc.sprite_y);
         i++;
     }
 }

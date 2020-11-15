@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/11/13 18:40:49 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/15 14:29:45 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,7 +256,7 @@ int             calculate_collision_0(float p_x, float p_y, s_ray_tracing *ray_t
 int             calculate_collision_1(float p_x, float p_y, s_ray_tracing *ray_trc, char **map);
 int             calculate_collision_2(float p_x, float p_y, s_ray_tracing *ray_trc, char **map);
 int             calculate_collision_3(float p_x, float p_y, s_ray_tracing *ray_trc, char **map);
-t_bool          check_wall_collision(int x, int y, char **map, s_ray_tracing * ray_trc);
+t_bool          check_wall_collision(int tile_value, int tile_coord, s_ray_tracing * ray_trc, t_bool horiz);
 unsigned int	add_shade(unsigned int colour, double distance);
 void            draw_column(int i, float distance, cub3d *data);
 void            move_from_wall(cub3d *data, float x, float y);
