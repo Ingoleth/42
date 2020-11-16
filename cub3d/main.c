@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 19:44:52 by user42            #+#    #+#             */
-/*   Updated: 2020/11/09 12:30:22 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/16 11:20:58 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,8 @@ int main (void)
 {
 	cub3d data;
 
-	if (!(data.mlx_data.mlx_ptr = mlx_init()))
-		exit(-1);
-	initialize_render_data(&data.mlx_data, &data);
-	if (!(data.render_data))
+	if (!(data.mlx_data.mlx_ptr = mlx_init()) ||
+	!initialize_render_data(&data.mlx_data, &data))
 		exit(-1);
 	mlx_mouse_hide(data.mlx_data.mlx_ptr, data.mlx_data.win_ptr);
 	mlx_hook(data.mlx_data.win_ptr, 2, 1L<<0, on_key_pressed, &data);

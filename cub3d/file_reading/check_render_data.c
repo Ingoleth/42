@@ -6,13 +6,13 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 19:26:29 by user42            #+#    #+#             */
-/*   Updated: 2020/11/09 18:21:27 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/16 09:55:06 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int check_textures(s_render_data *render_data)
+t_bool check_textures(s_render_data *render_data)
 {
     char *aux;
 
@@ -33,7 +33,7 @@ int check_textures(s_render_data *render_data)
         ft_putstr_fd(aux, 1);
         ft_putstr_fd("texture!\n", 1);
     }
-    return ((int)aux);
+    return (aux ? true : false);
 }
 
 int check_render_data(s_render_data *render_data, void *mlx_ptr)

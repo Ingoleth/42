@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 14:07:13 by user42            #+#    #+#             */
-/*   Updated: 2020/11/11 16:23:06 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/16 09:55:20 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,6 @@ t_bool is_key_pressed(t_keys *keys)
 
 int check_keys (cub3d *data)
 {
-	s_mlx *mlx_data;
-
-	mlx_data = &data->mlx_data;
     if(is_key_pressed(&data->mlx_data.keys_pressed))
     {
         if (data->mlx_data.keys_pressed.forward || data->mlx_data.keys_pressed.backwards)
