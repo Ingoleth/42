@@ -6,7 +6,7 @@
 #    By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/16 09:35:06 by aiglesia          #+#    #+#              #
-#    Updated: 2020/11/16 11:33:02 by aiglesia         ###   ########.fr        #
+#    Updated: 2020/11/16 11:45:00 by aiglesia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ LIBS = -lmlx -lXext -lX11 -lm
 RM = rm -f
 ECHO = echo
 all: ${NAME}
-${NAME}: ${OBJS}
+${NAME}:
 		make -C ${LIB_DIR}
 		cp ${LIB_DIR}${LIBFT_A} .
 		${CC} ${CFLAGS} main.c ${SRCS} ${LIBFT_A} ${LIBS}

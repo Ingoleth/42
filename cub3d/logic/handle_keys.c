@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 14:07:13 by user42            #+#    #+#             */
-/*   Updated: 2020/11/16 09:55:20 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/16 16:07:21 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,14 @@ int		on_key_pressed(int keycode, cub3d *data)
 		data->mlx_data.keys_pressed.left = true;
 	if (keycode == LOOK_RIGHT)
 		data->mlx_data.keys_pressed.right = true;
-    if (keycode == ESC)
+    if (keycode == ENTER)
+	{
+		if (data->mlx_data.keys_pressed.enter)
+			data->mlx_data.keys_pressed.enter = false;
+		else
+			data->mlx_data.keys_pressed.enter = true;
+	}
+	if (keycode == ESC)
         cleanup(data);
     return (0);
 }
@@ -42,7 +49,7 @@ int		on_key_released(int keycode, s_mlx *mlx_data)
 
 t_bool is_key_pressed(t_keys *keys)
 {
-	if(keys->forward || keys->backwards || keys->left || keys->right)
+	if(keys->forward || keys->backwards || keys->left || keys->right || keys->enter)
 		return (true);
 	else
 		return (false);

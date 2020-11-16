@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 09:57:41 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/11/12 14:16:56 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/16 16:09:57 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ unsigned int		add_shade(unsigned int colour, double distance)
 
 	if (distance > SHADE_DISTANCE)
 		distance = SHADE_DISTANCE;
-	distance /= SHADE_DISTANCE + 0.2;
+	distance /= SHADE_DISTANCE;
+	distance -= 0.2;
 	r = r - (r * distance);
 	g = g - (g * distance);
 	b = b - (b * distance);

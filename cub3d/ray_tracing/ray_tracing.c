@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 12:13:52 by user42            #+#    #+#             */
-/*   Updated: 2020/11/15 12:16:40 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/16 14:33:10 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void    ray_trace(cub3d *data)
         data->ray_trc.sprite = 0;
         draw_column(i, calculate_collision(angle, data), data);
         if(data->ray_trc.sprite != 0)
-            printf("Sprite at %f, %f\n", data->ray_trc.sprite_x, data->ray_trc.sprite_y);
+            draw_sprite_column(i, data);
         i++;
     }
 }

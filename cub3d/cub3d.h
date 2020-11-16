@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/11/15 14:29:45 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/16 16:01:30 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,20 +78,13 @@ typedef struct      s_file_descriptor
     char            *path;
 }                   s_file_descriptor;
 
-typedef struct      s_col
-{
-    struct s_col    *next;
-    int             x;
-    int             y;
-    t_bool          not_dirty;
-}                   t_collision;
-
 typedef struct      keys
 {
     t_bool          forward;
     t_bool          backwards;
     t_bool          left;
     t_bool          right;
+    t_bool          enter;
 }                   t_keys;
 
 typedef struct      mlx
@@ -105,7 +98,6 @@ typedef struct      mlx
     int             tile_size;
     int             render;
     t_keys          keys_pressed;
-    t_collision     *c_tiles;
 }                   s_mlx;
 
 typedef struct s_write_coords

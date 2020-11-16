@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:55:47 by user42            #+#    #+#             */
-/*   Updated: 2020/11/09 14:52:53 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/16 16:04:54 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,11 @@ int redraw_screen(cub3d *data)
     mlx_data = &data->mlx_data;
     ray_trace(data);
     mlx_put_image_to_window(mlx_data->mlx_ptr, mlx_data->win_ptr, mlx_data->background->img, 0, 0);
-    mlx_put_image_to_window(mlx_data->mlx_ptr, mlx_data->win_ptr, mlx_data->map->img, 0, 0);
-    render_cursor(mlx_data, data->render_data);
+    if (data->mlx_data.keys_pressed.enter)
+    {
+        mlx_put_image_to_window(mlx_data->mlx_ptr, mlx_data->win_ptr, mlx_data->map->img, 0, 0);
+        render_cursor(mlx_data, data->render_data);
+    }
     print_debug_info(mlx_data, data->render_data);
     return(0);
 }
