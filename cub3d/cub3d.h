@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/11/16 16:01:30 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/22 16:30:58 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,23 @@
  #include "../libft/libft.h"
  #include <math.h>
  #include <time.h> //Remove when done!
+
+typedef enum	t_bool
+{
+    no_error,
+    out_of_memory,
+    wrong_file,
+    repeated_texture,
+    wrong_resolution,
+    wrong_input,
+    wrong_map_input,
+    no_player,
+    multiple_player,
+    map_not_enclosed,
+    invalid_texture,
+    wrong_colour,
+    file_not_cub
+}	t_error_values;
 
 typedef struct      s_data 
 {
@@ -55,7 +72,7 @@ typedef struct		s_render_data
 
 typedef struct      s_error
 {
-    int             error_id;
+    t_error_values  error_id;
     int             line;
     int             row;
 }                   s_error;

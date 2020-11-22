@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 16:34:39 by user42            #+#    #+#             */
-/*   Updated: 2020/11/11 16:41:24 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/22 16:38:16 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int		fill_colour(unsigned int *colour, char *line, s_error *error)
 		else
 			return (error->error_id = 11);
 	}
-	*colour = get_trgb(0, r, g, b);
+	*colour = get_trgb(1, r, g, b);
 	return (0);
 }
 

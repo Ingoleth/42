@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 10:23:24 by user42            #+#    #+#             */
-/*   Updated: 2020/11/16 11:19:18 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/22 16:36:47 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,9 @@ s_error *error, char **line, char *data_file)
 	int					i;
 
 	file.path = data_file;
-	if ((file.fd = open(data_file, O_RDONLY)) && file.fd == -1)
+	if (ft_strncmp(data_file + ft_strlen(data_file) - 4, ".cub", 4))
+		error->error_id = file_not_cub;
+	else if ((file.fd = open(data_file, O_RDONLY)) && file.fd == -1)
 		error->error_id = 2;
 	while (!(error->error_id && print_error(error)))
 	{
