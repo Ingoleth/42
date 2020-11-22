@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 10:47:37 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/10/31 10:48:14 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/22 17:08:58 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ void cleanup(cub3d *data)
 	mlx_destroy_window(data->mlx_data.mlx_ptr, data->mlx_data.win_ptr);
 	mlx_destroy_display(data->mlx_data.mlx_ptr);
 	free(data->mlx_data.mlx_ptr);
-	free_render_data(data->render_data);
+	free_render_data(&data->render_data);
 	exit(0);
 }

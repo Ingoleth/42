@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:33:22 by user42            #+#    #+#             */
-/*   Updated: 2020/11/22 16:44:58 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/22 17:13:34 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,20 +72,18 @@ void    load_map(char **map, s_mlx *mlx_data, int res_x, int res_y)
     draw_tiles(mlx_data->map, map, tile_size, tile_size / LINE_WIDTH);
 }
 
-s_render_data *initialize_render_data(s_mlx *mlx_data, cub3d *data)
+int initialize_render_data(s_mlx *mlx_data, cub3d *data)
 {
-    s_render_data *render_data;
 
-    if (!(render_data = read_file("/home/user42/Documents/42_2/cub3d/map.cub", mlx_data->mlx_ptr)) ||
-	check_render_data(render_data, mlx_data->mlx_ptr))
-		return (free_render_data(render_data));
-    mlx_data->win_ptr = mlx_new_window(mlx_data->mlx_ptr, render_data->res_x, render_data->res_y, "Cub3d");
-	load_floor_ceiling(render_data, mlx_data);
-	load_map(render_data->map, mlx_data, render_data->res_x, render_data->res_y);
-    load_cursor(mlx_data, render_data->view_angle);
-    data->render_data = render_data;
-    data->ray_trc.column_height = render_data->res_y / 2;
+    if (!read_file("/home/user42/Documents/42_2/cub3d/map.cub", &data->render_data, mlx_data->mlx_ptr) ||
+	check_render_data(&data->render_data, mlx_data->mlx_ptr))
+		return (free_render_data(&data->render_data));
+    mlx_data->win_ptr = mlx_new_window(mlx_data->mlx_ptr, data->render_data.res_x, data->render_data.res_y, "Cub3d");
+	load_floor_ceiling(&data->render_data, mlx_data);
+	load_map(data->render_data.map, mlx_data, data->render_data.res_x, data->render_data.res_y);
+    load_cursor(mlx_data, data->render_data.view_angle);
+    data->ray_trc.column_height = data->render_data.res_y / 2;
     ft_memset(&data->mlx_data.keys_pressed, 0, sizeof(t_keys));
     redraw_screen(data);
-    return(render_data);
+    return (1);
 }

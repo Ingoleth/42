@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/11/22 16:30:58 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/22 17:20:42 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ typedef struct ray_tracing
 
 typedef struct cub3d
 {
-    s_render_data   *render_data;
+    s_render_data   render_data;
     s_mlx           mlx_data;
     s_ray_tracing   ray_trc;
 }                   cub3d;
@@ -214,7 +214,7 @@ typedef struct cub3d
 #define WEST 2
 #define SOUTH 3
 
-s_render_data   *read_file (char *data_file, void *mlx_data);
+s_render_data	*read_file(char *data_file, s_render_data *render_data, void *mlx_ptr);
 int		        fill_resolution(char *line, s_render_data *render_data, s_error *error);
 void            fill_render_struct(s_render_data *render_data, char *line, s_error *error, s_file_descriptor *file);
 void	        handle_map(s_render_data *render_data, s_error *error, char *str, s_file_descriptor *file);
@@ -222,7 +222,7 @@ void	        advance_file_line(char **line, s_error *error);
 void            add_texture(t_data *image, void *mlx_data, char *line, s_error *s_error);
 int             print_error(s_error * error);
 int             check_map_coherence(char **map, s_error *error);
-s_render_data   *free_render_data(s_render_data *render_data);
+int             free_render_data(s_render_data *render_data);
 int             set_error_value(int id, int i, int j, s_error *error);
 int         	check_map_basic_elements(s_map_bearings *map_info, s_error *error);
 int             check_render_data(s_render_data *render_data, void *mlx_ptr);
@@ -237,7 +237,7 @@ void            load_floor_ceiling(s_render_data *render_data, s_mlx *mlx_data);
 s_coords        set_draw_coords(int x, int y, int end_x, int end_y);
 t_data          *load_xpm_image(void *mlx_ptr, char *path);
 int             load_cursor(s_mlx *mlx_data, float angle);
-s_render_data   *initialize_render_data(s_mlx *mlx_data, cub3d *data);
+int             initialize_render_data(s_mlx *mlx_data, cub3d *data);
 int             redraw_screen(cub3d *data);
 void            render_cursor(s_mlx *mlx_data, s_render_data *render_data);
 int             set_cursor(float angle);

@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 10:23:24 by user42            #+#    #+#             */
-/*   Updated: 2020/11/22 16:36:47 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/22 17:14:48 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,21 @@ void			free_textures(s_render_data *render_data) //TODO change to destroy!
 		free(render_data->sprite.img);
 }
 
-s_render_data	*free_render_data(s_render_data *render_data)
+int		free_render_data(s_render_data *render_data)
 {
 	int i;
 
 	i = 0;
-	if (render_data)
+	if (render_data->map)
 	{
-		if (render_data->map)
+		while (render_data->map[i])
 		{
-			while (render_data->map[i])
-			{
-				free(render_data->map[i]);
-				i++;
-			}
-			free(render_data->map);
+			free(render_data->map[i]);
+			i++;
 		}
-		free_textures(render_data);
-		free(render_data);
+		free(render_data->map);
 	}
+	free_textures(render_data);
 	
 	return (0);
 }
@@ -75,15 +71,13 @@ s_error *error, char **line, char *data_file)
 	return (file.fd);
 }
 
-s_render_data	*read_file(char *data_file, void *mlx_ptr)
+s_render_data	*read_file(char *data_file, s_render_data *render_data, void *mlx_ptr)
 {
-	s_render_data	*render_data;
 	s_error			error;
 	char			*line;
 	int				fd;
 
-	if (!(render_data = ft_calloc(1, sizeof(s_render_data))))
-		return (0);
+	ft_memset(render_data, 0, sizeof(s_render_data));
 	ft_memset(&error, 0, sizeof(error));
 	render_data->mlx_ptr = mlx_ptr;
 	fd = read_actual_file(render_data, &error, &line, data_file);

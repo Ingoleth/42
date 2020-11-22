@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 18:06:53 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/11/16 12:45:06 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/22 17:12:00 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ unsigned int get_sprite_colour(cub3d *data, int column_size, int img_y)
 	float max_size;
 
 	return (RED);
-	image = &data->render_data->sprite;
-	max_size = fabs(cos(data->render_data->view_angle)) + fabs(cos(data->render_data->view_angle));
-	x = (int)(image->width * (get_sprite_horizontal_lenght(&data->ray_trc, data->render_data->view_angle) / max_size));
+	image = &data->render_data.sprite;
+	max_size = fabs(cos(data->render_data.view_angle)) + fabs(cos(data->render_data.view_angle));
+	x = (int)(image->width * (get_sprite_horizontal_lenght(&data->ray_trc, data->render_data.view_angle) / max_size));
 	y = (int)(image->height * (0.5 + (0.5 * img_y / column_size)));
 
 	return (get_pixel(image, x, y)); // Add a check to only return something if non-transparent!
@@ -68,8 +68,8 @@ void draw_sprite_column(int i, cub3d *data)
 	int j;
 	float distance;
 
-	distance = get_sprite_distance(data->render_data->player_x, data->render_data->player_y, data->ray_trc.sprite_x, data->ray_trc.sprite_y);
-	y_axis = data->render_data->res_y / 2;
+	distance = get_sprite_distance(data->render_data.player_x, data->render_data.player_y, data->ray_trc.sprite_x, data->ray_trc.sprite_y);
+	y_axis = data->render_data.res_y / 2;
 	column_size = (int)(data->ray_trc.column_height / (2 * distance));
 	max_draw_height = column_size > y_axis / 2 ? y_axis / 2 : column_size;
 	j = 0;
