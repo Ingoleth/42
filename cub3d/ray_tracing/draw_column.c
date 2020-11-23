@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 09:57:41 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/11/22 17:12:50 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/23 17:45:13 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ unsigned int get_image_colour(cub3d *data, int column_size, int img_y)
 	t_data *image;
 	int x;
 	int y;
-
+	
 	image = get_texture_to_render(data->ray_trc.cardinal_collision, &data->render_data);
 	y = (int)(image->height * (0.5 + (0.5 * img_y / column_size)));
 	if (data->ray_trc.cardinal_collision == NORTH || data->ray_trc.cardinal_collision == SOUTH)
