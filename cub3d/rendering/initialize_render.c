@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:33:22 by user42            #+#    #+#             */
-/*   Updated: 2020/11/22 17:13:34 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/23 18:13:38 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,10 @@ void    load_map(char **map, s_mlx *mlx_data, int res_x, int res_y)
     draw_tiles(mlx_data->map, map, tile_size, tile_size / LINE_WIDTH);
 }
 
-int initialize_render_data(s_mlx *mlx_data, cub3d *data)
+int initialize_render_data(s_mlx *mlx_data, cub3d *data, char *file_path)
 {
 
-    if (!read_file("/home/user42/Documents/42_2/cub3d/map.cub", &data->render_data, mlx_data->mlx_ptr) ||
+    if (!read_file(file_path, &data->render_data, mlx_data->mlx_ptr) ||
 	check_render_data(&data->render_data, mlx_data->mlx_ptr))
 		return (free_render_data(&data->render_data));
     mlx_data->win_ptr = mlx_new_window(mlx_data->mlx_ptr, data->render_data.res_x, data->render_data.res_y, "Cub3d");

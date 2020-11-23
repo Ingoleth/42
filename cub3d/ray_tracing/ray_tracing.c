@@ -6,16 +6,9 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 12:13:52 by user42            #+#    #+#             */
-/*   Updated: 2020/11/23 17:45:01 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/23 17:57:12 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*
-    tileStepx/y = +-1;
-    x/yStep = tan(a) / 1/tan(a);
-    xIntercept = x + dx + dy/tan(); The x position wherein the ray intercepts with the vertical tile;
-    YIntercept = y + dy + dy/tan();
-*/
 
 #include "../cub3d.h"
 
@@ -41,7 +34,7 @@ float calculate_collision(float angle, cub3d *data)
     else if (data->ray_trc.sector == 3)
         calculate_collision_3(x,y, &data->ray_trc, data->render_data.map);
     x = fabsf((data->ray_trc.x_collision - data->render_data.player_x) / cosf(angle));
-    return(fabsf(x * cosf(beta)));
+    return(fabsf(x * cosf(beta))); //TODO: It doesn't work on 0 / PI for obvious reasons. Add if.
 }
 
 void    ray_trace(cub3d *data)
@@ -57,8 +50,8 @@ void    ray_trace(cub3d *data)
         angle = angle > PI2 ? angle - PI2 : angle;
         data->ray_trc.sprite = 0;
         draw_column(i, calculate_collision(angle, data), data);
-        //if(data->ray_trc.sprite != 0)
-        //    draw_sprite_column(i, data);
+        if(data->ray_trc.sprite != 0)
+            draw_sprite_column(i, data);
         i++;
     }
 }

@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/11/22 17:20:42 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/23 18:14:12 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,7 +189,7 @@ typedef struct cub3d
 #define MAX_OFFSET 10
 #define PLAYER_SPEED 0.1
 #define ROTATION_SPEED 0.8
-#define FOV 0.785398
+#define FOV 1
 #define WALL_DISTANCE 0.1f
 #define SHADE_DISTANCE 10
 
@@ -237,7 +237,7 @@ void            load_floor_ceiling(s_render_data *render_data, s_mlx *mlx_data);
 s_coords        set_draw_coords(int x, int y, int end_x, int end_y);
 t_data          *load_xpm_image(void *mlx_ptr, char *path);
 int             load_cursor(s_mlx *mlx_data, float angle);
-int             initialize_render_data(s_mlx *mlx_data, cub3d *data);
+int             initialize_render_data(s_mlx *mlx_data, cub3d *data, char *file_path);
 int             redraw_screen(cub3d *data);
 void            render_cursor(s_mlx *mlx_data, s_render_data *render_data);
 int             set_cursor(float angle);
