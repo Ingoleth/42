@@ -6,7 +6,7 @@
 #    By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/16 09:35:06 by aiglesia          #+#    #+#              #
-#    Updated: 2020/11/16 11:45:00 by aiglesia         ###   ########.fr        #
+#    Updated: 2020/11/24 13:40:41 by aiglesia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,6 @@ SRCS =	file_reading/add_texture.c					\
 		logic/movement.c							\
 		ray_tracing/angle.c							\
 		ray_tracing/draw_column.c					\
-		ray_tracing/get_sprite_horizontal_lenght.c	\
 		ray_tracing/ray_handler.c					\
 		ray_tracing/ray_tracing.c					\
 		ray_tracing/sprite.c						\
@@ -44,7 +43,7 @@ RM = rm -f
 ECHO = echo
 all: ${NAME}
 ${NAME}:
-		make -C ${LIB_DIR}
+		make -C ${LIB_DIR} bonus
 		cp ${LIB_DIR}${LIBFT_A} .
 		${CC} ${CFLAGS} main.c ${SRCS} ${LIBFT_A} ${LIBS}
 bonus: all
@@ -57,6 +56,8 @@ fclean:	clean
 		make -C $(LIB_DIR) fclean
 		${RM} ${NAME}
 re: fclean all
+	clear
+	./a.out
 echo: 
 		${ECHO} ${SRCS}
 .PHONY:     all clean fclean bonus

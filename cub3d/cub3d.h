@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/11/23 18:14:12 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/24 16:52:28 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,16 @@ typedef struct      s_data
     int             height;
     int             width;
 }                   t_data;
+
+typedef struct      s_sprite
+{
+    int             texture;
+    float           distance;
+    float           sprite_x;
+    float           sprite_y;
+    float           upper_limit;
+    float           lower_limit;
+}                   t_sprite;
 
 typedef struct		s_render_data
 {
@@ -135,9 +145,7 @@ typedef struct ray_tracing
     float       tan_x;
     float       tan_y;
     float       column_height;
-    int         sprite;
-    float       sprite_x;
-    float       sprite_y;
+    t_list      *sprite;
     float       sprite_plane_lenght;
 }               s_ray_tracing;
 
@@ -272,7 +280,5 @@ void            move_from_wall(cub3d *data, float x, float y);
 t_bool          check_wall_distance(cub3d *data, float temp_x, float temp_y);
 t_bool          check_sprite(cub3d *data);
 float	        get_sprite_horizontal_lenght(s_ray_tracing *ray_trc, float view_angle);
-void            draw_sprite(int i, int j, cub3d *data); //remove?
-void            draw_sprite_column(int i, cub3d *data);
 
  #endif

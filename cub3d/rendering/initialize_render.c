@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:33:22 by user42            #+#    #+#             */
-/*   Updated: 2020/11/23 18:13:38 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/24 16:13:38 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void draw_tiles(t_data *map_img, char **map, int tile_size, int line_size)
             {
                 x = j * tile_size + line_size;
                 y = i * tile_size + line_size;
-                draw_pixel_area(map_img, set_draw_coords(x, y, x + tile_size - line_size, y + tile_size - line_size), map[i][j] == '1' ? WHITE : GREY);
+                draw_pixel_area(map_img, set_draw_coords(x, y, x + tile_size - line_size, y + tile_size - line_size), map[i][j] == '1' ? WHITE : (map[i][j] == '0' ? GREY : RED));
                 j++;
             }
         }
@@ -83,7 +83,6 @@ int initialize_render_data(s_mlx *mlx_data, cub3d *data, char *file_path)
 	load_map(data->render_data.map, mlx_data, data->render_data.res_x, data->render_data.res_y);
     load_cursor(mlx_data, data->render_data.view_angle);
     data->ray_trc.column_height = data->render_data.res_y / 2;
-    ft_memset(&data->mlx_data.keys_pressed, 0, sizeof(t_keys));
     redraw_screen(data);
     return (1);
 }
