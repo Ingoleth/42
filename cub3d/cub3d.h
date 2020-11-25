@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/11/24 16:52:28 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/25 10:42:51 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ typedef struct      s_sprite
 {
     int             texture;
     float           distance;
+    float           beggining;
+    float           end;
     float           sprite_x;
     float           sprite_y;
     float           upper_limit;

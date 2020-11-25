@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 11:24:55 by user42            #+#    #+#             */
-/*   Updated: 2020/11/04 16:22:41 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/25 11:42:14 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int		check_map_coherence(char **map, s_error *error)
 	{
 		while (map[i][j])
 		{
-			if (ft_checkchar(map[i][j], "02") && check_for_spaces(map, i, j))
+			if (ft_checkchar(map[i][j], "02345") && check_for_spaces(map, i, j))
 				return (set_error_value(9, i, j, error));
 			j++;
 		}

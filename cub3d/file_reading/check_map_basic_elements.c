@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 16:17:13 by user42            #+#    #+#             */
-/*   Updated: 2020/10/24 19:00:48 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/25 12:24:47 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char *line, int i)
 	else if (ft_checkchar(line[i], "NWSE") &&
 		handle_player_position(map_info, error, line, i))
 		return (1);
-	else if (!ft_checkchar(line[i], "02") && !(line[i] == ' '))
+	else if (!ft_checkchar(line[i], "02345 "))
 	{
 		error->row = i;
 		return (error->error_id = 6);

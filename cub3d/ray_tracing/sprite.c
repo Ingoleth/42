@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 18:06:53 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/11/24 16:52:12 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/25 12:29:19 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,15 @@ void add_sprite (s_ray_tracing *ray_trc, int tile_value, float x, float y)
 	{
 		sprite = (t_sprite *)sprite_ptr->content;
 		if (sprite->sprite_x == x && sprite->sprite_y == y)
+		{
+			sprite->beggining = ray_trc->angle;
 			return ;
+		}
 		sprite_ptr = sprite_ptr->next;
 	}
 	if(!(sprite = ft_calloc(1, sizeof(t_sprite))))
 		return ;
+	sprite->end = ray_trc->angle;
 	sprite->sprite_x = x;
 	sprite->sprite_y = y;
 	sprite->texture = tile_value;
@@ -38,7 +42,7 @@ t_bool check_wall_collision(int tile_value, int tile_coord, s_ray_tracing * ray_
 	float x;
 	float y;
 
-	if (tile_value == '1') // Change it so the thing is not turbo guarra
+	if (tile_value == '1')
 	{
 		if (horiz)
 			ray_trc->y_collision = tile_coord;
@@ -46,7 +50,7 @@ t_bool check_wall_collision(int tile_value, int tile_coord, s_ray_tracing * ray_
 			ray_trc->x_collision = tile_coord;
 		return (true);
 	}
-	if (tile_value == '2')
+	if (tile_value > '1')
 	{
 		if (horiz)
 		{

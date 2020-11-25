@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 09:57:41 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/11/23 17:45:13 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/25 10:44:08 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void draw_column(int i, float distance, cub3d *data)
 	column_size = (int)(data->ray_trc.column_height / (distance));
 	max_draw_height = column_size > y_axis ? y_axis : column_size;
 	j = 0;
-	while (j < max_draw_height) //Move to a different function, check for sprite in a while to avoid double drawing...
+	while (j < max_draw_height) //Changed recently; change to see if it works properly...
 	{
 		draw_pixel(data->mlx_data.background, i, y_axis + j, add_shade(get_image_colour(data, column_size, j), distance));
 		draw_pixel(data->mlx_data.background, i, y_axis - j, add_shade(get_image_colour(data, column_size, -j), distance));
