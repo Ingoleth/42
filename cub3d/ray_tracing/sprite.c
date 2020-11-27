@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 18:06:53 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/11/25 12:29:19 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/27 16:07:41 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,11 @@ void add_sprite (s_ray_tracing *ray_trc, int tile_value, float x, float y)
 	{
 		sprite = (t_sprite *)sprite_ptr->content;
 		if (sprite->sprite_x == x && sprite->sprite_y == y)
-		{
-			sprite->beggining = ray_trc->angle;
 			return ;
-		}
 		sprite_ptr = sprite_ptr->next;
 	}
 	if(!(sprite = ft_calloc(1, sizeof(t_sprite))))
 		return ;
-	sprite->end = ray_trc->angle;
 	sprite->sprite_x = x;
 	sprite->sprite_y = y;
 	sprite->texture = tile_value;

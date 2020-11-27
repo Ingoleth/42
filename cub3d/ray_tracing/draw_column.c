@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 09:57:41 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/11/25 10:44:08 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/26 10:41:55 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void draw_column(int i, float distance, cub3d *data)
 		draw_pixel(data->mlx_data.background, i, y_axis - j, add_shade(get_image_colour(data, column_size, -j), distance));
 		j++;
 	}
-	while (get_pixel(data->mlx_data.background, i, y_axis - j) != data->render_data.c_rgb && j < y_axis)
+	while (j < y_axis)
 	{
 		draw_pixel(data->mlx_data.background, i, y_axis - j, data->render_data.c_rgb);
 		draw_pixel(data->mlx_data.background, i, y_axis + j, data->render_data.f_rgb);

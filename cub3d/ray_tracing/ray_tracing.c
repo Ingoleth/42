@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 12:13:52 by user42            #+#    #+#             */
-/*   Updated: 2020/11/25 12:57:38 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/27 16:19:49 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,10 @@ void    get_sprite_distance(cub3d *data)
     while (aux)
     {
         aux2 = (t_sprite *)aux->content;
-        x = fabsf(data->render_data.player_x - aux2->sprite_x);
-        y = fabsf(data->render_data.player_y - aux2->sprite_y);
-        aux2->lower_limit = fabsf(atanf(y / x));
-        aux2->distance = (sqrtf(x * x + y * y) * cos(data->render_data.view_angle - aux2->lower_limit));
-        aux2->upper_limit = aux2->lower_limit + fabsf(atanf(0.5 / aux2->distance));
-        aux2->lower_limit = aux2->upper_limit - 2 * (aux2->upper_limit - aux2->lower_limit);
+        x = aux2->sprite_x - data->render_data.player_x;
+        y = -(aux2->sprite_y - data->render_data.player_y);
+        aux2->angle =  data->render_data.view_angle - atanf(y / x);
+        aux2->distance = (sqrtf(x * x + y * y) * fabsf(cos(aux2->angle)));
         aux = aux->next;
     }
 }
@@ -68,63 +66,62 @@ int get_sprite_colour(int i)
         return(CYAN);
     else
         return(PURPLE);
+}
+
+void draw_sprite_column(int drawing_position, t_sprite *sprite, cub3d *data)
+{
+    int y_draw_coord;
+    int y_position;
+    int size;
+
+    size = sprite->size_half * 2;
+    y_position = 0;
+    y_draw_coord = sprite->sprite_center_y - sprite->size_half;
+    while (y_draw_coord < 0)
+    {
+        y_position++;
+        y_draw_coord++;
+    }
+    while (y_position < size && y_draw_coord < data->render_data.res_y)
+    {
+        draw_pixel(data->mlx_data.background, drawing_position, y_draw_coord, get_sprite_colour(sprite->texture));
+        y_position++;
+        y_draw_coord++;
+    }
     
 }
 
-void draw_sprite_column(t_sprite *sprite, int i, cub3d *data)
+void    draw_sprite(cub3d *data, t_sprite *sprite)
 {
-	int y_axis;
-	int column_size;
-	int max_draw_height;
-	int j;
+    int drawing_position;
 
-	y_axis = data->render_data.res_y / 2;
-	column_size = (int)(data->ray_trc.column_height / sprite->distance);
-	max_draw_height = column_size > y_axis ? y_axis : column_size;
-	j = 0;
-	while (j < max_draw_height) //Changed recently; change to see if it works properly...
-	{
-		draw_pixel(data->mlx_data.background, i, y_axis + j, get_sprite_colour(sprite->texture));
-		draw_pixel(data->mlx_data.background, i, y_axis - j, get_sprite_colour(sprite->texture));
-		j++;
-	}
-}
-
-void draw_sprite(float angle, t_list *aux, int i, cub3d *data)
-{
-    t_sprite    *sprite;
-
-    sprite = aux->content;
-    while (aux)
+    sprite->sprite_center_x = (tan(sprite->angle) / tan(FOV / 2) + 1) * data->render_data.res_x / 2;
+    sprite->sprite_center_y = data->render_data.res_y / 2 + (data->render_data.res_y / 2) / sprite->distance;
+    sprite->size_half = data->ray_trc.column_height / (sprite->distance * 1.5);
+    drawing_position = sprite->sprite_center_x - sprite->size_half > 0 ? sprite->sprite_center_x - sprite->size_half : 0;
+    while (drawing_position < sprite->sprite_center_x  + sprite->size_half && drawing_position < data->render_data.res_x)
     {
-        if ((angle <= sprite->upper_limit && angle <= sprite->end) &&
-            (angle >= sprite->lower_limit && angle >= sprite->beggining))
-            draw_sprite_column(sprite, i, data);
-        aux = aux->next;
-        if (aux)
-            sprite = aux->content;
+        //if (distance_array[drawing_position] > sprite->distance)
+            draw_sprite_column(drawing_position, sprite, data);
+        drawing_position++;
     }
 }
 
 void    draw_sprites(cub3d *data)
 {
-    float angle;
-    int i;
     t_list *aux;
-    
-    get_sprite_distance(data);
+    int i;
+
     aux = data->ray_trc.sprite;
-    i = data->render_data.res_x - 1;
-    while (i >= 0)
+    get_sprite_distance(data);
+    while (aux)
     {
-        
-        angle = data->render_data.view_angle - atan(tan(FOV / 2.0) * (2.0 * i / data->render_data.res_x - 1.0));
-        angle = angle < 0 ? PI2 + angle : angle;
-        angle = angle > PI2 ? angle - PI2 : angle;
-        data->ray_trc.angle = angle;
-        draw_sprite(angle, aux, i, data);
-        i--;
+
+        draw_sprite(data, aux->content);
+        aux = aux->next;
     }
+    i = 0 + 1;
+    aux += i;
     ft_lstclear(&data->ray_trc.sprite, free);
 }
 

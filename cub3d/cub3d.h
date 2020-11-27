@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/11/25 10:42:51 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/27 14:56:10 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,13 @@ typedef struct      s_data
 typedef struct      s_sprite
 {
     int             texture;
+    float           angle;
     float           distance;
-    float           beggining;
-    float           end;
     float           sprite_x;
     float           sprite_y;
-    float           upper_limit;
-    float           lower_limit;
+    int             sprite_center_x;
+    int             sprite_center_y;
+    int             size_half;
 }                   t_sprite;
 
 typedef struct		s_render_data
@@ -199,7 +199,7 @@ typedef struct cub3d
 #define MAX_OFFSET 10
 #define PLAYER_SPEED 0.1
 #define ROTATION_SPEED 0.8
-#define FOV 1
+#define FOV 0.785398F
 #define WALL_DISTANCE 0.1f
 #define SHADE_DISTANCE 10
 
