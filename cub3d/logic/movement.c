@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 11:19:11 by user42            #+#    #+#             */
-/*   Updated: 2020/11/26 10:35:17 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/27 17:55:16 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void handle_movement(cub3d *data)
         angle = data->render_data.view_angle;
     temp_x = data->render_data.player_x + cos(angle) * PLAYER_SPEED;
     temp_y = data->render_data.player_y - sin(angle) * PLAYER_SPEED;
-    if (data->render_data.map[(int)temp_y][(int)temp_x] != '1')
+    if (data->render_data.map[(int)temp_y][(int)temp_x] == '0')
     {
         data->render_data.player_x = temp_x;
         data->render_data.player_y = temp_y;

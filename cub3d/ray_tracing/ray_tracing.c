@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 12:13:52 by user42            #+#    #+#             */
-/*   Updated: 2020/11/27 16:19:49 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/27 17:46:42 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,23 @@ void    get_sprite_distance(cub3d *data)
     }
 }
 
-int get_sprite_colour(int i)
+int get_sprite_colour(cub3d *data, int x, int y, t_sprite *sprite)
 {
-    if (i == '2')
-        return(RED);
-    else if (i == '3')
-        return(YELLOW);
-    else if (i == '4')
-        return(CYAN);
+    t_data *image;
+    float image_x;
+    float image_y;
+
+    if (sprite->texture == '2')
+        image = &data->render_data.sprite;
+    else if (sprite->texture == '3')
+       image = &data->render_data.sprite;
+    else if (sprite->texture == '4')
+       image = &data->render_data.sprite;
     else
-        return(PURPLE);
+       image = &data->render_data.sprite;
+    image_x = ((x - sprite->sprite_center_x + sprite->size_half) / (float)sprite->size_half / 2) * image->width;
+    image_y = (y / ((float)sprite->size_half * 2)) * image->height;
+    return(get_pixel(image, image_x, image_y));
 }
 
 void draw_sprite_column(int drawing_position, t_sprite *sprite, cub3d *data)
@@ -73,6 +80,7 @@ void draw_sprite_column(int drawing_position, t_sprite *sprite, cub3d *data)
     int y_draw_coord;
     int y_position;
     int size;
+    int pixel;
 
     size = sprite->size_half * 2;
     y_position = 0;
@@ -84,7 +92,9 @@ void draw_sprite_column(int drawing_position, t_sprite *sprite, cub3d *data)
     }
     while (y_position < size && y_draw_coord < data->render_data.res_y)
     {
-        draw_pixel(data->mlx_data.background, drawing_position, y_draw_coord, get_sprite_colour(sprite->texture));
+        pixel = get_sprite_colour(data, drawing_position, y_position, sprite);
+        if (pixel != -16777216)
+            draw_pixel(data->mlx_data.background, drawing_position, y_draw_coord, add_shade(pixel, sprite->distance));
         y_position++;
         y_draw_coord++;
     }
@@ -97,7 +107,7 @@ void    draw_sprite(cub3d *data, t_sprite *sprite)
 
     sprite->sprite_center_x = (tan(sprite->angle) / tan(FOV / 2) + 1) * data->render_data.res_x / 2;
     sprite->sprite_center_y = data->render_data.res_y / 2 + (data->render_data.res_y / 2) / sprite->distance;
-    sprite->size_half = data->ray_trc.column_height / (sprite->distance * 1.5);
+    sprite->size_half = data->ray_trc.column_height * 2 / (sprite->distance);
     drawing_position = sprite->sprite_center_x - sprite->size_half > 0 ? sprite->sprite_center_x - sprite->size_half : 0;
     while (drawing_position < sprite->sprite_center_x  + sprite->size_half && drawing_position < data->render_data.res_x)
     {
