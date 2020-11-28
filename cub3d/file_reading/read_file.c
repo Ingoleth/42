@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 10:23:24 by user42            #+#    #+#             */
-/*   Updated: 2020/11/22 17:14:48 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/28 11:02:02 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,12 @@ void			free_textures(s_render_data *render_data) //TODO change to destroy!
 		free(render_data->west_texture.img);
 	if (render_data->south_texture.img)
 		free(render_data->south_texture.img);
-	if (render_data->sprite.img)
-		free(render_data->sprite.img);
+	if (render_data->sprite1.img)
+		free(render_data->sprite1.img);
+	if (render_data->sprite2.img)
+		free(render_data->sprite2.img);
+	if (render_data->sprite3.img)
+		free(render_data->sprite3.img);
 }
 
 int		free_render_data(s_render_data *render_data)

@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/11/28 10:33:57 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/28 10:57:50 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,9 @@ typedef struct		s_render_data
     t_data          west_texture;
     t_data          east_texture;
     t_data          south_texture;
-    t_data          sprite;
+    t_data          sprite1;
+    t_data          sprite2;
+    t_data          sprite3;
     void            *mlx_ptr;
     unsigned int    c_rgb;
     unsigned int    f_rgb;

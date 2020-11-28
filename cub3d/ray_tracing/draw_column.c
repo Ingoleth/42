@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 09:57:41 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/11/26 10:41:55 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/28 11:01:20 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,8 @@ t_data *get_texture_to_render(int index, s_render_data *render_data)
 		return (&render_data->west_texture);
 	else if(index == SOUTH)
 		return (&render_data->south_texture);
-	else if(index == EAST)
-		return (&render_data->east_texture);
 	else
-		return (&render_data->sprite);
+		return (&render_data->east_texture);
 }
 
 unsigned int get_image_colour(cub3d *data, int column_size, int img_y)

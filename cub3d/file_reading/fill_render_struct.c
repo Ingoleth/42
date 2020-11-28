@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 16:34:39 by user42            #+#    #+#             */
-/*   Updated: 2020/11/22 16:38:16 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/28 11:04:47 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,12 @@ int		handle_textures(char *line, s_render_data *render_data, s_error *error)
 		add_texture(&render_data->west_texture, render_data->mlx_ptr, line + 2, error);
 	else if (!(ft_strncmp(line, "EA", 2)))
 		add_texture(&render_data->east_texture, render_data->mlx_ptr, line + 2, error);
-	else if (!(ft_strncmp(line, "S", 1)))
-		add_texture(&render_data->sprite, render_data->mlx_ptr, line + 1, error);
+	else if (!(ft_strncmp(line, "S2", 2)))
+		add_texture(&render_data->sprite1, render_data->mlx_ptr, line + 2, error);
+	else if (!(ft_strncmp(line, "S3", 2)))
+		add_texture(&render_data->sprite2, render_data->mlx_ptr, line + 2, error);
+	else if (!(ft_strncmp(line, "S4", 2)))
+		add_texture(&render_data->sprite3, render_data->mlx_ptr, line + 2, error);
 	else if (line[0] == 'C')
 		fill_colour(&render_data->c_rgb, line + 1, error);
 	else if (line[0] == 'F')
