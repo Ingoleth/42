@@ -6,7 +6,7 @@
 #    By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/16 09:35:06 by aiglesia          #+#    #+#              #
-#    Updated: 2020/11/26 10:13:51 by aiglesia         ###   ########.fr        #
+#    Updated: 2020/11/28 13:57:20 by aiglesia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ RM = rm -f
 ECHO = echo
 all: ${NAME}
 ${NAME}:
-		make -C ${LIB_DIR} bonus
+		make -C ${LIB_DIR}
 		cp ${LIB_DIR}${LIBFT_A} .
 		${CC} ${CFLAGS} main.c ${SRCS} ${LIBFT_A} ${LIBS}
 bonus: all

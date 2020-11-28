@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 12:42:43 by rprieto-          #+#    #+#             */
-/*   Updated: 2020/10/30 10:10:25 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/28 13:26:51 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ void				ft_lstadd_back(t_list **alst, t_list *new);
 void				ft_lstdelone(t_list *lst, void (*del)(void*));
 void				ft_lstclear(t_list **lst, void (*del)(void*));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
+void				ft_lstmove_forwards(t_list *list, t_list *src);
+void				ft_lstmove_backwards(t_list *list);
 int					ft_get_index_of(char *string, char c);
 int					ft_nbrlen(int n);
 int					get_next_line	(int fd, char **line);
