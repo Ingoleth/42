@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:33:22 by user42            #+#    #+#             */
-/*   Updated: 2020/11/24 16:13:38 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/28 10:39:58 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,9 @@ int initialize_render_data(s_mlx *mlx_data, cub3d *data, char *file_path)
 	load_map(data->render_data.map, mlx_data, data->render_data.res_x, data->render_data.res_y);
     load_cursor(mlx_data, data->render_data.view_angle);
     data->ray_trc.column_height = data->render_data.res_y / 2;
+    if (!(data->ray_trc.wall_distance = (float *)malloc((data->render_data.res_x + 1) * sizeof(float))))
+        return (0);
+    data->ray_trc.wall_distance[data->render_data.res_x] = 0;
     redraw_screen(data);
     return (1);
 }

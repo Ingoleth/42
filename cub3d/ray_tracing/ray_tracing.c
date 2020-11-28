@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 12:13:52 by user42            #+#    #+#             */
-/*   Updated: 2020/11/27 17:46:42 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/28 10:49:15 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,17 +101,17 @@ void draw_sprite_column(int drawing_position, t_sprite *sprite, cub3d *data)
     
 }
 
-void    draw_sprite(cub3d *data, t_sprite *sprite)
+void    draw_sprite(cub3d *data, t_sprite *sprite, float *distance_array)
 {
     int drawing_position;
 
     sprite->sprite_center_x = (tan(sprite->angle) / tan(FOV / 2) + 1) * data->render_data.res_x / 2;
-    sprite->sprite_center_y = data->render_data.res_y / 2 + (data->render_data.res_y / 2) / sprite->distance;
-    sprite->size_half = data->ray_trc.column_height * 2 / (sprite->distance);
+    sprite->size_half = data->ray_trc.column_height / (sprite->distance);
+    sprite->sprite_center_y = data->render_data.res_y / 2 + (data->render_data.res_y / 2) / sprite->distance - sprite->size_half * 0.75;
     drawing_position = sprite->sprite_center_x - sprite->size_half > 0 ? sprite->sprite_center_x - sprite->size_half : 0;
     while (drawing_position < sprite->sprite_center_x  + sprite->size_half && drawing_position < data->render_data.res_x)
     {
-        //if (distance_array[drawing_position] > sprite->distance)
+        if (distance_array[drawing_position] > sprite->distance)
             draw_sprite_column(drawing_position, sprite, data);
         drawing_position++;
     }
@@ -126,8 +126,7 @@ void    draw_sprites(cub3d *data)
     get_sprite_distance(data);
     while (aux)
     {
-
-        draw_sprite(data, aux->content);
+        draw_sprite(data, aux->content, data->ray_trc.wall_distance);
         aux = aux->next;
     }
     i = 0 + 1;
@@ -146,7 +145,8 @@ void    ray_trace(cub3d *data)
         angle = data->render_data.view_angle - atan(tan(FOV / 2.0) * (2.0 * i / data->render_data.res_x - 1.0));
         angle = angle < 0 ? PI2 + angle : angle;
         angle = angle > PI2 ? angle - PI2 : angle;
-        draw_column(i, calculate_collision(angle, data), data);
+        data->ray_trc.wall_distance[i] = calculate_collision(angle, data);
+        draw_column(i, data->ray_trc.wall_distance[i], data);
         i++;
     }
     if (data->ray_trc.sprite)
