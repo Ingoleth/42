@@ -6,13 +6,13 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 13:12:36 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/10/30 10:10:51 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/28 13:23:19 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	fill_gnl_buffer(t_gnl_buffer **buffer, char *line)
+int			fill_gnl_buffer(t_gnl_buffer **buffer, char *line)
 {
 	t_gnl_buffer	*aux;
 
