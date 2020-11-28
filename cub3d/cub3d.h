@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/11/28 10:57:50 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/28 21:27:09 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,15 @@ typedef struct      s_file_descriptor
     char            *path;
 }                   s_file_descriptor;
 
+typedef struct      s_map_render
+{
+    int             line_size;
+    int             tile_size;
+    char            **map;
+    int             size_x;
+    int             size_y;
+}                   s_map_render;
+
 typedef struct      keys
 {
     t_bool          forward;
@@ -118,12 +127,16 @@ typedef struct      keys
     t_bool          enter;
 }                   t_keys;
 
+
+
 typedef struct      mlx
 {
     void            *mlx_ptr;
     void            *win_ptr;
     t_data          *background;
     t_data          *map;
+    int             map_initial_x;
+    int             map_initial_y;
     t_data          **cursor;
     int             current_cursor;
     int             tile_size;
@@ -195,8 +208,8 @@ typedef struct cub3d
 #define BOT_MAX 4.7323887F
 #define BOT_MIN 4.6923887F
 
-#define TILE_MINIMUM 10
-#define MAP_RATIO 2 
+#define TILE_MAXIMUM 15
+#define MAP_RATIO 2
 #define LINE_WIDTH 8
 #define MAX_OFFSET 10
 #define PLAYER_SPEED 0.1

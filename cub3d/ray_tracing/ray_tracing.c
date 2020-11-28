@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 12:13:52 by user42            #+#    #+#             */
-/*   Updated: 2020/11/28 11:30:06 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/28 15:32:27 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void draw_sprite_column(int drawing_position, t_sprite *sprite, cub3d *data)
     while (y_position < size && y_draw_coord < data->render_data.res_y)
     {
         pixel = get_sprite_colour(data, drawing_position, y_position, sprite);
-        if (pixel != -16777216)
+        if (pixel != 0 && pixel != -16777216) //Double check
             draw_pixel(data->mlx_data.background, drawing_position, y_draw_coord, pixel);
         y_position++;
         y_draw_coord++;
@@ -115,6 +115,29 @@ void    draw_sprite(cub3d *data, t_sprite *sprite, float *distance_array)
     }
 }
 
+void    order_sprites(t_list *sprite)
+{
+    t_list *aux;
+    int i;
+
+    i = 1;
+    while (i)
+    {
+        i = 0;
+        aux = sprite;
+        if (aux->next)
+        while (aux)
+        {
+            if (aux->next && ((t_sprite *)aux->next->content)->distance > ((t_sprite *)aux->content)->distance)
+            {
+                i = 1;
+                ft_lstmove_backwards(aux);
+            }
+            aux = aux->next;
+        }
+    }  
+}   
+
 void    draw_sprites(cub3d *data)
 {
     t_list *aux;
@@ -122,6 +145,7 @@ void    draw_sprites(cub3d *data)
 
     aux = data->ray_trc.sprite;
     get_sprite_distance(data);
+    order_sprites(aux);
     while (aux)
     {
         draw_sprite(data, aux->content, data->ray_trc.wall_distance);

@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 09:35:38 by user42            #+#    #+#             */
-/*   Updated: 2020/11/04 16:25:38 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/28 21:23:38 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,5 @@ void render_cursor(s_mlx *mlx_data, s_render_data *render_data)
     image = mlx_data->cursor[mlx_data->current_cursor];
     x = (int)(render_data->player_x * mlx_data->tile_size);
     y = (int)(render_data->player_y * mlx_data->tile_size);
-    mlx_put_image_to_window(mlx_data->mlx_ptr, mlx_data->win_ptr, image->img, x, y);
+    mlx_put_image_to_window(mlx_data->mlx_ptr, mlx_data->win_ptr, image->img, x + mlx_data->map_initial_x , y + mlx_data->map_initial_y);
 }
