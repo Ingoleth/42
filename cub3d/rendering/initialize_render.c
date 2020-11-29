@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:33:22 by user42            #+#    #+#             */
-/*   Updated: 2020/11/29 13:25:22 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/29 15:09:46 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,28 +101,6 @@ void draw_map_sides(t_data *map_image, int border_start, float border_side, t_ma
     }
 }
 
-void draw_map_corner(t_data *map_image, int border_start, float border_side, t_map_colour **border)
-{
-    int i;
-    int j;
-    int border_end;
-
-    border_end = border_start + border_side;
-    i = border_start;
-    j = border_start;
-     while (i < border_end)
-    {
-        while (j < border_end)
-        {
-            draw_pixel(map_image, i, j, border[(int)((float)((j - border_start) / border_side) * 6)]
-            [(int)((float)((i - border_start) / border_side) * 6)]);
-            j++;
-        }
-        i++;
-        j = border_start;
-    }
-}
-
 t_map_colour **get_map_corner(void)
 {
     t_map_colour map_corner[7][7] = {
@@ -155,14 +133,41 @@ t_map_colour **get_map_corner(void)
     return (aux);
 }
 
+void draw_map_corner(t_data *map_image, int border_start, float border_side)
+{
+    int i;
+    int j;
+    int border_end;
+    t_map_colour **border;
+
+    border = get_map_corner();
+    border_end = border_start + border_side;
+    i = border_start;
+    j = border_start;
+     while (i < border_end)
+    {
+        while (j < border_end)
+        {
+            draw_pixel(map_image, i, j, border
+            [(int)((float)((j - border_start) / border_side) * 6)]
+            [(int)((float)((i - border_start) / border_side) * 6)]);
+            j++;
+        }
+        i++;
+        j = border_start;
+    }
+    i = 0;
+    while (i++ < 7)
+        free(border[i]);
+    free(border);
+}
+
 void draw_edges(t_data *map_image, int border_start, int border_side)
 {
     t_map_colour map_side[7] = {brown_1, brown_1, brown_2, grey_1, grey_2, grey_2, grey_3};
-    t_map_colour **map_corner;
-
-    map_corner = get_map_corner();
+    
     draw_map_sides(map_image, border_start, border_side, map_side);
-    draw_map_corner(map_image, border_start, border_side, map_corner);
+    draw_map_corner(map_image, border_start, border_side);
 }
 
 void    load_map(char **map, s_mlx *mlx_data, int res_x, int res_y)
@@ -172,7 +177,7 @@ void    load_map(char **map, s_mlx *mlx_data, int res_x, int res_y)
     s_map_render map_render;
     
     map_size = res_x < res_y ? res_x / MAP_RATIO : res_y / MAP_RATIO;
-    border_size = map_size / 16;
+    border_size = map_size / BORDER_RATIO;
     map_render.map = map;
     map_render.tile_size = get_tile_size(map, map_size - border_size, &map_render);
     map_render.line_size = map_render.tile_size / LINE_WIDTH;
