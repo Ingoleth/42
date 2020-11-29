@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/11/28 21:27:09 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/29 13:19:34 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,19 @@ typedef enum	t_bool
     wrong_colour,
     file_not_cub
 }	t_error_values;
+
+typedef enum t_colour
+{
+    tile_1,
+    tile_2,
+    tile_3,
+    tile_4,
+    brown_1 = -12447728,
+    brown_2 = -13563639,
+    grey_1 = -4144960,
+    grey_2 = -8618884,
+    grey_3 = -11053739
+}   t_map_colour;
 
 typedef struct      s_data 
 {
@@ -209,7 +222,7 @@ typedef struct cub3d
 #define BOT_MIN 4.6923887F
 
 #define TILE_MAXIMUM 15
-#define MAP_RATIO 2
+#define MAP_RATIO 4
 #define LINE_WIDTH 8
 #define MAX_OFFSET 10
 #define PLAYER_SPEED 0.1
