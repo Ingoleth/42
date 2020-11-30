@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/11/30 16:38:09 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/30 18:03:09 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,9 @@ typedef enum t_colour
     brown_2 = -13563639,
     grey_1 = -4144960,
     grey_2 = -8618884,
-    grey_3 = -11053739
+    grey_3 = -11053739,
+    red_1 = 10551306,
+    red_2 = 6225926
 }   t_map_colour;
 
 typedef struct      s_data 
@@ -203,6 +205,7 @@ typedef struct cub3d
 #define CURSOR_SOUTH_WEST "./textures/cursor/cursor_south_west.xpm"
 #define CURSOR_WEST "./textures/cursor/cursor_west.xpm"
 #define CURSOR_NORTH_WEST "./textures/cursor/cursor_north_west.xpm"
+#define HEALTH_BAR_PATH "/home/user42/Documents/42/cub3d/textures/health_bar.xpm"
 
 #define PI 3.141593F
 #define PI2 6.283186F
@@ -239,6 +242,11 @@ typedef struct cub3d
 #define FOV 0.785398F
 #define WALL_DISTANCE 0.1f
 #define SHADE_DISTANCE 10
+
+#define HB_START_x 22
+#define HB_START_Y 6.5
+#define HB_LENGHT_X 39.5
+#define HB_LENGHT_Y 4
 
 #define TRANSPARENT -1
 #define BLACK 0

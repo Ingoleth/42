@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:33:22 by user42            #+#    #+#             */
-/*   Updated: 2020/11/30 16:38:35 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/30 17:30:37 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,10 +199,9 @@ void load_health_bar(s_mlx *mlx_data, int res)
 
     bar_width = res /MAP_RATIO;
     bar_height = bar_width / 4;
-    health_bar_temp = load_xpm_image(mlx_data->mlx_ptr, "/home/user42/Documents/42/cub3d/textures/health_bar.xpm");
+    health_bar_temp = load_xpm_image(mlx_data->mlx_ptr, HEALTH_BAR_PATH);
     mlx_data->health_bar.image = initialize_image(mlx_data->mlx_ptr, bar_width, bar_height);
     mlx_data->health_bar.pixel_size = bar_width / (float)health_bar_temp->width;
-    printf("%i\n", mlx_data->health_bar.pixel_size);
     res = 0;
     j = 0;
     while (res < bar_width)
