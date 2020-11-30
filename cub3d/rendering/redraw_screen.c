@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:55:47 by user42            #+#    #+#             */
-/*   Updated: 2020/11/30 18:12:17 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/30 18:14:09 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int redraw_screen(cub3d *data)
         mlx_put_image_to_window(mlx_data->mlx_ptr, mlx_data->win_ptr, mlx_data->map->img, 0, 0);
         render_cursor(mlx_data, &data->render_data);
         print_debug_info(mlx_data, &data->render_data);
-        render_health_bar(mlx_data, 1, mlx_data->health_bar.pixel_size); //change to use actual values!
+        render_health_bar(mlx_data, 1, mlx_data->health_bar.pixel_size);
     }
     return(0);
 }
