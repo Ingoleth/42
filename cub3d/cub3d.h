@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/11/30 18:03:09 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/30 18:45:37 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ typedef struct		s_render_data
     int             res_y;
     float           player_x;
     float           player_y;
+    float           current_health;
     float           view_angle;
     t_data          north_texture;
     t_data          west_texture;
@@ -247,6 +248,7 @@ typedef struct cub3d
 #define HB_START_Y 6.5
 #define HB_LENGHT_X 39.5
 #define HB_LENGHT_Y 4
+#define MAX_HEALTH 50
 
 #define TRANSPARENT -1
 #define BLACK 0
