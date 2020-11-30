@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/11/30 12:51:19 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/30 16:38:09 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,6 @@ typedef struct ray_tracing
     float       tan_y;
     float       column_height;
     t_list      *sprite;
-    float        *wall_distance;
 }               s_ray_tracing;
 
 typedef struct cub3d

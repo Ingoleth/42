@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 12:13:52 by user42            #+#    #+#             */
-/*   Updated: 2020/11/28 15:32:27 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/30 16:35:52 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ void    order_sprites(t_list *sprite)
     }  
 }   
 
-void    draw_sprites(cub3d *data)
+void    draw_sprites(cub3d *data, float *distance_array)
 {
     t_list *aux;
     int i;
@@ -148,7 +148,7 @@ void    draw_sprites(cub3d *data)
     order_sprites(aux);
     while (aux)
     {
-        draw_sprite(data, aux->content, data->ray_trc.wall_distance);
+        draw_sprite(data, aux->content, distance_array);
         aux = aux->next;
     }
     i = 0 + 1;
@@ -160,6 +160,7 @@ void    ray_trace(cub3d *data)
 {
     int i;
     float angle;
+    float distance_array[data->render_data.res_x];
     
     i = 0;
     while (i < data->render_data.res_x)
@@ -167,10 +168,10 @@ void    ray_trace(cub3d *data)
         angle = data->render_data.view_angle - atan(tan(FOV / 2.0) * (2.0 * i / data->render_data.res_x - 1.0));
         angle = angle < 0 ? PI2 + angle : angle;
         angle = angle > PI2 ? angle - PI2 : angle;
-        data->ray_trc.wall_distance[i] = calculate_collision(angle, data);
-        draw_column(i, data->ray_trc.wall_distance[i], data);
+        distance_array[i] = calculate_collision(angle, data);
+        draw_column(i, distance_array[i], data);
         i++;
     }
     if (data->ray_trc.sprite)
-        draw_sprites(data);
+        draw_sprites(data, distance_array);
 }
