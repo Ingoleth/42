@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:33:22 by user42            #+#    #+#             */
-/*   Updated: 2020/11/29 15:09:46 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/30 13:14:06 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ void draw_map_corner(t_data *map_image, int border_start, float border_side)
         i++;
         j = border_start;
     }
-    i = 0;
+    i = -1;
     while (i++ < 7)
         free(border[i]);
     free(border);
@@ -190,6 +190,34 @@ void    load_map(char **map, s_mlx *mlx_data, int res_x, int res_y)
     draw_edges(mlx_data->map, map_size - border_size, border_size);
 }
 
+void load_health_bar(s_mlx *mlx_data, int res)
+{
+    t_data * health_bar_temp;
+    float bar_width;
+    float bar_height;
+    int j;
+
+    bar_width = res /MAP_RATIO;
+    bar_height = bar_width / 4;
+    health_bar_temp = load_xpm_image(mlx_data->mlx_ptr, "/home/user42/Documents/42/cub3d/textures/health_bar.xpm");
+    mlx_data->health_bar.image = initialize_image(mlx_data->mlx_ptr, bar_width, bar_height);
+    mlx_data->health_bar.pixel_size = bar_width / (float)health_bar_temp->width;
+    printf("%i\n", mlx_data->health_bar.pixel_size);
+    res = 0;
+    j = 0;
+    while (res < bar_width)
+    {
+        while (j < bar_height)
+        {
+            draw_pixel(mlx_data->health_bar.image, res, j, get_pixel(health_bar_temp, (int)(res / bar_width * health_bar_temp->width), (int)(j / bar_height * health_bar_temp->height)));
+            j++;
+        }
+        res++;
+        j = 0;
+    }
+    free_image(mlx_data->mlx_ptr, health_bar_temp); //TODO check that it gets erased properly!
+}
+
 int initialize_render_data(s_mlx *mlx_data, cub3d *data, char *file_path)
 {
 
@@ -199,6 +227,7 @@ int initialize_render_data(s_mlx *mlx_data, cub3d *data, char *file_path)
     mlx_data->win_ptr = mlx_new_window(mlx_data->mlx_ptr, data->render_data.res_x, data->render_data.res_y, "Cub3d");
 	load_floor_ceiling(&data->render_data, mlx_data);
 	load_map(data->render_data.map, mlx_data, data->render_data.res_x, data->render_data.res_y);
+    load_health_bar(mlx_data, data->render_data.res_x > data->render_data.res_y ? data->render_data.res_y : data->render_data.res_x);
     load_cursor(mlx_data, data->render_data.view_angle);
     data->ray_trc.column_height = data->render_data.res_y / 2;
     if (!(data->ray_trc.wall_distance = (float *)malloc((data->render_data.res_x + 1) * sizeof(float))))

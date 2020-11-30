@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 20:28:46 by user42            #+#    #+#             */
-/*   Updated: 2020/11/13 00:09:59 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/30 13:08:32 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ t_data *initialize_image(void *mlx_ptr, int size_x, int size_y)
     if (!(image = ft_calloc(1, sizeof(t_data))))
         return (0);
     image->img = mlx_new_image(mlx_ptr, size_x, size_y);
+    image->width = size_x;
+    image->height = size_y;
     image->addr = mlx_get_data_addr(image->img, &image->bits_per_pixel,
     &image->line_length, &image->endian);
     return(image);

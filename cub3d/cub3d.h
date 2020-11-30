@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/11/29 15:11:01 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/11/30 12:51:19 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,15 @@ typedef struct      keys
     t_bool          enter;
 }                   t_keys;
 
-
+typedef struct      health_bar
+{
+    int             bar_start_x;
+    int             bar_start_y;
+    int             pixel_size;
+    int             bar_size_x;
+    int             bar_size_y;
+    t_data          *image;
+}                   t_health_bar;
 
 typedef struct      mlx
 {
@@ -148,6 +156,7 @@ typedef struct      mlx
     void            *win_ptr;
     t_data          *background;
     t_data          *map;
+    t_health_bar    health_bar;
     int             map_initial_x;
     int             map_initial_y;
     t_data          **cursor;
@@ -238,7 +247,7 @@ typedef struct cub3d
 #define GREY  0x2b2b2b
 #define RED   0x8B0000
 #define CYAN  0x00ffff
-#define YELLOW 0xffff00 
+#define YELLOW 0xffff00
 #define PURPLE 0x800080	
 
 #define ESC 65307
