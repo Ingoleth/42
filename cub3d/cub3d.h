@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/11/30 18:45:37 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/03 00:09:48 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ typedef struct		s_render_data
     int             res_y;
     float           player_x;
     float           player_y;
+    float           y_angle;
     float           current_health;
     float           view_angle;
     t_data          north_texture;
@@ -138,9 +139,14 @@ typedef struct      keys
 {
     t_bool          forward;
     t_bool          backwards;
+    t_bool          mv_left;
+    t_bool          mv_right;
     t_bool          left;
     t_bool          right;
+    t_bool          up;
+    t_bool          down;
     t_bool          enter;
+    t_bool          jump;
 }                   t_keys;
 
 typedef struct      health_bar
@@ -187,6 +193,7 @@ typedef struct ray_tracing
     float       tan_x;
     float       tan_y;
     float       column_height;
+    float       jump_time;
     t_list      *sprite;
 }               s_ray_tracing;
 
@@ -261,10 +268,15 @@ typedef struct cub3d
 
 #define ESC 65307
 #define ENTER 65293
-#define FORWARD 65362
-#define BACKWARDS 65364
+#define LOOK_UP 65362
+#define LOOK_DOWN 65364
 #define LOOK_LEFT 65361
 #define LOOK_RIGHT 65363
+#define MOVE_LEFT 'a'
+#define MOVE_RIGHT 'd'
+#define FORWARD 'w'
+#define BACKWARDS 's'
+#define SPACE ' '
 
 #define EAST 0
 #define NORTH 1
@@ -324,7 +336,7 @@ int             calculate_collision_2(float p_x, float p_y, s_ray_tracing *ray_t
 int             calculate_collision_3(float p_x, float p_y, s_ray_tracing *ray_trc, char **map);
 t_bool          check_wall_collision(int tile_value, int tile_coord, s_ray_tracing * ray_trc, t_bool horiz);
 unsigned int	add_shade(unsigned int colour, double distance);
-void            draw_column(int i, float distance, cub3d *data);
+void            draw_column(int i, float distance, cub3d *data, int y_offset);
 void            move_from_wall(cub3d *data, float x, float y);
 t_bool          check_wall_distance(cub3d *data, float temp_x, float temp_y);
 t_bool          check_sprite(cub3d *data);

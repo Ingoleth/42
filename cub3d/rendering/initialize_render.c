@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:33:22 by user42            #+#    #+#             */
-/*   Updated: 2020/11/30 18:47:22 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/02 16:05:39 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,6 +230,7 @@ int initialize_render_data(s_mlx *mlx_data, cub3d *data, char *file_path)
     load_cursor(mlx_data, data->render_data.view_angle);
     data->ray_trc.column_height = data->render_data.res_y / 2;
     data->render_data.current_health = MAX_HEALTH;
+    data->render_data.y_angle = 1;
     data->mlx_data.keys_pressed.enter = true;
     redraw_screen(data);
     return (1);

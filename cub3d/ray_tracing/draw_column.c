@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 09:57:41 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/11/28 11:01:20 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/02 16:15:08 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ unsigned int get_image_colour(cub3d *data, int column_size, int img_y)
 	int y;
 	
 	image = get_texture_to_render(data->ray_trc.cardinal_collision, &data->render_data);
-	y = (int)(image->height * (0.5 + (0.5 * img_y / column_size)));
+	y = (int)(image->height * img_y / (float)column_size);
 	if (data->ray_trc.cardinal_collision == NORTH || data->ray_trc.cardinal_collision == SOUTH)
 		x = (int)(image->width * (data->ray_trc.x_collision - (int)data->ray_trc.x_collision));
 	else
@@ -57,27 +57,16 @@ unsigned int get_image_colour(cub3d *data, int column_size, int img_y)
 	return (get_pixel(image, x, y));
 }
 
-void draw_column(int i, float distance, cub3d *data)
+void draw_column(int i, float distance, cub3d *data, int y_offset)
 {
-	int y_axis;
 	int column_size;
-	int max_draw_height;
+	int starting_position;
 	int j;
-
-	y_axis = data->render_data.res_y / 2;
 	column_size = (int)(data->ray_trc.column_height / (distance));
-	max_draw_height = column_size > y_axis ? y_axis : column_size;
-	j = 0;
-	while (j < max_draw_height) //Changed recently; change to see if it works properly...
-	{
-		draw_pixel(data->mlx_data.background, i, y_axis + j, add_shade(get_image_colour(data, column_size, j), distance));
-		draw_pixel(data->mlx_data.background, i, y_axis - j, add_shade(get_image_colour(data, column_size, -j), distance));
-		j++;
-	}
-	while (j < y_axis)
-	{
-		draw_pixel(data->mlx_data.background, i, y_axis - j, data->render_data.c_rgb);
-		draw_pixel(data->mlx_data.background, i, y_axis + j, data->render_data.f_rgb);
-		j++;
-	}
+	starting_position = data->render_data.res_y / 2 - column_size / 2 + y_offset;
+	j = starting_position < 0 ? -starting_position : 0;
+	draw_pixel_area(data->mlx_data.background, set_draw_coords(i, 0, i + 1, starting_position), data->render_data.c_rgb);
+	draw_pixel_area(data->mlx_data.background, set_draw_coords(i, starting_position + column_size + 1, i + 1, data->render_data.res_y), data->render_data.f_rgb);
+	while (j++ < column_size && starting_position + j < data->render_data.res_y)
+		draw_pixel(data->mlx_data.background, i, starting_position + j, get_image_colour(data, column_size, j));
 }

@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 12:13:52 by user42            #+#    #+#             */
-/*   Updated: 2020/11/30 16:35:52 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/03 00:45:40 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ float calculate_collision(float angle, cub3d *data)
     else if (data->ray_trc.sector == 3)
         calculate_collision_3(x, y, &data->ray_trc, data->render_data.map);
     x = fabsf((data->ray_trc.x_collision - data->render_data.player_x) / cosf(angle));
-    return(fabsf(x * cosf(beta))); //TODO: It doesn't work on 0 / PI for obvious reasons. Add if. Or if sneaky, change the values so it nevers get there :P
+    y = fabsf((data->ray_trc.y_collision - data->render_data.player_y) / sinf(angle));
+    x = fabsf(x * cosf(beta));
+    y = fabsf(y * cosf(beta));
+    return(x > y ? y : x);
 }
 
 void    get_sprite_distance(cub3d *data)
@@ -73,7 +76,7 @@ int get_sprite_colour(cub3d *data, int x, int y, t_sprite *sprite)
     return(get_pixel(image, image_x, image_y));
 }
 
-void draw_sprite_column(int drawing_position, t_sprite *sprite, cub3d *data)
+void draw_sprite_column(int drawing_position, t_sprite *sprite, cub3d *data, int y_offset)
 {
     int y_draw_coord;
     int y_position;
@@ -82,7 +85,7 @@ void draw_sprite_column(int drawing_position, t_sprite *sprite, cub3d *data)
 
     size = sprite->size_half * 2;
     y_position = 0;
-    y_draw_coord = sprite->sprite_center_y - sprite->size_half;
+    y_draw_coord = sprite->sprite_center_y - sprite->size_half + y_offset;
     while (y_draw_coord < 0)
     {
         y_position++;
@@ -99,7 +102,7 @@ void draw_sprite_column(int drawing_position, t_sprite *sprite, cub3d *data)
     
 }
 
-void    draw_sprite(cub3d *data, t_sprite *sprite, float *distance_array)
+void    draw_sprite(cub3d *data, t_sprite *sprite, float *distance_array, float time)
 {
     int drawing_position;
 
@@ -110,7 +113,7 @@ void    draw_sprite(cub3d *data, t_sprite *sprite, float *distance_array)
     while (drawing_position < sprite->sprite_center_x  + sprite->size_half && drawing_position < data->render_data.res_x)
     {
         if (distance_array[drawing_position] > sprite->distance)
-            draw_sprite_column(drawing_position, sprite, data);
+            draw_sprite_column(drawing_position, sprite, data, time);
         drawing_position++;
     }
 }
@@ -138,7 +141,7 @@ void    order_sprites(t_list *sprite)
     }  
 }   
 
-void    draw_sprites(cub3d *data, float *distance_array)
+void    draw_sprites(cub3d *data, float *distance_array, float time)
 {
     t_list *aux;
     int i;
@@ -148,7 +151,7 @@ void    draw_sprites(cub3d *data, float *distance_array)
     order_sprites(aux);
     while (aux)
     {
-        draw_sprite(data, aux->content, distance_array);
+        draw_sprite(data, aux->content, distance_array, time);
         aux = aux->next;
     }
     i = 0 + 1;
@@ -156,22 +159,52 @@ void    draw_sprites(cub3d *data, float *distance_array)
     ft_lstclear(&data->ray_trc.sprite, free);
 }
 
+int handle_jump(t_bool *is_jumping, float *start_time)
+{
+    int y_offset;
+    float time;
+
+    if (!*start_time)
+        *start_time = (float)clock() / CLOCKS_PER_SEC - *start_time;
+    time = (float)clock() / CLOCKS_PER_SEC - *start_time;
+        if (time > 0.7)
+        {
+            *is_jumping = false;
+            *start_time = 0;
+            return(0);
+        }
+        if (time < 0.1)
+            y_offset = -5 * sin(time / 0.1 * PI);
+        else if (time < 0.6)
+            y_offset = 60 * sin((time - 0.1) / 0.5 * PI);
+        else
+            y_offset = -7 * sin((time - 0.6) / 0.1 * PI);
+        return (y_offset);
+}
+
 void    ray_trace(cub3d *data)
 {
     int i;
     float angle;
     float distance_array[data->render_data.res_x];
+    float y_offset; 
     
     i = 0;
+    if (data->mlx_data.keys_pressed.jump)
+        y_offset = handle_jump(&data->mlx_data.keys_pressed.jump, &data->ray_trc.jump_time);
+     else
+        y_offset = 0;
     while (i < data->render_data.res_x)
     {
         angle = data->render_data.view_angle - atan(tan(FOV / 2.0) * (2.0 * i / data->render_data.res_x - 1.0));
         angle = angle < 0 ? PI2 + angle : angle;
         angle = angle > PI2 ? angle - PI2 : angle;
         distance_array[i] = calculate_collision(angle, data);
-        draw_column(i, distance_array[i], data);
+        if (!distance_array[i])
+            distance_array[i] = 0.001;
+        draw_column(i, distance_array[i], data, y_offset);
         i++;
     }
     if (data->ray_trc.sprite)
-        draw_sprites(data, distance_array);
+        draw_sprites(data, distance_array, y_offset);
 }
