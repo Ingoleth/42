@@ -6,12 +6,18 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 19:44:52 by user42            #+#    #+#             */
-/*   Updated: 2020/12/03 00:32:17 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/04 11:09:16 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "stdio.h"
+
+int print_message()
+{
+	printf("Hello\n");
+	return (0);
+}
 
 int main (void)
 {
@@ -24,7 +30,8 @@ int main (void)
 	mlx_mouse_hide(data.mlx_data.mlx_ptr, data.mlx_data.win_ptr);
 	mlx_hook(data.mlx_data.win_ptr, 2, 1L<<0, on_key_pressed, &data);
 	mlx_hook(data.mlx_data.win_ptr, 3, 1L<<1, on_key_released, &data.mlx_data);
-	mlx_hook(data.mlx_data.win_ptr, 17, 1L<<2, close_window, &data);
+	mlx_hook(data.mlx_data.win_ptr, 17, 1L<<2, cleanup, &data);
+	mlx_hook(data.mlx_data.win_ptr, 9, 1L<<21, redraw_screen, &data);
 	mlx_loop_hook(data.mlx_data.mlx_ptr, check_keys, &data);
 	mlx_loop(data.mlx_data.mlx_ptr);
 

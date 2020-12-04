@@ -6,13 +6,13 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 10:47:37 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/11/30 11:18:20 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/03 12:39:38 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void cleanup(cub3d *data)
+int cleanup(cub3d *data)
 {
 	t_data          **cursor;
 	int i;
@@ -32,4 +32,5 @@ void cleanup(cub3d *data)
 	free(data->mlx_data.mlx_ptr);
 	free_render_data(&data->render_data);
 	exit(0);
+	return (0);
 }

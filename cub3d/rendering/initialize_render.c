@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:33:22 by user42            #+#    #+#             */
-/*   Updated: 2020/12/02 16:05:39 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/04 12:10:46 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,11 +197,15 @@ void load_health_bar(s_mlx *mlx_data, int res)
     float bar_height;
     int j;
 
-    bar_width = res /MAP_RATIO;
+    bar_width = res / MAP_RATIO;
     bar_height = bar_width / 4;
     health_bar_temp = load_xpm_image(mlx_data->mlx_ptr, HEALTH_BAR_PATH);
     mlx_data->health_bar.image = initialize_image(mlx_data->mlx_ptr, bar_width, bar_height);
-    mlx_data->health_bar.pixel_size = bar_width / (float)health_bar_temp->width;
+    mlx_data->health_bar.pixel_size = (int)bar_width / (float)health_bar_temp->width;
+    mlx_data->health_bar.bar_start_x = HB_START_x * (mlx_data->health_bar.image->width / (float) health_bar_temp->width);
+    mlx_data->health_bar.bar_start_y = HB_START_Y * (mlx_data->health_bar.image->height / (float)health_bar_temp->height);
+    mlx_data->health_bar.bar_lenght_x = (HB_LENGHT_X) * (mlx_data->health_bar.image->width / (float) health_bar_temp->width);
+    mlx_data->health_bar.bar_lenght_y = (HB_LENGHT_Y) * (mlx_data->health_bar.image->height / (float)health_bar_temp->height);
     res = 0;
     j = 0;
     while (res < bar_width)

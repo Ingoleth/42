@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/12/03 00:09:48 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/04 12:10:14 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,9 +153,9 @@ typedef struct      health_bar
 {
     int             bar_start_x;
     int             bar_start_y;
+    int             bar_lenght_x;
+    int             bar_lenght_y;
     int             pixel_size;
-    int             bar_size_x;
-    int             bar_size_y;
     t_data          *image;
 }                   t_health_bar;
 
@@ -251,9 +251,9 @@ typedef struct cub3d
 #define WALL_DISTANCE 0.1f
 #define SHADE_DISTANCE 10
 
-#define HB_START_x 22
-#define HB_START_Y 6.5
-#define HB_LENGHT_X 39.5
+#define HB_START_x 21
+#define HB_START_Y 6
+#define HB_LENGHT_X 38
 #define HB_LENGHT_Y 4
 #define MAX_HEALTH 50
 
@@ -295,7 +295,7 @@ int             free_render_data(s_render_data *render_data);
 int             set_error_value(int id, int i, int j, s_error *error);
 int         	check_map_basic_elements(s_map_bearings *map_info, s_error *error);
 int             check_render_data(s_render_data *render_data, void *mlx_ptr);
-void            cleanup(cub3d *data);
+int             cleanup(cub3d *data);
 
 t_data          *initialize_image(void *mlx_ptr, int size_x, int size_y);
 unsigned int    get_pixel(t_data *image, int x, int y);
