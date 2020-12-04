@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 19:57:29 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/12/04 20:14:08 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/04 20:29:59 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void change_level(cub3d *data, char *map_path)
 	res_x = data->render_data.res_x;
 	res_y = data->render_data.res_y;
 	player_life = data->render_data.current_health;
-	free_render_data(&data->render_data);
+	free_render_data(&data->render_data, data->mlx_data.mlx_ptr);
 	if (!read_file(map_path, &data->render_data, mlx_data->mlx_ptr) ||
 	check_render_data(&data->render_data, mlx_data->mlx_ptr))
 		cleanup(data);

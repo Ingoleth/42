@@ -6,31 +6,33 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 10:23:24 by user42            #+#    #+#             */
-/*   Updated: 2020/11/28 11:02:02 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/04 21:03:12 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void			free_textures(s_render_data *render_data) //TODO change to destroy!
+void	free_textures(s_render_data *render_data, void *mlx_ptr) //TODO change to destroy!
 {
+	printf("Hello there!\n");
 	if (render_data->east_texture.img)
-		free(render_data->east_texture.img);
-	if (render_data->north_texture.img)
-		free(render_data->north_texture.img);
+		mlx_destroy_image(mlx_ptr, render_data->east_texture.img);
+	/*if (render_data->north_texture.img)
+		mlx_destroy_image(mlx_ptr, render_data->north_texture.img);
 	if (render_data->west_texture.img)
-		free(render_data->west_texture.img);
+		mlx_destroy_image(mlx_ptr, render_data->west_texture.img);
 	if (render_data->south_texture.img)
-		free(render_data->south_texture.img);
+		mlx_destroy_image(mlx_ptr, render_data->south_texture.img);
 	if (render_data->sprite1.img)
-		free(render_data->sprite1.img);
+		mlx_destroy_image(mlx_ptr, render_data->sprite1.img);
 	if (render_data->sprite2.img)
-		free(render_data->sprite2.img);
+		mlx_destroy_image(mlx_ptr, render_data->sprite2.img);
 	if (render_data->sprite3.img)
-		free(render_data->sprite3.img);
+		mlx_destroy_image(mlx_ptr, render_data->sprite3.img);*/
+	printf("General kenobi!\n");
 }
 
-int		free_render_data(s_render_data *render_data)
+int		free_render_data(s_render_data *render_data, void *mlx_ptr)
 {
 	int i;
 
@@ -44,7 +46,7 @@ int		free_render_data(s_render_data *render_data)
 		}
 		free(render_data->map);
 	}
-	free_textures(render_data);
+	free_textures(render_data, mlx_ptr);
 	
 	return (0);
 }
@@ -89,7 +91,7 @@ s_render_data	*read_file(char *data_file, s_render_data *render_data, void *mlx_
 	{
 		if (fd != -1)
 			end_get_next_line(fd);
-		free_render_data(render_data);
+		free_render_data(render_data, mlx_ptr); //TODO Double check!
 		return (0);
 	}
 	return (render_data);

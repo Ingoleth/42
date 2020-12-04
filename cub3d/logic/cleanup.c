@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 10:47:37 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/12/03 12:39:38 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/04 21:02:46 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,15 @@ int cleanup(cub3d *data)
 		i++;
 	}
 	free(cursor);
+	free_image(data->mlx_data.mlx_ptr, data->mlx_data.health_bar.image);
+ 	//mlx_destroy_image(data->mlx_data.mlx_ptr, data->mlx_data.health_bar.image->img);
 	free_image(data->mlx_data.mlx_ptr, data->mlx_data.background);
 	free_image(data->mlx_data.mlx_ptr, data->mlx_data.map);
 	mlx_destroy_window(data->mlx_data.mlx_ptr, data->mlx_data.win_ptr);
 	mlx_destroy_display(data->mlx_data.mlx_ptr);
+	printf("Hey\n");
+	free_render_data(&data->render_data, data->mlx_data.mlx_ptr);
 	free(data->mlx_data.mlx_ptr);
-	free_render_data(&data->render_data);
 	exit(0);
 	return (0);
 }

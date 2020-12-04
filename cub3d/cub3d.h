@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/12/04 20:08:44 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/04 20:28:19 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -291,7 +291,7 @@ void	        advance_file_line(char **line, s_error *error);
 void            add_texture(t_data *image, void *mlx_data, char *line, s_error *s_error);
 int             print_error(s_error * error);
 int             check_map_coherence(char **map, s_error *error);
-int             free_render_data(s_render_data *render_data);
+int             free_render_data(s_render_data *render_data, void *mlx_ptr);
 int             set_error_value(int id, int i, int j, s_error *error);
 int         	check_map_basic_elements(s_map_bearings *map_info, s_error *error);
 int             check_render_data(s_render_data *render_data, void *mlx_ptr);

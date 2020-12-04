@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 12:13:52 by user42            #+#    #+#             */
-/*   Updated: 2020/12/03 00:45:40 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/04 20:54:53 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void    get_sprite_distance(cub3d *data)
         x = aux2->sprite_x - data->render_data.player_x;
         y = -(aux2->sprite_y - data->render_data.player_y);
         aux2->angle =  data->render_data.view_angle - atanf(y / x);
-        aux2->distance = (sqrtf(x * x + y * y) * fabsf(cos(aux2->angle)));
+        aux2->distance = (sqrtf(x * x + y * y) * fabsf(cosf(aux2->angle)));
         aux = aux->next;
     }
 }
@@ -174,11 +174,11 @@ int handle_jump(t_bool *is_jumping, float *start_time)
             return(0);
         }
         if (time < 0.1)
-            y_offset = -5 * sin(time / 0.1 * PI);
+            y_offset = -5 * sinf(time / 0.1 * PI);
         else if (time < 0.6)
-            y_offset = 60 * sin((time - 0.1) / 0.5 * PI);
+            y_offset = 60 * sinf((time - 0.1) / 0.5 * PI);
         else
-            y_offset = -7 * sin((time - 0.6) / 0.1 * PI);
+            y_offset = -7 * sinf((time - 0.6) / 0.1 * PI);
         return (y_offset);
 }
 

@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 19:16:58 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/11/28 14:07:47 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/04 20:59:22 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,13 @@
 
 int main (void)
 {
-	t_list *list = 0;
-	int i = 0;
-	int *nb;
+	t_data image;
+	void *mlx_ptr;
 
-	while (i < 4)
-	{
-		nb = malloc(sizeof(int));
-		*nb = i;
-		ft_lstadd_back(&list, ft_lstnew(nb));
-		i++;
-	}
-
-	while (list)
-	{
-		if (*(int *)list->content == 2)
-			ft_lstmove_backwards(list);
-		printf("%i\n", *(int *)list->content);
-		list = list->next;
-	}
+	mlx_ptr = mlx_init();
+	ft_memset(&image, 0, sizeof(image));
+	add_texture(&image, mlx_ptr, "/home/user42/Documents/42/cub3d/textures/barrel.XPM", 0);
+	mlx_destroy_image(mlx_ptr, image.img);
+	mlx_destroy_display(mlx_ptr);
+	free(mlx_ptr);
 }
