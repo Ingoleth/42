@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:33:22 by user42            #+#    #+#             */
-/*   Updated: 2020/12/04 12:10:46 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/04 19:39:56 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,7 @@ void    load_map(char **map, s_mlx *mlx_data, int res_x, int res_y)
     s_map_render map_render;
     
     map_size = res_x < res_y ? res_x / MAP_RATIO : res_y / MAP_RATIO;
+    map_size = map_size == 0 ? 1 : map_size;
     border_size = map_size / BORDER_RATIO;
     map_render.map = map;
     map_render.tile_size = get_tile_size(map, map_size - border_size, &map_render);
@@ -197,8 +198,8 @@ void load_health_bar(s_mlx *mlx_data, int res)
     float bar_height;
     int j;
 
-    bar_width = res / MAP_RATIO;
-    bar_height = bar_width / 4;
+    bar_width = res / MAP_RATIO > 0 ? res / MAP_RATIO : 1;
+    bar_height = (int)(bar_width / 4) > 0 ? bar_width / 4 : 1;
     health_bar_temp = load_xpm_image(mlx_data->mlx_ptr, HEALTH_BAR_PATH);
     mlx_data->health_bar.image = initialize_image(mlx_data->mlx_ptr, bar_width, bar_height);
     mlx_data->health_bar.pixel_size = (int)bar_width / (float)health_bar_temp->width;
