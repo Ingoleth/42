@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/12/04 12:10:14 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/04 20:08:44 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -341,5 +341,6 @@ void            move_from_wall(cub3d *data, float x, float y);
 t_bool          check_wall_distance(cub3d *data, float temp_x, float temp_y);
 t_bool          check_sprite(cub3d *data);
 float	        get_sprite_horizontal_lenght(s_ray_tracing *ray_trc, float view_angle);
-
+void            change_level(cub3d *data, char *map_path);
+void            load_map(char **map, s_mlx *mlx_data, int res_x, int res_y);
  #endif

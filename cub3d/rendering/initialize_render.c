@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:33:22 by user42            #+#    #+#             */
-/*   Updated: 2020/12/04 19:39:56 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/04 20:06:26 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,7 +227,7 @@ int initialize_render_data(s_mlx *mlx_data, cub3d *data, char *file_path)
 
     if (!read_file(file_path, &data->render_data, mlx_data->mlx_ptr) ||
 	check_render_data(&data->render_data, mlx_data->mlx_ptr))
-		return (free_render_data(&data->render_data));
+		cleanup(data); //TODO Might crashy crash, make it check the images have value
     mlx_data->win_ptr = mlx_new_window(mlx_data->mlx_ptr, data->render_data.res_x, data->render_data.res_y, "Cub3d");
 	load_floor_ceiling(&data->render_data, mlx_data);
 	load_map(data->render_data.map, mlx_data, data->render_data.res_x, data->render_data.res_y);

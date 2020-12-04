@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 14:07:13 by user42            #+#    #+#             */
-/*   Updated: 2020/12/03 00:37:57 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/04 20:04:29 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int		on_key_pressed(int keycode, cub3d *data)
 		data->mlx_data.keys_pressed.enter = data->mlx_data.keys_pressed.enter ? false : true;
 		redraw_screen(data);
 	}
+	if (keycode == 't')
+		change_level(data, "/home/user42/Documents/42/cub3d/map 2.cub");
 	if (keycode == ESC)
         cleanup(data);
     return (0);
