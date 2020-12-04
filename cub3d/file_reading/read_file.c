@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 10:23:24 by user42            #+#    #+#             */
-/*   Updated: 2020/12/04 21:03:12 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/04 21:12:14 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 void	free_textures(s_render_data *render_data, void *mlx_ptr) //TODO change to destroy!
 {
-	printf("Hello there!\n");
 	if (render_data->east_texture.img)
 		mlx_destroy_image(mlx_ptr, render_data->east_texture.img);
-	/*if (render_data->north_texture.img)
+	if (render_data->north_texture.img)
 		mlx_destroy_image(mlx_ptr, render_data->north_texture.img);
 	if (render_data->west_texture.img)
 		mlx_destroy_image(mlx_ptr, render_data->west_texture.img);
@@ -28,8 +27,7 @@ void	free_textures(s_render_data *render_data, void *mlx_ptr) //TODO change to d
 	if (render_data->sprite2.img)
 		mlx_destroy_image(mlx_ptr, render_data->sprite2.img);
 	if (render_data->sprite3.img)
-		mlx_destroy_image(mlx_ptr, render_data->sprite3.img);*/
-	printf("General kenobi!\n");
+		mlx_destroy_image(mlx_ptr, render_data->sprite3.img);
 }
 
 int		free_render_data(s_render_data *render_data, void *mlx_ptr)
