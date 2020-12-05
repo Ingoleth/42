@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:33:22 by user42            #+#    #+#             */
-/*   Updated: 2020/12/04 20:06:26 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/06 00:26:51 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,7 +219,7 @@ void load_health_bar(s_mlx *mlx_data, int res)
         res++;
         j = 0;
     }
-    free_image(mlx_data->mlx_ptr, health_bar_temp); //TODO check that it gets erased properly!
+    free_image(mlx_data->mlx_ptr, health_bar_temp);
 }
 
 int initialize_render_data(s_mlx *mlx_data, cub3d *data, char *file_path)
@@ -233,7 +233,8 @@ int initialize_render_data(s_mlx *mlx_data, cub3d *data, char *file_path)
 	load_map(data->render_data.map, mlx_data, data->render_data.res_x, data->render_data.res_y);
     load_health_bar(mlx_data, data->render_data.res_x > data->render_data.res_y ? data->render_data.res_y : data->render_data.res_x);
     load_cursor(mlx_data, data->render_data.view_angle);
-    data->ray_trc.column_height = data->render_data.res_y / 2;
+    data->ray_trc.focal_length = data->render_data.res_y / 2 / tanf(FOV / 2);
+    data->render_data.column_height = data->render_data.res_y / 2;
     data->render_data.current_health = MAX_HEALTH;
     data->render_data.y_angle = 1;
     data->mlx_data.keys_pressed.enter = true;

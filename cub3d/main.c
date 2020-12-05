@@ -6,18 +6,12 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 19:44:52 by user42            #+#    #+#             */
-/*   Updated: 2020/12/04 21:10:02 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/05 21:10:19 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "stdio.h"
-
-int print_message()
-{
-	printf("Hello\n");
-	return (0);
-}
 
 int main (void)
 {

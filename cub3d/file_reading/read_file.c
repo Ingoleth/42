@@ -6,13 +6,13 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 10:23:24 by user42            #+#    #+#             */
-/*   Updated: 2020/12/04 21:12:14 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/05 09:38:04 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	free_textures(s_render_data *render_data, void *mlx_ptr) //TODO change to destroy!
+void	free_textures(s_render_data *render_data, void *mlx_ptr)
 {
 	if (render_data->east_texture.img)
 		mlx_destroy_image(mlx_ptr, render_data->east_texture.img);

@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 09:57:41 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/12/02 16:15:08 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/06 00:35:00 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ unsigned int		add_shade(unsigned int colour, double distance)
 	if (distance > SHADE_DISTANCE)
 		distance = SHADE_DISTANCE;
 	distance /= SHADE_DISTANCE;
-	distance -= 0.2;
+	distance -= distance > 0.05 ? 0.05 : 0;
 	r = r - (r * distance);
 	g = g - (g * distance);
 	b = b - (b * distance);
@@ -62,11 +62,10 @@ void draw_column(int i, float distance, cub3d *data, int y_offset)
 	int column_size;
 	int starting_position;
 	int j;
-	column_size = (int)(data->ray_trc.column_height / (distance));
+	column_size = (int)(data->render_data.column_height / (distance));
 	starting_position = data->render_data.res_y / 2 - column_size / 2 + y_offset;
 	j = starting_position < 0 ? -starting_position : 0;
-	draw_pixel_area(data->mlx_data.background, set_draw_coords(i, 0, i + 1, starting_position), data->render_data.c_rgb);
-	draw_pixel_area(data->mlx_data.background, set_draw_coords(i, starting_position + column_size + 1, i + 1, data->render_data.res_y), data->render_data.f_rgb);
 	while (j++ < column_size && starting_position + j < data->render_data.res_y)
-		draw_pixel(data->mlx_data.background, i, starting_position + j, get_image_colour(data, column_size, j));
+		draw_pixel(data->mlx_data.background, i, starting_position + j, add_shade(get_image_colour(data, column_size, j), distance));
+	
 }

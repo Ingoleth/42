@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 12:13:52 by user42            #+#    #+#             */
-/*   Updated: 2020/12/04 20:54:53 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/06 00:54:28 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void draw_sprite_column(int drawing_position, t_sprite *sprite, cub3d *data, int
     {
         pixel = get_sprite_colour(data, drawing_position, y_position, sprite);
         if (pixel != 0 && pixel != -16777216) //Double check
-            draw_pixel(data->mlx_data.background, drawing_position, y_draw_coord, pixel);
+            draw_pixel(data->mlx_data.background, drawing_position, y_draw_coord, add_shade(pixel, sprite->distance));
         y_position++;
         y_draw_coord++;
     }
@@ -107,7 +107,7 @@ void    draw_sprite(cub3d *data, t_sprite *sprite, float *distance_array, float 
     int drawing_position;
 
     sprite->sprite_center_x = (tan(sprite->angle) / tan(FOV / 2) + 1) * data->render_data.res_x / 2;
-    sprite->size_half = data->ray_trc.column_height / (sprite->distance);
+    sprite->size_half = data->render_data.column_height / (sprite->distance);
     sprite->sprite_center_y = data->render_data.res_y / 2 + (data->render_data.res_y / 2) / sprite->distance - sprite->size_half;
     drawing_position = sprite->sprite_center_x - sprite->size_half > 0 ? sprite->sprite_center_x - sprite->size_half : 0;
     while (drawing_position < sprite->sprite_center_x  + sprite->size_half && drawing_position < data->render_data.res_x)
@@ -182,6 +182,48 @@ int handle_jump(t_bool *is_jumping, float *start_time)
         return (y_offset);
 }
 
+void draw_ceiling(s_coords coords, s_render_data *render_data, t_data *background, t_data *image) //Add y_offset!
+{
+	float distance;
+    int y_res_2;
+	
+	image++;//REMOVE!!!!
+    y_res_2 = coords.end_y / 2;
+    while (coords.y < y_res_2)
+    {
+        distance = render_data->column_height / ((y_res_2 - coords.y) * 2);
+        while (coords.x < coords.end_x)
+        {
+            if (distance < render_data->distance_array[coords.x])
+                draw_pixel(background, coords.x, coords.y, add_shade(render_data->c_rgb, distance));
+            coords.x++;
+        }
+        coords.y++;
+        coords.x = 0;
+    }
+}
+
+void draw_floor(s_coords coords, s_render_data *render_data, t_data *background, t_data *image) //Add y_offset!
+{
+	float distance;
+    int res_y_2;
+	
+    res_y_2 = render_data->res_y / 2;
+	image++;//REMOVE!!!!
+    while (coords.y > res_y_2)
+    {
+        distance = render_data->column_height / ((coords.y - res_y_2) * 2);
+        while (coords.x < coords.end_x)
+        {
+            if (distance < render_data->distance_array[coords.x])
+                draw_pixel(background, coords.x, coords.y, add_shade(render_data->f_rgb, distance));
+            coords.x++;
+        }
+        coords.y--;
+        coords.x = 0;
+    }
+}
+
 void    ray_trace(cub3d *data)
 {
     int i;
@@ -205,6 +247,9 @@ void    ray_trace(cub3d *data)
         draw_column(i, distance_array[i], data, y_offset);
         i++;
     }
+    data->render_data.distance_array = distance_array;
+    draw_ceiling(set_draw_coords(0, 0, data->render_data.res_x, data->render_data.res_y), &data->render_data, data->mlx_data.background, &data->render_data.north_texture);
+    draw_floor(set_draw_coords(0, data->render_data.res_y, data->render_data.res_x, data->render_data.res_y), &data->render_data, data->mlx_data.background, &data->render_data.north_texture);
     if (data->ray_trc.sprite)
         draw_sprites(data, distance_array, y_offset);
 }

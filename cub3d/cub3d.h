@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/12/04 20:28:19 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/06 00:50:49 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ typedef struct		s_render_data
     unsigned int    c_rgb;
     unsigned int    f_rgb;
     char            **map;
+    float           *distance_array;
+    float           column_height; 
 }                   s_render_data;
 
 typedef struct      s_error
@@ -192,9 +194,9 @@ typedef struct ray_tracing
     int         cardinal_collision;
     float       tan_x;
     float       tan_y;
-    float       column_height;
     float       jump_time;
     t_list      *sprite;
+    float       focal_length;
 }               s_ray_tracing;
 
 typedef struct cub3d
@@ -248,8 +250,7 @@ typedef struct cub3d
 #define PLAYER_SPEED 0.1
 #define ROTATION_SPEED 0.8
 #define FOV 0.785398F
-#define WALL_DISTANCE 0.1f
-#define SHADE_DISTANCE 10
+#define SHADE_DISTANCE 1
 
 #define HB_START_x 21
 #define HB_START_Y 6
