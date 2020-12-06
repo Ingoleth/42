@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 12:13:52 by user42            #+#    #+#             */
-/*   Updated: 2020/12/06 00:54:28 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/06 16:28:50 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,7 +184,7 @@ int handle_jump(t_bool *is_jumping, float *start_time)
 
 void draw_ceiling(s_coords coords, s_render_data *render_data, t_data *background, t_data *image) //Add y_offset!
 {
-	float distance;
+	float distance; //TODO Fix upper edge not being proprely redrawn...
     int y_res_2;
 	
 	image++;//REMOVE!!!!
@@ -209,7 +209,7 @@ void draw_floor(s_coords coords, s_render_data *render_data, t_data *background,
     int res_y_2;
 	
     res_y_2 = render_data->res_y / 2;
-	image++;//REMOVE!!!!
+	image++;//REMOVE!!!! //TODO take into account jumpy jump!
     while (coords.y > res_y_2)
     {
         distance = render_data->column_height / ((coords.y - res_y_2) * 2);
@@ -247,9 +247,10 @@ void    ray_trace(cub3d *data)
         draw_column(i, distance_array[i], data, y_offset);
         i++;
     }
+    i = 0;
     data->render_data.distance_array = distance_array;
     draw_ceiling(set_draw_coords(0, 0, data->render_data.res_x, data->render_data.res_y), &data->render_data, data->mlx_data.background, &data->render_data.north_texture);
     draw_floor(set_draw_coords(0, data->render_data.res_y, data->render_data.res_x, data->render_data.res_y), &data->render_data, data->mlx_data.background, &data->render_data.north_texture);
-    if (data->ray_trc.sprite)
+    if (data->ray_trc.sprite) // TODO change!
         draw_sprites(data, distance_array, y_offset);
 }

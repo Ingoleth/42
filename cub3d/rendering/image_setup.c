@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 20:28:46 by user42            #+#    #+#             */
-/*   Updated: 2020/11/30 13:08:32 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/06 16:24:27 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,6 @@ s_coords    set_draw_coords(int x, int y, int end_x, int end_y)
     coords.end_x = end_x;
     coords.end_y = end_y;
     return (coords);
-}
-
-void load_floor_ceiling(s_render_data *render_data, s_mlx *mlx_data)
-{
-    int half_point;
-
-    half_point = render_data->res_y / 2;
-    mlx_data->background = initialize_image(mlx_data->mlx_ptr, render_data->res_x, render_data->res_y);
-    draw_pixel_area(mlx_data->background, set_draw_coords(0, 0, render_data->res_x, half_point), render_data->c_rgb);
-    draw_pixel_area(mlx_data->background, set_draw_coords(0, half_point, render_data->res_x, render_data->res_y), render_data->f_rgb);
 }
 
 t_data *initialize_image(void *mlx_ptr, int size_x, int size_y)

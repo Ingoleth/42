@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:33:22 by user42            #+#    #+#             */
-/*   Updated: 2020/12/06 00:26:51 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/06 16:25:28 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,7 +229,7 @@ int initialize_render_data(s_mlx *mlx_data, cub3d *data, char *file_path)
 	check_render_data(&data->render_data, mlx_data->mlx_ptr))
 		cleanup(data); //TODO Might crashy crash, make it check the images have value
     mlx_data->win_ptr = mlx_new_window(mlx_data->mlx_ptr, data->render_data.res_x, data->render_data.res_y, "Cub3d");
-	load_floor_ceiling(&data->render_data, mlx_data);
+    mlx_data->background = initialize_image(mlx_data->mlx_ptr, data->render_data.res_x, data->render_data.res_y);
 	load_map(data->render_data.map, mlx_data, data->render_data.res_x, data->render_data.res_y);
     load_health_bar(mlx_data, data->render_data.res_x > data->render_data.res_y ? data->render_data.res_y : data->render_data.res_x);
     load_cursor(mlx_data, data->render_data.view_angle);
