@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/12/06 16:20:21 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/07 14:16:57 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,8 @@ typedef struct		s_render_data
     unsigned int    f_rgb;
     char            **map;
     float           *distance_array;
-    float           column_height; 
+    float           column_height;
+    float           shade_distance; 
 }                   s_render_data;
 
 typedef struct      s_error
@@ -149,6 +150,7 @@ typedef struct      keys
     t_bool          down;
     t_bool          enter;
     t_bool          jump;
+    t_bool          transition;
 }                   t_keys;
 
 typedef struct      health_bar
@@ -247,10 +249,11 @@ typedef struct cub3d
 #define LINE_WIDTH 8
 #define BORDER_RATIO 10
 #define MAX_OFFSET 10
-#define PLAYER_SPEED 0.1
+#define PLAYER_SPEED 0.05
 #define ROTATION_SPEED 0.8
 #define FOV 0.785398F
 #define SHADE_DISTANCE 8
+#define FADE_TIME 1.5
 
 #define HB_START_x 21
 #define HB_START_Y 6
@@ -336,7 +339,7 @@ int             calculate_collision_1(float p_x, float p_y, s_ray_tracing *ray_t
 int             calculate_collision_2(float p_x, float p_y, s_ray_tracing *ray_trc, char **map);
 int             calculate_collision_3(float p_x, float p_y, s_ray_tracing *ray_trc, char **map);
 t_bool          check_wall_collision(int tile_value, int tile_coord, s_ray_tracing * ray_trc, t_bool horiz);
-unsigned int	add_shade(unsigned int colour, double distance);
+unsigned int	add_shade(unsigned int colour, double distance, float shade_distance);
 void            draw_column(int i, float distance, cub3d *data, int y_offset);
 void            move_from_wall(cub3d *data, float x, float y);
 t_bool          check_wall_distance(cub3d *data, float temp_x, float temp_y);
@@ -344,4 +347,5 @@ t_bool          check_sprite(cub3d *data);
 float	        get_sprite_horizontal_lenght(s_ray_tracing *ray_trc, float view_angle);
 void            change_level(cub3d *data, char *map_path);
 void            load_map(char **map, s_mlx *mlx_data, int res_x, int res_y);
+void            transition_to_level(cub3d *data);
  #endif

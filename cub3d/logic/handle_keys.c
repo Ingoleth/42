@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 14:07:13 by user42            #+#    #+#             */
-/*   Updated: 2020/12/06 16:29:53 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/07 13:54:01 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		on_key_pressed(int keycode, cub3d *data)
 		redraw_screen(data);
 	}
 	if (keycode == 't')
-		change_level(data, "/home/user42/Documents/42/cub3d/map 2.cub");
+			data->mlx_data.keys_pressed.transition = true;
 	if (keycode == ESC)
         cleanup(data);
     return (0);
@@ -67,7 +67,7 @@ int		on_key_released(int keycode, s_mlx *mlx_data)
 
 t_bool is_key_pressed(t_keys *keys)
 {
-	if(keys->forward || keys->backwards || keys->mv_left || keys->mv_right || keys->left || keys->right || keys->down || keys->up || keys->jump)
+	if(keys->forward || keys->backwards || keys->mv_left || keys->mv_right || keys->left || keys->right || keys->down || keys->up || keys->jump || keys->transition)
 		return (true);
 	else
 		return (false);
@@ -81,6 +81,8 @@ int check_keys (cub3d *data)
             handle_movement(data);
         if (data->mlx_data.keys_pressed.left || data->mlx_data.keys_pressed.right || data->mlx_data.keys_pressed.up || data->mlx_data.keys_pressed.down)
             update_angle_info(&data->mlx_data.keys_pressed, &data->render_data.view_angle);
+		if (data->mlx_data.keys_pressed.transition)
+			transition_to_level(data);
         redraw_screen(data);
     }
     return(0);

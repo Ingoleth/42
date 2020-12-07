@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 10:23:24 by user42            #+#    #+#             */
-/*   Updated: 2020/12/05 09:38:04 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/06 17:00:59 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int		free_render_data(s_render_data *render_data, void *mlx_ptr)
 		free(render_data->map);
 	}
 	free_textures(render_data, mlx_ptr);
-	
 	return (0);
 }
 
@@ -80,6 +79,7 @@ s_render_data	*read_file(char *data_file, s_render_data *render_data, void *mlx_
 	s_error			error;
 	char			*line;
 	int				fd;
+	char			aux[2];
 
 	ft_memset(render_data, 0, sizeof(s_render_data));
 	ft_memset(&error, 0, sizeof(error));
@@ -87,9 +87,8 @@ s_render_data	*read_file(char *data_file, s_render_data *render_data, void *mlx_
 	fd = read_actual_file(render_data, &error, &line, data_file);
 	if (error.error_id)
 	{
-		if (fd != -1)
+		if (fd != -1 && read(fd, aux, 1))
 			end_get_next_line(fd);
-		free_render_data(render_data, mlx_ptr); //TODO Double check!
 		return (0);
 	}
 	return (render_data);

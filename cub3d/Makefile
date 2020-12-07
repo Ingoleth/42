@@ -6,7 +6,7 @@
 #    By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/16 09:35:06 by aiglesia          #+#    #+#              #
-#    Updated: 2020/12/04 20:02:17 by aiglesia         ###   ########.fr        #
+#    Updated: 2020/12/06 17:56:53 by aiglesia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,6 @@ SRCS =	file_reading/add_texture.c					\
 		file_reading/read_file_error.c				\
 		file_reading/read_file.c					\
 		logic/cleanup.c								\
-		logic/close_window.c						\
 		logic/handle_keys.c							\
 		logic/movement.c							\
 		logic/change_level.c						\
