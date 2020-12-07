@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:33:22 by user42            #+#    #+#             */
-/*   Updated: 2020/12/06 18:07:48 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/08 00:08:29 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,7 +236,6 @@ int initialize_render_data(s_mlx *mlx_data, cub3d *data, char *file_path)
     data->ray_trc.focal_length = data->render_data.res_y / 2 / tanf(FOV / 2);
     data->render_data.column_height = data->render_data.res_y / 2;
     data->render_data.current_health = MAX_HEALTH;
-    data->render_data.y_angle = 1;
     data->mlx_data.keys_pressed.enter = true;
     data->render_data.shade_distance = SHADE_DISTANCE;
     redraw_screen(data);

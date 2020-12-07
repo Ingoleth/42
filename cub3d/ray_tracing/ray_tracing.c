@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 12:13:52 by user42            #+#    #+#             */
-/*   Updated: 2020/12/07 14:39:00 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/08 00:39:58 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,10 +229,9 @@ void    ray_trace(cub3d *data)
     float y_offset; 
     
     i = 0;
+    y_offset = data->render_data.y_angle * 3 * data->render_data.column_height;
     if (data->mlx_data.keys_pressed.jump)
-        y_offset = handle_jump(&data->mlx_data.keys_pressed.jump, &data->ray_trc.jump_time);
-     else
-        y_offset = 0;
+        y_offset += handle_jump(&data->mlx_data.keys_pressed.jump, &data->ray_trc.jump_time);
     while (i < data->render_data.res_x)
     {
         angle = data->render_data.view_angle - atan(tan(FOV / 2.0) * (2.0 * i / data->render_data.res_x - 1.0));
@@ -244,7 +243,6 @@ void    ray_trace(cub3d *data)
         draw_column(i, distance_array[i], data, y_offset);
         i++;
     }
-    i = 0;
     data->render_data.distance_array = distance_array;
     draw_ceiling(set_draw_coords(0, 0, data->render_data.res_x, data->render_data.res_y + 2 * y_offset), &data->render_data, data->mlx_data.background);
     draw_floor(set_draw_coords(0, data->render_data.res_y, data->render_data.res_x, data->render_data.res_y + 2 * y_offset), &data->render_data, data->mlx_data.background);

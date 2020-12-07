@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 13:00:56 by user42            #+#    #+#             */
-/*   Updated: 2020/11/11 16:23:29 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/08 00:41:10 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,24 @@ void    update_angle_info(t_keys *keys, float *angle)
         if (*angle >= PI2)
             *angle = *angle - PI2;
     }
+}
+
+void    update_ver_angle_info(t_keys *keys, float *angle)
+{
+    static float ang = 0;
+
+    if (!ang)
+        ang = ANGLE_1 * VER_ROTATION_SPEED;
+    if (keys->up)
+    {
+        if(*angle < 0.3)
+            *angle += ang;
+    }
+    if (keys->down)
+    {
+        if(*angle > -0.3)
+            *angle -= ang;
+    }
+    if (keys->down && keys->up)
+        *angle = 0;
 }

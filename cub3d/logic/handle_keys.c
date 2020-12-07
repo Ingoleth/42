@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 14:07:13 by user42            #+#    #+#             */
-/*   Updated: 2020/12/07 13:54:01 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/08 00:11:53 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,10 @@ int check_keys (cub3d *data)
     {
         if (data->mlx_data.keys_pressed.forward || data->mlx_data.keys_pressed.backwards || data->mlx_data.keys_pressed.mv_right || data->mlx_data.keys_pressed.mv_left)
             handle_movement(data);
-        if (data->mlx_data.keys_pressed.left || data->mlx_data.keys_pressed.right || data->mlx_data.keys_pressed.up || data->mlx_data.keys_pressed.down)
+        if (data->mlx_data.keys_pressed.left || data->mlx_data.keys_pressed.right)
             update_angle_info(&data->mlx_data.keys_pressed, &data->render_data.view_angle);
+		if (data->mlx_data.keys_pressed.up || data->mlx_data.keys_pressed.down)
+			update_ver_angle_info(&data->mlx_data.keys_pressed, &data->render_data.y_angle);
 		if (data->mlx_data.keys_pressed.transition)
 			transition_to_level(data);
         redraw_screen(data);

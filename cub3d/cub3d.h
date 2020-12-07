@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/12/07 14:16:57 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/08 00:10:39 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,6 +251,7 @@ typedef struct cub3d
 #define MAX_OFFSET 10
 #define PLAYER_SPEED 0.05
 #define ROTATION_SPEED 0.8
+#define VER_ROTATION_SPEED 0.8
 #define FOV 0.785398F
 #define SHADE_DISTANCE 8
 #define FADE_TIME 1.5
@@ -328,6 +329,7 @@ void            handle_movement(cub3d *data);
 int             close_window(void *mlx_ptr, void *win_ptr);
 
 void            update_angle_info(t_keys *key, float *data);
+void            update_ver_angle_info(t_keys *keys, float *angle);
 float           rad_to_degrees(float angle);
 float           handle_tan(float angle);
 int             get_sector(float angle);
