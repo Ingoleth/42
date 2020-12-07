@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 12:13:52 by user42            #+#    #+#             */
-/*   Updated: 2020/12/06 18:09:31 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/07 14:39:00 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,9 +144,10 @@ void    order_sprites(t_list *sprite)
 void    draw_sprites(cub3d *data, float *distance_array, float time)
 {
     t_list *aux;
-    int i;
 
     aux = data->ray_trc.sprite;
+    if (!aux)
+        return ;
     get_sprite_distance(data);
     order_sprites(aux);
     while (aux)
@@ -154,8 +155,6 @@ void    draw_sprites(cub3d *data, float *distance_array, float time)
         draw_sprite(data, aux->content, distance_array, time);
         aux = aux->next;
     }
-    i = 0 + 1;
-    aux += i;
     ft_lstclear(&data->ray_trc.sprite, free);
 }
 
@@ -182,19 +181,18 @@ int handle_jump(t_bool *is_jumping, float *start_time)
         return (y_offset);
 }
 
-void draw_ceiling(s_coords coords, s_render_data *render_data, t_data *background, t_data *image) //Add y_offset!
+void draw_ceiling(s_coords coords, s_render_data *render_data, t_data *background)
 {
-	float distance; //TODO Fix upper edge not being proprely redrawn...
+	float distance;
     int y_res_2;
-	
-	image++;//REMOVE!!!!
+
     y_res_2 = coords.end_y / 2;
-    while (coords.y < y_res_2)
+    while (coords.y <= y_res_2)
     {
         distance = render_data->column_height / ((y_res_2 - coords.y) * 2);
         while (coords.x < coords.end_x)
         {
-            if (distance < render_data->distance_array[coords.x])
+            if (distance <= render_data->distance_array[coords.x])
                 draw_pixel(background, coords.x, coords.y, add_shade(render_data->c_rgb, distance, render_data->shade_distance));
             coords.x++;
         }
@@ -203,13 +201,12 @@ void draw_ceiling(s_coords coords, s_render_data *render_data, t_data *backgroun
     }
 }
 
-void draw_floor(s_coords coords, s_render_data *render_data, t_data *background, t_data *image) //Add y_offset!
+void draw_floor(s_coords coords, s_render_data *render_data, t_data *background)
 {
 	float distance;
     int res_y_2;
 	
-    res_y_2 = render_data->res_y / 2;
-	image++;//REMOVE!!!! //TODO take into account jumpy jump!
+    res_y_2 = coords.end_y / 2;
     while (coords.y > res_y_2)
     {
         distance = render_data->column_height / ((coords.y - res_y_2) * 2);
@@ -249,8 +246,7 @@ void    ray_trace(cub3d *data)
     }
     i = 0;
     data->render_data.distance_array = distance_array;
-    draw_ceiling(set_draw_coords(0, 0, data->render_data.res_x, data->render_data.res_y), &data->render_data, data->mlx_data.background, &data->render_data.north_texture);
-    draw_floor(set_draw_coords(0, data->render_data.res_y, data->render_data.res_x, data->render_data.res_y), &data->render_data, data->mlx_data.background, &data->render_data.north_texture);
-    if (data->ray_trc.sprite) // TODO change!
+    draw_ceiling(set_draw_coords(0, 0, data->render_data.res_x, data->render_data.res_y + 2 * y_offset), &data->render_data, data->mlx_data.background);
+    draw_floor(set_draw_coords(0, data->render_data.res_y, data->render_data.res_x, data->render_data.res_y + 2 * y_offset), &data->render_data, data->mlx_data.background);
         draw_sprites(data, distance_array, y_offset);
 }
