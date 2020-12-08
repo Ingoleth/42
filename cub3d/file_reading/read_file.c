@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 10:23:24 by user42            #+#    #+#             */
-/*   Updated: 2020/12/06 17:00:59 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/08 10:21:25 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int		free_render_data(s_render_data *render_data, void *mlx_ptr)
 		}
 		free(render_data->map);
 	}
+	if (render_data->extra_level)
+		free(render_data->extra_level);
 	free_textures(render_data, mlx_ptr);
 	return (0);
 }

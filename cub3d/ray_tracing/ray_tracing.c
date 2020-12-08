@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 12:13:52 by user42            #+#    #+#             */
-/*   Updated: 2020/12/08 00:39:58 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/08 00:41:49 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,7 +229,7 @@ void    ray_trace(cub3d *data)
     float y_offset; 
     
     i = 0;
-    y_offset = data->render_data.y_angle * 3 * data->render_data.column_height;
+    y_offset = data->render_data.y_angle * data->render_data.column_height;
     if (data->mlx_data.keys_pressed.jump)
         y_offset += handle_jump(&data->mlx_data.keys_pressed.jump, &data->ray_trc.jump_time);
     while (i < data->render_data.res_x)

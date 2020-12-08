@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/12/08 00:10:39 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/08 10:07:26 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,8 @@ typedef struct		s_render_data
     char            **map;
     float           *distance_array;
     float           column_height;
-    float           shade_distance; 
+    float           shade_distance;
+    char            *extra_level; 
 }                   s_render_data;
 
 typedef struct      s_error
@@ -251,7 +252,7 @@ typedef struct cub3d
 #define MAX_OFFSET 10
 #define PLAYER_SPEED 0.05
 #define ROTATION_SPEED 0.8
-#define VER_ROTATION_SPEED 0.8
+#define VER_ROTATION_SPEED 1.5
 #define FOV 0.785398F
 #define SHADE_DISTANCE 8
 #define FADE_TIME 1.5

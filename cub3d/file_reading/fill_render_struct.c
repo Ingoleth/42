@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 16:34:39 by user42            #+#    #+#             */
-/*   Updated: 2020/11/28 11:04:47 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/08 10:13:42 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,8 @@ s_error *error, s_file_descriptor *file)
 		error->error_id = 0;
 	else if (*line == 'R')
 		fill_resolution(line + 1, render_data, error);
+	else if (!(ft_strncmp(line, "EL", 2)))
+		render_data->extra_level = ft_strdup(line + 2);
 	else if (handle_textures(line, render_data, error))
 		error->error_id = error->error_id;
 	else if (*line == '1' || *line == ' ')
