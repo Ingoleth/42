@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 10:23:24 by user42            #+#    #+#             */
-/*   Updated: 2020/12/08 10:21:25 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/08 10:29:41 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,11 @@ s_render_data	*read_file(char *data_file, s_render_data *render_data, void *mlx_
 		return (0);
 	}
 	return (render_data);
+}
+
+char *skip_spaces(char *str)
+{
+	while (ft_isspace(*str))
+		str++;
+	return (str);
 }

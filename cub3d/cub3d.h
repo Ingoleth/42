@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/12/08 10:07:26 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/08 10:29:58 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -351,4 +351,5 @@ float	        get_sprite_horizontal_lenght(s_ray_tracing *ray_trc, float view_an
 void            change_level(cub3d *data, char *map_path);
 void            load_map(char **map, s_mlx *mlx_data, int res_x, int res_y);
 void            transition_to_level(cub3d *data);
+char            *skip_spaces(char *str);
  #endif

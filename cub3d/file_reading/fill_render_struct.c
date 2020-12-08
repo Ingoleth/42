@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 16:34:39 by user42            #+#    #+#             */
-/*   Updated: 2020/12/08 10:13:42 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/08 10:31:40 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,23 +79,23 @@ int		fill_colour(unsigned int *colour, char *line, s_error *error)
 int		handle_textures(char *line, s_render_data *render_data, s_error *error)
 {
 	if (!(ft_strncmp(line, "NO", 2)))
-		add_texture(&render_data->north_texture, render_data->mlx_ptr, line + 2, error);
+		add_texture(&render_data->north_texture, render_data->mlx_ptr, skip_spaces(line + 2), error);
 	else if (!(ft_strncmp(line, "SO", 2)))
-		add_texture(&render_data->south_texture, render_data->mlx_ptr, line + 2, error);
+		add_texture(&render_data->south_texture, render_data->mlx_ptr, skip_spaces(line + 2), error);
 	else if (!(ft_strncmp(line, "WE", 2)))
-		add_texture(&render_data->west_texture, render_data->mlx_ptr, line + 2, error);
+		add_texture(&render_data->west_texture, render_data->mlx_ptr, skip_spaces(line + 2), error);
 	else if (!(ft_strncmp(line, "EA", 2)))
-		add_texture(&render_data->east_texture, render_data->mlx_ptr, line + 2, error);
+		add_texture(&render_data->east_texture, render_data->mlx_ptr, skip_spaces(line + 2), error);
 	else if (!(ft_strncmp(line, "S2", 2)))
-		add_texture(&render_data->sprite1, render_data->mlx_ptr, line + 2, error);
+		add_texture(&render_data->sprite1, render_data->mlx_ptr, skip_spaces(line + 2), error);
 	else if (!(ft_strncmp(line, "S3", 2)))
-		add_texture(&render_data->sprite2, render_data->mlx_ptr, line + 2, error);
+		add_texture(&render_data->sprite2, render_data->mlx_ptr, skip_spaces(line + 2), error);
 	else if (!(ft_strncmp(line, "S4", 2)))
-		add_texture(&render_data->sprite3, render_data->mlx_ptr, line + 2, error);
+		add_texture(&render_data->sprite3, render_data->mlx_ptr, skip_spaces(line + 2), error);
 	else if (line[0] == 'C')
-		fill_colour(&render_data->c_rgb, line + 1, error);
+		fill_colour(&render_data->c_rgb, skip_spaces(line + 1), error);
 	else if (line[0] == 'F')
-		fill_colour(&render_data->f_rgb, line + 1, error);
+		fill_colour(&render_data->f_rgb, skip_spaces(line + 1), error);
 	else
 		return (0);
 	return (1);
@@ -109,7 +109,7 @@ s_error *error, s_file_descriptor *file)
 	else if (*line == 'R')
 		fill_resolution(line + 1, render_data, error);
 	else if (!(ft_strncmp(line, "EL", 2)))
-		render_data->extra_level = ft_strdup(line + 2);
+		render_data->extra_level = ft_strdup(skip_spaces(line + 2));
 	else if (handle_textures(line, render_data, error))
 		error->error_id = error->error_id;
 	else if (*line == '1' || *line == ' ')
