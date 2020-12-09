@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 14:07:13 by user42            #+#    #+#             */
-/*   Updated: 2020/12/08 00:11:53 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/09 10:53:05 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,7 @@ int check_keys (cub3d *data)
 			transition_to_level(data);
         redraw_screen(data);
     }
+	else
+		render_health_bar(&data->mlx_data, data->render_data.current_health / (float)MAX_HEALTH, data->mlx_data.health_bar.pixel_size, &data->mlx_data.keys_pressed);
     return(0);
 }

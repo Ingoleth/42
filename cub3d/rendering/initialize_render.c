@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:33:22 by user42            #+#    #+#             */
-/*   Updated: 2020/12/08 00:08:29 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/09 11:31:37 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,35 @@ void    load_map(char **map, s_mlx *mlx_data, int res_x, int res_y)
     draw_edges(mlx_data->map, map_size - border_size, border_size);
 }
 
+void load_face(t_health_bar *health_bar, void *mlx_ptr, float ratio)
+{
+    t_data *face_temp;
+    int i;
+    int j;
+    float width;
+
+    face_temp = load_xpm_image(mlx_ptr, "/home/user42/Documents/42/cub3d/textures/face.xpm");
+    face_temp->addr = mlx_get_data_addr(face_temp->img, &face_temp->bits_per_pixel, &face_temp->line_length, &face_temp->endian);
+    width =  12 * ratio;
+    width = (int)width > 0 ? width : 1;
+    health_bar->face_pos = 2 * ratio;
+    health_bar->face = initialize_image(mlx_ptr, 2 * width, width);
+    i = 0;
+    j = 0;
+    ratio = face_temp->height / width;
+    while (i < 2 * width)
+    {
+        while (j < width)
+        {
+            draw_pixel(health_bar->face, i, j, get_pixel(face_temp, i / (width * 2) * face_temp->width, j / width * face_temp->height)); //TEST!
+            j++;
+        }
+        i++;
+        j = 0;
+    }
+    free_image(mlx_ptr, face_temp);
+}
+
 void load_health_bar(s_mlx *mlx_data, int res)
 {
     t_data * health_bar_temp;
@@ -198,7 +227,7 @@ void load_health_bar(s_mlx *mlx_data, int res)
     float bar_height;
     int j;
 
-    bar_width = res / MAP_RATIO > 0 ? res / MAP_RATIO : 1;
+    bar_width = 1.5 * res / MAP_RATIO > 0 ? 1.5 * res / MAP_RATIO : 1;
     bar_height = (int)(bar_width / 4) > 0 ? bar_width / 4 : 1;
     health_bar_temp = load_xpm_image(mlx_data->mlx_ptr, HEALTH_BAR_PATH);
     mlx_data->health_bar.image = initialize_image(mlx_data->mlx_ptr, bar_width, bar_height);
@@ -219,6 +248,7 @@ void load_health_bar(s_mlx *mlx_data, int res)
         res++;
         j = 0;
     }
+    load_face(&mlx_data->health_bar, mlx_data->mlx_ptr, (mlx_data->health_bar.image->width / (float) health_bar_temp->width));
     free_image(mlx_data->mlx_ptr, health_bar_temp);
 }
 

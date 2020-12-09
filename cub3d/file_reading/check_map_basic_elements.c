@@ -6,18 +6,20 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 16:17:13 by user42            #+#    #+#             */
-/*   Updated: 2020/11/25 12:24:47 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/09 12:15:48 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int				handle_player_position(s_map_bearings *map_info, s_error *error,
+int	handle_player_position(s_map_bearings *map_info, s_error *error,
 char *line, int i)
- {
+{
 	if (map_info->player_pos_x || map_info->player_pos_y)
-		return ((error->error_id = 8) &&
-				(error->row = i));
+	{
+		error->row = i;
+		return ((error->error_id = 8));
+	}
 	if (line[i] == 'E')
 		map_info->view_angle = 0;
 	if (line[i] == 'N')
@@ -30,9 +32,9 @@ char *line, int i)
 	map_info->player_pos_x = i;
 	map_info->player_pos_y = error->line - map_info->top_one;
 	return (0);
- }
+}
 
-int				fill_map_bearings(s_map_bearings *map_info, s_error *error,
+int	fill_map_bearings(s_map_bearings *map_info, s_error *error,
 char *line, int i)
 {
 	if (line[i] == '1')
@@ -56,7 +58,7 @@ char *line, int i)
 	return (0);
 }
 
-int check_map_basic_elements(s_map_bearings *map_info, s_error *error)
+int	check_map_basic_elements(s_map_bearings *map_info, s_error *error)
 {
 	t_gnl_buffer	*aux;
 	int				i;

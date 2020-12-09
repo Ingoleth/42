@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 10:47:37 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/12/06 16:51:05 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/09 11:44:47 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,15 @@ int cleanup(cub3d *data)
 		free(cursor);
 	}
 	if (data->mlx_data.health_bar.image)
-	free_image(data->mlx_data.mlx_ptr, data->mlx_data.health_bar.image);
+		free_image(data->mlx_data.mlx_ptr, data->mlx_data.health_bar.image);
+	if (data->mlx_data.health_bar.face)
+		free_image(data->mlx_data.mlx_ptr, data->mlx_data.health_bar.face);
 	if (data->mlx_data.background)
 	free_image(data->mlx_data.mlx_ptr, data->mlx_data.background);
 	if (data->mlx_data.map)
 	free_image(data->mlx_data.mlx_ptr, data->mlx_data.map);
 	free_render_data(&data->render_data, data->mlx_data.mlx_ptr);
+	
 	if (data->mlx_data.win_ptr)
 		mlx_destroy_window(data->mlx_data.mlx_ptr, data->mlx_data.win_ptr);
 	mlx_destroy_display(data->mlx_data.mlx_ptr);

@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 11:24:55 by user42            #+#    #+#             */
-/*   Updated: 2020/11/25 11:42:14 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/09 11:58:55 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char	**copy_map(s_map_bearings *map_info)
 {
-	char	**map;
-	int		i;
-	t_gnl_buffer *buffer;
+	char			**map;
+	int				i;
+	t_gnl_buffer	*buffer;
 
 	i = 0;
 	if (!(map = ft_calloc(map_info->bot_one - map_info->top_one + 3,
@@ -32,18 +32,14 @@ char	**copy_map(s_map_bearings *map_info)
 		buffer = buffer->next;
 	}
 	i = 0;
-
 	free_gnl_buffer(map_info->map_struct, false);
 	return (map);
 }
 
-int		check_for_spaces(char **map, int i, int j)
+int		check_for_spaces(char **map, int i, int j, int k)
 {
-	int k;
-
 	if (i == 0 || j == 0 || !map[i + 1])
 		return (1);
-	k = 0;
 	if (i > 0)
 	{
 		while (map[i - 1][k] && k < j)
@@ -79,7 +75,8 @@ int		check_map_coherence(char **map, s_error *error)
 	{
 		while (map[i][j])
 		{
-			if (ft_checkchar(map[i][j], "02345") && check_for_spaces(map, i, j))
+			if (ft_checkchar(map[i][j], "02345") &&
+			check_for_spaces(map, i, j, 0))
 				return (set_error_value(9, i, j, error));
 			j++;
 		}
@@ -93,7 +90,7 @@ void	handle_map(s_render_data *render_data, s_error *error,
 char *str, s_file_descriptor *file)
 {
 	s_map_bearings map_info;
-	
+
 	ft_memset(&map_info, 0, sizeof(s_map_bearings));
 	fill_gnl_buffer(&map_info.map_struct, str);
 	gnl_buffer(file->fd, 0, &map_info.map_struct);

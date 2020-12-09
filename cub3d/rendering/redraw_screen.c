@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:55:47 by user42            #+#    #+#             */
-/*   Updated: 2020/12/04 19:39:07 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/09 11:22:58 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,35 @@ void print_debug_info(s_mlx *mlx_data, s_render_data *render_data)
     free(s3);
 }
 
-void render_health_bar(s_mlx *mlx_data, float health_ratio, int pixel_size)
+void draw_face(t_health_bar *health_bar, t_keys *keys)
+{
+    int i;
+    int j;
+    int final_pos;
+    int index;
+
+    i = health_bar->face_pos;
+    j = health_bar->face_pos;
+    if (keys->right && !keys->left)
+        index = 0;
+    else if (!keys->right && keys->left)
+        index = health_bar->face->height;
+    else
+        index = (clock() / 600000) % 2 ? 0 : health_bar->face->height;
+    final_pos = i + health_bar->face->height;
+    while (i < final_pos)
+    {
+        while (j < final_pos)
+        {
+            draw_pixel(health_bar->image, i, j, get_pixel(health_bar->face, index + i - health_bar->face_pos, j - health_bar->face_pos));
+            j++;
+        }
+        i++;
+        j = health_bar->face_pos;
+    }
+}
+
+void render_health_bar(s_mlx *mlx_data, float health_ratio, int pixel_size, t_keys *keys)
 {
     int start_pos_x;
     int start_pos_y;
@@ -58,6 +86,7 @@ void render_health_bar(s_mlx *mlx_data, float health_ratio, int pixel_size)
         draw_pixel_area(mlx_data->health_bar.image, set_draw_coords(end_pos_x - pixel_size, start_pos_y + pixel_size, end_pos_x, end_pos_y - pixel_size), red_2);
     draw_pixel_area(mlx_data->health_bar.image, set_draw_coords(end_pos_x, start_pos_y, start_pos_x + mlx_data->health_bar.bar_lenght_x, end_pos_y), BLACK);
     mlx_put_image_to_window(mlx_data->mlx_ptr, mlx_data->win_ptr, mlx_data->health_bar.image->img, mlx_data->map->width + 2 * pixel_size, 0);
+    draw_face(&mlx_data->health_bar, keys);
 }
 
 int redraw_screen(cub3d *data)
@@ -72,7 +101,7 @@ int redraw_screen(cub3d *data)
         mlx_put_image_to_window(mlx_data->mlx_ptr, mlx_data->win_ptr, mlx_data->map->img, 0, 0);
         render_cursor(mlx_data, &data->render_data);
         print_debug_info(mlx_data, &data->render_data);
-        render_health_bar(mlx_data, data->render_data.current_health / (float)MAX_HEALTH, mlx_data->health_bar.pixel_size);
+        render_health_bar(mlx_data, data->render_data.current_health / (float)MAX_HEALTH, mlx_data->health_bar.pixel_size, &data->mlx_data.keys_pressed);
     }
     data++;
     return(0);

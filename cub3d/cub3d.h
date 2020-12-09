@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/12/08 10:29:58 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/09 11:41:37 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
  #include <mlx.h>
  #include "../libft/libft.h"
  #include <math.h>
- #include <time.h> //Remove when done!
+ #include <time.h>
 
 typedef enum	t_bool
 {
@@ -161,7 +161,9 @@ typedef struct      health_bar
     int             bar_lenght_x;
     int             bar_lenght_y;
     int             pixel_size;
+    int             face_pos;
     t_data          *image;
+    t_data          *face;
 }                   t_health_bar;
 
 typedef struct      mlx
@@ -352,4 +354,5 @@ void            change_level(cub3d *data, char *map_path);
 void            load_map(char **map, s_mlx *mlx_data, int res_x, int res_y);
 void            transition_to_level(cub3d *data);
 char            *skip_spaces(char *str);
+void            render_health_bar(s_mlx *mlx_data, float health_ratio, int pixel_size, t_keys *keys);
  #endif

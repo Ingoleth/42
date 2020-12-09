@@ -6,13 +6,13 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 10:23:24 by user42            #+#    #+#             */
-/*   Updated: 2020/12/08 10:29:41 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/09 11:52:14 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	free_textures(s_render_data *render_data, void *mlx_ptr)
+void			free_textures(s_render_data *render_data, void *mlx_ptr)
 {
 	if (render_data->east_texture.img)
 		mlx_destroy_image(mlx_ptr, render_data->east_texture.img);
@@ -30,7 +30,7 @@ void	free_textures(s_render_data *render_data, void *mlx_ptr)
 		mlx_destroy_image(mlx_ptr, render_data->sprite3.img);
 }
 
-int		free_render_data(s_render_data *render_data, void *mlx_ptr)
+int				free_render_data(s_render_data *render_data, void *mlx_ptr)
 {
 	int i;
 
@@ -76,7 +76,8 @@ s_error *error, char **line, char *data_file)
 	return (file.fd);
 }
 
-s_render_data	*read_file(char *data_file, s_render_data *render_data, void *mlx_ptr)
+s_render_data	*read_file(char *data_file, s_render_data *render_data,
+void *mlx_ptr)
 {
 	s_error			error;
 	char			*line;
@@ -96,7 +97,7 @@ s_render_data	*read_file(char *data_file, s_render_data *render_data, void *mlx_
 	return (render_data);
 }
 
-char *skip_spaces(char *str)
+char			*skip_spaces(char *str)
 {
 	while (ft_isspace(*str))
 		str++;

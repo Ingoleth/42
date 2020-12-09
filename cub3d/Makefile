@@ -6,7 +6,7 @@
 #    By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/16 09:35:06 by aiglesia          #+#    #+#              #
-#    Updated: 2020/12/06 17:56:53 by aiglesia         ###   ########.fr        #
+#    Updated: 2020/12/09 11:47:27 by aiglesia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,8 +55,6 @@ fclean:	clean
 		make -C $(LIB_DIR) fclean
 		${RM} ${NAME}
 re: fclean all
-	clear
-	./a.out
 echo: 
 		${ECHO} ${SRCS}
 .PHONY:     all clean fclean bonus
