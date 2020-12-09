@@ -6,17 +6,27 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 10:47:37 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/12/09 11:44:47 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/09 12:39:58 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int cleanup(cub3d *data)
+void	free_hud(cub3d *data)
 {
-	t_data          **cursor;
-	int i;
-	
+	if (data->mlx_data.health_bar.image)
+		free_image(data->mlx_data.mlx_ptr, data->mlx_data.health_bar.image);
+	if (data->mlx_data.health_bar.face)
+		free_image(data->mlx_data.mlx_ptr, data->mlx_data.health_bar.face);
+	if (data->mlx_data.map)
+		free_image(data->mlx_data.mlx_ptr, data->mlx_data.map);
+}
+
+int		cleanup(cub3d *data)
+{
+	t_data	**cursor;
+	int		i;
+
 	i = 0;
 	cursor = data->mlx_data.cursor;
 	if (cursor)
@@ -28,16 +38,10 @@ int cleanup(cub3d *data)
 		}
 		free(cursor);
 	}
-	if (data->mlx_data.health_bar.image)
-		free_image(data->mlx_data.mlx_ptr, data->mlx_data.health_bar.image);
-	if (data->mlx_data.health_bar.face)
-		free_image(data->mlx_data.mlx_ptr, data->mlx_data.health_bar.face);
+	free_hud(data);
 	if (data->mlx_data.background)
-	free_image(data->mlx_data.mlx_ptr, data->mlx_data.background);
-	if (data->mlx_data.map)
-	free_image(data->mlx_data.mlx_ptr, data->mlx_data.map);
+		free_image(data->mlx_data.mlx_ptr, data->mlx_data.background);
 	free_render_data(&data->render_data, data->mlx_data.mlx_ptr);
-	
 	if (data->mlx_data.win_ptr)
 		mlx_destroy_window(data->mlx_data.mlx_ptr, data->mlx_data.win_ptr);
 	mlx_destroy_display(data->mlx_data.mlx_ptr);

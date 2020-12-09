@@ -6,11 +6,25 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 14:07:13 by user42            #+#    #+#             */
-/*   Updated: 2020/12/09 10:53:05 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/09 12:53:21 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+void	handle_special_keys(cub3d *data, int keycode)
+{
+	if (keycode == ENTER)
+	{
+		data->mlx_data.keys_pressed.enter = data->mlx_data.keys_pressed.enter ?
+		false : true;
+		redraw_screen(data);
+	}
+	if (keycode == 't')
+		data->mlx_data.keys_pressed.transition = true;
+	if (keycode == ESC)
+		cleanup(data);
+}
 
 int		on_key_pressed(int keycode, cub3d *data)
 {
@@ -32,16 +46,8 @@ int		on_key_pressed(int keycode, cub3d *data)
 		data->mlx_data.keys_pressed.down = true;
 	if (keycode == SPACE && !data->mlx_data.keys_pressed.jump)
 		data->mlx_data.keys_pressed.jump = true;
-    if (keycode == ENTER)
-	{
-		data->mlx_data.keys_pressed.enter = data->mlx_data.keys_pressed.enter ? false : true;
-		redraw_screen(data);
-	}
-	if (keycode == 't')
-			data->mlx_data.keys_pressed.transition = true;
-	if (keycode == ESC)
-        cleanup(data);
-    return (0);
+	handle_special_keys(data, keycode);
+	return (0);
 }
 
 int		on_key_released(int keycode, s_mlx *mlx_data)
@@ -65,29 +71,51 @@ int		on_key_released(int keycode, s_mlx *mlx_data)
 	return (0);
 }
 
-t_bool is_key_pressed(t_keys *keys)
+t_bool	is_key_pressed(t_keys *keys)
 {
-	if(keys->forward || keys->backwards || keys->mv_left || keys->mv_right || keys->left || keys->right || keys->down || keys->up || keys->jump || keys->transition)
+	if (keys->forward ||
+	keys->backwards ||
+	keys->mv_left ||
+	keys->mv_right ||
+	keys->left ||
+	keys->right ||
+	keys->down ||
+	keys->up ||
+	keys->jump ||
+	keys->transition)
 		return (true);
 	else
 		return (false);
 }
 
-int check_keys (cub3d *data)
+int		check_keys(cub3d *data)
 {
-    if(is_key_pressed(&data->mlx_data.keys_pressed))
-    {
-        if (data->mlx_data.keys_pressed.forward || data->mlx_data.keys_pressed.backwards || data->mlx_data.keys_pressed.mv_right || data->mlx_data.keys_pressed.mv_left)
-            handle_movement(data);
-        if (data->mlx_data.keys_pressed.left || data->mlx_data.keys_pressed.right)
-            update_angle_info(&data->mlx_data.keys_pressed, &data->render_data.view_angle);
-		if (data->mlx_data.keys_pressed.up || data->mlx_data.keys_pressed.down)
-			update_ver_angle_info(&data->mlx_data.keys_pressed, &data->render_data.y_angle);
+	if (is_key_pressed(&data->mlx_data.keys_pressed))
+	{
 		if (data->mlx_data.keys_pressed.transition)
+		{
 			transition_to_level(data);
-        redraw_screen(data);
-    }
+			redraw_screen(data);
+			return (0);
+		}
+		if (data->mlx_data.keys_pressed.forward ||
+		data->mlx_data.keys_pressed.backwards ||
+		data->mlx_data.keys_pressed.mv_right ||
+		data->mlx_data.keys_pressed.mv_left)
+			handle_movement(data);
+		if (data->mlx_data.keys_pressed.left ||
+		data->mlx_data.keys_pressed.right)
+			update_angle_info(&data->mlx_data.keys_pressed,
+			&data->render_data.view_angle);
+		if (data->mlx_data.keys_pressed.up ||
+		data->mlx_data.keys_pressed.down)
+			update_ver_angle_info(&data->mlx_data.keys_pressed,
+			&data->render_data.y_angle);
+		redraw_screen(data);
+	}
 	else
-		render_health_bar(&data->mlx_data, data->render_data.current_health / (float)MAX_HEALTH, data->mlx_data.health_bar.pixel_size, &data->mlx_data.keys_pressed);
-    return(0);
+		render_health_bar(&data->mlx_data, data->render_data.current_health /
+		(float)MAX_HEALTH, data->mlx_data.health_bar.pixel_size,
+		&data->mlx_data.keys_pressed);
+	return (0);
 }
