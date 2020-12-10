@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 19:57:29 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/12/09 12:46:10 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/10 11:00:49 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,28 @@ void	change_level(cub3d *data, char *map_path)
 	data->render_data.res_y);
 }
 
+int		fade_in(float time, t_bool *controller, cub3d *data)
+{
+	if (time < FADE_TIME)
+	{
+		data->render_data.shade_distance = SHADE_DISTANCE -
+		SHADE_DISTANCE * (time / FADE_TIME);
+		return (1);
+	}
+	*controller = 1;
+	return (0);
+}
+
+int		fade_out(float time, cub3d *data)
+{
+	if (time < FADE_TIME)
+	{
+		data->render_data.shade_distance = SHADE_DISTANCE * (time / FADE_TIME);
+		return (1);
+	}
+	return (0);
+}
+
 void	transition_to_level(cub3d *data)
 {
 	static float	time_init;
@@ -46,16 +68,8 @@ void	transition_to_level(cub3d *data)
 	if (time_init == 0)
 		time_init = (float)clock() / CLOCKS_PER_SEC;
 	time = (float)clock() / CLOCKS_PER_SEC - time_init;
-	if (controller == 0)
-	{
-		if (time < FADE_TIME)
-		{
-			data->render_data.shade_distance = SHADE_DISTANCE -
-			SHADE_DISTANCE * (time / FADE_TIME);
-			return ;
-		}
-		controller = 1;
-	}
+	if (controller == 0 && fade_in(time, &controller, data))
+		return ;
 	if (controller == 1)
 	{
 		if (!data->render_data.extra_level)
@@ -65,13 +79,21 @@ void	transition_to_level(cub3d *data)
 		time_init = 0;
 		return ;
 	}
-	if (time < FADE_TIME)
-	{
-		data->render_data.shade_distance = SHADE_DISTANCE * (time / FADE_TIME);
+	if (fade_out(time, data))
 		return ;
-	}
 	controller = 0;
 	time_init = 0;
 	data->render_data.shade_distance = SHADE_DISTANCE;
 	data->mlx_data.keys_pressed.transition = false;
+}
+
+int		handle_transition(cub3d *data)
+{
+	if (data->mlx_data.keys_pressed.transition)
+	{
+		transition_to_level(data);
+		redraw_screen(data);
+		return (1);
+	}
+	return (0);
 }

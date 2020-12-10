@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 14:07:13 by user42            #+#    #+#             */
-/*   Updated: 2020/12/09 12:53:21 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/10 10:55:30 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,8 @@ int		check_keys(cub3d *data)
 {
 	if (is_key_pressed(&data->mlx_data.keys_pressed))
 	{
-		if (data->mlx_data.keys_pressed.transition)
-		{
-			transition_to_level(data);
-			redraw_screen(data);
+		if (handle_transition(data))
 			return (0);
-		}
 		if (data->mlx_data.keys_pressed.forward ||
 		data->mlx_data.keys_pressed.backwards ||
 		data->mlx_data.keys_pressed.mv_right ||
