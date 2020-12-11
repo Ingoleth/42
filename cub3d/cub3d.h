@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/12/10 10:51:58 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/11 12:32:57 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ typedef struct      s_map_render
     char            **map;
     int             size_x;
     int             size_y;
+    int             current_tile;
 }                   s_map_render;
 
 typedef struct      keys
@@ -338,7 +339,7 @@ float           handle_tan(float angle);
 int             get_sector(float angle);
 
 void            ray_trace(cub3d *data);
-float           calculate_collision(float angle, cub3d *data);
+float	        calculate_collision(float angle, cub3d *data, float x, float y);
 int             calculate_collision_0(float p_x, float p_y, s_ray_tracing *ray_trc, char **map);
 int             calculate_collision_1(float p_x, float p_y, s_ray_tracing *ray_trc, char **map);
 int             calculate_collision_2(float p_x, float p_y, s_ray_tracing *ray_trc, char **map);
@@ -355,5 +356,12 @@ void            load_map(char **map, s_mlx *mlx_data, int res_x, int res_y);
 void            transition_to_level(cub3d *data);
 char            *skip_spaces(char *str);
 void            render_health_bar(s_mlx *mlx_data, float health_ratio, int pixel_size, t_keys *keys);
-int            handle_transition(cub3d *data);
+int             handle_transition(cub3d *data);
+void	        order_sprites(t_list *sprite);
+void            draw_sprites(cub3d *data, float *distance_array, float time);
+void	        draw_ceiling(s_coords coords, s_render_data *render_data, t_data *background);
+void	        draw_floor(s_coords coords, s_render_data *render_data, t_data *background);
+void	        draw_sprites_and_ceiling(cub3d *data, int y_offset, float *distance_array);
+void	        draw_edges(t_data *map_image, int border_start, int border_side, void *mlx_ptr);
+void            load_map(char **map, s_mlx *mlx_data, int res_x, int res_y);
  #endif

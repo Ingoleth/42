@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 14:26:03 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/11/16 09:55:51 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/10 12:24:41 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ char **map)
 			y--;
 			if (check_wall_collision(map[y][x], y + 1, ray_trc, true))
 				return (ray_trc->cardinal_collision = SOUTH);
-		ray_trc->x_collision += ray_trc->tan_x;
+			ray_trc->x_collision += ray_trc->tan_x;
 		}
 		while (ray_trc->x_collision - x > 1 + y - ray_trc->y_collision)
 		{
 			x++;
 			if (check_wall_collision(map[y][x], x, ray_trc, false))
 				return (ray_trc->cardinal_collision = WEST);
-		ray_trc->y_collision -= ray_trc->tan_y;
+			ray_trc->y_collision -= ray_trc->tan_y;
 		}
 	}
 	return (0);

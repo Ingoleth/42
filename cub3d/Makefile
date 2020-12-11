@@ -6,7 +6,7 @@
 #    By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/16 09:35:06 by aiglesia          #+#    #+#              #
-#    Updated: 2020/12/09 11:47:27 by aiglesia         ###   ########.fr        #
+#    Updated: 2020/12/11 12:19:35 by aiglesia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,11 +26,15 @@ SRCS =	file_reading/add_texture.c					\
 		ray_tracing/draw_column.c					\
 		ray_tracing/ray_handler.c					\
 		ray_tracing/ray_tracing.c					\
-		ray_tracing/sprite.c						\
+		ray_tracing/sprite_drawing.c				\
+		ray_tracing/sprite_handling.c				\
 		rendering/colour.c							\
 		rendering/cursor.c							\
 		rendering/image_setup.c						\
+		rendering/initialize_map_render.c			\
 		rendering/initialize_render.c				\
+		rendering/load_map.c						\
+		rendering/pixel_handling.c					\
 		rendering/redraw_screen.c
 OBJS = 	*.o
 LIB_DIR = ./libft/
