@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 11:05:51 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/12/14 13:23:13 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/14 15:20:54 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	copy_image(t_data *render, int fd)
 	int			j;
 	unsigned	aux;
 
-	i = 0;
+	i = 1;
 	j = render->height - 1;
 	while (j >= 0)
 	{
@@ -56,19 +56,37 @@ void	copy_header(t_data *render, int fd)
 	return ;
 }
 
+/*
+**	Prints in order:
+**	-Magic byte BM											(2 pixels).
+**	-Size of the file										(4 pixels).
+**	-Reservado												(4 pixels).
+**	-Desajuste de la imagen -donde empiezan los píxeles-	(4 bytes).
+**	
+**	--HEADER--
+**	-Tamaño del header										(4 bytes).
+**	-Ancho de la imagen										(2 bytes).
+**	-Número de planos -Siempre es igual a uno-				(2 bytes).
+**  -tamaño del pixel en bytes								(4 bytes).
+**	-Reservado												(28 bytes).
+**
+**	--IMAGEN--
+**	Pixels de la imagen (invertidos).
+*/
+
 void	take_screenshot(t_data *render)
 {
 	int fd;
 	int file_size;
-	int first_pix;
+	int image_start;
 
 	fd = open("cub3d.bmp", O_CREAT | O_RDWR);
-	file_size = 14 + 40 + 4 + (render->width * render->height) * 4;
-	first_pix = 14 + 40 + 4;
+	file_size = 14 + 40 + (render->width * render->height) * 4;
+	image_start = 14 + 40;
 	write(fd, "BM", 2);
 	write(fd, &file_size, 4);
 	write(fd, "\0\0\0\0", 4);
-	write(fd, &first_pix, 4);
+	write(fd, &image_start, 4);
 	copy_header(render, fd);
 	copy_image(render, fd);
 	close(fd);
