@@ -6,20 +6,32 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 19:44:52 by user42            #+#    #+#             */
-/*   Updated: 2020/12/11 13:32:49 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/13 11:17:30 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	cub3d data;
 
+	if (argc < 2)
+	{
+		ft_putstr_fd("Error:\nNo input file.\n", 1);
+		return(-1);
+	}
+	if (argc == 3 && ft_strncmp(argv[2], "--save", 7))
+	{
+		ft_putstr_fd("Error:\nInvalid second argument.\n", 1);
+		return (-1);
+	}
 	ft_memset(&data, 0, sizeof(cub3d));
-	if (!(data.mlx_data.mlx_ptr = mlx_init()) || !initialize_render_data(
-		&data.mlx_data, &data, "/home/user42/Documents/42/cub3d/map.cub")) //TODO take from parameter!
+	if (!(data.mlx_data.mlx_ptr = mlx_init()) ||
+	!initialize_render_data(&data.mlx_data, &data, argv[1]))
 		cleanup(&data);
+	if(argc == 3)
+		take_screenshot(data.mlx_data.background);
 	mlx_hook(data.mlx_data.win_ptr, 2, 1L << 0, on_key_pressed, &data);
 	mlx_hook(data.mlx_data.win_ptr, 3, 1L << 1, on_key_released,
 	&data.mlx_data);

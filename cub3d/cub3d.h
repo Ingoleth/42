@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/12/11 12:32:57 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/13 11:13:04 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -364,4 +364,5 @@ void	        draw_floor(s_coords coords, s_render_data *render_data, t_data *bac
 void	        draw_sprites_and_ceiling(cub3d *data, int y_offset, float *distance_array);
 void	        draw_edges(t_data *map_image, int border_start, int border_side, void *mlx_ptr);
 void            load_map(char **map, s_mlx *mlx_data, int res_x, int res_y);
+void            take_screenshot(t_data *render);
  #endif

@@ -6,7 +6,7 @@
 #    By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/16 09:35:06 by aiglesia          #+#    #+#              #
-#    Updated: 2020/12/11 12:19:35 by aiglesia         ###   ########.fr        #
+#    Updated: 2020/12/13 11:13:34 by aiglesia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ SRCS =	file_reading/add_texture.c					\
 		rendering/initialize_render.c				\
 		rendering/load_map.c						\
 		rendering/pixel_handling.c					\
-		rendering/redraw_screen.c
+		rendering/redraw_screen.c					\
+		screenshot.c
 OBJS = 	*.o
 LIB_DIR = ./libft/
 LIBFT_A = libft.a
