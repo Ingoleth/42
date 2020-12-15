@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 12:13:52 by user42            #+#    #+#             */
-/*   Updated: 2020/12/15 11:17:12 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/15 13:49:40 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	ray_trace(cub3d *data)
 	if (data->mlx_data.keys_pressed.jump)
 		y_offset += handle_jump(&data->mlx_data.keys_pressed.jump,
 		&data->ray_trc.jump_time);
-	data->ray_trc.y_offset = y_offset;
+	data->render_data.y_offset = y_offset;
 	get_distance_and_offset(data, distance_array, offset_array, dir_array);
 	draw_floor_and_ceiling(data, y_offset, distance_array);
 	draw_walls(data, distance_array, offset_array, dir_array);

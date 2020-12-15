@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/12/15 11:18:41 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/15 13:48:51 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,8 @@ typedef struct		s_render_data
     char            **map;
     float           column_height;
     float           shade_distance;
-    char            *extra_level; 
+    char            *extra_level;
+    int         y_offset; 
 }                   s_render_data;
 
 typedef struct      s_error
@@ -202,7 +203,6 @@ typedef struct ray_tracing
     float       jump_time;
     t_list      *sprite;
     float       img_x;
-    int         y_offset;
 }               s_ray_tracing;
 
 typedef struct cub3d
@@ -360,7 +360,7 @@ int             handle_transition(cub3d *data);
 void	        order_sprites(t_list *sprite);
 void            draw_sprites(cub3d *data, float *distance_array, float time);
 void	        draw_floor_and_ceiling(cub3d *data, int y_offset, float *distance_array);
-void draw_walls(cub3d *data, float *distance_array, float *offset_array, int *dir_array);
+void            draw_walls(cub3d *data, float *distance_array, float *offset_array, int *dir_array);
 void	        draw_edges(t_data *map_image, int border_start, int border_side, void *mlx_ptr);
 void            load_map(char **map, s_mlx *mlx_data, int res_x, int res_y);
 void            take_screenshot(t_data *render);

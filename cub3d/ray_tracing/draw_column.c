@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 09:57:41 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/12/15 11:07:18 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/15 15:15:36 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ float shade_distance)
 	if (distance > shade_distance)
 		distance = shade_distance;
 	distance /= shade_distance;
-	distance -= distance > 0.05 ? 0.05 : 0;
 	r = r - (r * distance);
 	g = g - (g * distance);
 	b = b - (b * distance);
