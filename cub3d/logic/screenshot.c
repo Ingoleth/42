@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 11:05:51 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/12/15 10:05:25 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/15 15:19:29 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	copy_header(t_data *render, int fd)
 **	-Size of the file										(4 pixels).
 **	-Reservado												(4 pixels).
 **	-Desajuste de la imagen -donde empiezan los píxeles-	(4 bytes).
-**	
+**
 **	--HEADER--
 **	-Tamaño del header										(4 bytes).
 **	-Ancho de la imagen										(2 bytes).

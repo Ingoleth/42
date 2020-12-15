@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 12:13:52 by user42            #+#    #+#             */
-/*   Updated: 2020/12/15 13:49:40 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/15 15:32:13 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ int		handle_jump(t_bool *is_jumping, float *start_time)
 	return (y_offset);
 }
 
-void get_distance_and_offset(cub3d *data, float *distance_array, float *offset_array, int *dir_array)
+void	get_distance_and_offset(cub3d *data, float *distance_array,
+float *offset_array, int *dir_array)
 {
 	int		i;
 	float	angle;
@@ -79,9 +80,11 @@ void get_distance_and_offset(cub3d *data, float *distance_array, float *offset_a
 			distance_array[i] = 0.001;
 		if (data->ray_trc.cardinal_collision == NORTH ||
 		data->ray_trc.cardinal_collision == SOUTH)
-			offset_array[i] = data->ray_trc.x_collision - (int)data->ray_trc.x_collision;
+			offset_array[i] = data->ray_trc.x_collision
+			- (int)data->ray_trc.x_collision;
 		else
-			offset_array[i] = data->ray_trc.y_collision - (int)data->ray_trc.y_collision;
+			offset_array[i] = data->ray_trc.y_collision
+			- (int)data->ray_trc.y_collision;
 		dir_array[i] = data->ray_trc.cardinal_collision;
 		i++;
 	}
@@ -92,7 +95,6 @@ void	ray_trace(cub3d *data)
 	float	distance_array[data->render_data.res_x];
 	float	offset_array[data->render_data.res_x];
 	int		dir_array[data->render_data.res_x];
-
 	float	y_offset;
 
 	y_offset = data->render_data.y_angle * data->render_data.column_height;

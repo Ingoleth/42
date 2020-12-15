@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 10:41:56 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/12/15 15:17:01 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/15 15:27:43 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,11 @@ void	draw_floor_and_ceiling(cub3d *data, int y_offset, float *distance_array)
 	&data->render_data, data->mlx_data.background, distance_array);
 }
 
-void draw_walls(cub3d *data, float *distance_array, float *offset_array, int *dir_array)
+void	draw_walls(cub3d *data, float *distance_array, float *offset_array,
+int *dir_array)
 {
 	int i;
-	
+
 	i = 0;
 	while (i < data->render_data.res_x)
 	{
