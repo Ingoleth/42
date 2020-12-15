@@ -6,11 +6,11 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 11:05:51 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/12/14 15:20:54 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/15 10:05:25 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	copy_image(t_data *render, int fd)
 {

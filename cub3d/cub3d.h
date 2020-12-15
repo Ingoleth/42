@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/12/13 11:13:04 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/15 11:18:41 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ typedef struct		s_render_data
     unsigned int    c_rgb;
     unsigned int    f_rgb;
     char            **map;
-    float           *distance_array;
     float           column_height;
     float           shade_distance;
     char            *extra_level; 
@@ -202,7 +201,8 @@ typedef struct ray_tracing
     float       tan_y;
     float       jump_time;
     t_list      *sprite;
-    float       focal_length;
+    float       img_x;
+    int         y_offset;
 }               s_ray_tracing;
 
 typedef struct cub3d
@@ -359,9 +359,8 @@ void            render_health_bar(s_mlx *mlx_data, float health_ratio, int pixel
 int             handle_transition(cub3d *data);
 void	        order_sprites(t_list *sprite);
 void            draw_sprites(cub3d *data, float *distance_array, float time);
-void	        draw_ceiling(s_coords coords, s_render_data *render_data, t_data *background);
-void	        draw_floor(s_coords coords, s_render_data *render_data, t_data *background);
-void	        draw_sprites_and_ceiling(cub3d *data, int y_offset, float *distance_array);
+void	        draw_floor_and_ceiling(cub3d *data, int y_offset, float *distance_array);
+void draw_walls(cub3d *data, float *distance_array, float *offset_array, int *dir_array);
 void	        draw_edges(t_data *map_image, int border_start, int border_side, void *mlx_ptr);
 void            load_map(char **map, s_mlx *mlx_data, int res_x, int res_y);
 void            take_screenshot(t_data *render);

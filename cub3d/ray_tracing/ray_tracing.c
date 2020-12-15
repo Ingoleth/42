@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 12:13:52 by user42            #+#    #+#             */
-/*   Updated: 2020/12/10 13:08:39 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/15 11:17:12 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,62 +61,12 @@ int		handle_jump(t_bool *is_jumping, float *start_time)
 	return (y_offset);
 }
 
-void	draw_ceiling(s_coords coords, s_render_data *render_data,
-t_data *background)
-{
-	float	distance;
-	int		y_res_2;
-
-	y_res_2 = coords.end_y / 2;
-	while (coords.y <= y_res_2)
-	{
-		distance = render_data->column_height / ((y_res_2 - coords.y) * 2);
-		while (coords.x < coords.end_x)
-		{
-			if (distance <= render_data->distance_array[coords.x])
-				draw_pixel(background, coords.x, coords.y, add_shade(
-			render_data->c_rgb, distance, render_data->shade_distance));
-			coords.x++;
-		}
-		coords.y++;
-		coords.x = 0;
-	}
-}
-
-void	draw_floor(s_coords coords, s_render_data *render_data,
-t_data *background)
-{
-	float	distance;
-	int		res_y_2;
-
-	res_y_2 = coords.end_y / 2;
-	while (coords.y > res_y_2)
-	{
-		distance = render_data->column_height / ((coords.y - res_y_2) * 2);
-		while (coords.x < coords.end_x)
-		{
-			if (distance < render_data->distance_array[coords.x])
-				draw_pixel(background, coords.x, coords.y, add_shade(
-			render_data->f_rgb, distance, render_data->shade_distance));
-			coords.x++;
-		}
-		coords.y--;
-		coords.x = 0;
-	}
-}
-
-void	ray_trace(cub3d *data)
+void get_distance_and_offset(cub3d *data, float *distance_array, float *offset_array, int *dir_array)
 {
 	int		i;
 	float	angle;
-	float	distance_array[data->render_data.res_x];
-	float	y_offset;
 
 	i = 0;
-	y_offset = data->render_data.y_angle * data->render_data.column_height;
-	if (data->mlx_data.keys_pressed.jump)
-		y_offset += handle_jump(&data->mlx_data.keys_pressed.jump,
-		&data->ray_trc.jump_time);
 	while (i < data->render_data.res_x)
 	{
 		angle = data->render_data.view_angle - atan(tan(FOV / 2.0) *
@@ -127,9 +77,31 @@ void	ray_trace(cub3d *data)
 		data->render_data.player_x, data->render_data.player_y);
 		if (!distance_array[i])
 			distance_array[i] = 0.001;
-		draw_column(i, distance_array[i], data, y_offset);
+		if (data->ray_trc.cardinal_collision == NORTH ||
+		data->ray_trc.cardinal_collision == SOUTH)
+			offset_array[i] = data->ray_trc.x_collision - (int)data->ray_trc.x_collision;
+		else
+			offset_array[i] = data->ray_trc.y_collision - (int)data->ray_trc.y_collision;
+		dir_array[i] = data->ray_trc.cardinal_collision;
 		i++;
 	}
-	data->render_data.distance_array = distance_array;
-	draw_sprites_and_ceiling(data, y_offset, distance_array);
+}
+
+void	ray_trace(cub3d *data)
+{
+	float	distance_array[data->render_data.res_x];
+	float	offset_array[data->render_data.res_x];
+	int		dir_array[data->render_data.res_x];
+
+	float	y_offset;
+
+	y_offset = data->render_data.y_angle * data->render_data.column_height;
+	if (data->mlx_data.keys_pressed.jump)
+		y_offset += handle_jump(&data->mlx_data.keys_pressed.jump,
+		&data->ray_trc.jump_time);
+	data->ray_trc.y_offset = y_offset;
+	get_distance_and_offset(data, distance_array, offset_array, dir_array);
+	draw_floor_and_ceiling(data, y_offset, distance_array);
+	draw_walls(data, distance_array, offset_array, dir_array);
+	draw_sprites(data, distance_array, y_offset);
 }

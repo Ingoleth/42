@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:33:22 by user42            #+#    #+#             */
-/*   Updated: 2020/12/11 13:27:46 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/15 11:08:03 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ float bar_height)
 	return (health_bar_temp);
 }
 
-void	load_health_bar(s_mlx *mlx_data, int res)
+void	load_health_bar(s_mlx *mlx_data, int res) //Add to bonus!
 {
 	t_data	*hb_t;
 	float	bar_width;
@@ -104,7 +104,7 @@ void	load_health_bar(s_mlx *mlx_data, int res)
 	(mlx_data->health_bar.image->width / (float)hb_t->width), hb_t);
 }
 
-int		initialize_render_data(s_mlx *mlx_data, cub3d *data, char *file_path)
+int		initialize_render_data(s_mlx *mlx_data, cub3d *data, char *file_path) //Add to bonus!
 {
 	if (!read_file(file_path, &data->render_data, mlx_data->mlx_ptr) ||
 	check_render_data(&data->render_data, mlx_data->mlx_ptr))
@@ -119,7 +119,6 @@ int		initialize_render_data(s_mlx *mlx_data, cub3d *data, char *file_path)
 	data->render_data.res_y ? data->render_data.res_y :
 	data->render_data.res_x);
 	load_cursor(mlx_data, data->render_data.view_angle);
-	data->ray_trc.focal_length = data->render_data.res_y / 2 / tanf(FOV / 2);
 	data->render_data.column_height = data->render_data.res_y / 2;
 	data->render_data.current_health = MAX_HEALTH;
 	data->mlx_data.keys_pressed.enter = true;

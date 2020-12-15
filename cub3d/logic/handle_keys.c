@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 14:07:13 by user42            #+#    #+#             */
-/*   Updated: 2020/12/10 10:55:30 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/14 15:27:08 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ t_bool	is_key_pressed(t_keys *keys)
 		return (false);
 }
 
-int		check_keys(cub3d *data)
+int		check_keys(cub3d *data) //Add to bonus!
 {
 	if (is_key_pressed(&data->mlx_data.keys_pressed))
 	{

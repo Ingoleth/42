@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 18:06:53 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/12/10 13:02:05 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/15 10:41:51 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,16 +94,4 @@ s_ray_tracing *ray_trc, t_bool horiz)
 	}
 	check_tile_collision(tile_value, tile_coord, ray_trc, horiz);
 	return (false);
-}
-
-void	draw_sprites_and_ceiling(cub3d *data, int y_offset,
-float *distance_array)
-{
-	draw_ceiling(set_draw_coords(0, 0, data->render_data.res_x,
-	data->render_data.res_y + 2 * y_offset), &data->render_data,
-	data->mlx_data.background);
-	draw_floor(set_draw_coords(0, data->render_data.res_y,
-	data->render_data.res_x, data->render_data.res_y + 2 * y_offset),
-	&data->render_data, data->mlx_data.background);
-	draw_sprites(data, distance_array, y_offset);
 }

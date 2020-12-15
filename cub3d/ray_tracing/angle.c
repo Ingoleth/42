@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 13:00:56 by user42            #+#    #+#             */
-/*   Updated: 2020/12/10 11:08:51 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/14 15:26:39 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	update_angle_info(t_keys *keys, float *angle)
 	}
 }
 
-void	update_ver_angle_info(t_keys *keys, float *angle)
+void	update_ver_angle_info(t_keys *keys, float *angle) //Add to bonus!
 {
 	static float ang = 0;
 
