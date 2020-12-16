@@ -12,6 +12,27 @@
 
 #include "cub3d.h"
 
+void	handle_sprite_collision(t_keys *keys, char tile, s_render_data
+*render_data)
+{
+	if (tile == '2' && !keys->transition)
+	{
+		if (render_data->current_health)
+			render_data->current_health -= 1;
+		if (render_data->current_health == 0)
+		{
+			free(render_data->extra_level);
+			render_data->extra_level = 0;
+			keys->transition = true;
+		}
+	}
+	else if (tile == '3')
+	{
+		if (render_data->current_health < MAX_HEALTH)
+			render_data->current_health += 1;
+	}
+}
+
 void	handle_strife(cub3d *data, float temp_x, float temp_y)
 {
 	float angle;
@@ -27,7 +48,7 @@ void	handle_strife(cub3d *data, float temp_x, float temp_y)
 		temp_x = temp_x + cosf(angle) * PLAYER_SPEED;
 		temp_y = temp_y - sinf(angle) * PLAYER_SPEED;
 	}
-	if (!(data->render_data.map[(int)temp_y][(int)temp_x] == '1'))
+	if (data->render_data.map[(int)temp_y][(int)temp_x] == '0')
 	{
 		data->render_data.player_x = temp_x;
 		data->render_data.player_y = temp_y;
@@ -58,4 +79,6 @@ void	handle_movement(cub3d *data)
 		temp_y -= sinf(angle) * PLAYER_SPEED;
 	}
 	handle_strife(data, temp_x, temp_y);
+	handle_sprite_collision(&data->mlx_data.keys_pressed,
+	data->render_data.map[(int)temp_y][(int)temp_x], &data->render_data);
 }

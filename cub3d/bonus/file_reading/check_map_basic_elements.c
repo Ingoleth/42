@@ -50,7 +50,7 @@ char *line, int i)
 	else if (ft_checkchar(line[i], "NWSE") &&
 		handle_player_position(map_info, error, line, i))
 		return (1);
-	else if (!ft_checkchar(line[i], "02 "))
+	else if (!ft_checkchar(line[i], "02345 "))
 	{
 		error->row = i;
 		return (error->error_id = 6);

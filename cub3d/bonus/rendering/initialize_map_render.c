@@ -6,11 +6,11 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 13:29:10 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/12/11 12:16:16 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/17 00:02:52 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "cub3d.h"
 
 void	draw_map_corner(t_data *map_image, int border_start,
 float border_side, t_data *corner)

@@ -26,7 +26,11 @@ t_bool	check_textures(s_render_data *render_data)
 	if (!render_data->west_texture.img)
 		aux = "west";
 	if (!render_data->sprite1.img)
-		aux = "sprite";
+		aux = "sprite (1)";
+	if (!render_data->sprite2.img)
+		aux = "sprite (2)";
+	if (!render_data->sprite3.img)
+		aux = "sprite (3)";
 	if (aux)
 	{
 		ft_putstr_fd("Error:\nMissing ", 1);

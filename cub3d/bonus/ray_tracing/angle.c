@@ -64,3 +64,22 @@ void	update_angle_info(t_keys *keys, float *angle)
 	}
 }
 
+void	update_ver_angle_info(t_keys *keys, float *angle) //Add to bonus!
+{
+	static float ang = 0;
+
+	if (!ang)
+		ang = ANGLE_1 * VER_ROTATION_SPEED;
+	if (keys->up)
+	{
+		if (*angle < 0.5)
+			*angle += ang;
+	}
+	if (keys->down)
+	{
+		if (*angle > -0.5)
+			*angle -= ang;
+	}
+	if (keys->down && keys->up)
+		*angle = 0;
+}

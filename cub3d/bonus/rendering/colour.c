@@ -1,24 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redraw_screen.c                                    :+:      :+:    :+:   */
+/*   colour.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/08 12:55:47 by user42            #+#    #+#             */
-/*   Updated: 2020/12/17 00:02:52 by aiglesia         ###   ########.fr       */
+/*   Created: 2020/10/02 20:20:12 by user42            #+#    #+#             */
+/*   Updated: 2020/12/10 13:11:40 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-
-int		redraw_screen(cub3d *data)
+int		get_trgb(int t, int r, int g, int b)
 {
-	s_mlx *mlx_data;
+	return (t << 24 | r << 16 | g << 8 | b);
+}
 
-	mlx_data = &data->mlx_data;
-	ray_trace(data);
-	mlx_put_image_to_window(mlx_data->mlx_ptr, mlx_data->win_ptr,
-	mlx_data->background->img, 0, 0);
-	return (0);
+int		get_t(int trgb)
+{
+	return ((trgb & (0xFF << 24)) >> 24);
+}
+
+int		get_r(int trgb)
+{
+	return ((trgb & (0xFF << 16)) >> 16);
+}
+
+int		get_g(int trgb)
+{
+	return ((trgb & (0xFF << 8)) >> 8);
+}
+
+int		get_b(int trgb)
+{
+	return (trgb & 0xFF);
 }

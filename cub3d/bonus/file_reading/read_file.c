@@ -24,6 +24,10 @@ void			free_textures(s_render_data *render_data, void *mlx_ptr)
 		mlx_destroy_image(mlx_ptr, render_data->south_texture.img);
 	if (render_data->sprite1.img)
 		mlx_destroy_image(mlx_ptr, render_data->sprite1.img);
+	if (render_data->sprite2.img)
+		mlx_destroy_image(mlx_ptr, render_data->sprite2.img);
+	if (render_data->sprite3.img)
+		mlx_destroy_image(mlx_ptr, render_data->sprite3.img);
 }
 
 int				free_render_data(s_render_data *render_data, void *mlx_ptr)

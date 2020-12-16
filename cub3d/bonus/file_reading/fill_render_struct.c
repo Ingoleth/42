@@ -90,8 +90,14 @@ int		handle_textures(char *line, s_render_data *render_data, s_error *error)
 	else if (!(ft_strncmp(line, "EA", 2)))
 		add_texture(&render_data->east_texture, render_data->mlx_ptr,
 		skip_spaces(line + 2), error);
-	else if (!(ft_strncmp(line, "S", 1)))
+	else if (!(ft_strncmp(line, "S2", 2)))
 		add_texture(&render_data->sprite1, render_data->mlx_ptr,
+		skip_spaces(line + 2), error);
+	else if (!(ft_strncmp(line, "S3", 2)))
+		add_texture(&render_data->sprite2, render_data->mlx_ptr,
+		skip_spaces(line + 2), error);
+	else if (!(ft_strncmp(line, "S4", 2)))
+		add_texture(&render_data->sprite3, render_data->mlx_ptr,
 		skip_spaces(line + 2), error);
 	else
 		return (0);
@@ -105,6 +111,8 @@ s_error *error, s_file_descriptor *file)
 		error->error_id = 0;
 	else if (*line == 'R')
 		fill_resolution(line + 1, render_data, error);
+	else if (!(ft_strncmp(line, "EL", 2)))
+		render_data->extra_level = ft_strdup(skip_spaces(line + 2));
 	else if (handle_textures(line, render_data, error))
 		error->error_id = error->error_id;
 	else if (line[0] == 'C')

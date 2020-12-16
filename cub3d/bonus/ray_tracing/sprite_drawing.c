@@ -37,7 +37,12 @@ int		get_sprite_colour(cub3d *data, int x, int y, t_sprite *sprite)
 	float	image_x;
 	float	image_y;
 
-	image = &data->render_data.sprite1;
+	if (sprite->texture == '2')
+		image = &data->render_data.sprite1;
+	else if (sprite->texture == '3')
+		image = &data->render_data.sprite2;
+	else
+		image = &data->render_data.sprite3;
 	image_x = ((x - sprite->sprite_center_x + sprite->size_half) /
 	(float)sprite->size_half / 2) * image->width;
 	image_y = (y / ((float)sprite->size_half * 2)) * image->height;
@@ -65,7 +70,8 @@ int y_offset)
 		pixel = get_sprite_colour(data, drawing_position, y_position, sprite);
 		if (pixel != 0 && pixel != -16777216)
 			draw_pixel(data->mlx_data.background, drawing_position,
-		y_draw_coord, pixel);
+		y_draw_coord,
+		add_shade(pixel, sprite->distance, data->render_data.shade_distance));
 		y_position++;
 		y_draw_coord++;
 	}

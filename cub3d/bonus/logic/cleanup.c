@@ -12,8 +12,33 @@
 
 #include "cub3d.h"
 
+void	free_hud(cub3d *data)
+{
+	if (data->mlx_data.health_bar.image)
+		free_image(data->mlx_data.mlx_ptr, data->mlx_data.health_bar.image);
+	if (data->mlx_data.health_bar.face)
+		free_image(data->mlx_data.mlx_ptr, data->mlx_data.health_bar.face);
+	if (data->mlx_data.map)
+		free_image(data->mlx_data.mlx_ptr, data->mlx_data.map);
+}
+
 int		cleanup(cub3d *data)
 {
+	t_data	**cursor;
+	int		i;
+
+	i = 0;
+	cursor = data->mlx_data.cursor;
+	if (cursor)
+	{
+		while (i < 8)
+		{
+			free_image(data->mlx_data.mlx_ptr, cursor[i]);
+			i++;
+		}
+		free(cursor);
+	}
+	free_hud(data);
 	if (data->mlx_data.background)
 		free_image(data->mlx_data.mlx_ptr, data->mlx_data.background);
 	free_render_data(&data->render_data, data->mlx_data.mlx_ptr);

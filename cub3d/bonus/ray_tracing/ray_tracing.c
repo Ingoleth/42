@@ -38,17 +38,36 @@ float	calculate_collision(float angle, cub3d *data, float x, float y)
 	return (x > y ? y : x);
 }
 
-void	ray_trace(cub3d *data)
+int		handle_jump(t_bool *is_jumping, float *start_time)
 {
-	float	distance_array[data->render_data.res_x];
-	float	y_offset;
+	int		y_offset;
+	float	time;
+
+	if (!*start_time)
+		*start_time = (float)clock() / CLOCKS_PER_SEC - *start_time;
+	time = (float)clock() / CLOCKS_PER_SEC - *start_time;
+	if (time > 0.7)
+	{
+		*is_jumping = false;
+		*start_time = 0;
+		return (0);
+	}
+	if (time < 0.1)
+		y_offset = -5 * sinf(time / 0.1 * PI);
+	else if (time < 0.6)
+		y_offset = 60 * sinf((time - 0.1) / 0.5 * PI);
+	else
+		y_offset = -7 * sinf((time - 0.6) / 0.1 * PI);
+	return (y_offset);
+}
+
+void	get_distance_and_offset(cub3d *data, float *distance_array,
+float *offset_array, int *dir_array)
+{
 	int		i;
 	float	angle;
 
-	y_offset = 0;
 	i = 0;
-	draw_pixel_area(data->mlx_data.background, set_draw_coords(0, 0, data->render_data.res_x, data->render_data.res_y / 2), data->render_data.c_rgb);
-	draw_pixel_area(data->mlx_data.background, set_draw_coords(0, data->render_data.res_y / 2, data->render_data.res_x, data->render_data.res_y), data->render_data.f_rgb);
 	while (i < data->render_data.res_x)
 	{
 		angle = data->render_data.view_angle - atan(tan(FOV / 2.0) *
@@ -59,8 +78,32 @@ void	ray_trace(cub3d *data)
 		data->render_data.player_x, data->render_data.player_y);
 		if (!distance_array[i])
 			distance_array[i] = 0.001;
-		draw_column(i, distance_array[i], data, 0);
+		if (data->ray_trc.cardinal_collision == NORTH ||
+		data->ray_trc.cardinal_collision == SOUTH)
+			offset_array[i] = data->ray_trc.x_collision
+			- (int)data->ray_trc.x_collision;
+		else
+			offset_array[i] = data->ray_trc.y_collision
+			- (int)data->ray_trc.y_collision;
+		dir_array[i] = data->ray_trc.cardinal_collision;
 		i++;
 	}
+}
+
+void	ray_trace(cub3d *data)
+{
+	float	distance_array[data->render_data.res_x];
+	float	offset_array[data->render_data.res_x];
+	int		dir_array[data->render_data.res_x];
+	float	y_offset;
+
+	y_offset = data->render_data.y_angle * data->render_data.column_height;
+	if (data->mlx_data.keys_pressed.jump)
+		y_offset += handle_jump(&data->mlx_data.keys_pressed.jump,
+		&data->ray_trc.jump_time);
+	data->render_data.y_offset = y_offset;
+	get_distance_and_offset(data, distance_array, offset_array, dir_array);
+	draw_floor_and_ceiling(data, y_offset, distance_array);
+	draw_walls(data, distance_array, offset_array, dir_array);
 	draw_sprites(data, distance_array, y_offset);
 }

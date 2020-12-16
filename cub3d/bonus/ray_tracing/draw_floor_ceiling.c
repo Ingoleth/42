@@ -6,11 +6,11 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 10:41:56 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/12/15 15:27:43 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/17 00:02:52 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "cub3d.h"
 
 void	draw_ceiling(s_coords coords, s_render_data *render_data,
 t_data *background, float *distance_array)

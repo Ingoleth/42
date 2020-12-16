@@ -6,11 +6,11 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/11 12:17:49 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/12/11 12:45:30 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/17 00:02:52 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "cub3d.h"
 
 int		get_tile_size(char **map, int side_size, s_map_render *map_render)
 {

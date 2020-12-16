@@ -12,6 +12,25 @@
 
 #include "cub3d.h"
 
+unsigned	add_shade(unsigned int colour, double distance,
+float shade_distance)
+{
+	int r;
+	int g;
+	int b;
+
+	r = get_r(colour);
+	g = get_g(colour);
+	b = get_b(colour);
+	if (distance > shade_distance)
+		distance = shade_distance;
+	distance /= shade_distance;
+	r = r - (r * distance);
+	g = g - (g * distance);
+	b = b - (b * distance);
+	return (get_trgb(get_t(colour), r, g, b));
+}
+
 t_data		*get_texture_to_render(int index, s_render_data *render_data)
 {
 	if (index == NORTH)
@@ -47,14 +66,8 @@ void		draw_column(int i, float distance, cub3d *data, int y_offset)
 	starting_position = data->render_data.res_y / 2 - column_size / 2
 	+ y_offset;
 	j = starting_position < 0 ? -starting_position : 0;
-	if (data->ray_trc.cardinal_collision == NORTH ||
-		data->ray_trc.cardinal_collision == SOUTH)
-			data->ray_trc.img_x = data->ray_trc.x_collision
-			- (int)data->ray_trc.x_collision;
-		else
-			data->ray_trc.img_x = data->ray_trc.y_collision
-			- (int)data->ray_trc.y_collision;
 	while (j++ < column_size && starting_position + j < data->render_data.res_y)
 		draw_pixel(data->mlx_data.background, i, starting_position + j,
-		get_image_colour(data, column_size, j));
+		add_shade(get_image_colour(data, column_size, j), distance,
+		data->render_data.shade_distance));
 }
