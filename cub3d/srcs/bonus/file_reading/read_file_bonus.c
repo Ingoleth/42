@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_file.c                                        :+:      :+:    :+:   */
+/*   read_file_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 10:23:24 by user42            #+#    #+#             */
-/*   Updated: 2020/12/17 00:02:52 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/18 16:55:49 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ s_error *error, char **line, char *data_file)
 	if (ft_strncmp(data_file + ft_strlen(data_file) - 4, ".cub", 4))
 		error->error_id = file_not_cub;
 	else if ((file.fd = open(data_file, O_RDONLY)) && file.fd == -1)
-		error->error_id = 2;
+		error->error_id = wrong_file;
 	while (!(error->error_id && print_error(error)))
 	{
 		i = get_next_line(file.fd, line);
@@ -82,7 +82,6 @@ void *mlx_ptr)
 	s_error			error;
 	char			*line;
 	int				fd;
-	char			aux[2];
 
 	ft_memset(render_data, 0, sizeof(s_render_data));
 	ft_memset(&error, 0, sizeof(error));
@@ -90,7 +89,7 @@ void *mlx_ptr)
 	fd = read_actual_file(render_data, &error, &line, data_file);
 	if (error.error_id)
 	{
-		if (fd != -1 && read(fd, aux, 1))
+		if (fd != -1)
 			end_get_next_line(fd);
 		return (0);
 	}

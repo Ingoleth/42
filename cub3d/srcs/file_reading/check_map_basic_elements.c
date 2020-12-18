@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 16:17:13 by user42            #+#    #+#             */
-/*   Updated: 2020/12/18 13:59:17 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/18 16:57:53 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char *line, int i)
 	if (map_info->player_pos_x || map_info->player_pos_y)
 	{
 		error->row = i;
-		return ((error->error_id = 8));
+		return ((error->error_id = multiple_player));
 	}
 	if (line[i] == 'E')
 		map_info->view_angle = ANGLE_0_5;
@@ -53,7 +53,7 @@ char *line, int i)
 	else if (!ft_checkchar(line[i], "02 "))
 	{
 		error->row = i;
-		return (error->error_id = 6);
+		return (error->error_id = wrong_map_input);
 	}
 	if (line[i] == '2')
 		map_info->is_sp1 = true;
@@ -80,8 +80,8 @@ int	check_map_basic_elements(s_map_bearings *map_info, s_error *error)
 	}
 	if (!map_info->bot_one && !map_info->left_one && !map_info->right_one
 		&& !map_info->top_one)
-		return (!(error->error_id = 6));
+		return (!(error->error_id = wrong_map_input));
 	if (!map_info->player_pos_x || !map_info->player_pos_y)
-		return (!(error->error_id = 7));
+		return (!(error->error_id = no_player));
 	return (1);
 }

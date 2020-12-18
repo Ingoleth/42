@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 12:15:44 by user42            #+#    #+#             */
-/*   Updated: 2020/12/17 00:02:52 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/18 16:55:44 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	add_texture(t_data *image, void *mlx_ptr, char *line, s_error *error)
 	&image->height);
 	if (!image->img)
 	{
-		error->error_id = 10;
+		error->error_id = invalid_texture;
 		return ;
 	}
 	image->addr = mlx_get_data_addr(image->img, &image->bits_per_pixel,

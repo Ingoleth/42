@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fill_render_struct.c                               :+:      :+:    :+:   */
+/*   fill_render_struct_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 16:34:39 by user42            #+#    #+#             */
-/*   Updated: 2020/12/18 11:45:35 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/18 16:53:45 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,15 @@ int		fill_resolution(char *line, s_render_data *render_data, s_error *error)
 	if (!(render_data->res_x = ft_atoi(line)))
 		return (4);
 	if (advance_numbers(&line, error, 0))
-		return (error->error_id = 4);
+		return (error->error_id = wrong_resolution);
 	if (!(render_data->res_y = ft_atoi(line)))
-		return (error->error_id = 4);
+		return (error->error_id = wrong_resolution);
 	while (*line)
 	{
 		if (ft_isspace(*line) || ft_isdigit(*line))
 			advance_file_line(&line, error);
 		else
-			return (error->error_id = 4);
+			return (error->error_id = wrong_resolution);
 	}
 	return (0);
 }
@@ -58,19 +58,19 @@ int		fill_colour(unsigned int *colour, char *line, s_error *error)
 
 	r = ft_atoi(line);
 	if (r > 255 || advance_numbers(&line, error, 1))
-		return (error->error_id = 11);
+		return (error->error_id = wrong_colour);
 	g = ft_atoi(line);
 	if (g > 255 || advance_numbers(&line, error, 1))
-		return (error->error_id = 11);
+		return (error->error_id = wrong_colour);
 	b = ft_atoi(line);
 	if (b > 255)
-		return (error->error_id = 11);
+		return (error->error_id = wrong_colour);
 	while (*line)
 	{
 		if (ft_isspace(*line) || ft_isdigit(*line))
 			advance_file_line(&line, error);
 		else
-			return (error->error_id = 11);
+			return (error->error_id = wrong_colour);
 	}
 	*colour = get_trgb(1, r, g, b);
 	return (0);
@@ -127,7 +127,7 @@ s_error *error, s_file_descriptor *file)
 	else
 	{
 		free(line);
-		error->error_id = 5;
+		error->error_id = wrong_input;
 		return ;
 	}
 	free(line);
