@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 11:24:55 by user42            #+#    #+#             */
-/*   Updated: 2020/12/17 00:02:52 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/18 11:37:41 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,8 @@ char *str, s_file_descriptor *file)
 	render_data->player_y = map_info.player_pos_y + 0.5;
 	render_data->view_angle = map_info.view_angle;
 	render_data->map = copy_map(&map_info);
+	render_data->is_sp1 = map_info.is_sp1;
+	render_data->is_sp1 = map_info.is_sp2;
+	render_data->is_sp1 = map_info.is_sp3;
 	check_map_coherence(render_data->map, error);
 }

@@ -6,7 +6,7 @@
 #    By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/16 09:35:06 by aiglesia          #+#    #+#              #
-#    Updated: 2020/12/17 00:05:33 by aiglesia         ###   ########.fr        #
+#    Updated: 2020/12/18 11:55:10 by aiglesia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ SRCS =	file_reading/add_texture.c					\
 		rendering/redraw_screen.c
 
 SRCS_BONUS =	file_reading/add_texture.c						\
-				file_reading/handle_map.c						\
+				bonus/file_reading/handle_map.c					\
 				file_reading/read_file_error.c					\
 				bonus/file_reading/check_map_basic_elements.c	\
 				bonus/file_reading/check_render_data.c			\
@@ -74,7 +74,7 @@ ${NAME}:
 		make -C ${LIB_DIR}
 		cp ${LIB_DIR}${LIBFT_A} .
 		${CC} ${CFLAGS} main.c ${SRCS} ${LIBFT_A} ${LIBS}
-bonus: ${BNS}
+bonus: fclean ${BNS}
 ${BNS}:
 		make -C ${LIB_DIR}
 		cp ${LIB_DIR}${LIBFT_A} .

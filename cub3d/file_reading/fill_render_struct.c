@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 16:34:39 by user42            #+#    #+#             */
-/*   Updated: 2020/12/17 00:02:52 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/18 11:46:32 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,19 +78,19 @@ int		fill_colour(unsigned int *colour, char *line, s_error *error)
 
 int		handle_textures(char *line, s_render_data *render_data, s_error *error)
 {
-	if (!(ft_strncmp(line, "NO", 2)))
+	if (!(ft_strncmp(line, "NO ", 3)))
 		add_texture(&render_data->north_texture, render_data->mlx_ptr,
-		skip_spaces(line + 2), error);
-	else if (!(ft_strncmp(line, "SO", 2)))
+		skip_spaces(line + 3), error);
+	else if (!(ft_strncmp(line, "SO ", 3)))
 		add_texture(&render_data->south_texture, render_data->mlx_ptr,
-		skip_spaces(line + 2), error);
-	else if (!(ft_strncmp(line, "WE", 2)))
+		skip_spaces(line + 3), error);
+	else if (!(ft_strncmp(line, "WE ", 3)))
 		add_texture(&render_data->west_texture, render_data->mlx_ptr,
-		skip_spaces(line + 2), error);
-	else if (!(ft_strncmp(line, "EA", 2)))
+		skip_spaces(line + 3), error);
+	else if (!(ft_strncmp(line, "EA ", 3)))
 		add_texture(&render_data->east_texture, render_data->mlx_ptr,
-		skip_spaces(line + 2), error);
-	else if (!(ft_strncmp(line, "S", 1)))
+		skip_spaces(line + 3), error);
+	else if (!(ft_strncmp(line, "S ", 2)))
 		add_texture(&render_data->sprite1, render_data->mlx_ptr,
 		skip_spaces(line + 2), error);
 	else

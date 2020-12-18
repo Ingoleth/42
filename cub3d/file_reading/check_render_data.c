@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 19:26:29 by user42            #+#    #+#             */
-/*   Updated: 2020/12/17 00:02:52 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/18 11:40:31 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_bool	check_textures(s_render_data *render_data)
 		aux = "south";
 	if (!render_data->west_texture.img)
 		aux = "west";
-	if (!render_data->sprite1.img)
+	if (render_data->is_sp1 && !render_data->sprite1.img)
 		aux = "sprite";
 	if (aux)
 	{

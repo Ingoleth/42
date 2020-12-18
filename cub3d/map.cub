@@ -1,9 +1,9 @@
 R 1920  1080
-S              /home/user42/Documents/42/cub3d/textures/barrel.XPM
-SO      /home/user42/Documents/42/cub3d/textures/mossy.XPM
-NO              /home/user42/Documents/42/cub3d/textures/mossy.XPM
-EA                /home/user42/Documents/42/cub3d/textures/greystone.XPM
-WE      /home/user42/Documents/42/cub3d/textures/greystone.XPM
+S /home/user42/Documents/42/cub3d/textures/barrel.XPM
+SO /home/user42/Documents/42/cub3d/textures/mossy.XPM
+NO /home/user42/Documents/42/cub3d/textures/mossy.XPM
+EA /home/user42/Documents/42/cub3d/textures/greystone.XPM
+WE /home/user42/Documents/42/cub3d/textures/greystone.XPM
 F    220,20,60
 C    21,30,61
 

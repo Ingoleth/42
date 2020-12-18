@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/12/15 16:52:16 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/18 11:37:10 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,9 @@ typedef struct		s_render_data
     t_data          sprite1;
     t_data          sprite2;
     t_data          sprite3;
+    t_bool          is_sp1;
+    t_bool          is_sp2;
+    t_bool          is_sp3;
     void            *mlx_ptr;
     unsigned int    c_rgb;
     unsigned int    f_rgb;
@@ -109,7 +112,7 @@ typedef struct      s_error
 {
     t_error_values  error_id;
     int             line;
-    int             row;
+    int             row;;
 }                   s_error;
 
 typedef struct      s_map_bearings
@@ -122,6 +125,9 @@ typedef struct      s_map_bearings
     int             player_pos_y;
     float           view_angle;
     t_gnl_buffer    *map_struct;
+    t_bool          is_sp1;
+    t_bool          is_sp2;
+    t_bool          is_sp3;
 }                   s_map_bearings;
 
 typedef struct      s_file_descriptor
