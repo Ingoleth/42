@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 12:13:52 by user42            #+#    #+#             */
-/*   Updated: 2020/12/18 12:36:19 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/18 12:57:22 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	ray_trace(cub3d *data)
 
 	y_offset = 0;
 	i = 0;
-	draw_background();
+	draw_background(data);
 	while (i < data->render_data.res_x)
 	{
 		angle = data->render_data.view_angle - atan(tan(FOV / 2.0) *

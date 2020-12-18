@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 19:44:52 by user42            #+#    #+#             */
-/*   Updated: 2020/12/18 12:42:17 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/18 13:04:50 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ void	handle_initial_arguments(int argc, char **argv)
 	if (argc == 3 && ft_strncmp(argv[2], "--save", 7))
 	{
 		ft_putstr_fd("Error:\nInvalid second argument.\n", 1);
+		exit(-1);
+	}
+	if (argc > 3)
+	{
+		ft_putstr_fd("Error:\nToo many arguments.\n", 1);
 		exit(-1);
 	}
 }
