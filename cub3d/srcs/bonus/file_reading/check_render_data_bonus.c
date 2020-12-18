@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 19:26:29 by user42            #+#    #+#             */
-/*   Updated: 2020/12/18 13:40:11 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/18 17:01:51 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_bool	check_textures(s_render_data *render_data)
 		aux = "sprite (3)";
 	if (aux)
 	{
-		ft_putstr_fd("Error:\nMissing ", 1);
+		ft_putstr_fd("Error\nMissing ", 1);
 		ft_putstr_fd(aux, 1);
 		ft_putstr_fd(" texture!\n", 1);
 	}
@@ -51,7 +51,7 @@ int		check_colour(s_render_data *render_data)
 		aux = "floor";
 	if (aux)
 	{
-		ft_putstr_fd("Error:\nMissing ", 1);
+		ft_putstr_fd("Error\nMissing ", 1);
 		ft_putstr_fd(aux, 1);
 		ft_putstr_fd("colour!\n", 1);
 	}
@@ -91,12 +91,12 @@ int		check_render_data(s_render_data *render_data, void *mlx_ptr)
 		return (1);
 	if (!render_data->map)
 	{
-		ft_putstr_fd("Error:\nMissing map;\n", 1);
+		ft_putstr_fd("Error\nMissing map;\n", 1);
 		return (1);
 	}
 	if(check_resolution(mlx_ptr, render_data))
 	{
-		ft_putstr_fd("Error:\nNo resolution input!\n", 1);
+		ft_putstr_fd("Error\nNo resolution input!\n", 1);
 		return(1);
 	}
 	return (0);
