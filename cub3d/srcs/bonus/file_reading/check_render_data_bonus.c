@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_render_data.c                                :+:      :+:    :+:   */
+/*   check_render_data_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 19:26:29 by user42            #+#    #+#             */
-/*   Updated: 2020/12/18 11:40:12 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/18 13:40:11 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		check_colour(s_render_data *render_data)
 	return (aux ? true : false);
 }
 
-void	check_resolution(void *mlx_ptr, s_render_data *render_data)
+int	check_resolution(void *mlx_ptr, s_render_data *render_data)
 {
 	int x;
 	int y;
@@ -76,6 +76,9 @@ void	check_resolution(void *mlx_ptr, s_render_data *render_data)
 		ft_putstr_fd("Setting to screen size...\n", 1);
 		render_data->res_y = y;
 	}
+	if (!render_data->res_x || !render_data->res_y)
+		return (1);
+	return (0);
 }
 
 int		check_render_data(s_render_data *render_data, void *mlx_ptr)
@@ -91,6 +94,10 @@ int		check_render_data(s_render_data *render_data, void *mlx_ptr)
 		ft_putstr_fd("Error:\nMissing map;\n", 1);
 		return (1);
 	}
-	check_resolution(mlx_ptr, render_data);
+	if(check_resolution(mlx_ptr, render_data))
+	{
+		ft_putstr_fd("Error:\nNo resolution input!\n", 1);
+		return(1);
+	}
 	return (0);
 }

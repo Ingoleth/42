@@ -6,7 +6,7 @@
 #    By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/16 09:35:06 by aiglesia          #+#    #+#              #
-#    Updated: 2020/12/18 12:55:07 by aiglesia         ###   ########.fr        #
+#    Updated: 2020/12/18 13:35:51 by aiglesia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,12 +75,12 @@ all: ${NAME}
 ${NAME}:
 		make -C ${LIB_DIR}
 		cp ${LIB_DIR}${LIBFT_A} .
-		${CC} ${CFLAGS} ${SRCS} ${LIBFT_A} ${LIBS} -o cub3d
+		${CC} ${CFLAGS} ${SRCS} ${LIBFT_A} ${LIBS} -o ${NAME}
 bonus: ${BNS}
 ${BNS}:
 		make -C ${LIB_DIR}
 		cp ${LIB_DIR}${LIBFT_A} .
-		${CC} ${CFLAGS} ${SRCS_BONUS} ${LIBFT_A} ${LIBS} -o cub3d_bonus
+		${CC} ${CFLAGS} ${SRCS_BONUS} ${LIBFT_A} ${LIBS} -o ${BNS}
 clean:
 		make -C ${LIB_DIR} clean
 		rm -rf libft.a
@@ -89,6 +89,7 @@ fclean: clean
 
 		make -C $(LIB_DIR) fclean
 		${RM} ${NAME}
+		${RM} ${BNS}
 re: fclean all
 echo: 
 		${ECHO} ${SRCS}
