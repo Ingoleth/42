@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 16:17:13 by user42            #+#    #+#             */
-/*   Updated: 2020/12/17 00:02:52 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/18 13:59:17 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ char *line, int i)
 		error->row = i;
 		return (error->error_id = 6);
 	}
+	if (line[i] == '2')
+		map_info->is_sp1 = true;
 	return (0);
 }
 
