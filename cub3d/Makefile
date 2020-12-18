@@ -6,7 +6,7 @@
 #    By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/16 09:35:06 by aiglesia          #+#    #+#              #
-#    Updated: 2020/12/18 12:29:41 by aiglesia         ###   ########.fr        #
+#    Updated: 2020/12/18 12:55:07 by aiglesia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,8 +83,9 @@ ${BNS}:
 		${CC} ${CFLAGS} ${SRCS_BONUS} ${LIBFT_A} ${LIBS} -o cub3d_bonus
 clean:
 		make -C ${LIB_DIR} clean
+		rm -rf libft.a
 		rm -rf cub3d.bmp
-fclean: 
+fclean: clean
 
 		make -C $(LIB_DIR) fclean
 		${RM} ${NAME}
