@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   angle.c                                            :+:      :+:    :+:   */
+/*   angle_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 13:00:56 by user42            #+#    #+#             */
-/*   Updated: 2020/12/17 00:02:52 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/18 12:36:53 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	update_angle_info(t_keys *keys, float *angle)
 	}
 }
 
-void	update_ver_angle_info(t_keys *keys, float *angle) //Add to bonus!
+void	update_ver_angle_info(t_keys *keys, float *angle)
 {
 	static float ang = 0;
 

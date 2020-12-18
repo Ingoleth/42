@@ -6,26 +6,31 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 19:44:52 by user42            #+#    #+#             */
-/*   Updated: 2020/12/16 13:29:44 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/18 12:42:17 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int argc, char **argv)
+void	handle_initial_arguments(int argc, char **argv)
 {
-	cub3d data;
-
 	if (argc < 2)
 	{
 		ft_putstr_fd("Error:\nNo input file.\n", 1);
-		return (-1);
+		exit(-1);
 	}
 	if (argc == 3 && ft_strncmp(argv[2], "--save", 7))
 	{
 		ft_putstr_fd("Error:\nInvalid second argument.\n", 1);
-		return (-1);
+		exit(-1);
 	}
+}
+
+int		main(int argc, char **argv)
+{
+	cub3d data;
+
+	handle_initial_arguments(argc, argv);
 	ft_memset(&data, 0, sizeof(cub3d));
 	if (!(data.mlx_data.mlx_ptr = mlx_init()) ||
 	!initialize_render_data(&data.mlx_data, &data, argv[1]))

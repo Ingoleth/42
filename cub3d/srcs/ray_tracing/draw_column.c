@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 09:57:41 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/12/17 00:02:52 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/18 12:31:31 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ void		draw_column(int i, float distance, cub3d *data, int y_offset)
 	j = starting_position < 0 ? -starting_position : 0;
 	if (data->ray_trc.cardinal_collision == NORTH ||
 		data->ray_trc.cardinal_collision == SOUTH)
-			data->ray_trc.img_x = data->ray_trc.x_collision
-			- (int)data->ray_trc.x_collision;
-		else
-			data->ray_trc.img_x = data->ray_trc.y_collision
-			- (int)data->ray_trc.y_collision;
+		data->ray_trc.img_x = data->ray_trc.x_collision
+		- (int)data->ray_trc.x_collision;
+	else
+		data->ray_trc.img_x = data->ray_trc.y_collision
+		- (int)data->ray_trc.y_collision;
 	while (j++ < column_size && starting_position + j < data->render_data.res_y)
 		draw_pixel(data->mlx_data.background, i, starting_position + j,
 		get_image_colour(data, column_size, j));

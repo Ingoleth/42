@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 12:13:52 by user42            #+#    #+#             */
-/*   Updated: 2020/12/17 00:02:52 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/18 12:36:19 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,16 @@ float	calculate_collision(float angle, cub3d *data, float x, float y)
 	return (x > y ? y : x);
 }
 
+void	draw_background(cub3d *data)
+{
+	draw_pixel_area(data->mlx_data.background, set_draw_coords(0, 0,
+	data->render_data.res_x, data->render_data.res_y / 2),
+	data->render_data.c_rgb);
+	draw_pixel_area(data->mlx_data.background, set_draw_coords(0,
+	data->render_data.res_y / 2, data->render_data.res_x,
+	data->render_data.res_y), data->render_data.f_rgb);
+}
+
 void	ray_trace(cub3d *data)
 {
 	float	distance_array[data->render_data.res_x];
@@ -47,8 +57,7 @@ void	ray_trace(cub3d *data)
 
 	y_offset = 0;
 	i = 0;
-	draw_pixel_area(data->mlx_data.background, set_draw_coords(0, 0, data->render_data.res_x, data->render_data.res_y / 2), data->render_data.c_rgb);
-	draw_pixel_area(data->mlx_data.background, set_draw_coords(0, data->render_data.res_y / 2, data->render_data.res_x, data->render_data.res_y), data->render_data.f_rgb);
+	draw_background();
 	while (i < data->render_data.res_x)
 	{
 		angle = data->render_data.view_angle - atan(tan(FOV / 2.0) *

@@ -6,12 +6,12 @@
 #    By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/16 09:35:06 by aiglesia          #+#    #+#              #
-#    Updated: 2020/12/18 12:26:55 by aiglesia         ###   ########.fr        #
+#    Updated: 2020/12/18 12:29:41 by aiglesia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3d
-BNS = cub3d_bonus
+NAME = cub3D
+BNS = cub3D_bonus
 SRCS =	srcs/file_reading/add_texture.c					\
 		srcs/file_reading/check_map_basic_elements.c	\
 		srcs/file_reading/check_render_data.c			\
