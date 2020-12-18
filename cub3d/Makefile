@@ -6,63 +6,65 @@
 #    By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/16 09:35:06 by aiglesia          #+#    #+#              #
-#    Updated: 2020/12/18 11:55:10 by aiglesia         ###   ########.fr        #
+#    Updated: 2020/12/18 12:26:55 by aiglesia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = a.out
-BNS = a.out
-SRCS =	file_reading/add_texture.c					\
-		file_reading/check_map_basic_elements.c		\
-		file_reading/check_render_data.c			\
-		file_reading/fill_render_struct.c			\
-		file_reading/handle_map.c					\
-		file_reading/read_file_error.c				\
-		file_reading/read_file.c					\
-		logic/cleanup.c								\
-		logic/handle_keys.c							\
-		logic/movement.c							\
-		logic/screenshot.c							\
-		ray_tracing/angle.c							\
-		ray_tracing/draw_column.c					\
-		ray_tracing/ray_handler.c					\
-		ray_tracing/ray_tracing.c					\
-		ray_tracing/sprite_drawing.c				\
-		ray_tracing/sprite_handling.c				\
-		rendering/colour.c							\
-		rendering/image_setup.c						\
-		rendering/initialize_render.c				\
-		rendering/pixel_handling.c					\
-		rendering/redraw_screen.c
+NAME = cub3d
+BNS = cub3d_bonus
+SRCS =	srcs/file_reading/add_texture.c					\
+		srcs/file_reading/check_map_basic_elements.c	\
+		srcs/file_reading/check_render_data.c			\
+		srcs/file_reading/fill_render_struct.c			\
+		srcs/file_reading/handle_map.c					\
+		srcs/file_reading/read_file_error.c				\
+		srcs/file_reading/read_file.c					\
+		srcs/logic/cleanup.c							\
+		srcs/logic/handle_keys.c						\
+		srcs/logic/movement.c							\
+		srcs/logic/screenshot.c							\
+		srcs/ray_tracing/angle.c						\
+		srcs/ray_tracing/draw_column.c					\
+		srcs/ray_tracing/ray_handler.c					\
+		srcs/ray_tracing/ray_tracing.c					\
+		srcs/ray_tracing/sprite_drawing.c				\
+		srcs/ray_tracing/sprite_handling.c				\
+		srcs/rendering/colour.c							\
+		srcs/rendering/image_setup.c					\
+		srcs/rendering/initialize_render.c				\
+		srcs/rendering/pixel_handling.c					\
+		srcs/rendering/redraw_screen.c					\
+		srcs/main.c
 
-SRCS_BONUS =	file_reading/add_texture.c						\
-				bonus/file_reading/handle_map.c					\
-				file_reading/read_file_error.c					\
-				bonus/file_reading/check_map_basic_elements.c	\
-				bonus/file_reading/check_render_data.c			\
-				bonus/file_reading/fill_render_struct.c			\
-				bonus/file_reading/read_file.c					\
-				bonus/logic/change_level.c						\
-				bonus/logic/cleanup.c							\
-				bonus/logic/handle_keys.c						\
-				bonus/logic/movement.c							\
-				logic/screenshot.c								\
-				bonus/ray_tracing/angle.c						\
-				bonus/ray_tracing/draw_column.c					\
-				bonus/ray_tracing/draw_floor_ceiling.c			\
-				ray_tracing/ray_handler.c						\
-				bonus/ray_tracing/ray_tracing.c					\
-				bonus/ray_tracing/sprite_drawing.c				\
-				ray_tracing/sprite_handling.c					\
-				rendering/colour.c								\
-				bonus/rendering/cursor.c						\
-				rendering/image_setup.c							\
-				bonus/rendering/initialize_map_render.c			\
-				bonus/rendering/initialize_render.c				\
-				bonus/rendering/load_map.c						\
-				rendering/pixel_handling.c						\
-				bonus/rendering/redraw_screen.c
-LIB_DIR = ./libft/
+SRCS_BONUS =	srcs/file_reading/add_texture.c								\
+				srcs/bonus/file_reading/handle_map_bonus.c					\
+				srcs/file_reading/read_file_error.c							\
+				srcs/bonus/file_reading/check_map_basic_elements_bonus.c	\
+				srcs/bonus/file_reading/check_render_data_bonus.c			\
+				srcs/bonus/file_reading/fill_render_struct_bonus.c			\
+				srcs/bonus/file_reading/read_file_bonus.c					\
+				srcs/bonus/logic/change_level_bonus.c						\
+				srcs/bonus/logic/cleanup_bonus.c							\
+				srcs/bonus/logic/handle_keys_bonus.c						\
+				srcs/bonus/logic/movement_bonus.c							\
+				srcs/logic/screenshot.c										\
+				srcs/bonus/ray_tracing/angle_bonus.c						\
+				srcs/bonus/ray_tracing/draw_column_bonus.c					\
+				srcs/bonus/ray_tracing/draw_floor_ceiling_bonus.c			\
+				srcs/ray_tracing/ray_handler.c								\
+				srcs/bonus/ray_tracing/ray_tracing_bonus.c					\
+				srcs/bonus/ray_tracing/sprite_drawing_bonus.c				\
+				srcs/ray_tracing/sprite_handling.c							\
+				srcs/rendering/colour.c										\
+				srcs/bonus/rendering/cursor_bonus.c							\
+				srcs/rendering/image_setup.c								\
+				srcs/bonus/rendering/initialize_map_render_bonus.c			\
+				srcs/bonus/rendering/initialize_render_bonus.c				\
+				srcs/bonus/rendering/load_map_bonus.c						\
+				srcs/rendering/pixel_handling.c								\
+				srcs/bonus/rendering/redraw_screen_bonus.c					\
+				srcs/main.c
+LIB_DIR = ./srcs/libft/
 LIBFT_A = libft.a
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
@@ -73,14 +75,15 @@ all: ${NAME}
 ${NAME}:
 		make -C ${LIB_DIR}
 		cp ${LIB_DIR}${LIBFT_A} .
-		${CC} ${CFLAGS} main.c ${SRCS} ${LIBFT_A} ${LIBS}
-bonus: fclean ${BNS}
+		${CC} ${CFLAGS} ${SRCS} ${LIBFT_A} ${LIBS} -o cub3d
+bonus: ${BNS}
 ${BNS}:
 		make -C ${LIB_DIR}
 		cp ${LIB_DIR}${LIBFT_A} .
-		${CC} ${CFLAGS} main.c ${SRCS_BONUS} ${LIBFT_A} ${LIBS}
+		${CC} ${CFLAGS} ${SRCS_BONUS} ${LIBFT_A} ${LIBS} -o cub3d_bonus
 clean:
 		make -C ${LIB_DIR} clean
+		rm -rf cub3d.bmp
 fclean: 
 
 		make -C $(LIB_DIR) fclean
