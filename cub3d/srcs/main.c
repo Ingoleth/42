@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 19:44:52 by user42            #+#    #+#             */
-/*   Updated: 2020/12/18 13:04:50 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/18 13:20:45 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,9 @@ int		main(int argc, char **argv)
 
 	handle_initial_arguments(argc, argv);
 	ft_memset(&data, 0, sizeof(cub3d));
-	if (!(data.mlx_data.mlx_ptr = mlx_init()) ||
-	!initialize_render_data(&data.mlx_data, &data, argv[1]))
+	if (!(data.mlx_data.mlx_ptr = mlx_init()))
+		return (0);
+	if (!initialize_render_data(&data.mlx_data, &data, argv[1]))
 		cleanup(&data);
 	if (argc == 3)
 		take_screenshot(data.mlx_data.background);
