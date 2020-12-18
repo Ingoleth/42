@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 16:34:39 by user42            #+#    #+#             */
-/*   Updated: 2020/12/18 17:56:11 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/18 18:12:14 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,7 @@ s_error *error, s_file_descriptor *file)
 {
 	char *aux;
 
-	if (!line || *line == 0)
-		error->error_id = 0;
-	else if (*line == 'R')
+	if (*line == 'R')
 		fill_resolution(line + 1, render_data, error);
 	else if (!(ft_strncmp(line, "EL", 2)))
 		render_data->extra_level = ft_strdup(skip_spaces(line + 2));
@@ -121,13 +119,13 @@ s_error *error, s_file_descriptor *file)
 		fill_colour(&render_data->c_rgb, skip_spaces(line + 1), error);
 	else if (line[0] == 'F')
 		fill_colour(&render_data->f_rgb, skip_spaces(line + 1), error);
-	else if ((*line == '1' || *line == ' ') && 
+	else if ((*line == '1' || *line == ' ') &&
 	((aux = line) && advance_numbers(&aux, error, false) && !*aux))
 	{
 		handle_map(render_data, error, line, file);
 		return ;
 	}
-	else
+	else if (*line)
 	{
 		free(line);
 		error->error_id = wrong_input;
