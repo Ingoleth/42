@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 16:34:39 by user42            #+#    #+#             */
-/*   Updated: 2020/12/19 11:33:11 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/19 12:04:04 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ int		fill_colour(unsigned int *colour, char *line, s_error *error)
 	int b;
 
 	r = ft_atoi(line);
-	if (r > 255 || advance_numbers(&line, error, 1) || !ft_isdigit(*line))
+	if (r > 255 || !ft_isdigit(*line) || advance_numbers(&line, error, 1))
 		return (error->error_id = wrong_colour);
 	g = ft_atoi(line);
-	if (g > 255 || advance_numbers(&line, error, 1) || !ft_isdigit(*line))
+	if (g > 255 || !ft_isdigit(*line) || advance_numbers(&line, error, 1))
 		return (error->error_id = wrong_colour);
 	b = ft_atoi(line);
 	if (b > 255 || !ft_isdigit(*line))
