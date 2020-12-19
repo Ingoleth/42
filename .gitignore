@@ -66,3 +66,4 @@ cub3d/textures/bluestone.xpm
 cub3d/textures/barrel.xpm
 cub3d/cub3D
 *.cub
+cub3d/maps/map.cub

@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 10:23:24 by user42            #+#    #+#             */
-/*   Updated: 2020/12/19 12:54:34 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/19 12:59:54 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void *mlx_ptr)
 	s_error			error;
 	char			*line;
 	int				fd;
+	char			aux[2];
 
 	ft_memset(render_data, 0, sizeof(s_render_data));
 	ft_memset(&error, 0, sizeof(error));
@@ -85,7 +86,7 @@ void *mlx_ptr)
 	fd = read_actual_file(render_data, &error, &line, data_file);
 	if (error.error_id)
 	{
-		if (fd != -1 && read(fd, line, 1))
+		if (fd != -1 && read(fd, aux, 1))
 			end_get_next_line(fd);
 		return (0);
 	}
