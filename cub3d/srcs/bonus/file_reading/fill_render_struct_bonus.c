@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 16:34:39 by user42            #+#    #+#             */
-/*   Updated: 2020/12/19 11:24:57 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/19 11:33:11 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ int		handle_textures(char *line, s_render_data *render_data, s_error *error)
 void	fill_render_struct(s_render_data *render_data, char *line,
 s_error *error, s_file_descriptor *file)
 {
-	char *aux;
 
 	if (*line == 'R')
 		fill_resolution(line + 1, render_data, error);
@@ -119,8 +118,7 @@ s_error *error, s_file_descriptor *file)
 		fill_colour(&render_data->c_rgb, skip_spaces(line + 1), error);
 	else if (line[0] == 'F')
 		fill_colour(&render_data->f_rgb, skip_spaces(line + 1), error);
-	else if ((*line == '1' || *line == ' ') &&
-	(aux = line) && !advance_numbers(&aux, error, false))
+	else if (*line == '1' || *line == ' ')
 	{
 		handle_map(render_data, error, line, file);
 		return ;
