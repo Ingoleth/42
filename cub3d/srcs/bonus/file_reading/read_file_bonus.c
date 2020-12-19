@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 10:23:24 by user42            #+#    #+#             */
-/*   Updated: 2020/12/18 16:55:49 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/19 12:55:21 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void *mlx_ptr)
 	fd = read_actual_file(render_data, &error, &line, data_file);
 	if (error.error_id)
 	{
-		if (fd != -1)
+		if (fd != -1 && read(fd, line, 1))
 			end_get_next_line(fd);
 		return (0);
 	}
