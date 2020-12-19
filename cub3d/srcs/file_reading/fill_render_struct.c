@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 16:34:39 by user42            #+#    #+#             */
-/*   Updated: 2020/12/19 12:18:18 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/19 12:26:09 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,11 @@ int		fill_resolution(char *line, s_render_data *render_data, s_error *error)
 		return (error->error_id = wrong_resolution);
 	if (!(render_data->res_y = ft_atoi(line)))
 		return (error->error_id = wrong_resolution);
+	while (ft_isspace(*line))
+		advance_file_line(&line, error);
 	while (*line)
 	{
-		if (ft_isspace(*line) || ft_isdigit(*line))
+		if (ft_isdigit(*line))
 			advance_file_line(&line, error);
 		else
 			return (error->error_id = wrong_resolution);
@@ -67,12 +69,14 @@ int		fill_colour(unsigned int *colour, char *line, s_error *error)
 	b = ft_atoi(line);
 	if (b > 255 || !ft_isdigit(*line))
 		return (error->error_id = wrong_colour);
+	while (ft_isspace(*line))
+		advance_file_line(&line, error);
 	while (*line)
 	{
-		if (ft_isspace(*line) || ft_isdigit(*line))
+		if (ft_isdigit(*line))
 			advance_file_line(&line, error);
 		else
-			return (error->error_id = wrong_colour);
+			return (error->error_id = wrong_resolution);
 	}
 	*colour = get_trgb(1, r, g, b);
 	return (0);
