@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 16:34:39 by user42            #+#    #+#             */
-/*   Updated: 2020/12/18 18:11:26 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/19 11:23:52 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,8 @@ s_error *error, s_file_descriptor *file)
 		fill_colour(&render_data->c_rgb, skip_spaces(line + 1), error);
 	else if (line[0] == 'F')
 		fill_colour(&render_data->f_rgb, skip_spaces(line + 1), error);
-	else if ((*line == '1' || *line == ' ') &&
-	((aux = line) && advance_numbers(&aux, error, false) && !*aux))
+	else if ((*line == '1' || *line == ' ')
+	&& (aux = line) && !advance_numbers(&aux, error, false))
 	{
 		handle_map(render_data, error, line, file);
 		return ;
