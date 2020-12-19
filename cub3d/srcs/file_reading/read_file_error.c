@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 11:44:33 by user42            #+#    #+#             */
-/*   Updated: 2020/12/17 00:02:52 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/19 12:19:59 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	print_error_description(s_error *error)
 		ft_putstr_fd("Wrong colour input!\n", 1);
 	else if (error->error_id == file_not_cub)
 		ft_putstr_fd("File doesn't end in .cub!\n", 1);
+	else if (error->error_id == repeated_colour)
+		ft_putstr_fd("Repeated colour definition!\n", 1);
 }
 
 int		print_error(s_error *error)

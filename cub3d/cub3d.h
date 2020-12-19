@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/12/18 11:37:10 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/19 12:16:56 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ typedef enum	t_bool
     map_not_enclosed,
     invalid_texture,
     wrong_colour,
-    file_not_cub
+    file_not_cub,
+    repeated_colour
 }	t_error_values;
 
 typedef enum t_colour

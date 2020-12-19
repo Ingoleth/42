@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 16:34:39 by user42            #+#    #+#             */
-/*   Updated: 2020/12/19 12:04:28 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/19 12:18:18 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int		fill_colour(unsigned int *colour, char *line, s_error *error)
 	int g;
 	int b;
 
+	if (*colour)
+		return(error->error_id = repeated_colour);
 	r = ft_atoi(line);
 	if (r > 255 || !ft_isdigit(*line) || advance_numbers(&line, error, 1))
 		return (error->error_id = wrong_colour);
