@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 19:26:29 by user42            #+#    #+#             */
-/*   Updated: 2020/12/18 18:08:05 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/19 11:40:24 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		check_colour(s_render_data *render_data)
 	aux = 0;
 	if (!get_t(render_data->c_rgb))
 		aux = "ceiling ";
-	else if (!get_t(render_data->c_rgb))
+	else if (!get_t(render_data->f_rgb))
 		aux = "floor";
 	if (aux)
 	{
