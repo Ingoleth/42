@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 16:34:39 by user42            #+#    #+#             */
-/*   Updated: 2020/12/20 10:52:29 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/20 10:56:28 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int		fill_colour(unsigned int *colour, char *line, s_error *error)
 		return (error->error_id = wrong_colour);
 	while (ft_isspace(*line))
 		advance_file_line(&line, error);
-	check_remainder_colour(line, error);
+	check_remainding_colour(line, error);
 	*colour = get_trgb(1, r, g, b);
 	return (0);
 }
