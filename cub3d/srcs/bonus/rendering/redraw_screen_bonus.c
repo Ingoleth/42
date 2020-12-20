@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redraw_screen.c                                    :+:      :+:    :+:   */
+/*   redraw_screen_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:55:47 by user42            #+#    #+#             */
-/*   Updated: 2020/12/17 00:02:52 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/20 11:51:07 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	print_debug_info(s_mlx *mlx_data, s_render_data *render_data)
+void	print_debug_info(t_mlx *mlx_data, t_render_data *render_data)
 {
 	char *s1;
 	char *s2;
@@ -69,7 +69,7 @@ void	draw_face(t_health_bar *health_bar, t_keys *keys)
 	}
 }
 
-void	render_health_bar(s_mlx *mlx_data, float health_ratio, int pixel_size,
+void	render_health_bar(t_mlx *mlx_data, float health_ratio, int pixel_size,
 t_keys *keys)
 {
 	int start_pos_x;
@@ -99,9 +99,9 @@ t_keys *keys)
 	draw_face(&mlx_data->health_bar, keys);
 }
 
-int		redraw_screen(cub3d *data)
+int		redraw_screen(t_cub3d *data)
 {
-	s_mlx *mlx_data;
+	t_mlx *mlx_data;
 
 	mlx_data = &data->mlx_data;
 	ray_trace(data);

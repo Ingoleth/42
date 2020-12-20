@@ -6,13 +6,13 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 11:19:11 by user42            #+#    #+#             */
-/*   Updated: 2020/12/17 00:02:52 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/20 11:51:07 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	handle_strife(cub3d *data, float temp_x, float temp_y)
+void	handle_strife(t_cub3d *data, float temp_x, float temp_y)
 {
 	float angle;
 
@@ -34,7 +34,7 @@ void	handle_strife(cub3d *data, float temp_x, float temp_y)
 	}
 }
 
-void	handle_movement(cub3d *data)
+void	handle_movement(t_cub3d *data)
 {
 	float angle;
 	float temp_x;

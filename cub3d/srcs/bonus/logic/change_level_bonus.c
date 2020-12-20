@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   change_level.c                                     :+:      :+:    :+:   */
+/*   change_level_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 19:57:29 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/12/17 00:02:52 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/20 11:51:07 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	change_level(cub3d *data, char *map_path)
+void	change_level(t_cub3d *data, char *map_path)
 {
-	s_mlx			*mlx_data;
-	s_render_data	aux;
+	t_mlx			*mlx_data;
+	t_render_data	aux;
 
 	mlx_data = &data->mlx_data;
 	aux.res_x = data->render_data.res_x;
@@ -37,7 +37,7 @@ void	change_level(cub3d *data, char *map_path)
 	data->render_data.res_y);
 }
 
-int		fade_in(float time, t_bool *controller, cub3d *data)
+int		fade_in(float time, t_bool *controller, t_cub3d *data)
 {
 	if (time < FADE_TIME)
 	{
@@ -49,7 +49,7 @@ int		fade_in(float time, t_bool *controller, cub3d *data)
 	return (0);
 }
 
-int		fade_out(float time, cub3d *data)
+int		fade_out(float time, t_cub3d *data)
 {
 	if (time < FADE_TIME)
 	{
@@ -59,7 +59,7 @@ int		fade_out(float time, cub3d *data)
 	return (0);
 }
 
-void	transition_to_level(cub3d *data)
+void	transition_to_level(t_cub3d *data)
 {
 	static float	time_init;
 	float			time;
@@ -87,7 +87,7 @@ void	transition_to_level(cub3d *data)
 	data->mlx_data.keys_pressed.transition = false;
 }
 
-int		handle_transition(cub3d *data)
+int		handle_transition(t_cub3d *data)
 {
 	if (data->mlx_data.keys_pressed.transition)
 	{

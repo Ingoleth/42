@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   load_map.c                                         :+:      :+:    :+:   */
+/*   load_map_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/11 12:17:49 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/12/17 00:02:52 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/20 11:40:48 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		get_tile_size(char **map, int side_size, s_map_render *map_render)
+int		get_tile_size(char **map, int side_size, t_map_render *map_render)
 {
 	int		i;
 	int		j;
@@ -38,7 +38,7 @@ int		get_tile_size(char **map, int side_size, s_map_render *map_render)
 	return (tile_size);
 }
 
-void	draw_actual_tiles(t_data *map_img, s_map_render *map_render, int x,
+void	draw_actual_tiles(t_data *map_img, t_map_render *map_render, int x,
 int y)
 {
 	unsigned	colour;
@@ -60,7 +60,7 @@ int y)
 	colour);
 }
 
-void	draw_tiles(t_data *map_img, s_map_render *map_render,
+void	draw_tiles(t_data *map_img, t_map_render *map_render,
 int initial_x, int initial_y)
 {
 	int		i;
@@ -87,11 +87,11 @@ int initial_x, int initial_y)
 	}
 }
 
-void	load_map(char **map, s_mlx *mlx_data, int res_x, int res_y)
+void	load_map(char **map, t_mlx *mlx_data, int res_x, int res_y)
 {
 	int				map_size;
 	int				border_size;
-	s_map_render	map_render;
+	t_map_render	map_render;
 
 	map_size = res_x < res_y ? res_x / MAP_RATIO : res_y / MAP_RATIO;
 	map_size = map_size == 0 ? 1 : map_size;

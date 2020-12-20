@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_floor_ceiling.c                               :+:      :+:    :+:   */
+/*   draw_floor_ceiling_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 10:41:56 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/12/17 00:02:52 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/20 12:05:20 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_ceiling(s_coords coords, s_render_data *render_data,
+void	draw_ceiling(t_coords coords, t_render_data *render_data,
 t_data *background, float *distance_array)
 {
 	float	distance;
@@ -32,7 +32,7 @@ t_data *background, float *distance_array)
 	}
 }
 
-void	draw_floor(s_coords coords, s_render_data *render_data,
+void	draw_floor(t_coords coords, t_render_data *render_data,
 t_data *background, float *distance_array)
 {
 	float	distance;
@@ -52,7 +52,7 @@ t_data *background, float *distance_array)
 	}
 }
 
-void	draw_floor_and_ceiling(cub3d *data, int y_offset, float *distance_array)
+void	draw_floor_and_ceiling(t_cub3d *data, int y_offset, float *distance_array)
 {
 	draw_ceiling(set_draw_coords(0, 0, data->render_data.res_x,
 	data->render_data.res_y / 2 + y_offset), &data->render_data,
@@ -62,7 +62,7 @@ void	draw_floor_and_ceiling(cub3d *data, int y_offset, float *distance_array)
 	&data->render_data, data->mlx_data.background, distance_array);
 }
 
-void	draw_walls(cub3d *data, float *distance_array, float *offset_array,
+void	draw_walls(t_cub3d *data, float *distance_array, float *offset_array,
 int *dir_array)
 {
 	int i;

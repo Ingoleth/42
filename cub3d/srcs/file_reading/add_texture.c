@@ -6,13 +6,13 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 12:15:44 by user42            #+#    #+#             */
-/*   Updated: 2020/12/19 12:10:53 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/20 11:30:22 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	add_texture(t_data *image, void *mlx_ptr, char *line, s_error *error)
+void	add_texture(t_data *image, void *mlx_ptr, char *line, t_error *error)
 {
 	if (image->img)
 	{

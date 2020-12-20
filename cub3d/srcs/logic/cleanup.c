@@ -6,13 +6,13 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/31 10:47:37 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/12/18 13:27:29 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/20 11:51:07 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		cleanup(cub3d *data)
+int		cleanup(t_cub3d *data)
 {
 	if (data->mlx_data.background)
 		free_image(data->mlx_data.mlx_ptr, data->mlx_data.background);

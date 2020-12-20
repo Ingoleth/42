@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:33:22 by user42            #+#    #+#             */
-/*   Updated: 2020/12/18 12:41:47 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/20 13:07:01 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_data *health_bar_temp)
 	free_image(mlx_ptr, health_bar_temp);
 }
 
-t_data	*load_health_bar_info(s_mlx *mlx_data, float bar_width,
+t_data	*load_health_bar_info(t_mlx *mlx_data, float bar_width,
 float bar_height)
 {
 	t_data *health_bar_temp;
@@ -64,7 +64,7 @@ float bar_height)
 	bar_width, bar_height);
 	mlx_data->health_bar.pixel_size = (int)bar_width /
 	(float)health_bar_temp->width;
-	mlx_data->health_bar.bar_start_x = HB_START_x *
+	mlx_data->health_bar.bar_start_x = HB_START_X *
 	(mlx_data->health_bar.image->width / (float)health_bar_temp->width);
 	mlx_data->health_bar.bar_start_y = HB_START_Y *
 	(mlx_data->health_bar.image->height / (float)health_bar_temp->height);
@@ -75,7 +75,7 @@ float bar_height)
 	return (health_bar_temp);
 }
 
-void	load_health_bar(s_mlx *mlx_data, int res)
+void	load_health_bar(t_mlx *mlx_data, int res)
 {
 	t_data	*hb_t;
 	float	bar_width;
@@ -104,7 +104,7 @@ void	load_health_bar(s_mlx *mlx_data, int res)
 	(mlx_data->health_bar.image->width / (float)hb_t->width), hb_t);
 }
 
-int		initialize_render_data(s_mlx *mlx_data, cub3d *data, char *file_path)
+int		initialize_render_data(t_mlx *mlx_data, t_cub3d *data, char *file_path)
 {
 	if (!read_file(file_path, &data->render_data, mlx_data->mlx_ptr) ||
 	check_render_data(&data->render_data, mlx_data->mlx_ptr))
@@ -119,7 +119,8 @@ int		initialize_render_data(s_mlx *mlx_data, cub3d *data, char *file_path)
 	data->render_data.res_y ? data->render_data.res_y :
 	data->render_data.res_x);
 	load_cursor(mlx_data, data->render_data.view_angle);
-	data->render_data.column_height = data->render_data.res_y / 2;
+	data->render_data.column_height = data->render_data.res_x /
+	(tan(FOV / 2 ) * 2);
 	data->render_data.current_health = MAX_HEALTH;
 	data->mlx_data.keys_pressed.enter = true;
 	data->render_data.shade_distance = SHADE_DISTANCE;

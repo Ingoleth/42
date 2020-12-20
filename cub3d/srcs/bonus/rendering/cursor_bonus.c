@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cursor.c                                           :+:      :+:    :+:   */
+/*   cursor_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 09:35:38 by user42            #+#    #+#             */
-/*   Updated: 2020/12/17 00:02:52 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/20 11:40:48 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		set_cursor(float angle)
 		return (7);
 }
 
-int		load_cursor(s_mlx *mlx_data, float angle)
+int		load_cursor(t_mlx *mlx_data, float angle)
 {
 	if (!(mlx_data->cursor = ft_calloc(9, sizeof(t_data))))
 		return (0);
@@ -48,7 +48,7 @@ int		load_cursor(s_mlx *mlx_data, float angle)
 	return (0);
 }
 
-void	render_cursor(s_mlx *mlx_data, s_render_data *render_data)
+void	render_cursor(t_mlx *mlx_data, t_render_data *render_data)
 {
 	int		x;
 	int		y;

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_map.c                                       :+:      :+:    :+:   */
+/*   handle_map_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 11:24:55 by user42            #+#    #+#             */
-/*   Updated: 2020/12/18 11:37:41 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/20 11:35:32 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char	**copy_map(s_map_bearings *map_info)
+char	**copy_map(t_map_bearings *map_info)
 {
 	char			**map;
 	int				i;
@@ -64,7 +64,7 @@ int		check_for_spaces(char **map, int i, int j, int k)
 	return (0);
 }
 
-int		check_map_coherence(char **map, s_error *error)
+int		check_map_coherence(char **map, t_error *error)
 {
 	int i;
 	int j;
@@ -86,12 +86,12 @@ int		check_map_coherence(char **map, s_error *error)
 	return (0);
 }
 
-void	handle_map(s_render_data *render_data, s_error *error,
-char *str, s_file_descriptor *file)
+void	handle_map(t_render_data *render_data, t_error *error,
+char *str, t_file_descriptor *file)
 {
-	s_map_bearings map_info;
+	t_map_bearings map_info;
 
-	ft_memset(&map_info, 0, sizeof(s_map_bearings));
+	ft_memset(&map_info, 0, sizeof(t_map_bearings));
 	fill_gnl_buffer(&map_info.map_struct, str);
 	gnl_buffer(file->fd, 0, &map_info.map_struct);
 	if (!check_map_basic_elements(&map_info, error))

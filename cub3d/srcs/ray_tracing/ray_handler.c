@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 14:26:03 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/12/17 00:02:52 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/20 11:49:26 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** If the opposing coordinate increases, do 1 - offset!
 */
 
-int	calculate_collision_0(float p_x, float p_y, s_ray_tracing *ray_trc,
+int	calculate_collision_0(float p_x, float p_y, t_ray_tracing *ray_trc,
 char **map)
 {
 	int x;
@@ -46,7 +46,7 @@ char **map)
 	return (0);
 }
 
-int	calculate_collision_1(float p_x, float p_y, s_ray_tracing *ray_trc,
+int	calculate_collision_1(float p_x, float p_y, t_ray_tracing *ray_trc,
 char **map)
 {
 	int x;
@@ -76,7 +76,7 @@ char **map)
 	return (0);
 }
 
-int	calculate_collision_2(float p_x, float p_y, s_ray_tracing *ray_trc,
+int	calculate_collision_2(float p_x, float p_y, t_ray_tracing *ray_trc,
 char **map)
 {
 	int x;
@@ -106,7 +106,7 @@ char **map)
 	return (0);
 }
 
-int	calculate_collision_3(float p_x, float p_y, s_ray_tracing *ray_trc,
+int	calculate_collision_3(float p_x, float p_y, t_ray_tracing *ray_trc,
 char **map)
 {
 	int x;

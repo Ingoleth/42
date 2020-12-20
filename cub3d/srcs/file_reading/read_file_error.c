@@ -6,13 +6,13 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 11:44:33 by user42            #+#    #+#             */
-/*   Updated: 2020/12/20 10:53:30 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/20 11:30:22 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		set_error_value(int id, int i, int j, s_error *error)
+int		set_error_value(int id, int i, int j, t_error *error)
 {
 	error->error_id = id;
 	error->line = i;
@@ -20,7 +20,7 @@ int		set_error_value(int id, int i, int j, s_error *error)
 	return (1);
 }
 
-void	handle_repetition_errors(s_error *error)
+void	handle_repetition_errors(t_error *error)
 {
 	if (error->error_id == repeated_texture)
 		ft_putstr_fd("Repeated texture definition!\n", 1);
@@ -30,7 +30,7 @@ void	handle_repetition_errors(s_error *error)
 		ft_putstr_fd("Repeated colour definition!\n", 1);
 }
 
-void	print_error_description(s_error *error)
+void	print_error_description(t_error *error)
 {
 	if (error->error_id == out_of_memory)
 		ft_putstr_fd("Ran out of memory\n", 1);
@@ -56,7 +56,7 @@ void	print_error_description(s_error *error)
 		handle_repetition_errors(error);
 }
 
-int		print_error(s_error *error)
+int		print_error(t_error *error)
 {
 	char *s;
 
@@ -77,7 +77,7 @@ int		print_error(s_error *error)
 	return (1);
 }
 
-void	advance_file_line(char **line, s_error *error)
+void	advance_file_line(char **line, t_error *error)
 {
 	*line = *line + 1;
 	error->row++;

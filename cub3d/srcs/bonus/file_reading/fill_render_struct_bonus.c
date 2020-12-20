@@ -6,13 +6,13 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 16:34:39 by user42            #+#    #+#             */
-/*   Updated: 2020/12/20 10:50:49 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/20 11:35:32 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		advance_numbers(char **line, s_error *error, int i)
+int		advance_numbers(char **line, t_error *error, int i)
 {
 	while (ft_isspace(**line) || (i == 1 && **line == ',' && i++))
 		advance_file_line(line, error);
@@ -32,7 +32,7 @@ int		advance_numbers(char **line, s_error *error, int i)
 	return (0);
 }
 
-int		fill_resolution(char *line, s_render_data *render_data, s_error *error)
+int		fill_resolution(char *line, t_render_data *render_data, t_error *error)
 {
 	if (!(render_data->res_x = ft_atoi(line)))
 		return (4);
@@ -52,7 +52,7 @@ int		fill_resolution(char *line, s_render_data *render_data, s_error *error)
 	return (0);
 }
 
-int		fill_colour(unsigned int *colour, char *line, s_error *error)
+int		fill_colour(unsigned int *colour, char *line, t_error *error)
 {
 	int r;
 	int g;
@@ -74,7 +74,7 @@ int		fill_colour(unsigned int *colour, char *line, s_error *error)
 	return (0);
 }
 
-int		handle_textures(char *line, s_render_data *render_data, s_error *error)
+int		handle_textures(char *line, t_render_data *render_data, t_error *error)
 {
 	if (!(ft_strncmp(line, "NO ", 3)))
 		add_texture(&render_data->north_texture, render_data->mlx_ptr,
@@ -102,8 +102,8 @@ int		handle_textures(char *line, s_render_data *render_data, s_error *error)
 	return (1);
 }
 
-void	fill_render_struct(s_render_data *render_data, char *line,
-s_error *error, s_file_descriptor *file)
+void	fill_render_struct(t_render_data *render_data, char *line,
+t_error *error, t_file_descriptor *file)
 {
 	char *aux;
 

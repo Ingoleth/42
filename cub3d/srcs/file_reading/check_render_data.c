@@ -6,13 +6,13 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 19:26:29 by user42            #+#    #+#             */
-/*   Updated: 2020/12/20 10:57:56 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/20 11:30:22 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	check_remainding_colour(char *line, s_error *error)
+void	check_remainding_colour(char *line, t_error *error)
 {
 	while (*line)
 	{
@@ -26,7 +26,7 @@ void	check_remainding_colour(char *line, s_error *error)
 	}
 }
 
-t_bool	check_textures(s_render_data *render_data)
+t_bool	check_textures(t_render_data *render_data)
 {
 	char *aux;
 
@@ -50,7 +50,7 @@ t_bool	check_textures(s_render_data *render_data)
 	return (aux ? true : false);
 }
 
-int		check_colour(s_render_data *render_data)
+int		check_colour(t_render_data *render_data)
 {
 	char *aux;
 
@@ -68,7 +68,7 @@ int		check_colour(s_render_data *render_data)
 	return (aux ? true : false);
 }
 
-int		check_resolution(void *mlx_ptr, s_render_data *render_data)
+int		check_resolution(void *mlx_ptr, t_render_data *render_data)
 {
 	int x;
 	int y;
@@ -91,7 +91,7 @@ int		check_resolution(void *mlx_ptr, s_render_data *render_data)
 	return (0);
 }
 
-int		check_render_data(s_render_data *render_data, void *mlx_ptr)
+int		check_render_data(t_render_data *render_data, void *mlx_ptr)
 {
 	if (!render_data)
 		return (0);

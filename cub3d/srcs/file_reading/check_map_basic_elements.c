@@ -6,13 +6,13 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 16:17:13 by user42            #+#    #+#             */
-/*   Updated: 2020/12/18 17:36:03 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/20 11:31:54 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	handle_player_position(s_map_bearings *map_info, s_error *error,
+int	handle_player_position(t_map_bearings *map_info, t_error *error,
 char *line, int i)
 {
 	if (map_info->player_pos_x || map_info->player_pos_y)
@@ -34,7 +34,7 @@ char *line, int i)
 	return (0);
 }
 
-int	fill_map_bearings(s_map_bearings *map_info, s_error *error,
+int	fill_map_bearings(t_map_bearings *map_info, t_error *error,
 char *line, int i)
 {
 	if (line[i] == '1')
@@ -60,7 +60,7 @@ char *line, int i)
 	return (0);
 }
 
-int	check_map_basic_elements(s_map_bearings *map_info, s_error *error)
+int	check_map_basic_elements(t_map_bearings *map_info, t_error *error)
 {
 	t_gnl_buffer	*aux;
 	int				i;

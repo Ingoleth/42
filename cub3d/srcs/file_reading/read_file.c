@@ -6,13 +6,13 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 10:23:24 by user42            #+#    #+#             */
-/*   Updated: 2020/12/19 13:24:12 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/20 11:35:32 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void			free_textures(s_render_data *render_data, void *mlx_ptr)
+void			free_textures(t_render_data *render_data, void *mlx_ptr)
 {
 	if (render_data->east_texture.img)
 		mlx_destroy_image(mlx_ptr, render_data->east_texture.img);
@@ -26,7 +26,7 @@ void			free_textures(s_render_data *render_data, void *mlx_ptr)
 		mlx_destroy_image(mlx_ptr, render_data->sprite1.img);
 }
 
-int				free_render_data(s_render_data *render_data, void *mlx_ptr)
+int				free_render_data(t_render_data *render_data, void *mlx_ptr)
 {
 	int i;
 
@@ -46,10 +46,10 @@ int				free_render_data(s_render_data *render_data, void *mlx_ptr)
 	return (0);
 }
 
-int				read_actual_file(s_render_data *render_data,
-s_error *error, char **line, char *data_file)
+int				read_actual_file(t_render_data *render_data,
+t_error *error, char **line, char *data_file)
 {
-	s_file_descriptor	file;
+	t_file_descriptor	file;
 	int					i;
 
 	file.path = data_file;
@@ -72,15 +72,15 @@ s_error *error, char **line, char *data_file)
 	return (file.fd);
 }
 
-s_render_data	*read_file(char *data_file, s_render_data *render_data,
+t_render_data	*read_file(char *data_file, t_render_data *render_data,
 void *mlx_ptr)
 {
-	s_error			error;
+	t_error			error;
 	char			*line;
 	int				fd;
 	char			aux[2];
 
-	ft_memset(render_data, 0, sizeof(s_render_data));
+	ft_memset(render_data, 0, sizeof(t_render_data));
 	ft_memset(&error, 0, sizeof(error));
 	render_data->mlx_ptr = mlx_ptr;
 	fd = read_actual_file(render_data, &error, &line, data_file);

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sprite_drawing.c                                   :+:      :+:    :+:   */
+/*   sprite_drawing_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 11:13:27 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/12/17 00:02:52 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/20 13:30:32 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	get_sprite_distance(cub3d *data)
+void	get_sprite_distance(t_cub3d *data)
 {
 	t_list		*aux;
 	t_sprite	*aux2;
@@ -31,7 +31,7 @@ void	get_sprite_distance(cub3d *data)
 	}
 }
 
-int		get_sprite_colour(cub3d *data, int x, int y, t_sprite *sprite)
+int		get_sprite_colour(t_cub3d *data, int x, int y, t_sprite *sprite)
 {
 	t_data	*image;
 	float	image_x;
@@ -49,7 +49,7 @@ int		get_sprite_colour(cub3d *data, int x, int y, t_sprite *sprite)
 	return (get_pixel(image, image_x, image_y));
 }
 
-void	draw_sprite_column(int drawing_position, t_sprite *sprite, cub3d *data,
+void	draw_sprite_column(int drawing_position, t_sprite *sprite, t_cub3d *data,
 int y_offset)
 {
 	int y_draw_coord;
@@ -77,16 +77,15 @@ int y_offset)
 	}
 }
 
-void	draw_sprite(cub3d *data, t_sprite *sprite, float *distance_array,
+void	draw_sprite(t_cub3d *data, t_sprite *sprite, float *distance_array,
 float time)
 {
 	int drawing_position;
 
 	sprite->sprite_center_x = (tan(sprite->angle) / tan(FOV / 2) + 1) *
 	data->render_data.res_x / 2;
-	sprite->size_half = data->render_data.column_height / (sprite->distance);
-	sprite->sprite_center_y = data->render_data.res_y / 2 +
-	(data->render_data.res_y / 2) / sprite->distance - sprite->size_half;
+	sprite->size_half = data->render_data.column_height / (sprite->distance) / 2;
+	sprite->sprite_center_y = data->render_data.res_y / 2;
 	drawing_position = sprite->sprite_center_x - sprite->size_half > 0
 	? sprite->sprite_center_x - sprite->size_half : 0;
 	while (drawing_position < sprite->sprite_center_x + sprite->size_half &&
@@ -98,7 +97,7 @@ float time)
 	}
 }
 
-void	draw_sprites(cub3d *data, float *distance_array, float time)
+void	draw_sprites(t_cub3d *data, float *distance_array, float time)
 {
 	t_list *aux;
 

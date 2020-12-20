@@ -6,13 +6,13 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 12:13:52 by user42            #+#    #+#             */
-/*   Updated: 2020/12/18 12:57:22 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/20 11:51:07 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-float	calculate_collision(float angle, cub3d *data, float x, float y)
+float	calculate_collision(float angle, t_cub3d *data, float x, float y)
 {
 	float beta;
 
@@ -38,7 +38,7 @@ float	calculate_collision(float angle, cub3d *data, float x, float y)
 	return (x > y ? y : x);
 }
 
-void	draw_background(cub3d *data)
+void	draw_background(t_cub3d *data)
 {
 	draw_pixel_area(data->mlx_data.background, set_draw_coords(0, 0,
 	data->render_data.res_x, data->render_data.res_y / 2),
@@ -48,7 +48,7 @@ void	draw_background(cub3d *data)
 	data->render_data.res_y), data->render_data.f_rgb);
 }
 
-void	ray_trace(cub3d *data)
+void	ray_trace(t_cub3d *data)
 {
 	float	distance_array[data->render_data.res_x];
 	float	y_offset;

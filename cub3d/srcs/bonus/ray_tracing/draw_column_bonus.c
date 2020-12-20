@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_column.c                                      :+:      :+:    :+:   */
+/*   draw_column_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 09:57:41 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/12/17 00:02:52 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/20 11:51:07 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ float shade_distance)
 	return (get_trgb(get_t(colour), r, g, b));
 }
 
-t_data		*get_texture_to_render(int index, s_render_data *render_data)
+t_data		*get_texture_to_render(int index, t_render_data *render_data)
 {
 	if (index == NORTH)
 		return (&render_data->north_texture);
@@ -43,7 +43,7 @@ t_data		*get_texture_to_render(int index, s_render_data *render_data)
 		return (&render_data->east_texture);
 }
 
-unsigned	get_image_colour(cub3d *data, int column_size, int img_y)
+unsigned	get_image_colour(t_cub3d *data, int column_size, int img_y)
 {
 	t_data	*image;
 	int		x;
@@ -56,7 +56,7 @@ unsigned	get_image_colour(cub3d *data, int column_size, int img_y)
 	return (get_pixel(image, x, y));
 }
 
-void		draw_column(int i, float distance, cub3d *data, int y_offset)
+void		draw_column(int i, float distance, t_cub3d *data, int y_offset)
 {
 	int	column_size;
 	int	starting_position;

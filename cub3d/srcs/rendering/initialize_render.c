@@ -6,13 +6,13 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:33:22 by user42            #+#    #+#             */
-/*   Updated: 2020/12/18 13:27:35 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/20 13:06:34 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		initialize_render_data(s_mlx *mlx_data, cub3d *data, char *file_path)
+int		initialize_render_data(t_mlx *mlx_data, t_cub3d *data, char *file_path)
 {
 	if (!read_file(file_path, &data->render_data, mlx_data->mlx_ptr) ||
 	check_render_data(&data->render_data, mlx_data->mlx_ptr))
@@ -21,7 +21,8 @@ int		initialize_render_data(s_mlx *mlx_data, cub3d *data, char *file_path)
 	data->render_data.res_x, data->render_data.res_y, "Cub3d");
 	mlx_data->background = initialize_image(mlx_data->mlx_ptr,
 	data->render_data.res_x, data->render_data.res_y);
-	data->render_data.column_height = data->render_data.res_y / 2;
+	data->render_data.column_height = data->render_data.res_x /
+	(tan(FOV / 2 ) * 2);
 	redraw_screen(data);
 	return (1);
 }

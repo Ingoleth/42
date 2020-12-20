@@ -6,13 +6,13 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 14:07:13 by user42            #+#    #+#             */
-/*   Updated: 2020/12/18 12:37:07 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/20 11:51:07 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	handle_special_keys(cub3d *data, int keycode)
+void	handle_special_keys(t_cub3d *data, int keycode)
 {
 	if (keycode == ENTER)
 	{
@@ -26,7 +26,7 @@ void	handle_special_keys(cub3d *data, int keycode)
 		cleanup(data);
 }
 
-int		on_key_pressed(int keycode, cub3d *data)
+int		on_key_pressed(int keycode, t_cub3d *data)
 {
 	if (keycode == FORWARD)
 		data->mlx_data.keys_pressed.forward = true;
@@ -50,7 +50,7 @@ int		on_key_pressed(int keycode, cub3d *data)
 	return (0);
 }
 
-int		on_key_released(int keycode, s_mlx *mlx_data)
+int		on_key_released(int keycode, t_mlx *mlx_data)
 {
 	if (keycode == FORWARD)
 		mlx_data->keys_pressed.forward = false;
@@ -88,7 +88,7 @@ t_bool	is_key_pressed(t_keys *keys)
 		return (false);
 }
 
-int		check_keys(cub3d *data)
+int		check_keys(t_cub3d *data)
 {
 	if (is_key_pressed(&data->mlx_data.keys_pressed))
 	{

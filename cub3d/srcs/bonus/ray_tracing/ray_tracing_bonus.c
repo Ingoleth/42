@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray_tracing.c                                      :+:      :+:    :+:   */
+/*   ray_tracing_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 12:13:52 by user42            #+#    #+#             */
-/*   Updated: 2020/12/17 00:02:52 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/20 11:51:07 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-float	calculate_collision(float angle, cub3d *data, float x, float y)
+float	calculate_collision(float angle, t_cub3d *data, float x, float y)
 {
 	float beta;
 
@@ -61,7 +61,7 @@ int		handle_jump(t_bool *is_jumping, float *start_time)
 	return (y_offset);
 }
 
-void	get_distance_and_offset(cub3d *data, float *distance_array,
+void	get_distance_and_offset(t_cub3d *data, float *distance_array,
 float *offset_array, int *dir_array)
 {
 	int		i;
@@ -90,7 +90,7 @@ float *offset_array, int *dir_array)
 	}
 }
 
-void	ray_trace(cub3d *data)
+void	ray_trace(t_cub3d *data)
 {
 	float	distance_array[data->render_data.res_x];
 	float	offset_array[data->render_data.res_x];

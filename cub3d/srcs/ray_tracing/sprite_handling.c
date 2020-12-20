@@ -6,13 +6,13 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 18:06:53 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/12/17 00:02:52 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/20 11:49:26 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	add_sprite(s_ray_tracing *ray_trc, int tile_value, float x, float y)
+void	add_sprite(t_ray_tracing *ray_trc, int tile_value, float x, float y)
 {
 	t_sprite	*sprite;
 	t_list		*sprite_ptr;
@@ -58,7 +58,7 @@ void	order_sprites(t_list *sprite)
 }
 
 void	check_tile_collision(int tile_value, int tile_coord,
-s_ray_tracing *ray_trc, t_bool horiz)
+t_ray_tracing *ray_trc, t_bool horiz)
 {
 	float x;
 	float y;
@@ -82,7 +82,7 @@ s_ray_tracing *ray_trc, t_bool horiz)
 }
 
 t_bool	check_wall_collision(int tile_value, int tile_coord,
-s_ray_tracing *ray_trc, t_bool horiz)
+t_ray_tracing *ray_trc, t_bool horiz)
 {
 	if (tile_value == '1')
 	{

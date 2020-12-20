@@ -6,15 +6,15 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 13:18:34 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/12/17 00:02:52 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/20 12:05:20 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-s_coords	set_draw_coords(int x, int y, int end_x, int end_y)
+t_coords	set_draw_coords(int x, int y, int end_x, int end_y)
 {
-	s_coords coords;
+	t_coords coords;
 
 	coords.x = x;
 	coords.y = y;
@@ -35,7 +35,7 @@ void		draw_pixel(t_data *image, int x, int y, int color)
 	* (image->bits_per_pixel / 8))) = color;
 }
 
-void		draw_pixel_area(t_data *image, s_coords coords, int color)
+void		draw_pixel_area(t_data *image, t_coords coords, int color)
 {
 	int aux;
 
