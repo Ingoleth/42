@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 16:34:39 by user42            #+#    #+#             */
-/*   Updated: 2020/12/19 13:28:21 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/20 10:52:29 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int		fill_colour(unsigned int *colour, char *line, s_error *error)
 	int b;
 
 	if (*colour)
-		return(error->error_id = repeated_colour);
+		return (error->error_id = repeated_colour);
 	r = ft_atoi(line);
 	if (r > 255 || !ft_isdigit(*line) || advance_numbers(&line, error, 1))
 		return (error->error_id = wrong_colour);
@@ -71,13 +71,7 @@ int		fill_colour(unsigned int *colour, char *line, s_error *error)
 		return (error->error_id = wrong_colour);
 	while (ft_isspace(*line))
 		advance_file_line(&line, error);
-	while (*line)
-	{
-		if (ft_isdigit(*line))
-			advance_file_line(&line, error);
-		else
-			return (error->error_id = wrong_resolution);
-	}
+	check_remainder_colour(line, error);
 	*colour = get_trgb(1, r, g, b);
 	return (0);
 }
@@ -117,7 +111,8 @@ s_error *error, s_file_descriptor *file)
 		fill_colour(&render_data->c_rgb, skip_spaces(line + 1), error);
 	else if (line[0] == 'F')
 		fill_colour(&render_data->f_rgb, skip_spaces(line + 1), error);
-	else if ((ft_isdigit(*line) || *line == ' ') && (aux = line) && !advance_numbers(&aux, error, false))
+	else if ((ft_isdigit(*line) || *line == ' ') && (aux = line)
+	&& !advance_numbers(&aux, error, false))
 	{
 		handle_map(render_data, error, line, file);
 		return ;

@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 11:53:19 by user42            #+#    #+#             */
-/*   Updated: 2020/12/19 12:16:56 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/20 10:49:23 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -371,4 +371,5 @@ void            draw_walls(cub3d *data, float *distance_array, float *offset_arr
 void	        draw_edges(t_data *map_image, int border_start, int border_side, void *mlx_ptr);
 void            load_map(char **map, s_mlx *mlx_data, int res_x, int res_y);
 void            take_screenshot(t_data *render);
+void            check_remainding_colour(char *line, s_error *error);
  #endif

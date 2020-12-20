@@ -6,11 +6,22 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 19:26:29 by user42            #+#    #+#             */
-/*   Updated: 2020/12/19 11:40:24 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/20 10:52:12 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	check_remainding_colour(char *line, s_error *error)
+{
+	while (*line)
+	{
+		if (ft_isdigit(*line))
+			advance_file_line(&line, error);
+		else
+			return (error->error_id = wrong_resolution);
+	}
+}
 
 t_bool	check_textures(s_render_data *render_data)
 {

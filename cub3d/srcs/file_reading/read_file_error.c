@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 11:44:33 by user42            #+#    #+#             */
-/*   Updated: 2020/12/19 12:19:59 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/20 10:53:30 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,22 @@ int		set_error_value(int id, int i, int j, s_error *error)
 	return (1);
 }
 
+void	handle_repetition_errors(s_error *error)
+{
+	if (error->error_id == repeated_texture)
+		ft_putstr_fd("Repeated texture definition!\n", 1);
+	else if (error->error_id == multiple_player)
+		ft_putstr_fd("Multiple player positions!\n", 1);
+	else if (error->error_id == repeated_colour)
+		ft_putstr_fd("Repeated colour definition!\n", 1);
+}
+
 void	print_error_description(s_error *error)
 {
 	if (error->error_id == out_of_memory)
 		ft_putstr_fd("Ran out of memory\n", 1);
-	if (error->error_id == wrong_file)
+	else if (error->error_id == wrong_file)
 		ft_putstr_fd("Couldn't open file!\n", 1);
-	else if (error->error_id == repeated_texture)
-		ft_putstr_fd("Repeated texture definition!\n", 1);
 	else if (error->error_id == wrong_resolution)
 		ft_putstr_fd("Wrong resolution input!\n", 1);
 	else if (error->error_id == wrong_input)
@@ -36,8 +44,6 @@ void	print_error_description(s_error *error)
 		ft_putstr_fd("Wrong map input!\n", 1);
 	else if (error->error_id == no_player)
 		ft_putstr_fd("No player position!\n", 1);
-	else if (error->error_id == multiple_player)
-		ft_putstr_fd("Multiple player positions!\n", 1);
 	else if (error->error_id == map_not_enclosed)
 		ft_putstr_fd("Map not enclosed!\n", 1);
 	else if (error->error_id == invalid_texture)
@@ -46,8 +52,8 @@ void	print_error_description(s_error *error)
 		ft_putstr_fd("Wrong colour input!\n", 1);
 	else if (error->error_id == file_not_cub)
 		ft_putstr_fd("File doesn't end in .cub!\n", 1);
-	else if (error->error_id == repeated_colour)
-		ft_putstr_fd("Repeated colour definition!\n", 1);
+	else
+		handle_repetition_errors(error);
 }
 
 int		print_error(s_error *error)

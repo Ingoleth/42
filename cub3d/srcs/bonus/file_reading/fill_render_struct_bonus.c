@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 16:34:39 by user42            #+#    #+#             */
-/*   Updated: 2020/12/19 12:26:31 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/20 10:50:49 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,7 @@ int		fill_colour(unsigned int *colour, char *line, s_error *error)
 		return (error->error_id = wrong_colour);
 	while (ft_isspace(*line))
 		advance_file_line(&line, error);
-	while (*line)
-	{
-		if (ft_isdigit(*line))
-			advance_file_line(&line, error);
-		else
-			return (error->error_id = wrong_resolution);
-	}
+	check_remainding_colour(line, error);
 	*colour = get_trgb(1, r, g, b);
 	return (0);
 }
@@ -111,6 +105,7 @@ int		handle_textures(char *line, s_render_data *render_data, s_error *error)
 void	fill_render_struct(s_render_data *render_data, char *line,
 s_error *error, s_file_descriptor *file)
 {
+	char *aux;
 
 	if (*line == 'R')
 		fill_resolution(line + 1, render_data, error);
@@ -122,7 +117,8 @@ s_error *error, s_file_descriptor *file)
 		fill_colour(&render_data->c_rgb, skip_spaces(line + 1), error);
 	else if (line[0] == 'F')
 		fill_colour(&render_data->f_rgb, skip_spaces(line + 1), error);
-	else if (*line == '1' || *line == ' ')
+	else if ((ft_isdigit(*line) || *line == ' ')
+	&& (aux = line) && !advance_numbers(&aux, error, false))
 	{
 		handle_map(render_data, error, line, file);
 		return ;
