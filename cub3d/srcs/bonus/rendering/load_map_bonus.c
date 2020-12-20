@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/11 12:17:49 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/12/20 11:40:48 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/20 13:50:59 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int initial_x, int initial_y)
 	j = 0;
 	while (map[i])
 	{
-		while (map[i][j++])
+		while (map[i][j])
 		{
 			if (map[i][j] != ' ')
 			{
@@ -80,6 +80,7 @@ int initial_x, int initial_y)
 				draw_actual_tiles(map_img, map_render, j * map_render->tile_size
 				+ map_render->line_size + initial_x, i * map_render->tile_size
 				+ map_render->line_size + initial_y);
+				j++;
 			}
 		}
 		i++;

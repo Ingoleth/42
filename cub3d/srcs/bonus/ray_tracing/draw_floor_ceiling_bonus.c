@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 10:41:56 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/12/20 12:05:20 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/20 13:55:58 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ t_data *background, float *distance_array)
 
 	while (coords.y <= coords.end_y)
 	{
-		distance = render_data->column_height / ((coords.end_y - coords.y) * 2);
+		distance = render_data->column_height / ((coords.end_y - coords.y) *
+		2);
 		while (coords.x < coords.end_x)
 		{
 			if (distance <= distance_array[coords.x] + 1)
@@ -52,7 +53,8 @@ t_data *background, float *distance_array)
 	}
 }
 
-void	draw_floor_and_ceiling(t_cub3d *data, int y_offset, float *distance_array)
+void	draw_floor_and_ceiling(t_cub3d *data, int y_offset,
+float *distance_array)
 {
 	draw_ceiling(set_draw_coords(0, 0, data->render_data.res_x,
 	data->render_data.res_y / 2 + y_offset), &data->render_data,

@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 11:33:22 by user42            #+#    #+#             */
-/*   Updated: 2020/12/20 13:06:34 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/20 13:53:08 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		initialize_render_data(t_mlx *mlx_data, t_cub3d *data, char *file_path)
 	mlx_data->background = initialize_image(mlx_data->mlx_ptr,
 	data->render_data.res_x, data->render_data.res_y);
 	data->render_data.column_height = data->render_data.res_x /
-	(tan(FOV / 2 ) * 2);
+	(tan(FOV / 2) * 2);
 	redraw_screen(data);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 11:13:27 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/12/20 13:23:12 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/20 13:54:46 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int		get_sprite_colour(t_cub3d *data, int x, int y, t_sprite *sprite)
 	return (get_pixel(image, image_x, image_y));
 }
 
-void	draw_sprite_column(int drawing_position, t_sprite *sprite, t_cub3d *data,
-int y_offset)
+void	draw_sprite_column(int drawing_position, t_sprite *sprite,
+t_cub3d *data, int y_offset)
 {
 	int y_draw_coord;
 	int y_position;
@@ -78,7 +78,8 @@ float time)
 
 	sprite->sprite_center_x = (tan(sprite->angle) / tan(FOV / 2) + 1) *
 	data->render_data.res_x / 2;
-	sprite->size_half = data->render_data.column_height / (sprite->distance) / 2;
+	sprite->size_half = data->render_data.column_height /
+	(sprite->distance) / 2;
 	sprite->sprite_center_y = data->render_data.res_y / 2;
 	drawing_position = sprite->sprite_center_x - sprite->size_half > 0
 	? sprite->sprite_center_x - sprite->size_half : 0;
