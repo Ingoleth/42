@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 19:26:29 by user42            #+#    #+#             */
-/*   Updated: 2020/12/20 10:52:12 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/20 10:58:33 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ void	check_remainding_colour(char *line, s_error *error)
 		if (ft_isdigit(*line))
 			advance_file_line(&line, error);
 		else
-			return (error->error_id = wrong_resolution);
+		{
+			error->error_id = wrong_resolution;
+			break ;
+		}
 	}
 }
 
