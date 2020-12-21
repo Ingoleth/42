@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 11:05:51 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/12/17 00:02:52 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/21 10:22:49 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	copy_header(t_data *render, int fd)
 **	Pixels de la imagen (invertidos).
 */
 
-void	take_screenshot(t_data *render)
+void	take_screenshot(t_data *render, t_cub3d *data)
 {
 	int fd;
 	int file_size;
@@ -90,5 +90,5 @@ void	take_screenshot(t_data *render)
 	copy_header(render, fd);
 	copy_image(render, fd);
 	close(fd);
-	return ;
+	cleanup(data);
 }

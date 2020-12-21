@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 19:44:52 by user42            #+#    #+#             */
-/*   Updated: 2020/12/20 11:50:14 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/21 10:24:03 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		main(int argc, char **argv)
 	if (!initialize_render_data(&data.mlx_data, &data, argv[1]))
 		cleanup(&data);
 	if (argc == 3)
-		take_screenshot(data.mlx_data.background);
+		take_screenshot(data.mlx_data.background, &data);
 	mlx_hook(data.mlx_data.win_ptr, 2, 1L << 0, on_key_pressed, &data);
 	mlx_hook(data.mlx_data.win_ptr, 3, 1L << 1, on_key_released,
 	&data.mlx_data);
