@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 11:05:51 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/12/21 10:22:49 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/21 13:22:30 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,9 @@ void	take_screenshot(t_data *render, t_cub3d *data)
 	int file_size;
 	int image_start;
 
-	fd = open("cub3d.bmp", O_CREAT | O_RDWR);
+	fd = open("cub3d.bmp", O_WRONLY | O_CREAT, S_IRWXU);
+	if (fd == -1)
+		cleanup(data);
 	file_size = 14 + 40 + (render->width * render->height) * 4;
 	image_start = 14 + 40;
 	write(fd, "BM", 2);
@@ -91,4 +93,20 @@ void	take_screenshot(t_data *render, t_cub3d *data)
 	copy_image(render, fd);
 	close(fd);
 	cleanup(data);
+}
+
+void	handle_screenshot(char *file_path, t_cub3d *data)
+{
+	t_mlx *mlx_data;
+
+	mlx_data = &data->mlx_data;
+	if (!read_file(file_path, &data->render_data, mlx_data->mlx_ptr) ||
+	check_render_data(&data->render_data, mlx_data->mlx_ptr))
+		cleanup(data);
+	mlx_data->background = initialize_image(mlx_data->mlx_ptr,
+	data->render_data.res_x, data->render_data.res_y);
+	data->render_data.column_height = data->render_data.res_x /
+	(tan(FOV / 2) * 2);
+	ray_trace(data);
+	take_screenshot(data->mlx_data.background, data);
 }
