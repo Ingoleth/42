@@ -3,10 +3,14 @@ NO ./textures/greystone.xpm
 SO ./textures/redbrick.xpm
 EA ./textures/wood.xpm
 WE ./textures/wood.xpm
-S ./textures/barrel.xpm
+S ./textures/greenlight.xpm
 C 255,200,160
 F 122,122,122
 
-111
-1N1
-111
+111111111
+100020001
+100000001
+1200N0021
+100000001
+100020001
+111111111

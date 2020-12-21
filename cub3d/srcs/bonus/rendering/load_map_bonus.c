@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/11 12:17:49 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/12/20 13:50:59 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/21 10:38:13 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ int y)
 		colour = WHITE;
 	else if (current_tile == '0')
 		colour = GREY;
-	else if (current_tile == '1')
-		colour = RED;
 	else if (current_tile == '2')
-		colour = YELLOW;
+		colour = RED;
 	else if (current_tile == '3')
+		colour = YELLOW;
+	else if (current_tile == '4')
 		colour = PURPLE;
 	draw_pixel_area(map_img, set_draw_coords(x, y, x + map_render->tile_size -
 	map_render->line_size, y + map_render->tile_size - map_render->line_size),
