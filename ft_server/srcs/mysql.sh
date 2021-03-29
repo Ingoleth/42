@@ -1,7 +1,7 @@
 
 #!/bin/bash
 PASS=Password
-USER=ft_server
+USER_DB=ft_server
 DATABASE=wordpress
 service mysql start
 mysql -uroot <<MYSQL_SCRIPT
@@ -12,6 +12,6 @@ FLUSH PRIVILEGES;
 MYSQL_SCRIPT
 
 echo "MySQL user created."
-echo "Username:   $USER"
+echo "Username:   $USER_DB"
 echo "Password:   $PASS"
-mysql wordpress -u ft_server -p$PASS < /wordpress.sql
+mysql wordpress -u $USER_DB -p$PASS < /wordpress.sql

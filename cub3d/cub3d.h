@@ -17,7 +17,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <mlx.h>
-# include "../libft/libft.h"
+# include "srcs/libft/libft.h"
 # include <math.h>
 # include <time.h>
 

@@ -1,8 +1,7 @@
 #Pulls base container image;
 FROM debian:buster
 
-ENV AUTOINDEX off
-#Installs base dependencies //Remove systemctl
+#Installs base dependencies
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y update > /dev/null && apt-get -y upgrade > /dev/null && apt-get -y install \
 php-fpm			\
 php-mysql		\
@@ -41,12 +40,7 @@ tar xf phpMyAdmin-5.0.4-english.tar.gz --strip-components 1 -C /var/www/html/php
 COPY ./srcs/localhost /tmp
 COPY ./srcs/localhost_ai /tmp
 COPY ./srcs/nginx.sh /tmp
-COPY ./srcs/index.html  /var/www/html
-
-RUN bash tmp/nginx.sh && \
-ln -s /etc/nginx/sites-available/localhost /etc/nginx/sites-enabled/ && \
-rm /etc/nginx/sites-enabled/default
-
+COPY ./srcs/index.html  /tmp
 COPY ./srcs/run.sh /
 COPY ./srcs/nginx.conf /etc/nginx
 COPY ./srcs/mysql.sh /
@@ -55,6 +49,12 @@ COPY ./srcs/wordpress.sql /
 
 #Opens ports
 EXPOSE 80 443 8081
+
+ENV AUTOINDEX on
+
+RUN ln -s /etc/nginx/sites-available/localhost /etc/nginx/sites-enabled/ && \
+rm /etc/nginx/sites-enabled/default && \
+bash tmp/nginx.sh
 
 #Command with which the container is initializated
 CMD ["bash", "run.sh"]

@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 14:26:03 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/12/20 11:49:26 by aiglesia         ###   ########.fr       */
+/*   Updated: 2020/12/21 17:11:48 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char **map)
 	y = (int)p_y;
 	ray_trc->x_collision = p_x + (p_y - y) * ray_trc->tan_x;
 	ray_trc->y_collision = p_y - (1 - p_x + x) * ray_trc->tan_y;
-	while (x)
+	while (true)
 	{
 		while (ray_trc->x_collision - x <= 1 + y - ray_trc->y_collision)
 		{
@@ -56,7 +56,7 @@ char **map)
 	y = (int)p_y;
 	ray_trc->x_collision = p_x - (p_y - y) * ray_trc->tan_x;
 	ray_trc->y_collision = p_y - (p_x - x) * ray_trc->tan_y;
-	while (x)
+	while (true)
 	{
 		while (1 + x - ray_trc->x_collision <= 1 + y - ray_trc->y_collision)
 		{
@@ -86,7 +86,7 @@ char **map)
 	y = (int)p_y;
 	ray_trc->x_collision = p_x - (1 - p_y + y) * ray_trc->tan_x;
 	ray_trc->y_collision = p_y + (p_x - x) * ray_trc->tan_y;
-	while (x)
+	while (true)
 	{
 		while (1 + x - ray_trc->x_collision <= ray_trc->y_collision - y)
 		{
@@ -116,7 +116,7 @@ char **map)
 	y = (int)p_y;
 	ray_trc->x_collision = p_x + (1 - p_y + y) * ray_trc->tan_x;
 	ray_trc->y_collision = p_y + (1 - p_x + x) * ray_trc->tan_y;
-	while (x)
+	while (true)
 	{
 		while (ray_trc->x_collision - x <= ray_trc->y_collision - y)
 		{

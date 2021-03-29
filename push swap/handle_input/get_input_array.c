@@ -1,45 +1,16 @@
-#include "libft.h"
-#include <stdio.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_input_array.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/29 13:52:12 by aiglesia          #+#    #+#             */
+/*   Updated: 2021/03/29 13:53:08 by aiglesia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-typedef enum	e_error_code
-{
-    not_nb = 1,
-    repeated,
-    max_int = 2147483647,
-    min_int = -2147483648
-}	            t_error_code;
-
-t_bool  is_number(char *line)
-{
-    int i;
-
-    i = 0;
-    if (ft_strchr("+-", line[0]))
-        i++;
-    while (line[i])
-    {
-        if (!ft_isdigit(line[i]))
-            return (false);
-        i++;
-    }
-    return (true);
-    
-}
-
-t_bool is_repeated(int nb, t_list *array_list)
-{
-    if (array_list)
-        while (array_list)
-        {
-            if (((int *)array_list->content)[0] == nb)
-                return (true);
-            array_list = array_list->next;
-        }
-    return (false);
-}
+#include "push_swap.h"
 
 static void fill_array(int **array, t_list *array_list)
 {
@@ -61,22 +32,19 @@ static void add_nb_to_array(char *line, t_list **array_list)
 {
     int         error;
     int         *nb;
-    long int    aux; 
+    int    aux; 
 
     error = 0;
     if (!is_number(line))
         error = not_nb;
-    else
-    {
-        aux = ft_atoi(line);
-        free(line);  
-        if (aux > max_int || aux < min_int)
-            error = max_int;
-        else if (is_repeated(aux, array_list[0]))
-                error = repeated;
-    }
+    aux = ft_atoi(line);
+    if (is_long_int(line))
+        error = max_int;
+    if (is_repeated(aux, array_list[0]))
+            error = repeated;  
     if (!error)
     {
+        free(line);
         nb = ft_alloc(1, sizeof(int));
         if (nb)
         {
@@ -88,6 +56,7 @@ static void add_nb_to_array(char *line, t_list **array_list)
     {
         ft_printf(STDERR_FILENO, "Error\n");
         ft_lstclear(array_list, free);
+        free(line);
         exit(-1);
     }
 }
@@ -100,7 +69,7 @@ char *read_input(int fd)
     char buffer[2];
 
     line = ft_strdup("");
-    buffer[1] = 0; //Not 100% sure this is needed...
+    buffer[1] = 0;
     while (true)
     {
         bytes_read = read(fd, buffer, 1);
@@ -113,7 +82,7 @@ char *read_input(int fd)
     return (line);
 }
 
-int *handle_input(int fd)
+int *get_input_array(int fd)
 {
     t_list *array_list;
     char *line;
@@ -135,28 +104,4 @@ int *handle_input(int fd)
     fill_array(&array, array_list);
     ft_lstclear(&array_list, free);
     return (array);
-}
-
-int main (int arc, char **argv)
-{
-    int *array;
-    int i;
-    //int fd;
-
-    //fd = open("test", O_RDONLY);
-    if (arc == 1)
-        return (0);
-    if (!ft_strncmp(argv[1], "-ci", 4))
-        array = handle_input(STDIN_FILENO);
-    else
-        return (0);
-    
-
-    i = 0;
-    while (array[i])
-    {
-        printf("* %d\n", array[i]);
-        i++;
-    }
-    
 }

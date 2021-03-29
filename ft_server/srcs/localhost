@@ -12,7 +12,7 @@ server {
 
 	server_name	localhost www.localhost;
 	root		/var/www/html;
-	index		index.html index.nginx-debian.html index.php;
+	index		index.html index.php;
 
 	ssl_certificate ../ssl/certs/localhost.pem;
 	ssl_certificate_key ../ssl/private/localhost-key.pem;

@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 19:44:52 by user42            #+#    #+#             */
-/*   Updated: 2020/12/21 13:15:49 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/01/26 17:06:55 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,7 @@ int		main(int argc, char **argv)
 	mlx_hook(data.mlx_data.win_ptr, 3, 1L << 1, on_key_released,
 	&data.mlx_data);
 	mlx_hook(data.mlx_data.win_ptr, 33, 0, cleanup, &data);
-	mlx_hook(data.mlx_data.win_ptr, 9, 1L << 21, redraw_screen, &data);
+	//mlx_hook(data.mlx_data.win_ptr, 9, 1L << 21, redraw_screen, &data);
 	mlx_loop_hook(data.mlx_data.mlx_ptr, check_keys, &data);
 	mlx_loop(data.mlx_data.mlx_ptr);
-	data.mlx_data.win_ptr = 0;
-	cleanup(&data);
 }
