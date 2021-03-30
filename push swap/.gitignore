@@ -1,0 +1,3 @@
+*.o
+input
+.vscode/settings.json
