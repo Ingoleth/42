@@ -6,64 +6,70 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:46:11 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/03/30 01:59:00 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/03/30 19:21:25 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_bool is_repeated_array(int nb, int *array)
+t_bool	is_repeated_array(int nb, int *array)
 {
-    int i = 0;
+	int	i;
 
-    while (array[i])
-    {
-        if (nb == array[i])
-            return (true);
-        i++;
-    }
-    return (false);
+	i = 0;
+	while (array[i])
+	{
+		if (nb == array[i])
+			return (true);
+		i++;
+	}
+	return (false);
 }
 
-int *get_array_from_argv(char **argv)
+static void	print_error(void)
 {
-    int size;
-    int *aux;
-    int nb;
+	ft_putstr_fd("Error\n", STDERR_FILENO);
+	exit(1);
+}
 
-    size = 0;
-    while (argv[size])
-    {
-        if (!is_number(argv[size]) || is_long_int(argv[size]))
-        {
-            ft_putstr_fd("Error\n", STDERR_FILENO);
-            exit(1);
-        }
-        size++;
-    }
-    if (size == 0)
-    {
-        ft_putstr_fd("Error\n", STDERR_FILENO);
-        exit(1);
-    }
-    aux = ft_alloc(size, sizeof(int));
-    size = 0;
-    if (aux == NULL)
-    {
-        ft_putstr_fd("Error\n", STDERR_FILENO);
-        exit(1);
-    }    
-    while (argv[size])
-    {
-        nb = ft_atoi(argv[size]);
-        if (is_repeated_array(nb, aux))
-        {
-            free(aux);
-            ft_putstr_fd("Error\n", STDERR_FILENO);
-            exit(1);
-        }
-        aux[size] = nb;
-        size++;
-    }
-    return (aux);
+int	*fill_array(char **argv, int size)
+{
+	int	*array;
+	int	nb;
+
+	array = ft_alloc(size, sizeof(int));
+	if (array == NULL)
+		print_error();
+	size = 0;
+	while (argv[size])
+	{
+		nb = ft_atoi(argv[size]);
+		if (is_repeated_array(nb, array))
+		{
+			free(array);
+			print_error();
+		}
+		array[size] = nb;
+		size++;
+	}
+	return (array);
+}
+
+int	*get_array_from_argv(char **argv)
+{
+	int	size;
+
+	size = 0;
+	if (!argv[size])
+		print_error();
+	while (argv[size])
+	{
+		if (!is_number(argv[size]) || is_long_int(argv[size]))
+		{
+			ft_putstr_fd("Error\n", STDERR_FILENO);
+			exit(1);
+		}
+		size++;
+	}
+	return (fill_array(argv, size));
 }

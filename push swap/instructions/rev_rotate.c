@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 12:12:54 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/03/30 12:47:31 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/03/30 19:55:30 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	rev_rotate(int *array)
 {
-	int i;
-	int aux;
+	int	i;
+	int	aux;
 
 	if (!array || !array[0])
 		return ;
@@ -24,7 +24,7 @@ void	rev_rotate(int *array)
 	while (i > 0)
 	{
 		array[i] = array[i - 1];
-		i--; 
+		i--;
 	}
 	array[0] = aux;
 }

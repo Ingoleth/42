@@ -6,15 +6,15 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 17:52:33 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/03/30 18:31:24 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/03/30 20:00:28 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void print_stacks(int *array_a, int *array_b)
+void	print_stacks(int *array_a, int *array_b)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (array_a[i] || array_b[i])

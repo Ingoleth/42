@@ -6,13 +6,13 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 13:26:54 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/03/30 14:13:26 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/03/30 19:57:44 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static	t_bool swap_instruction(char *line, int *array_a, int *array_b)
+static	t_bool	swap_instruction(char *line, int *array_a, int *array_b)
 {
 	if (!ft_strncmp(line, "sa", 3))
 	{
@@ -33,7 +33,7 @@ static	t_bool swap_instruction(char *line, int *array_a, int *array_b)
 	return (false);
 }
 
-static	t_bool push_instruction(char *line, int *array_a, int *array_b)
+static	t_bool	push_instruction(char *line, int *array_a, int *array_b)
 {
 	if (!ft_strncmp(line, "pa", 3))
 	{
@@ -48,7 +48,7 @@ static	t_bool push_instruction(char *line, int *array_a, int *array_b)
 	return (false);
 }
 
-static	t_bool rotate_instruction(char *line, int *array_a, int *array_b)
+static	t_bool	rotate_instruction(char *line, int *array_a, int *array_b)
 {
 	if (!ft_strncmp(line, "ra", 3))
 	{
@@ -69,7 +69,7 @@ static	t_bool rotate_instruction(char *line, int *array_a, int *array_b)
 	return (false);
 }
 
-static	t_bool rev_rotate_instruction(char *line, int *array_a, int *array_b)
+static	t_bool	rev_rotate_instruction(char *line, int *array_a, int *array_b)
 {
 	if (!ft_strncmp(line, "rra", 4))
 	{
@@ -90,9 +90,9 @@ static	t_bool rev_rotate_instruction(char *line, int *array_a, int *array_b)
 	return (false);
 }
 
-void get_instructions(int *array_a, int *array_b, int fd)
+void	get_instructions(int *array_a, int *array_b, int fd)
 {
-	char *line;
+	char	*line;
 
 	while (true)
 	{
@@ -102,10 +102,10 @@ void get_instructions(int *array_a, int *array_b, int fd)
 			free(line);
 			break ;
 		}
-		if(!swap_instruction(line, array_a, array_b) &&
-		!push_instruction(line, array_a, array_b) &&
-		!rotate_instruction(line, array_a, array_b) &&
-		!rev_rotate_instruction(line, array_a, array_b))
+		if (!swap_instruction(line, array_a, array_b)
+			&& !push_instruction(line, array_a, array_b)
+			&& !rotate_instruction(line, array_a, array_b)
+			&& !rev_rotate_instruction(line, array_a, array_b))
 		{
 			ft_printf(STDERR_FILENO, "KO");
 			free(line);

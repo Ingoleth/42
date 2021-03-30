@@ -6,13 +6,13 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 02:07:37 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/03/30 02:11:36 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/03/30 19:54:58 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 void	swap(int *array)
 {
-	int aux;
+	int	aux;
 
 	if (array)
 	{

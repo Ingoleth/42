@@ -6,14 +6,14 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 02:21:32 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/03/30 12:44:47 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/03/30 19:54:50 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void rotate(int *array)
+void	rotate(int *array)
 {
-	int i;
-	int aux;
+	int	i;
+	int	aux;
 
 	if (!array || !array[0])
 		return ;
