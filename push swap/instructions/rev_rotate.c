@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   rev_rotate.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/30 02:12:12 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/03/30 13:19:34 by aiglesia         ###   ########.fr       */
+/*   Created: 2021/03/30 12:12:54 by aiglesia          #+#    #+#             */
+/*   Updated: 2021/03/30 12:47:31 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void push(int *dst, int *src)
+void	rev_rotate(int *array)
 {
+	int i;
 	int aux;
 
-	if (!dst || !src || !src[0])
+	if (!array || !array[0])
 		return ;
-	aux = get_array_length(dst);
-	if (aux)
+	i = get_array_length(array) - 1;
+	aux = array[i];
+	while (i > 0)
 	{
-		rotate(dst);
-		dst[aux] = dst[0];
+		array[i] = array[i - 1];
+		i--; 
 	}
-	dst[0] = src[0];
-	aux = 0;
-	while (src[aux])
-	{
-		src[aux] = src[aux + 1];
-		aux++;
-	}
-	
+	array[0] = aux;
 }

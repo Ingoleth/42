@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 17:52:33 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/03/29 18:52:23 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/03/30 13:22:25 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ void print_stacks(int *array_a, int *array_b)
 			printf("[%7d]", array_a[i]);
 		else if (a_done == false)
 			a_done = true;
+		if (!b_done && a_done)
+			printf("[       ]");
 		if (b_done == false && array_b[i])
 			printf(" [%7d]", array_b[i]);
 		else if (b_done == false)
 			b_done = true;
 		if (!a_done && b_done)
 			printf(" [       ]");
-		if (!b_done && a_done)
-			printf("[       ]");
 		printf("\n");
 		i++;
 	}

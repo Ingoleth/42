@@ -2,12 +2,19 @@
 NAME = input
 # HEADER FILES DIRECTORIES
 INCLUDES = -Ilibft/ -I.
-SRCS =	handle_input/get_array_from_argv.c	\
-		handle_input/get_input_array.c		\
-		handle_input/get_rand_array.c		\
-		handle_input/handle_input.c			\
-		handle_input/number_checks.c		\
-		utils/get_array_length.c			\
+SRCS =	handle_input/get_array_from_argv.c		\
+		handle_input/get_input_array.c			\
+		handle_input/get_rand_array.c			\
+		handle_input/handle_flags.c				\
+		handle_input/handle_input.c				\
+		handle_input/number_checks.c			\
+		instructions/get_instructions_verbose.c	\
+		instructions/get_instructions.c			\
+		instructions/push.c						\
+		instructions/rev_rotate.c				\
+		instructions/rotate.c					\
+		instructions/swap.c						\
+		utils/get_array_length.c				\
 		utils/print_stacks.c
 
 LIBFT_A = libft.a
