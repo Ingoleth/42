@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:39:13 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/03/30 15:27:10 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/03/30 15:31:17 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,14 @@ int *handle_random_input(char **argv, t_bool verbose)
             else if (!is_number(argv[1]))
                 ft_printf(STDERR_FILENO, "Array seed must be numeric!\n");
         }
-        else
-            return(get_rand_array(ft_atoi(argv[0]), ft_atoi(argv[1])));
+        return(get_rand_array(ft_atoi(argv[0]), ft_atoi(argv[1])));
     }
     if (verbose)
     {
         if (!argv[0])
-            ft_printf(STDERR_FILENO, "Error: array lenght and seed missing!\n");
+            ft_printf(STDERR_FILENO, "Array lenght and seed missing!\n");
         else
-            ft_printf(STDERR_FILENO, "Error: random seed missing!\n");
+            ft_printf(STDERR_FILENO, "Random seed missing!\n");
     }
     exit(-1);
 }

@@ -50,6 +50,8 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# Others
 cub3d/textures/wood.xpm
 cub3d/textures/texture_north.xpm
 cub3d/textures/redbrick.xpm
@@ -67,3 +69,4 @@ cub3d/textures/barrel.xpm
 cub3d/cub3D
 *.cub
 cub3d/maps/map.cub
+input
