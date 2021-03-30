@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:48:50 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/03/29 15:47:22 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/03/29 17:32:25 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int *get_rand_array(int length, unsigned short lfsr)
     int nb_length;
     unsigned bit;
 
-    array = ft_calloc(length, sizeof(int));
+    array = ft_calloc(length + 1, sizeof(int));
     if (array == NULL)
         return (NULL);
     i = 0;

@@ -6,7 +6,9 @@ SRCS =	handle_input/get_array_from_argv.c	\
 		handle_input/get_input_array.c		\
 		handle_input/get_rand_array.c		\
 		handle_input/handle_input.c			\
-		handle_input/number_checks.c
+		handle_input/number_checks.c		\
+		utils/get_array_length.c			\
+		utils/print_stacks.c
 
 LIBFT_A = libft.a
 # COMPILER FLAGS

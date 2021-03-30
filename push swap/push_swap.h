@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:39:46 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/03/29 15:46:44 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/03/30 01:54:24 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef	struct		s_flags
     t_bool  mode_argv;
     t_bool  verbose;
     t_bool  colour;
+    int     index;
 }					t_flags;
 
 typedef enum	e_error_code
@@ -39,7 +40,6 @@ typedef enum	e_error_code
 /*
 ** INPUT HANDLING
 */
-
 int     *handle_input(int argc, char **argv, t_flags  *flags);
 int     *get_input_array(int fd);
 int     *get_rand_array(int length, unsigned short lfsr);
@@ -48,5 +48,11 @@ t_bool  is_number(char *line);
 t_bool  is_repeated(int nb, t_list *array_list);
 t_bool  is_repeated_array(int nb, int *array);
 t_bool  is_long_int(char *input);
+t_bool  is_sorted(int *array);
+/*
+**  UTILS 
+*/
+void print_stacks(int *array_a, int *array_b);
+unsigned int get_array_length(int *array);
 
 #endif

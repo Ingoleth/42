@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:39:13 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/03/29 15:42:12 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/03/30 02:02:35 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void    handle_function_flags(char ***argv, t_flags  *flags)
             }
             flags->verbose = true;
         }
-        if (!ft_strncmp(argv[0][0], "-c", 3))
+        else if (!ft_strncmp(argv[0][0], "-c", 3))
         {
             if (flags->colour == true)
             {
@@ -75,8 +75,6 @@ int *handle_input(int argc, char **argv, t_flags  *flags)
         return (0);
     argv++;
     handle_flags(&argv, flags);
-    //printf("Mode: input from console = %d;\nMode: input from file = %d\nMode: create random array = %d\nMode: input from argv = %d\n", flags->mode_input, flags->mode_fd, flags->mode_rand, flags->mode_argv);
-    //printf("Next input = %s\n", argv[0]);
     if (flags->mode_input)
         array = get_input_array(STDIN_FILENO);
     else if (flags->mode_fd)

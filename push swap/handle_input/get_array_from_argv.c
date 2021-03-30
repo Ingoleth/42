@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:46:11 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/03/29 13:47:47 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/03/30 01:59:00 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ int *get_array_from_argv(char **argv)
     }
     if (size == 0)
     {
-            ft_putstr_fd("Error\n", STDERR_FILENO);
+        ft_putstr_fd("Error\n", STDERR_FILENO);
         exit(1);
     }
+    aux = ft_alloc(size, sizeof(int));
     size = 0;
-    aux = ft_calloc(size, sizeof(int));
     if (aux == NULL)
     {
         ft_putstr_fd("Error\n", STDERR_FILENO);
