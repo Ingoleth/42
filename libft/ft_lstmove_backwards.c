@@ -5,21 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/28 13:22:23 by aiglesia          #+#    #+#             */
-/*   Updated: 2020/11/28 13:22:49 by aiglesia         ###   ########.fr       */
+/*   Created: 2020/12/16 12:24:24 by rprieto-          #+#    #+#             */
+/*   Updated: 2021/03/30 21:04:13 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstmove_backwards(t_list *list)
+void	ft_lstmove_backwards(t_list *lst)
 {
-	void *aux;
+	void	*aux;
 
-	if (list->next)
+	if (lst->next)
 	{
-		aux = list->content;
-		list->content = list->next->content;
-		list->next->content = aux;
+		aux = lst->content;
+		lst->content = lst->next->content;
+		lst->next->content = aux;
 	}
 }

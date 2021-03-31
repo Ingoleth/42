@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstdbl_add_back.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rprieto- <rprieto-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/10 18:40:23 by rprieto-          #+#    #+#             */
-/*   Updated: 2019/11/26 12:58:53 by rprieto-         ###   ########.fr       */
+/*   Created: 2021/03/20 00:37:56 by rprieto-          #+#    #+#             */
+/*   Updated: 2021/03/20 00:38:07 by rprieto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list		*ft_lstnew(void const *content)
+void	ft_lstdbl_add_back(t_list_dbl **lst, t_list_dbl *new)
 {
-	t_list *new_elem;
+	t_list_dbl	*p;
 
-	if (!(new_elem = (t_list*)malloc(sizeof(t_list))))
-		return (NULL);
-	new_elem->content = (void*)content;
-	new_elem->next = NULL;
-	return (new_elem);
+	p = *lst;
+	if (!p)
+		*lst = new;
+	else
+	{
+		p = ft_lstdbl_last(p);
+		p->next = new;
+		p->next->prev = p;
+	}
 }

@@ -6,17 +6,23 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 11:44:29 by rprieto-          #+#    #+#             */
-/*   Updated: 2020/10/23 14:48:11 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/03/30 21:09:28 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int				ft_nbrlen(int n)
+int	ft_nbrlen(int n)
 {
 	long	nbr;
 	int		len;
 
-	len = 0;
-	nbr = (n < 0) ? -n : n;
+	if (n == 0)
+		len = 1;
+	else
+		len = 0;
+	if (n < 0)
+		nbr = -n;
+	else
+		nbr = n;
 	while (nbr != 0)
 	{
 		nbr /= 10;

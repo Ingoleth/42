@@ -6,37 +6,24 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 12:24:49 by rprieto-          #+#    #+#             */
-/*   Updated: 2020/10/23 14:47:19 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/03/30 21:00:52 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void		fill_nbr(char *string, unsigned int index, long int number)
+static void	fill_nbr(char *string, unsigned int index, long int number)
 {
-	if (number >= 10 || number <= -10)
+	if (number >= 10)
 	{
-		fill_nbr(string, index - 1, (number < 0 ? -number : number) / 10);
-		string[index] = ((number < 0 ? -number : number) % 10) + 48;
+		fill_nbr(string, index - 1, number / 10);
+		string[index] = (number % 10) + 48;
 	}
 	else
-		string[index] = (number >= 0 ? number : -number) + 48;
+		string[index] = number + 48;
 }
 
-unsigned int	get_digits(long int n)
-{
-	unsigned int	digits;
-
-	digits = (n < 0) ? 1 : 0;
-	while (n != 0)
-	{
-		n /= 10;
-		digits++;
-	}
-	return (digits);
-}
-
-char			*ft_itoa(long int n)
+char	*ft_itoa(int n)
 {
 	char			*string;
 	long int		n_copy;
@@ -45,14 +32,18 @@ char			*ft_itoa(long int n)
 
 	if (n == 0)
 		return (ft_strdup("0"));
-	digits = get_digits(n);
+	digits = ft_nbrlen(n);
 	n_copy = n;
 	index = digits - 1;
-	if (!(string = (char*)malloc((digits + 1) * sizeof(char))))
+	string = (char *)malloc((digits + 1) * sizeof(char));
+	if (!string)
 		return (NULL);
-	string[digits] = '\0';
 	if (n_copy < 0)
+	{
 		string[0] = '-';
+		n_copy = -n_copy;
+	}
 	fill_nbr(string, index, n_copy);
+	string[digits] = '\0';
 	return (string);
 }

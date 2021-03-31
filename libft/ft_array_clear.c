@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_array_clear.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/05 13:38:41 by rprieto-          #+#    #+#             */
-/*   Updated: 2021/03/30 21:58:53 by aiglesia         ###   ########.fr       */
+/*   Created: 2021/02/07 13:04:09 by rprieto-          #+#    #+#             */
+/*   Updated: 2021/03/30 20:10:19 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+void	ft_array_clear(void **array, void (*del)(void *))
 {
-	unsigned int	i;
+	int	i;
 
 	i = 0;
-	while ((s1[i] || s2[i]) && i < n)
+	if (array)
 	{
-		if (s1[i] != s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-		i++;
+		if (del)
+		{
+			while (((char **)array)[i])
+				del(array[i++]);
+			del(array[i]);
+		}
+		free(array);
 	}
-	return (0);
 }

@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_lstdbl_move_backwards.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/05 13:38:41 by rprieto-          #+#    #+#             */
-/*   Updated: 2021/03/30 21:58:53 by aiglesia         ###   ########.fr       */
+/*   Created: 2021/03/20 00:37:25 by rprieto-          #+#    #+#             */
+/*   Updated: 2021/03/30 21:04:05 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+void	ft_lstdbl_move_backwards(t_list_dbl *lst)
 {
-	unsigned int	i;
+	void	*aux;
 
-	i = 0;
-	while ((s1[i] || s2[i]) && i < n)
+	if (lst->next)
 	{
-		if (s1[i] != s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-		i++;
+		aux = lst->content;
+		lst->content = lst->next->content;
+		lst->next->content = aux;
 	}
-	return (0);
 }
