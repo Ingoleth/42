@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rprieto- <rprieto-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 12:42:43 by rprieto-          #+#    #+#             */
-/*   Updated: 2021/03/20 00:26:42 by rprieto-         ###   ########.fr       */
+/*   Updated: 2021/03/31 09:46:53 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,49 +21,37 @@
 #  define BUFFER_SIZE 15
 # endif
 
-typedef struct		s_list
+typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }					t_list;
 
-typedef struct		s_list_dbl
+typedef struct s_list_dbl
 {
 	void				*content;
 	struct s_list_dbl	*next;
 	struct s_list_dbl	*prev;
-}					t_list_dbl;
+}						t_list_dbl;
 
-typedef enum	e_bool
-{false, true}	t_bool;
+typedef enum e_bool
+{
+	false,
+	true
+}			t_bool;
 
-typedef struct		s_gnl
+typedef struct s_gnl
 {
 	void			*line;
 	int				fd;
 	struct s_gnl	*next;
 }					t_gnl;
 
-typedef struct		s_gnl_bf
+typedef struct s_gnl_bf
 {
 	char			*line;
 	struct s_gnl_bf	*next;
 }					t_gnl_buffer;
-
-typedef enum		e_case_type
-{
-	lower_case,
-	upper_case
-}					t_case_type;
-
-typedef	struct		s_modifiers
-{
-	int				fd;
-	char			left_justified;
-	char			zero_padded;
-	int				width;
-	int				precision;
-}					t_modifiers;
 
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
@@ -87,7 +75,7 @@ int					ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t				ft_strlcpy(char *dst, char const *src, size_t dstsize);
 size_t				ft_strlcat(char *dst, char const *src, size_t dstsize);
 char				*ft_strnstr(char const *haystack, const char *needle,
-size_t len);
+						size_t len);
 int					ft_atoi(char const *str);
 void				*ft_calloc(size_t count, size_t size);
 char				*ft_strdup(const char *s1);
@@ -129,9 +117,9 @@ int					gnl_buffer(int fd, int n, t_gnl_buffer **buffer);
 void				free_gnl_buffer(t_gnl_buffer *buffer, t_bool erase_mode);
 int					fill_gnl_buffer(t_gnl_buffer **buffer, char *line);
 int					ft_extract(char **line, unsigned int index,
-					unsigned int lenght);
+						unsigned int lenght);
 int					ft_insert(char **line, char *addendum, unsigned int index,
-					unsigned int lenght);
+						unsigned int lenght);
 int					ft_array_size(void **array);
 void				ft_array_clear(void **array, void (*del)(void *));
 void				*ft_alloc(size_t count, size_t size);
@@ -144,55 +132,5 @@ t_bool				ft_str_checkset(char *string, char *set);
 */
 
 int					ft_printf(int fd, const char *format_string, ...);
-char				*read_modifiers(va_list args, char *format_string,
-t_modifiers	*modifiers);
-void				format(va_list args, char specifier,
-t_modifiers modifiers, int *char_sum);
-t_modifiers			ft_initialize_struct(int fd);
-t_bool				is_flag(char c);
 
-/*
-**				FT_PRINTF_UTILS.C
-*/
-
-char				*get_precision(va_list args, char *format_string,
-t_modifiers *modifiers);
-char				*get_width(char *format_string, t_modifiers *modifiers);
-int					print_justification(int fd, char c, int times);
-t_bool				is_specifier(char c);
-/*
-**				FT_STRINGS.H
-*/
-
-void				handle_string(char *string, t_modifiers modifiers,
-int *char_sum);
-void				print_string(char *string, t_modifiers modifiers,
-int *char_sum);
-void				print_char(char c, t_modifiers modifiers, int *char_sum);
-void				print_symbol(t_modifiers modifiers, int *char_sum);
-
-/*
-**				FT_NUMBERS.C
-*/
-
-void				handle_number(long n, t_modifiers modifiers, int *char_sum);
-void				handle_number_no_prec(long n, t_modifiers modifiers,
-int *char_sum);
-void				handle_number_prec_width(long n, t_modifiers modifiers,
-int *char_sum);
-void				print_number(int fd, long n, int *char_sum);
-
-/*
-**				FT_HEX.C
-*/
-
-void				handle_hex_number(unsigned int n, t_modifiers modifiers,
-int *char_sum, char letter_type);
-void				print_hex(int fd, unsigned long n, int *char_sum,
-t_case_type case_type);
-int					get_hex_digits(unsigned long n);
-void				handle_pointer(void *pointer, t_modifiers modifiers,
-int *char_sum);
-void				print_pointer(void *pointer, t_modifiers modifiers,
-int *char_sum);
 #endif

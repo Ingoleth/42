@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rprieto- <rprieto-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 15:36:57 by rprieto-          #+#    #+#             */
-/*   Updated: 2021/03/08 12:16:56 by rprieto-         ###   ########.fr       */
+/*   Updated: 2021/03/31 09:47:51 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "printf.h"
 
 /*
 **	This function receives the list of arguments, the format string and a
@@ -20,7 +20,7 @@
 **	Then returns the format string after the digits
 */
 
-char		*get_precision(va_list args, char *format_string,
+char	*get_precision(va_list args, char *format_string,
 t_modifiers *modifiers)
 {
 	if (*(format_string + 1) == '*')
@@ -51,7 +51,7 @@ t_modifiers *modifiers)
 **	Then returns the format string after the digits
 */
 
-char		*get_width(char *format_string, t_modifiers *modifiers)
+char	*get_width(char *format_string, t_modifiers *modifiers)
 {
 	modifiers->width = ft_atoi(format_string);
 	if (modifiers->width < 0)
@@ -70,9 +70,9 @@ char		*get_width(char *format_string, t_modifiers *modifiers)
 **	Then returns the same number it receives
 */
 
-int			print_justification(int fd, char c, int times)
+int	print_justification(int fd, char c, int times)
 {
-	int times_copy;
+	int	times_copy;
 
 	times_copy = times;
 	while (times > 0)
@@ -88,8 +88,28 @@ int			print_justification(int fd, char c, int times)
 **	wether it's a specifier or not
 */
 
-t_bool		is_specifier(char c)
+t_bool	is_specifier(char c)
 {
-	return (c == 'c' || c == 's' || c == 'p' || c == 'd' || c == 'i' ||
-	c == 'u' || c == 'x' || c == 'X' || c == '%') ? true : false;
+	if (!ft_strchr("cspdiuxX%", c))
+		return (true);
+	return (false);
+}
+
+/*
+**	This function receives a long number and return the number of
+**	digits it has represented in hexadecimal base
+**	including the minus ("-") sign
+*/
+
+int	get_hex_digits(unsigned long n)
+{
+	int	digits;
+
+	digits = 0;
+	while (n != 0)
+	{
+		n /= 16;
+		digits++;
+	}
+	return (digits);
 }

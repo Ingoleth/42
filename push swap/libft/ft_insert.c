@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 10:47:49 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/03/06 12:52:34 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/03/30 20:18:13 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,15 @@ unsigned int lenght)
 
 	if (lenght < 1 || !addendum || !(*addendum))
 		return (index);
-	if (!(aux = malloc(ft_strlen(*line) + lenght + 1)))
+	aux = malloc(ft_strlen(*line) + lenght + 1);
+	if (!aux)
 		return (0);
 	if (index > ft_strlen(*line) + 1)
 		return (0);
 	ft_strlcpy(aux, *line, index + 1);
 	ft_strlcpy(&aux[index], addendum, lenght + 1);
 	ft_strlcpy(&aux[lenght + index], &(*line)[index],
-	ft_strlen(&(*line)[index]) + 1);
+		ft_strlen(&(*line)[index]) + 1);
 	free(*line);
 	*line = aux;
 	return (index + lenght);

@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 13:28:47 by rprieto-          #+#    #+#             */
-/*   Updated: 2021/02/14 09:42:47 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/03/30 20:16:39 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,13 @@ int	ft_extract(char **line, unsigned int index, unsigned int lenght)
 	char	*aux;
 	int		i;
 
-	if (!(aux = malloc(ft_strlen(*line) - lenght + 1)))
+	aux = malloc(ft_strlen(*line) - lenght + 1);
+	if (!aux)
 		return (0);
-	i = lenght < index + 1 ? index + 1 - lenght : 0;
+	if (lenght < index + 1)
+		i = index + 1 - lenght;
+	else
+		i = 0;
 	ft_strlcpy(aux, *line, i + 1);
 	ft_strlcpy(&aux[i], &(*line)[index + 1], ft_strlen(&(*line)[index]));
 	free(*line);

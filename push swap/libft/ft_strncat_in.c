@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 10:05:42 by user42            #+#    #+#             */
-/*   Updated: 2020/10/22 18:06:50 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/03/30 21:58:40 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ char	*ft_strncat_in(char *s1, char *s2, int n)
 
 	i = 0;
 	dstsize = ft_strlen(s1) + n + 1;
-	if (!(s = malloc(dstsize)))
+	s = malloc(dstsize);
+	if (!s)
 		return (0);
 	if (!s1 && !s2)
 		s[0] = 0;

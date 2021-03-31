@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_array_clear.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rprieto- <rprieto-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 13:04:09 by rprieto-          #+#    #+#             */
-/*   Updated: 2021/02/07 13:31:13 by rprieto-         ###   ########.fr       */
+/*   Updated: 2021/03/30 20:10:19 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_array_clear(void **array, void (*del)(void *))
 	{
 		if (del)
 		{
-			while (((char**)array)[i])
+			while (((char **)array)[i])
 				del(array[i++]);
 			del(array[i]);
 		}

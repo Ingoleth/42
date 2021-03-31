@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_array_size.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rprieto- <rprieto-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 12:47:58 by rprieto-          #+#    #+#             */
-/*   Updated: 2021/02/07 12:52:10 by rprieto-         ###   ########.fr       */
+/*   Updated: 2021/03/30 20:10:55 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_array_size(void **array)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!array)
 		return (0);
-	while (((char**)array)[i])
+	while (((char **)array)[i])
 		i++;
 	return (i);
 }

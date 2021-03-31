@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rprieto- <rprieto-@student.42.fr>          +#+  +:+       +#+         #
+#    By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/21 18:09:12 by rprieto-          #+#    #+#              #
-#    Updated: 2021/03/20 00:53:35 by rprieto-         ###   ########.fr        #
+#    Updated: 2021/03/31 09:48:48 by aiglesia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,7 +92,7 @@ OBJS_PRINTF =	ft_hex.o			\
 				ft_printf_utils.o	\
 				ft_printf.o			\
 				ft_strings.o
-CC = gcc -c -I ./
+CC = gcc -c -I ./ -I ./ft_printf
 CFLAGS = -Wall -Werror -Wextra
 RM = rm -rf
 all: ${NAME}

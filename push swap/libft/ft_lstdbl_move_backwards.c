@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstdbl_move_backwards.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rprieto- <rprieto-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 00:37:25 by rprieto-          #+#    #+#             */
-/*   Updated: 2021/03/20 00:37:38 by rprieto-         ###   ########.fr       */
+/*   Updated: 2021/03/30 21:04:05 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_lstdbl_move_backwards(t_list_dbl *lst)
 {
-	void *aux;
+	void	*aux;
 
 	if (lst->next)
 	{

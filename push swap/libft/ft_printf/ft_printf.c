@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rprieto- <rprieto-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 17:01:23 by rprieto-          #+#    #+#             */
-/*   Updated: 2021/03/08 15:19:23 by rprieto-         ###   ########.fr       */
+/*   Updated: 2021/03/31 09:48:01 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "printf.h"
 
-int			ft_printf(int fd, const char *format_string, ...)
+int	ft_printf(int fd, const char *format_string, ...)
 {
 	va_list		args;
 	int			char_sum;
@@ -26,7 +26,7 @@ int			ft_printf(int fd, const char *format_string, ...)
 		{
 			modifiers = ft_initialize_struct(fd);
 			format_string = read_modifiers(args,
-			(char *)++format_string, &modifiers);
+					(char *)++format_string, &modifiers);
 			format(args, *format_string, modifiers, &char_sum);
 		}
 		else
@@ -44,7 +44,7 @@ int			ft_printf(int fd, const char *format_string, ...)
 **	Then returns the format string when it encounters a specifier
 */
 
-char		*read_modifiers(va_list args, char *format_string,
+char	*read_modifiers(va_list args, char *format_string,
 t_modifiers *modifiers)
 {
 	while (is_flag(*format_string))
@@ -76,7 +76,7 @@ t_modifiers *modifiers)
 **	the correct function depending on the type of specifier
 */
 
-void		format(va_list args, char specifier, t_modifiers modifiers,
+void	format(va_list args, char specifier, t_modifiers modifiers,
 int *char_sum)
 {
 	if (specifier == 'i')
@@ -87,16 +87,16 @@ int *char_sum)
 		handle_number(va_arg(args, unsigned int), modifiers, char_sum);
 	else if (specifier == 'x')
 		handle_hex_number(va_arg(args, unsigned int), modifiers, char_sum,
-		lower_case);
+			lower_case);
 	else if (specifier == 'X')
 		handle_hex_number(va_arg(args, unsigned int), modifiers, char_sum,
-		upper_case);
+			upper_case);
 	else if (specifier == 'p')
 		handle_pointer(va_arg(args, void *), modifiers, char_sum);
 	else if (specifier == 'c')
 		print_char(va_arg(args, int), modifiers, char_sum);
 	else if (specifier == 's')
-		handle_string(va_arg(args, char*), modifiers, char_sum);
+		handle_string(va_arg(args, char *), modifiers, char_sum);
 	else if (specifier == '%')
 		print_symbol(modifiers, char_sum);
 }
@@ -107,7 +107,7 @@ int *char_sum)
 
 t_modifiers	ft_initialize_struct(int fd)
 {
-	t_modifiers modifiers;
+	t_modifiers	modifiers;
 
 	modifiers.left_justified = false;
 	modifiers.zero_padded = false;
@@ -122,7 +122,9 @@ t_modifiers	ft_initialize_struct(int fd)
 **	wether it's a flag or not
 */
 
-t_bool		is_flag(char c)
+t_bool	is_flag(char c)
 {
-	return (c == '-' || ft_isdigit(c) || c == '.' || c == '*') ? true : false;
+	if (c == '-' || ft_isdigit(c) || c == '.' || c == '*')
+		return (true);
+	return (false);
 }

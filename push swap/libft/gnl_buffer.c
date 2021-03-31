@@ -6,19 +6,20 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 13:12:36 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/02/10 20:55:04 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/03/31 09:31:10 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int			fill_gnl_buffer(t_gnl_buffer **buffer, char *line)
+int	fill_gnl_buffer(t_gnl_buffer **buffer, char *line)
 {
 	t_gnl_buffer	*aux;
 
 	if (!*buffer)
 	{
-		if (!(*buffer = ft_calloc(1, sizeof(t_gnl_buffer))))
+		*buffer = ft_calloc(1, sizeof(t_gnl_buffer));
+		if (!(*buffer))
 			return (0);
 		(*buffer)->line = line;
 	}
@@ -27,14 +28,15 @@ int			fill_gnl_buffer(t_gnl_buffer **buffer, char *line)
 		aux = *buffer;
 		while (aux->next)
 			aux = aux->next;
-		if (!(aux->next = ft_calloc(1, sizeof(t_gnl_buffer))))
+		aux->next = ft_calloc(1, sizeof(t_gnl_buffer));
+		if (!(aux->next))
 			return (0);
 		aux->next->line = line;
 	}
 	return (1);
 }
 
-void		free_gnl_buffer(t_gnl_buffer *buffer, t_bool erase_mode)
+void	free_gnl_buffer(t_gnl_buffer *buffer, t_bool erase_mode)
 {
 	if (buffer)
 	{
@@ -46,7 +48,7 @@ void		free_gnl_buffer(t_gnl_buffer *buffer, t_bool erase_mode)
 	}
 }
 
-int			gnl_buffer(int fd, int n, t_gnl_buffer **buffer)
+int	gnl_buffer(int fd, int n, t_gnl_buffer **buffer)
 {
 	char	*line;
 	int		continuous;
@@ -56,9 +58,12 @@ int			gnl_buffer(int fd, int n, t_gnl_buffer **buffer)
 	lenght = 0;
 	if (n < 0)
 		return (-1);
-	continuous = n ? 0 : 1;
-	while ((n > 0 || continuous) && (i = get_next_line(fd, &line)) >= 0)
+	continuous = 1;
+	if (n)
+		continuous = 0;
+	while ((n > 0 || continuous))
 	{
+		i = get_next_line(fd, &line);
 		if (!fill_gnl_buffer(buffer, line))
 		{
 			free_gnl_buffer(*buffer, 1);
@@ -76,9 +81,9 @@ int			gnl_buffer(int fd, int n, t_gnl_buffer **buffer)
 ** WARNING: only use if close is allowed!
 */
 
-void		end_get_next_line(int fd)
+void	end_get_next_line(int fd)
 {
-	char *line;
+	char	*line;
 
 	close(fd);
 	get_next_line(fd, &line);

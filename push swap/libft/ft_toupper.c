@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rprieto- <rprieto-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 10:50:11 by rprieto-          #+#    #+#             */
-/*   Updated: 2019/11/21 15:50:53 by rprieto-         ###   ########.fr       */
+/*   Updated: 2021/03/30 22:12:45 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_toupper(int c)
+int	ft_toupper(int c)
 {
-	return (c >= 'a' && c <= 'z') ? (c - 32) : (c);
+	if (c >= 'a' && c <= 'z')
+		return (c - 32);
+	return (c);
 }

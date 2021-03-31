@@ -3,14 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_hex.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rprieto- <rprieto-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 22:52:14 by rprieto-          #+#    #+#             */
-/*   Updated: 2021/03/08 16:16:07 by rprieto-         ###   ########.fr       */
+/*   Updated: 2021/03/31 09:47:29 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "printf.h"
+
+/*
+** This function writes the left hex justification. Norminette be cursed.
+*/
+
+void	print_hex_left_justification( t_modifiers modifiers,
+	int *char_sum, int justification)
+{
+	if (justification > 0 && !modifiers.left_justified)
+	{
+		if (modifiers.zero_padded && modifiers.precision != -2)
+			*char_sum += print_justification(modifiers.fd, ' ', justification);
+		else
+		{
+			if (modifiers.zero_padded)
+				*char_sum += print_justification(modifiers.fd, '0',
+						justification);
+			else
+				*char_sum += print_justification(modifiers.fd, ' ',
+						justification);
+		}
+	}
+}
 
 /*
 **	This function receives a long number and does some logic depending
@@ -20,27 +43,22 @@
 void	handle_hex_number(unsigned int n, t_modifiers modifiers, int *char_sum,
 char letter_type)
 {
-	int justification;
-	int number_width;
+	int	justification;
+	int	number_width;
 	int	hex_digits;
 
 	hex_digits = get_hex_digits((unsigned long)n);
-	number_width = (modifiers.precision != -2 && modifiers.precision >
-	hex_digits) ? modifiers.precision : hex_digits;
+	if (modifiers.precision != -2 && modifiers.precision > hex_digits)
+		number_width = modifiers.precision;
+	else
+		number_width = hex_digits;
 	justification = modifiers.width - number_width;
 	if (n == 0 && modifiers.precision == -2)
 		justification--;
-	if (justification > 0 && !modifiers.left_justified)
-	{
-		if (modifiers.zero_padded && modifiers.precision != -2)
-			*char_sum += print_justification(modifiers.fd, ' ', justification);
-		else
-			*char_sum += print_justification(modifiers.fd,
-			(modifiers.zero_padded) ? '0' : ' ', justification);
-	}
+	print_hex_left_justification(modifiers, char_sum, justification);
 	if (modifiers.precision != -2 && modifiers.precision > hex_digits)
 		*char_sum += print_justification(modifiers.fd, '0',
-		modifiers.precision - hex_digits);
+				modifiers.precision - hex_digits);
 	if ((n == 0 && modifiers.precision == -2) || n != 0)
 		print_hex(modifiers.fd, n, char_sum, letter_type);
 	if (justification > 0 && modifiers.left_justified)
@@ -56,8 +74,10 @@ t_case_type case_type)
 {
 	char		*hex_characters;
 
-	hex_characters = (case_type == lower_case)
-	? "0123456789abcdef" : "0123456789ABCDEF";
+	if (case_type == lower_case)
+		hex_characters = "0123456789abcdef";
+	else
+		hex_characters = "0123456789ABCDEF";
 	if (n > 15)
 	{
 		print_hex(fd, n / 16, char_sum, case_type);
@@ -75,8 +95,8 @@ t_case_type case_type)
 
 void	handle_pointer(void *pointer, t_modifiers modifiers, int *char_sum)
 {
-	int pointer_length;
-	int justification_width;
+	int	pointer_length;
+	int	justification_width;
 
 	if (modifiers.precision == -1 && pointer == NULL)
 		pointer_length = 2;
@@ -105,7 +125,7 @@ void	handle_pointer(void *pointer, t_modifiers modifiers, int *char_sum)
 
 void	print_pointer(void *pointer, t_modifiers modifiers, int *char_sum)
 {
-	int pointer_length;
+	int	pointer_length;
 
 	pointer_length = get_hex_digits((unsigned long)pointer);
 	*char_sum += write(modifiers.fd, "0x", 2);
@@ -115,7 +135,7 @@ void	print_pointer(void *pointer, t_modifiers modifiers, int *char_sum)
 		{
 			if (modifiers.precision > 0)
 				*char_sum += print_justification(
-					modifiers.fd, '0', modifiers.precision);
+						modifiers.fd, '0', modifiers.precision);
 			else if (modifiers.precision != -1)
 				*char_sum += write(modifiers.fd, "0", 1);
 		}
@@ -123,28 +143,9 @@ void	print_pointer(void *pointer, t_modifiers modifiers, int *char_sum)
 		{
 			if (modifiers.precision > 0 && modifiers.precision > pointer_length)
 				*char_sum += print_justification(modifiers.fd, '0',
-				modifiers.precision - pointer_length);
+						modifiers.precision - pointer_length);
 			print_hex(modifiers.fd,
-			(unsigned long)pointer, char_sum, lower_case);
+				(unsigned long)pointer, char_sum, lower_case);
 		}
 	}
-}
-
-/*
-**	This function receives a long number and return the number of
-**	digits it has represented in hexadecimal base
-**	including the minus ("-") sign
-*/
-
-int		get_hex_digits(unsigned long n)
-{
-	int	digits;
-
-	digits = 0;
-	while (n != 0)
-	{
-		n /= 16;
-		digits++;
-	}
-	return (digits);
 }
