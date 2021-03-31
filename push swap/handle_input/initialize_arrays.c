@@ -6,24 +6,22 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 10:29:09 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/03/31 11:03:34 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/03/31 20:36:50 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_flags	initialize_arrays(int argc, char **argv, int **array_a, int **array_b)
+void	initialize_arrays(int argc, char **argv, t_array_info *arrays, t_flags
+	*flags)
 {
-	int		length;
-	t_flags	flags;
-
-	*array_a = handle_input(argc, argv, &flags);
-	length = get_array_length(*array_a);
-	*array_b = ft_calloc(length + 1, sizeof(int));
-	if (*array_b == NULL)
+	ft_memset(arrays, 0, sizeof(t_array_info));
+	handle_input(argc, argv, flags, arrays);
+	arrays->array_b = ft_calloc(arrays->array_a_length + 1, sizeof(int));
+	if (arrays->array_b == NULL)
 	{
-		free(*array_a);
+		free(arrays->array_a);
 		exit (1);
 	}
-	return (flags);
+	arrays->max_array_length = arrays->array_a_length;
 }

@@ -6,28 +6,32 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 12:41:19 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/03/31 13:11:55 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/03/31 21:20:36 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	bubble_sort(int *array_a, int *array_b, int fd)
+void	bubble_sort(t_array_info *arrays, int fd)
 {
+	print_stacks(arrays);
 	while (true)
 	{
-		if (array_a[0] > array_a[1])
-			instruction(swap_a, fd, array_a, array_b);
-		else if (array_a[0])
-			instruction(push_b, fd, array_a, array_b);
-		if (array_b[0] < array_b[1])
-			instruction(swap_b, fd, array_a, array_b);
-		if (!array_a[0] || !array_a[1])
+		if (arrays->array_a_length <= 1
+			|| is_sorted(arrays->array_a, arrays->array_a_length))
 			break ;
-		print_stacks(array_a, array_b);
+		if (arrays->array_a[0] > arrays->array_a[1])
+			instruction(swap_a, fd, arrays);
+		else
+			instruction(push_b, fd, arrays);
+		if (arrays->array_b[0] < arrays->array_b[1])
+			instruction(swap_b, fd, arrays);
 	}
-	while (array_b[0])
-		instruction(push_a, fd, array_a, array_b);
+	if (arrays->array_b_length != 0)
+	{
+		while (arrays->array_b_length != 0)
+			instruction(push_a, fd, arrays);
+	}
 	ft_printf(fd, "\n");
-	print_stacks(array_a, array_b);
+	print_stacks(arrays);
 }

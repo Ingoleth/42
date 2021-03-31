@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 12:42:43 by rprieto-          #+#    #+#             */
-/*   Updated: 2021/03/31 09:46:53 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/03/31 18:38:12 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,9 +117,9 @@ int					gnl_buffer(int fd, int n, t_gnl_buffer **buffer);
 void				free_gnl_buffer(t_gnl_buffer *buffer, t_bool erase_mode);
 int					fill_gnl_buffer(t_gnl_buffer **buffer, char *line);
 int					ft_extract(char **line, unsigned int index,
-						unsigned int lenght);
+						unsigned int length);
 int					ft_insert(char **line, char *addendum, unsigned int index,
-						unsigned int lenght);
+						unsigned int length);
 int					ft_array_size(void **array);
 void				ft_array_clear(void **array, void (*del)(void *));
 void				*ft_alloc(size_t count, size_t size);

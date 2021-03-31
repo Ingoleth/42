@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:39:46 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/03/31 12:54:11 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/03/31 21:09:53 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,16 @@ typedef struct s_flags
 	t_bool	verbose;
 	t_bool	file_output;
 	int		index;
-}					t_flags;
+}			t_flags;
+
+typedef struct s_array_info
+{
+	int *array_a;
+	int *array_b;
+	int array_a_length;
+	int array_b_length;
+	int max_array_length;
+}		t_array_info;
 
 typedef enum e_instructions
 {
@@ -56,38 +65,37 @@ typedef enum e_error_code
 /*
 ** INPUT HANDLING
 */
-int				*handle_input(int argc, char **argv, t_flags *flags);
-t_flags			initialize_arrays(int
-					argc, char **argv, int **array_a, int **array_b);
-int				*get_input_array(int fd);
-int				*get_rand_array(int length, unsigned short lfsr);
-int				*get_array_from_argv(char **argv);
-void			handle_flags(char ***argv, t_flags *flags);
+void			handle_input(int argc, char **argv, t_flags *flags, t_array_info *arrays);
+void			initialize_arrays(int argc, char **argv, t_array_info *arrays, t_flags
+					*flags);
+void			get_input_array(int fd, t_array_info *arrays, t_bool verbose);
+void			get_rand_array(int length, unsigned short lfsr, t_array_info *arrays);
+void			get_array_from_argv(char **argv, int argc, int argv_pos,
+					t_array_info *arrays);
+void			handle_flags(char **argv, t_flags *flags, int *argv_pos);
 t_bool			is_number(char *line);
 t_bool			is_repeated(int nb, t_list *array_list);
-t_bool			is_repeated_array(int nb, int *array);
+t_bool			is_repeated_array(int nb, int *array, int length);
 t_bool			is_long_int(char *input);
-t_bool			is_sorted(int *array);
+t_bool			is_sorted(int *array, int length);
 /*
 ** INSTRUCTIONS
 */
-void			get_instructions(int *array_a, int *array_b, int fd);
-void			get_instructions_verbose(int *array_a, int *array_b, int fd);
-void			instruction(unsigned int
-					instruction, int fd, int *array_a, int *array_b);
-void			push(int *dst, int *src);
-void			rev_rotate(int *array);
-void			rotate(int *array);
-void			swap(int *array);
+void			get_instructions(t_array_info *arrays, int fd);
+void			get_instructions_verbose(t_array_info *arrays, int fd);
+void			instruction(unsigned int instruction, int fd, t_array_info *arrays);
+void			push(int *dst, int *src, int *dst_length, int *src_length);
+void			rev_rotate(int *array, int length);
+void			rotate(int *array, int length);
+void			swap(int *array, int length);
 /*
 ** SORTING
 */
-void			bubble_sort(int *array_a, int *array_b, int fd);
+void			bubble_sort(t_array_info *arrays, int fd);
 /*
 **  UTILS 
 */
-void			print_stacks(int *array_a, int *array_b);
-unsigned int	get_array_length(int *array);
+void			print_stacks(t_array_info *arrays);
 char			*read_input(int fd);
 
 #endif

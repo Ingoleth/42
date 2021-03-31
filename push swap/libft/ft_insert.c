@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 10:47:49 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/03/30 20:18:13 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/03/31 18:38:12 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 **
 ** INDEX = Marks where in *line the characters will be inserted.
 **
-** LENGHT = how many characters of ADDENDUM will be inserted.
+** length = how many characters of ADDENDUM will be inserted.
 **
-** Inserts lenght characters of addendum in the string line, creating a new one.
+** Inserts length characters of addendum in the string line, creating a new one.
 ** Returns an index pointing to the character after the inserted bit.
 **
 ** NOTES:
@@ -31,22 +31,22 @@
 */
 
 int	ft_insert(char **line, char *addendum, unsigned int index,
-unsigned int lenght)
+unsigned int length)
 {
 	char	*aux;
 
-	if (lenght < 1 || !addendum || !(*addendum))
+	if (length < 1 || !addendum || !(*addendum))
 		return (index);
-	aux = malloc(ft_strlen(*line) + lenght + 1);
+	aux = malloc(ft_strlen(*line) + length + 1);
 	if (!aux)
 		return (0);
 	if (index > ft_strlen(*line) + 1)
 		return (0);
 	ft_strlcpy(aux, *line, index + 1);
-	ft_strlcpy(&aux[index], addendum, lenght + 1);
-	ft_strlcpy(&aux[lenght + index], &(*line)[index],
+	ft_strlcpy(&aux[index], addendum, length + 1);
+	ft_strlcpy(&aux[length + index], &(*line)[index],
 		ft_strlen(&(*line)[index]) + 1);
 	free(*line);
 	*line = aux;
-	return (index + lenght);
+	return (index + length);
 }

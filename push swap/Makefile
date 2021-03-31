@@ -17,7 +17,6 @@ SRCS_COMMON = 		handle_input/get_array_from_argv.c		\
 					instructions/rev_rotate.c				\
 					instructions/rotate.c					\
 					instructions/swap.c						\
-					utils/get_array_length.c				\
 					utils/print_stacks.c
 
 SRCS_CHECKER = 		checker_main.c							\

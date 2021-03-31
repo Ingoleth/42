@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:53:48 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/03/30 19:51:05 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/03/31 20:05:31 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,16 @@ t_bool	is_long_int(char *input)
 	return (false);
 }
 
-t_bool	is_sorted(int *array)
+t_bool	is_sorted(int *array, int length)
 {
 	int	i;
 
 	if (!array)
 		return (false);
+	if (length == 0)
+		return (true);
 	i = 1;
-	while (array[i])
+	while (i < length)
 	{
 		if (array[i] < array[i - 1])
 			return (false);

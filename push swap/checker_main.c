@@ -6,13 +6,13 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 14:22:26 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/03/31 11:02:11 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/03/31 20:06:56 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static	void	handle_instructions(int *array_a, int *array_b, t_flags *flags)
+static	void	handle_instructions(t_array_info *arrays, t_flags *flags)
 {
 	int	fd;
 
@@ -26,21 +26,21 @@ static	void	handle_instructions(int *array_a, int *array_b, t_flags *flags)
 				ft_printf(STDERR_FILENO, "Couldn't open instructions file!\n");
 			else
 				ft_printf(STDERR_FILENO, "KO\n");
-			free(array_a);
-			free(array_b);
+			free(arrays->array_a);
+			free(arrays->array_b);
 			exit(-1);
 		}
 	}
 	if (flags->verbose)
-		get_instructions_verbose(array_a, array_b, fd);
+		get_instructions_verbose(arrays, fd);
 	else
-		get_instructions(array_a, array_b, fd);
+		get_instructions(arrays, fd);
 }
 
-static	void	
-	print_result(int *array_a, int *array_b, t_flags *flags)
+static	void print_result(t_array_info *arrays, t_flags *flags)
 {
-	if (!get_array_length(array_b) && is_sorted(array_a))
+	if (!arrays->array_b_length &&
+	is_sorted(arrays->array_a, arrays->array_a_length))
 	{
 		if (flags->verbose)
 			printf("Array is sorted!\n");
@@ -58,15 +58,14 @@ static	void
 
 int	main(int argc, char **argv)
 {
-	int		*array_a;
-	int		*array_b;
+	t_array_info arrays;
 	t_flags	flags;
 
 	if (argc == 1)
 		return (0);
-	flags = initialize_arrays(argc, argv, &array_a, &array_b);
-	handle_instructions(array_a, array_b, &flags);
-	print_result(array_a, array_b, &flags);
-	free(array_a);
-	free(array_b);
+	initialize_arrays(argc, argv, &arrays, &flags);
+	handle_instructions(&arrays, &flags);
+	print_result(&arrays, &flags);
+	free(arrays.array_a);
+	free(arrays.array_b);
 }

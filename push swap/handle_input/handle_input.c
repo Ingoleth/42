@@ -6,39 +6,39 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:39:13 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/03/30 19:36:15 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/03/31 20:13:55 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	*handle_random_input(char **argv, t_bool verbose)
+void	handle_random_input(char **argv, t_array_info *arrays, t_bool verbose, int argv_pos)
 {
-	if (argv[0] && argv[1])
+	if (argv[argv_pos + 1] && argv[argv_pos + 1])
 	{
-		if (verbose)
+		if (verbose && !is_number(argv[argv_pos + 1]))
+			ft_printf(STDERR_FILENO, "Array seed must be numeric!\n");
+		else 
 		{
-			if (!ft_atoi(argv[0]))
-				ft_printf(STDERR_FILENO, "Array lenght can't be zero!\n");
-			else if (!is_number(argv[1]))
-				ft_printf(STDERR_FILENO, "Array seed must be numeric!\n");
+			get_rand_array(ft_atoi(argv[argv_pos]), ft_atoi(argv[argv_pos + 1]), arrays);
+			return ;
 		}
-		return (get_rand_array(ft_atoi(argv[0]), ft_atoi(argv[1])));
 	}
-	if (verbose)
+	else if (verbose)
 	{
 		if (!argv[0])
-			ft_printf(STDERR_FILENO, "Array lenght and seed missing!\n");
+			ft_printf(STDERR_FILENO, "Array length and seed missing!\n");
 		else
 			ft_printf(STDERR_FILENO, "Random seed missing!\n");
 	}
 	exit(-1);
 }
-
-int	*handle_fd_array(char **argv, t_bool verbose)
+/*
+** TODO: Check for more arguments --> error if found?
+*/
+void	handle_fd_array(char **argv, t_array_info *arrays, t_bool verbose)
 {
 	int	fd;
-	int	*array;
 
 	fd = open(argv[0], O_RDONLY);
 	if (fd == -1)
@@ -52,26 +52,24 @@ int	*handle_fd_array(char **argv, t_bool verbose)
 		}
 		exit(1);
 	}
-	array = get_input_array(fd);
+	get_input_array(fd, arrays, verbose);
 	close(fd);
-	return (array);
 }
 
-int	*handle_input(int argc, char **argv, t_flags *flags)
+void	handle_input(int argc, char **argv, t_flags *flags, t_array_info *arrays)
 {
-	int	*array;
+	int argv_pos;
 
 	if (argc == 1)
-		return (0);
-	argv++;
-	handle_flags(&argv, flags);
+		exit(-1);
+	argv_pos = 1;
+	handle_flags(argv, flags, &argv_pos);
 	if (flags->mode_input)
-		array = get_input_array(STDIN_FILENO);
+		get_input_array(STDIN_FILENO, arrays, flags->verbose);
 	else if (flags->mode_fd)
-		array = handle_fd_array(argv, flags->verbose);
+		handle_fd_array(argv, arrays, flags->verbose);
 	else if (flags->mode_rand)
-		array = handle_random_input(argv, flags->verbose);
+		handle_random_input(argv, arrays, flags->verbose, argv_pos);
 	else
-		array = get_array_from_argv(argv);
-	return (array);
+		get_array_from_argv(argv, argc, argv_pos, arrays);
 }

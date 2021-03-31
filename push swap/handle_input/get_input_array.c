@@ -6,37 +6,53 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:52:12 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/03/30 19:20:03 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/03/31 18:38:12 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static	void	fill_array(int **array, t_list *array_list)
+static	void	fill_array(t_array_info *arrays, t_list *array_list)
 {
 	int	i;
 
 	i = 0;
-	array[0] = ft_alloc(ft_lstsize(array_list), sizeof(int));
-	if (!array[0])
-		return ;
+	arrays->array_a = ft_alloc(ft_lstsize(array_list), sizeof(int));
+	if (!arrays->array_a)
+	{
+		ft_lstclear(&array_list, free);
+		ft_printf(STDERR_FILENO, "ERROR\n");
+		exit (1);
+	}
 	while (array_list)
 	{
-		array[0][i] = ((int *)array_list->content)[0];
+		arrays->array_a[i] = ((int *)array_list->content)[0];
 		array_list = array_list->next;
 		i++;
 	}
+	arrays->array_a_length = i;
 }
 
-static	void	print_error_and_exit(t_list **array_list, char *line)
+static	void	print_error_and_exit(t_list **array_list, char *line, int error, t_bool verbose)
 {
-	ft_printf(STDERR_FILENO, "Error\n");
+	if (!verbose)
+		ft_printf(STDERR_FILENO, "Error\n");
+	else
+	{
+		if (error == not_nb)
+			ft_printf(STDERR_FILENO, "Error: Not numeric input!\n");
+		else if (error == max_int)
+			ft_printf(STDERR_FILENO, "Error: Input bigger than int!\n");
+		else if (error == repeated)
+			ft_printf(STDERR_FILENO, "Error: Duplicate number!\n");
+	}
+
 	ft_lstclear(array_list, free);
 	free(line);
 	exit(-1);
 }
 
-static	void	add_nb_to_array(char *line, t_list **array_list)
+static	void	add_nb_to_array(char *line, t_list **array_list, t_bool verbose)
 {
 	int			error;
 	int			*nb;
@@ -61,7 +77,7 @@ static	void	add_nb_to_array(char *line, t_list **array_list)
 		}
 	}
 	else
-		print_error_and_exit(array_list, line);
+		print_error_and_exit(array_list, line, error, verbose);
 }
 
 char	*read_input(int fd)
@@ -85,14 +101,13 @@ char	*read_input(int fd)
 	return (line);
 }
 
-int	*get_input_array(int fd)
+void	get_input_array(int fd, t_array_info *arrays, t_bool verbose)
 {
 	t_list	*array_list;
 	char	*line;
-	int		*array;
 
 	array_list = NULL;
-	if (fd == STDIN_FILENO)
+	if (fd == STDIN_FILENO && verbose)
 		printf("Please input the values for the array:\n");
 	while (true)
 	{
@@ -102,9 +117,8 @@ int	*get_input_array(int fd)
 			free(line);
 			break ;
 		}
-		add_nb_to_array(line, &array_list);
+		add_nb_to_array(line, &array_list, verbose);
 	}
-	fill_array(&array, array_list);
+	fill_array(arrays, array_list);
 	ft_lstclear(&array_list, free);
-	return (array);
 }

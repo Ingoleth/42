@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:48:50 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/03/30 19:24:57 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/03/31 18:38:12 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,30 +36,29 @@ int	rand_num(unsigned short *lfsr, unsigned int *bit, int length)
 	return (nb);
 }
 
-int	*get_rand_array(int length, unsigned short lfsr)
+void get_rand_array(int length, unsigned short lfsr, t_array_info *arrays)
 {
-	int				*array;
 	int				i;
 	int				nb_length;
 	unsigned int	bit;
 
-	array = ft_calloc(length + 1, sizeof(int));
-	if (array == NULL)
-		return (NULL);
+	arrays->array_a = ft_calloc(length + 1, sizeof(int));
+	if (arrays->array_a == NULL)
+		return ;
 	i = 0;
 	while (i < length)
 	{
 		nb_length = 6;
 		while (nb_length > 5)
 			nb_length = rand_num(&lfsr, &bit, 1);
-		if (!is_repeated_array(nb_length, array))
+		if (!is_repeated_array(nb_length, arrays->array_a, i))
 		{
-			array[i] = rand_num(&lfsr, &bit, nb_length);
+			arrays->array_a[i] = rand_num(&lfsr, &bit, nb_length);
 			nb_length = rand_num(&lfsr, &bit, 1);
 			if (nb_length % 2)
-				array[i] *= -1;
+				arrays->array_a[i] *= -1;
 			i++;
 		}
 	}
-	return (array);
+	arrays->array_a_length = length;
 }

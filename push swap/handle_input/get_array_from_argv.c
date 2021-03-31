@@ -6,18 +6,18 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:46:11 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/03/30 19:21:25 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/03/31 18:38:12 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_bool	is_repeated_array(int nb, int *array)
+t_bool	is_repeated_array(int nb, int *array, int length)
 {
 	int	i;
 
 	i = 0;
-	while (array[i])
+	while (i < length)
 	{
 		if (nb == array[i])
 			return (true);
@@ -32,44 +32,46 @@ static void	print_error(void)
 	exit(1);
 }
 
-int	*fill_array(char **argv, int size)
+void	fill_array(char **argv, int argc, int argv_pos, t_array_info *arrays)
 {
-	int	*array;
 	int	nb;
+	int	i;
 
-	array = ft_alloc(size, sizeof(int));
-	if (array == NULL)
+	arrays->array_a	 = ft_alloc(argc - argv_pos, sizeof(int));
+	arrays->array_a_length = argc - argv_pos;
+	if (arrays->array_a == NULL)
 		print_error();
-	size = 0;
-	while (argv[size])
+	i = 0;
+	while (argv_pos < argc)
 	{
-		nb = ft_atoi(argv[size]);
-		if (is_repeated_array(nb, array))
+		nb = ft_atoi(argv[argv_pos]);
+		if (is_repeated_array(nb, arrays->array_a, i))
 		{
-			free(array);
+			free(arrays->array_a);
 			print_error();
 		}
-		array[size] = nb;
-		size++;
+		arrays->array_a[i] = nb;
+		argv_pos++;
+		i++;
 	}
-	return (array);
 }
 
-int	*get_array_from_argv(char **argv)
+void	get_array_from_argv(char **argv, int argc, int argv_pos,
+	t_array_info *arrays)
 {
-	int	size;
+	int	i;
 
-	size = 0;
-	if (!argv[size])
+	i = argv_pos;
+	if (!argv[i])
 		print_error();
-	while (argv[size])
+	while (i < argc)
 	{
-		if (!is_number(argv[size]) || is_long_int(argv[size]))
+		if (!is_number(argv[i]) || is_long_int(argv[i]))
 		{
 			ft_putstr_fd("Error\n", STDERR_FILENO);
 			exit(1);
 		}
-		size++;
+		i++;
 	}
-	return (fill_array(argv, size));
+	fill_array(argv, argc, argv_pos, arrays);
 }

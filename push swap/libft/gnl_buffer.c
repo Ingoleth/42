@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 13:12:36 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/03/31 09:31:10 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/03/31 18:38:12 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ int	gnl_buffer(int fd, int n, t_gnl_buffer **buffer)
 	char	*line;
 	int		continuous;
 	int		i;
-	int		lenght;
+	int		length;
 
-	lenght = 0;
+	length = 0;
 	if (n < 0)
 		return (-1);
 	continuous = 1;
@@ -70,11 +70,11 @@ int	gnl_buffer(int fd, int n, t_gnl_buffer **buffer)
 			return (-1);
 		}
 		n--;
-		lenght += ft_strlen(line) + 1;
+		length += ft_strlen(line) + 1;
 		if (i == 0)
 			break ;
 	}
-	return (lenght);
+	return (length);
 }
 
 /*
