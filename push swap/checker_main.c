@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   checker_main.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 14:22:26 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/03/30 20:05:33 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/03/31 11:02:11 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,19 +60,11 @@ int	main(int argc, char **argv)
 {
 	int		*array_a;
 	int		*array_b;
-	int		length;
 	t_flags	flags;
 
 	if (argc == 1)
 		return (0);
-	array_a = handle_input(argc, argv, &flags);
-	length = get_array_length(array_a);
-	array_b = ft_calloc(length + 1, sizeof(int));
-	if (array_b == NULL)
-	{
-		free(array_a);
-		return (1);
-	}
+	flags = initialize_arrays(argc, argv, &array_a, &array_b);
 	handle_instructions(array_a, array_b, &flags);
 	print_result(array_a, array_b, &flags);
 	free(array_a);

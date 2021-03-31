@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 14:57:16 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/03/30 19:32:02 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/03/31 12:37:14 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,11 @@ void	handle_flags(char ***argv, t_flags *flags)
 				print_error_and_exit(flags_list, flags, argv);
 			flags->verbose = true;
 		}
-		else if (!ft_strncmp(argv[0][0], "-c", 3))
+		else if (!ft_strncmp(argv[0][0], "-fo", 3))
 		{
-			if (flags->colour == true)
+			if (flags->file_output == true)
 				print_error_and_exit(flags_list, flags, argv);
-			flags->colour = true;
+			flags->file_output = true;
 		}
 		handle_input_flags(flags_list, argv, flags);
 		argv[0] = argv[0] + 1;

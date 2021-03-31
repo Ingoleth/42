@@ -1,41 +1,46 @@
 # PROGRAM NAME
+
 CHECKER = checker
 PUSH_SWAP = push_swap
 
 # HEADER FILES DIRECTORIES
-INCLUDES = -Ilibft/ -I.
-SRCS_CHECKER =	checker_main.c							\
-				handle_input/get_array_from_argv.c		\
-				handle_input/get_input_array.c			\
-				handle_input/get_rand_array.c			\
-				handle_input/handle_flags.c				\
-				handle_input/handle_input.c				\
-				handle_input/number_checks.c			\
-				instructions/get_instructions_verbose.c	\
-				instructions/get_instructions.c			\
-				instructions/push.c						\
-				instructions/rev_rotate.c				\
-				instructions/rotate.c					\
-				instructions/swap.c						\
-				utils/get_array_length.c				\
-				utils/print_stacks.c
 
-SRCS_PUSH_SWAP = push_swap_main.c
+INCLUDES = -Ilibft/ -I.
+SRCS_COMMON = 		handle_input/get_array_from_argv.c		\
+					handle_input/get_input_array.c			\
+					handle_input/get_rand_array.c			\
+					handle_input/handle_flags.c				\
+					handle_input/handle_input.c				\
+					handle_input/initialize_arrays.c		\
+					handle_input/number_checks.c			\
+					instructions/push.c						\
+					instructions/rev_rotate.c				\
+					instructions/rotate.c					\
+					instructions/swap.c						\
+					utils/get_array_length.c				\
+					utils/print_stacks.c
+
+SRCS_CHECKER = 		checker_main.c							\
+					instructions/get_instructions_verbose.c	\
+					instructions/get_instructions.c
+
+SRCS_PUSH_SWAP =	push_swap_main.c						\
+					sorting/bubble_sort.c					\
+					sorting/instruction.c
 
 LIBFT_A = libft.a
 # COMPILER FLAGS
 FLAGS = -Wall -Wextra -Werror -g
 
+all: ${CHECKER}
 checker: ${CHECKER}
-push_swap: ${PUSH_SWAP}
-all: ${CHECKER} ${PUSH_SWAP}
 bonus: all
 
-${CHECKER}: ${SRCS_CHECKER} ${LIBFT_A}
-			gcc ${INCLUDES} ${FLAGS} ${SRCS_CHECKER} ${LIBFT_A} -o ${CHECKER}
+${CHECKER}: ${SRCS_COMMON} ${SRCS_CHECKER} ${LIBFT_A}
+			gcc ${INCLUDES} ${FLAGS} ${SRCS_COMMON} ${SRCS_CHECKER} ${LIBFT_A} -o ${CHECKER}
 
-${PUSH_SWAP}: ${SRCS_PUSH_SWAP} ${LIBFT_A}
-			gcc ${INCLUDES} ${FLAGS} ${SRCS_PUSH_SWAP} ${LIBFT_A} -o ${PUSH_SWAP}
+${PUSH_SWAP}: ${SRCS_COMMON} ${SRCS_PUSH_SWAP} ${LIBFT_A}
+			gcc ${INCLUDES} ${FLAGS} ${SRCS_COMMON} ${SRCS_PUSH_SWAP} ${LIBFT_A} -o ${PUSH_SWAP}
 
 ${LIBFT_A}:
 		make -C libft
@@ -46,6 +51,6 @@ clean:
 fclean: clean
 		make -C libft fclean
 		rm -f libft.a
-		rm -f ${CHECKER}
 		rm -f ${PUSH_SWAP}
+		rm -f ${CHECKER}
 re: fclean all checker
