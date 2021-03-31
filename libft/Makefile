@@ -6,7 +6,7 @@
 #    By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/21 18:09:12 by rprieto-          #+#    #+#              #
-#    Updated: 2021/03/31 09:48:48 by aiglesia         ###   ########.fr        #
+#    Updated: 2021/03/31 10:04:59 by aiglesia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,15 +60,15 @@ SRCS =	ft_atoi.c					\
 		ft_alloc.c					\
 		ft_array_clear.c			\
 		ft_strncpy.c				\
-		ft_lstadd_back_bonus.c		\
-		ft_lstnew_bonus.c			\
-		ft_lstlast_bonus.c			\
-		ft_lstadd_front_bonus.c		\
-		ft_lstsize_bonus.c			\
-		ft_lstdelone_bonus.c		\
-		ft_lstiter_bonus.c			\
-		ft_lstclear_bonus.c			\
-		ft_lstmap_bonus.c			\
+		ft_lstadd_back.c			\
+		ft_lstnew.c					\
+		ft_lstlast.c				\
+		ft_lstadd_front.c			\
+		ft_lstsize.c				\
+		ft_lstdelone.c				\
+		ft_lstiter.c				\
+		ft_lstclear.c				\
+		ft_lstmap.c					\
 		ft_lstmove_backwards.c		\
 		ft_str_checkset.c			\
 		ft_lstdbl_add_back.c		\
