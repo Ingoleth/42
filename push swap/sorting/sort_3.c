@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rev_rotate.c                                       :+:      :+:    :+:   */
+/*   sort_3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/30 12:12:54 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/04/01 21:19:29 by aiglesia         ###   ########.fr       */
+/*   Created: 2021/04/01 19:48:00 by aiglesia          #+#    #+#             */
+/*   Updated: 2021/04/01 21:23:08 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-/*
-**El útimo número acaba al ppo del stack 
-*/
-void	rev_rotate(int *array, int length)
+void	sort_3(t_array_info *arrays, int fd)
 {
-	int	aux;
-
-	if (!array || length < 2)
-		return ;
-	length--;
-	aux = array[length];
-	while (length > 0)
+	while (!is_sorted(arrays->array_a, arrays->array_a_length))
 	{
-		array[length] = array[length - 1];
-		length--;
+		if (arrays->array_a[0] > arrays->array_a[1])
+			instruction(swap_a, fd, arrays);
+		if (arrays->array_a[0] > arrays->array_a[2])
+			instruction(rev_rot_a, fd, arrays);
+		else
+			instruction(rev_rot_a, fd, arrays);
 	}
-	array[0] = aux;
 }

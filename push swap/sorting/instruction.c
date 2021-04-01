@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 12:04:07 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/03/31 21:17:47 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/04/01 19:54:56 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,4 +99,5 @@ void	instruction(unsigned int instruction, int fd, t_array_info *arrays)
 		instr_rotate(instruction, fd, arrays);
 	else if (instruction >= rev_rot_a && instruction <= rev_rot_a_and_b)
 		instr_rev_rotate(instruction, fd, arrays);
+	arrays->instruction_counter++;
 }

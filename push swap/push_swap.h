@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:39:46 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/03/31 21:09:53 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/04/01 21:21:24 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_array_info
 	int	array_a_length;
 	int	array_b_length;
 	int	max_array_length;
+	int	instruction_counter;
 }		t_array_info;
 
 typedef enum e_instructions
@@ -88,8 +89,8 @@ void			get_instructions_verbose(t_array_info *arrays, int fd);
 void			instruction(unsigned int instruction, int fd,
 					t_array_info *arrays);
 void			push(int *dst, int *src, int *dst_length, int *src_length);
-void			rev_rotate(int *array, int length);
 void			rotate(int *array, int length);
+void			rev_rotate(int *array, int length);
 void			swap(int *array, int length);
 /*
 ** SORTING
