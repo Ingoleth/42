@@ -12,15 +12,17 @@
 
 #include "push_swap.h"
 
-void	handle_random_input(char **argv, t_array_info *arrays, t_bool verbose, int argv_pos)
+void	handle_random_input(char **argv, t_array_info *arrays,
+	t_bool verbose, int argv_pos)
 {
 	if (argv[argv_pos + 1] && argv[argv_pos + 1])
 	{
 		if (verbose && !is_number(argv[argv_pos + 1]))
 			ft_printf(STDERR_FILENO, "Array seed must be numeric!\n");
-		else 
+		else
 		{
-			get_rand_array(ft_atoi(argv[argv_pos]), ft_atoi(argv[argv_pos + 1]), arrays);
+			get_rand_array(ft_atoi(argv[argv_pos]),
+				ft_atoi(argv[argv_pos + 1]), arrays);
 			return ;
 		}
 	}
@@ -33,10 +35,13 @@ void	handle_random_input(char **argv, t_array_info *arrays, t_bool verbose, int 
 	}
 	exit(-1);
 }
+
 /*
 ** TODO: Check for more arguments --> error if found?
 */
-void	handle_fd_array(char **argv, t_array_info *arrays, t_bool verbose)
+
+void	handle_fd_array(char **argv, t_array_info *arrays,
+	t_bool verbose)
 {
 	int	fd;
 
@@ -56,9 +61,10 @@ void	handle_fd_array(char **argv, t_array_info *arrays, t_bool verbose)
 	close(fd);
 }
 
-void	handle_input(int argc, char **argv, t_flags *flags, t_array_info *arrays)
+void	handle_input(int argc, char **argv,
+	t_flags *flags, t_array_info *arrays)
 {
-	int argv_pos;
+	int	argv_pos;
 
 	if (argc == 1)
 		exit(-1);

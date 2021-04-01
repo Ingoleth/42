@@ -37,10 +37,10 @@ static	void	handle_instructions(t_array_info *arrays, t_flags *flags)
 		get_instructions(arrays, fd);
 }
 
-static	void print_result(t_array_info *arrays, t_flags *flags)
+static	void	print_result(t_array_info *arrays, t_flags *flags)
 {
-	if (!arrays->array_b_length &&
-	is_sorted(arrays->array_a, arrays->array_a_length))
+	if (!arrays->array_b_length
+		&& is_sorted(arrays->array_a, arrays->array_a_length))
 	{
 		if (flags->verbose)
 			printf("Array is sorted!\n");
@@ -58,8 +58,8 @@ static	void print_result(t_array_info *arrays, t_flags *flags)
 
 int	main(int argc, char **argv)
 {
-	t_array_info arrays;
-	t_flags	flags;
+	t_array_info	arrays;
+	t_flags			flags;
 
 	if (argc == 1)
 		return (0);

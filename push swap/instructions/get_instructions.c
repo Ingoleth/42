@@ -50,7 +50,7 @@ static	t_bool	push_instruction(char *line, t_array_info *arrays)
 	return (false);
 }
 
-static	t_bool	rotate_instruction(char *line,  t_array_info *arrays)
+static	t_bool	rotate_instruction(char *line, t_array_info *arrays)
 {
 	if (!ft_strncmp(line, "ra", 3))
 	{
@@ -71,7 +71,7 @@ static	t_bool	rotate_instruction(char *line,  t_array_info *arrays)
 	return (false);
 }
 
-static	t_bool	rev_rotate_instruction(char *line,  t_array_info *arrays)
+static	t_bool	rev_rotate_instruction(char *line, t_array_info *arrays)
 {
 	if (!ft_strncmp(line, "rra", 4))
 	{

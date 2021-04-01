@@ -13,7 +13,8 @@
 #include "push_swap.h"
 
 static	void
-	print_error_and_exit(char **flags_list, t_flags *flags, char **argv, int *argv_pos)
+	print_error_and_exit(char **flags_list, t_flags *flags,
+		char **argv, int *argv_pos)
 {
 	free(flags_list);
 	if (flags->mode_argv && !argv[0][*argv_pos])
@@ -22,7 +23,8 @@ static	void
 	exit(1);
 }
 
-void	handle_input_flags(char **flags_list, char **argv, t_flags *flags, int *argv_pos)
+void	handle_input_flags(char **flags_list, char **argv,
+	t_flags *flags, int *argv_pos)
 {
 	if (!ft_strncmp(argv[*argv_pos], "-ci", 4))
 	{
@@ -66,7 +68,8 @@ static	t_bool	check_flags(char **flags_list, char *str)
 	return (false);
 }
 
-static	void	check_argv_mode(t_flags *flags, char **argv, char **flags_list, int *argv_pos)
+static	void	check_argv_mode(t_flags *flags, char **argv,
+	char **flags_list, int *argv_pos)
 {
 	if (!flags->mode_fd && !flags->mode_input && !flags->mode_rand)
 		flags->mode_argv = true;

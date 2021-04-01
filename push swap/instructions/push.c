@@ -15,7 +15,7 @@
 void	push(int *dst, int *src, int *dst_length, int *src_length)
 {
 	int	aux;
-	int i;
+	int	i;
 
 	if (!dst || !src || *src_length == 0)
 		return ;

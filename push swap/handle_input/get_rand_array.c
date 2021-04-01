@@ -36,7 +36,7 @@ int	rand_num(unsigned short *lfsr, unsigned int *bit, int length)
 	return (nb);
 }
 
-void get_rand_array(int length, unsigned short lfsr, t_array_info *arrays)
+void	get_rand_array(int length, unsigned short lfsr, t_array_info *arrays)
 {
 	int				i;
 	int				nb_length;

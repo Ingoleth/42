@@ -33,7 +33,8 @@ static	void	fill_array(t_array_info *arrays, t_list *array_list)
 	arrays->array_a_length = i;
 }
 
-static	void	print_error_and_exit(t_list **array_list, char *line, int error, t_bool verbose)
+static	void	print_error_and_exit(t_list **array_list, char *line,
+	int error, t_bool verbose)
 {
 	if (!verbose)
 		ft_printf(STDERR_FILENO, "Error\n");
@@ -46,7 +47,6 @@ static	void	print_error_and_exit(t_list **array_list, char *line, int error, t_b
 		else if (error == repeated)
 			ft_printf(STDERR_FILENO, "Error: Duplicate number!\n");
 	}
-
 	ft_lstclear(array_list, free);
 	free(line);
 	exit(-1);

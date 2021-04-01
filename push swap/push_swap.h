@@ -33,11 +33,11 @@ typedef struct s_flags
 
 typedef struct s_array_info
 {
-	int *array_a;
-	int *array_b;
-	int array_a_length;
-	int array_b_length;
-	int max_array_length;
+	int	*array_a;
+	int	*array_b;
+	int	array_a_length;
+	int	array_b_length;
+	int	max_array_length;
 }		t_array_info;
 
 typedef enum e_instructions
@@ -65,11 +65,13 @@ typedef enum e_error_code
 /*
 ** INPUT HANDLING
 */
-void			handle_input(int argc, char **argv, t_flags *flags, t_array_info *arrays);
-void			initialize_arrays(int argc, char **argv, t_array_info *arrays, t_flags
-					*flags);
+void			handle_input(int argc, char **argv, t_flags *flags,
+					t_array_info *arrays);
+void			initialize_arrays(int argc, char **argv, t_array_info *arrays,
+					t_flags *flags);
 void			get_input_array(int fd, t_array_info *arrays, t_bool verbose);
-void			get_rand_array(int length, unsigned short lfsr, t_array_info *arrays);
+void			get_rand_array(int length, unsigned short lfsr,
+					t_array_info *arrays);
 void			get_array_from_argv(char **argv, int argc, int argv_pos,
 					t_array_info *arrays);
 void			handle_flags(char **argv, t_flags *flags, int *argv_pos);
@@ -83,7 +85,8 @@ t_bool			is_sorted(int *array, int length);
 */
 void			get_instructions(t_array_info *arrays, int fd);
 void			get_instructions_verbose(t_array_info *arrays, int fd);
-void			instruction(unsigned int instruction, int fd, t_array_info *arrays);
+void			instruction(unsigned int instruction, int fd,
+					t_array_info *arrays);
 void			push(int *dst, int *src, int *dst_length, int *src_length);
 void			rev_rotate(int *array, int length);
 void			rotate(int *array, int length);

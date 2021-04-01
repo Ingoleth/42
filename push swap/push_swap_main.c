@@ -18,8 +18,8 @@
 
 int	main(int argc, char **argv)
 {
-	t_array_info arrays;
-	t_flags	flags;
+	t_array_info	arrays;
+	t_flags			flags;
 
 	if (argc == 1)
 		return (0);

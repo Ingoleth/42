@@ -37,7 +37,7 @@ void	fill_array(char **argv, int argc, int argv_pos, t_array_info *arrays)
 	int	nb;
 	int	i;
 
-	arrays->array_a	 = ft_alloc(argc - argv_pos, sizeof(int));
+	arrays->array_a = ft_alloc(argc - argv_pos, sizeof(int));
 	arrays->array_a_length = argc - argv_pos;
 	if (arrays->array_a == NULL)
 		print_error();

@@ -37,16 +37,18 @@ static void	instr_push(unsigned int instruction, int fd, t_array_info *arrays)
 	if (instruction == push_a)
 	{
 		ft_putstr_fd("pa\n", fd);
-		push(arrays->array_a, arrays->array_b, &arrays->array_a_length, &arrays->array_b_length);
+		push(arrays->array_a, arrays->array_b, &arrays->array_a_length,
+			&arrays->array_b_length);
 	}
 	else if (instruction == push_b)
 	{
 		ft_putstr_fd("pb\n", fd);
-		push(arrays->array_b, arrays->array_a, &arrays->array_b_length, &arrays->array_a_length);
+		push(arrays->array_b, arrays->array_a, &arrays->array_b_length,
+			&arrays->array_a_length);
 	}
 }
 
-static void	instr_rotate(unsigned int instruction, int fd,t_array_info *arrays)
+static void	instr_rotate(unsigned int instruction, int fd, t_array_info *arrays)
 {
 	if (instruction == rot_a)
 	{
@@ -66,7 +68,8 @@ static void	instr_rotate(unsigned int instruction, int fd,t_array_info *arrays)
 	}
 }
 
-static void	instr_rev_rotate(unsigned int instruction, int fd,t_array_info *arrays)
+static void	instr_rev_rotate(unsigned int instruction, int fd,
+	t_array_info *arrays)
 {
 	if (instruction == rev_rot_a)
 	{

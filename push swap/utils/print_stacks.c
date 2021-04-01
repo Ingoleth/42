@@ -17,7 +17,6 @@ void	print_stacks(t_array_info *arrays)
 	int	i;
 
 	i = 0;
-
 	while (i < arrays->array_a_length || i < arrays->array_b_length)
 	{
 		if (i < arrays->array_a_length)

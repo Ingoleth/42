@@ -26,7 +26,10 @@ int	ft_atoi(const char *str)
 	while (ft_isspace(str[i]))
 		i++;
 	if (str[i] == '-')
+	{
 		sign *= -1;
+		i++;
+	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		if (number == 0)
