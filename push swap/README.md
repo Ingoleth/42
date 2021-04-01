@@ -24,3 +24,18 @@ Them pancakes!
     https://iq.opengenus.org/sort-stack-using-stack/
 
     https://www.geeksforgeeks.org/check-if-it-is-possible-to-sort-the-array-after-rotating-it/
+
+
+
+https://www.geeksforgeeks.org/bubble-sort-using-two-stacks/
+https://github.com/anyaschukin/Push_Swap
+
+https://github.com/rizky/42-push_swap
+
+    https://www.youtube.com/watch?v=SLauY6PpjW4
+    https://www.youtube.com/watch?v=egU3YD8OKbw&t=51s
+    https://github.com/Binary-Hackers/42_Corrections/tree/master/00_Projects/02_Algorithmic/push_swap/00_new_correction_here
+
+https://github.com/VBrazhnik/Push_swap
+
+https://github.com/mikim42/push_swap
