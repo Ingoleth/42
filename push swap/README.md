@@ -1,5 +1,10 @@
 Documentation:
 
+no more than 2-3 operations for 3 integers
+no more than 12 operations for 5 integers
+no more than 700 operations for 100 integers
+no more than 5300 operations for 500 integers
+
 Geek for geeks:
 
     https://www.geeksforgeeks.org/minimum-number-swaps-required-sort-array/
@@ -8,6 +13,8 @@ Geek for geeks:
     https://stackoverflow.com/questions/15152322/compute-the-minimal-number-of-swaps-to-order-a-sequence/15152602#15152602
 
     https://cs.stackexchange.com/questions/83489/minimum-amount-of-swaps-needed-to-sort-a-stack
+
+    https://www.youtube.com/watch?v=nll-b4GeiX4
 
 
 Them pancakes!
@@ -39,3 +46,9 @@ https://github.com/rizky/42-push_swap
 https://github.com/VBrazhnik/Push_swap
 
 https://github.com/mikim42/push_swap
+
+https://github.com/HorebParraud/push_swap
+
+https://github.com/CharlieDeltaZA/push_swap
+
+https://github.com/Julsy/push_swap
