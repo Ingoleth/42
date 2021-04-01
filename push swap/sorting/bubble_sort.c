@@ -14,7 +14,6 @@
 
 void	bubble_sort(t_array_info *arrays, int fd)
 {
-	print_stacks(arrays);
 	while (true)
 	{
 		if (arrays->array_a_length <= 1
@@ -23,15 +22,7 @@ void	bubble_sort(t_array_info *arrays, int fd)
 		if (arrays->array_a[0] > arrays->array_a[1])
 			instruction(swap_a, fd, arrays);
 		else
-			instruction(push_b, fd, arrays);
-		if (arrays->array_b[0] < arrays->array_b[1])
-			instruction(swap_b, fd, arrays);
+			instruction(rev_rot_a, fd, arrays);
+		print_stacks(arrays);
 	}
-	if (arrays->array_b_length != 0)
-	{
-		while (arrays->array_b_length != 0)
-			instruction(push_a, fd, arrays);
-	}
-	ft_printf(fd, "\n");
-	print_stacks(arrays);
 }
