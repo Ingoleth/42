@@ -24,7 +24,14 @@ int	main(int argc, char **argv)
 	if (argc == 1)
 		return (0);
 	initialize_arrays(argc, argv, &arrays, &flags);
-	bubble_sort(&arrays, STDOUT_FILENO);
+	print_stacks(&arrays);
+	printf("\n");
+	if (arrays.array_a_length <= 3)
+		sort_3(&arrays, STDOUT_FILENO);
+	else
+		printf("Array too long!\n");
+	printf("\n");
+	print_stacks(&arrays);
 	free(arrays.array_a);
 	free(arrays.array_b);
 }

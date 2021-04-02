@@ -25,7 +25,11 @@ SRCS_CHECKER = 		checker_main.c							\
 
 SRCS_PUSH_SWAP =	push_swap_main.c						\
 					sorting/bubble_sort.c					\
-					sorting/instruction.c
+					sorting/instruction.c					\
+					sorting/sort_3.c						\
+					sorting/sort_5.c						\
+					sorting/sort_100.c						\
+					sorting/sort_500.c
 
 LIBFT_A = libft.a
 # COMPILER FLAGS

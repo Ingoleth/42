@@ -88,7 +88,10 @@ static void	instr_rev_rotate(unsigned int instruction, int fd,
 		rev_rotate(arrays->array_b, arrays->array_b_length);
 	}
 }
-
+/*
+**Rotate: El primer número acaba al final del stack;
+**Rev_rotate: El último número acaba al ppo del stack;
+*/
 void	instruction(unsigned int instruction, int fd, t_array_info *arrays)
 {
 	if (instruction <= swap_a_and_b)
