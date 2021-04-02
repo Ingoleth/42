@@ -27,7 +27,7 @@ static int	get_fd(t_bool file_output)
 static void	print_results(t_array_info *arrays)
 {
 	printf("\n");
-	print_stacks(&arrays);
+	print_stacks(arrays);
 	printf("Sorted in %i instructions!\n", arrays->instruction_counter);
 }
 

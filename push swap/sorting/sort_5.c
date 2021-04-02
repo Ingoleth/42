@@ -42,20 +42,14 @@ void	push_first_two_nums(t_array_info *arrays, int fd)
 		index = find_smaller_number(arrays->array_a, arrays->array_a_length);
 		if (index <= arrays->array_a_length / 2)
 		{
-			while (index)
-			{
+			while (index--)
 				instruction(rot_a, fd, arrays);
-				index--;
-			}
 			instruction(push_b, fd, arrays);
 		}
 		else
 		{
-			while (index < arrays->array_a_length)
-			{
+			while (index++ < arrays->array_a_length)
 				instruction(rev_rot_a, fd, arrays);
-				index++;
-			}
 			instruction(push_b, fd, arrays);
 		}
 	}

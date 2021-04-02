@@ -24,7 +24,6 @@ SRCS_CHECKER = 		checker_main.c							\
 					instructions/get_instructions.c
 
 SRCS_PUSH_SWAP =	push_swap_main.c						\
-					sorting/bubble_sort.c					\
 					sorting/instruction.c					\
 					sorting/sort_3.c						\
 					sorting/sort_5.c						\
