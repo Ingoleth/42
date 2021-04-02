@@ -67,7 +67,7 @@ t_bool	is_long_int(char *input)
 	return (false);
 }
 
-t_bool	is_sorted(int *array, int length)
+t_bool	is_sorted(int *array, int length, int direction)
 {
 	int	i;
 
@@ -78,8 +78,16 @@ t_bool	is_sorted(int *array, int length)
 	i = 1;
 	while (i < length)
 	{
-		if (array[i] < array[i - 1])
-			return (false);
+		if (direction == ascending)
+		{
+			if (array[i] < array[i - 1])
+				return (false);
+		}
+		else
+		{
+			if (array[i] > array[i - 1])
+				return (false);
+		}
 		i++;
 	}
 	return (true);

@@ -12,11 +12,11 @@ SRCS_COMMON = 		handle_input/get_array_from_argv.c		\
 					handle_input/handle_flags.c				\
 					handle_input/handle_input.c				\
 					handle_input/initialize_arrays.c		\
-					handle_input/number_checks.c			\
 					instructions/push.c						\
 					instructions/rev_rotate.c				\
 					instructions/rotate.c					\
 					instructions/swap.c						\
+					utils/number_checks.c					\
 					utils/print_stacks.c
 
 SRCS_CHECKER = 		checker_main.c							\
@@ -26,9 +26,12 @@ SRCS_CHECKER = 		checker_main.c							\
 SRCS_PUSH_SWAP =	push_swap_main.c						\
 					sorting/instruction.c					\
 					sorting/sort_3.c						\
+					sorting/sort_3_over_stack.c				\
 					sorting/sort_5.c						\
+					sorting/sort_5_over_stack.c				\
 					sorting/sort_100.c						\
-					sorting/sort_500.c
+					sorting/sort_500.c						\
+					utils/push_num.c
 
 LIBFT_A = libft.a
 # COMPILER FLAGS

@@ -12,23 +12,30 @@
 
 #include "push_swap.h"
 
-void	sort_3(t_array_info *arrays, int fd)
+void	sort_5_over_stack(t_array_info *arrays, int fd, int stack)
 {
-	if (arrays->array_a_length == 1)
-		return ;
-	if (arrays->array_a_length == 2)
-	{
-		if (!is_sorted(arrays->array_a, arrays->array_a_length, ascending))
-			instruction(swap_a, fd, arrays);
-		return ;
-	}
-	while (!is_sorted(arrays->array_a, 3, ascending))
-	{
-		if (arrays->array_a[0] > arrays->array_a[1])
-			instruction(swap_a, fd, arrays);
-		if (arrays->array_a[0] > arrays->array_a[2])
-			instruction(rev_rot_a, fd, arrays);
-		else if (!is_sorted(arrays->array_a, arrays->array_a_length, ascending))
-			instruction(rot_a, fd, arrays);
-	}
+    int i;
+
+    i = 2;
+    if (stack == array_a)
+    {
+        while (i--)
+            push_num(arrays, fd, array_b, smaller);
+        sort_3_over_stack(arrays, fd, array_a);
+        instruction(push_a, fd, arrays);
+	    instruction(push_a, fd, arrays);
+    }
+    else
+    {
+        print_stacks(arrays);
+        while (i--)
+            push_num(arrays, fd, array_a, bigger);
+        print_stacks(arrays);
+        printf("Sort 3 starts here!\n");
+        sort_3_over_stack(arrays, fd, array_b);
+        print_stacks(arrays);
+        printf("Sort 3 ends here!\n");
+        instruction(push_b, fd, arrays);
+	    instruction(push_b, fd, arrays);
+    }
 }

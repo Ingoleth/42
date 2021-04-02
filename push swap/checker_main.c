@@ -40,7 +40,7 @@ static	void	handle_instructions(t_array_info *arrays, t_flags *flags)
 static	void	print_result(t_array_info *arrays, t_flags *flags)
 {
 	if (!arrays->array_b_length
-		&& is_sorted(arrays->array_a, arrays->array_a_length))
+		&& is_sorted(arrays->array_a, arrays->array_a_length, ascending))
 	{
 		if (flags->verbose)
 			printf("Array is sorted!\n");

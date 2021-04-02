@@ -53,7 +53,13 @@ typedef enum e_instructions
 	rot_a_and_b,
 	rev_rot_a,
 	rev_rot_b,
-	rev_rot_a_and_b
+	rev_rot_a_and_b,
+	ascending,
+	descending,
+	bigger,
+	smaller,
+	array_a,
+	array_b
 }				t_instructions;
 
 typedef enum e_error_code
@@ -80,7 +86,7 @@ t_bool			is_number(char *line);
 t_bool			is_repeated(int nb, t_list *array_list);
 t_bool			is_repeated_array(int nb, int *array, int length);
 t_bool			is_long_int(char *input);
-t_bool			is_sorted(int *array, int length);
+t_bool			is_sorted(int *array, int length, int direction);
 /*
 ** INSTRUCTIONS
 */
@@ -97,11 +103,14 @@ void			swap(int *array, int length);
 */
 void			bubble_sort(t_array_info *arrays, int fd);
 void			sort_3(t_array_info *arrays, int fd);
+void			sort_3_over_stack(t_array_info *arrays, int fd, int stack);
 void			sort_5(t_array_info *arrays, int fd);
+void			sort_5_over_stack(t_array_info *arrays, int fd, int stack);
 /*
 **  UTILS 
 */
 void			print_stacks(t_array_info *arrays);
+void			push_num(t_array_info *arrays, int fd, int stack, int type);
 char			*read_input(int fd);
 
 #endif
