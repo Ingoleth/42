@@ -19,7 +19,7 @@ static	void	handle_instructions(t_array_info *arrays, t_flags *flags)
 	fd = 0;
 	if (flags->inst_mode_fd)
 	{
-		fd = open("instuctions", O_RDONLY);
+		fd = open("instructions_list", O_RDONLY);
 		if (fd == -1)
 		{
 			if (flags->verbose)

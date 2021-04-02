@@ -22,7 +22,7 @@ void	sort_3(t_array_info *arrays, int fd)
 			instruction(swap_a, fd, arrays);
 		return ;
 	}
-	while (!is_sorted(arrays->array_a, arrays->array_a_length))
+	while (!is_sorted(arrays->array_a, 3))
 	{
 		if (arrays->array_a[0] > arrays->array_a[1])
 			instruction(swap_a, fd, arrays);
@@ -32,4 +32,3 @@ void	sort_3(t_array_info *arrays, int fd)
 			instruction(rot_a, fd, arrays);
 	}
 }
-

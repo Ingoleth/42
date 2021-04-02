@@ -97,6 +97,7 @@ void			swap(int *array, int length);
 */
 void			bubble_sort(t_array_info *arrays, int fd);
 void			sort_3(t_array_info *arrays, int fd);
+void			sort_5(t_array_info *arrays, int fd);
 /*
 **  UTILS 
 */
