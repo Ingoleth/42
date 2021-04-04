@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 12:04:07 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/04/04 17:54:32 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/04/04 18:22:15 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ static void	instr_push(unsigned int instruction, t_array_info *arrays)
 		ft_putstr_fd("pa\n", arrays->fd);
 		push(arrays->array_a, arrays->array_b, &arrays->array_a_length,
 			&arrays->array_b_length);
+		if (arrays->current_index == arrays->array_a_length - 1)
+			arrays->current_index = 0;
 	}
 	else if (instruction == push_b)
 	{
@@ -66,6 +68,13 @@ static void	instr_rotate(unsigned int instruction, t_array_info *arrays)
 		rotate(arrays->array_a, arrays->array_a_length);
 		rotate(arrays->array_b, arrays->array_b_length);
 	}
+	if (instruction != rot_b)
+	{
+		if (arrays->current_index == arrays->array_a_length - 1)
+			arrays->current_index = 0;
+		else
+			arrays->current_index++;
+	}
 }
 
 static void	instr_rev_rotate(unsigned int instruction, t_array_info *arrays)
@@ -85,6 +94,13 @@ static void	instr_rev_rotate(unsigned int instruction, t_array_info *arrays)
 		ft_putstr_fd("rrb\n", arrays->fd);
 		rev_rotate(arrays->array_a, arrays->array_a_length);
 		rev_rotate(arrays->array_b, arrays->array_b_length);
+	}
+	if (instruction != rev_rot_b)
+	{
+		if (arrays->current_index == 0)
+			arrays->current_index = arrays->array_a_length - 1;
+		else
+			arrays->current_index--;
 	}
 }
 
