@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 10:23:42 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/04/03 19:32:20 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/04/04 18:00:19 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,24 +35,23 @@ int	main(int argc, char **argv)
 {
 	t_array_info	arrays;
 	t_flags			flags;
-	int				fd;
 
 	if (argc == 1)
 		return (0);
 	initialize_arrays(argc, argv, &arrays, &flags);
-	fd = get_fd(flags.file_output);
+	arrays.fd = get_fd(flags.file_output);
 	if (flags.verbose)
 		print_stacks(&arrays);
 	if (arrays.array_a_length <= 3)
-		sort_3_over_stack(&arrays, fd, array_a);
+		sort_3(&arrays);
 	else if (arrays.array_a_length <= 5)
-		sort_5(&arrays, fd);
+		sort_5(&arrays);
 	else
-		regular_sort(&arrays, fd);
+		regular_sort(&arrays);
 	if (flags.verbose)
 		print_results(&arrays);
 	free(arrays.array_a);
 	free(arrays.array_b);
-	if (fd)
-		close(fd);
+	if (arrays.fd)
+		close(arrays.fd);
 }

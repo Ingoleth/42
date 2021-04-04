@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 17:52:33 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/04/04 17:42:19 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/04/04 18:01:00 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static unsigned int	find_number(int *array, unsigned int length, int type)
 	return (j);
 }
 
-void	push_num_b(t_array_info *arrays, int fd, int type)
+void	push_num_b(t_array_info *arrays, int type)
 {
 	int	index;
 
@@ -42,18 +42,18 @@ void	push_num_b(t_array_info *arrays, int fd, int type)
 	if (index <= arrays->array_a_length / 2)
 	{
 		while (index--)
-			instruction(rot_a, fd, arrays);
-		instruction(push_b, fd, arrays);
+			instruction(rot_a, arrays);
+		instruction(push_b, arrays);
 	}
 	else
 	{
 		while (index++ < arrays->array_a_length)
-			instruction(rev_rot_a, fd, arrays);
-		instruction(push_b, fd, arrays);
+			instruction(rev_rot_a, arrays);
+		instruction(push_b, arrays);
 	}
 }
 
-void	push_num_a(t_array_info *arrays, int fd, int type)
+void	push_num_a(t_array_info *arrays, int type)
 {
 	int	index;
 
@@ -61,21 +61,26 @@ void	push_num_a(t_array_info *arrays, int fd, int type)
 	if (index <= arrays->array_b_length / 2)
 	{
 		while (index--)
-			instruction(rot_b, fd, arrays);
-		instruction(push_a, fd, arrays);
+			instruction(rot_b, arrays);
+		instruction(push_a, arrays);
 	}
 	else
 	{
 		while (index++ < arrays->array_b_length)
-			instruction(rev_rot_b, fd, arrays);
-		instruction(push_a, fd, arrays);
+			instruction(rev_rot_b, arrays);
+		instruction(push_a, arrays);
 	}
 }
 
-void	push_num(t_array_info *arrays, int fd, int stack, int type)
+void	push_num(t_array_info *arrays, int stack, int type)
 {
+	if (type != bigger && type != smaller)
+	{
+		printf("Wrong type input!\n");
+		return ;
+	}
 	if (stack == array_a)
-		push_num_a(arrays, fd, type);
+		push_num_a(arrays, type);
 	else
-		push_num_b(arrays, fd, type);
+		push_num_b(arrays, type);
 }

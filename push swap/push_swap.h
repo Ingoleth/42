@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:39:46 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/04/02 22:57:40 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/04/04 17:56:29 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ typedef struct s_array_info
 	int	array_b_length;
 	int	max_array_length;
 	int	instruction_counter;
+	int fd;
+	int current_index;
 }		t_array_info;
 
 typedef enum e_instructions
@@ -92,8 +94,7 @@ t_bool			is_sorted(int *array, int length, int direction);
 */
 void			get_instructions(t_array_info *arrays, int fd);
 void			get_instructions_verbose(t_array_info *arrays, int fd);
-void			instruction(unsigned int instruction, int fd,
-					t_array_info *arrays);
+void			instruction(unsigned int instruction, t_array_info *arrays);
 void			push(int *dst, int *src, int *dst_length, int *src_length);
 void			rotate(int *array, int length);
 void			rev_rotate(int *array, int length);
@@ -101,16 +102,16 @@ void			swap(int *array, int length);
 /*
 ** SORTING
 */
-void			regular_sort(t_array_info *arrays, int fd);
-void			sort_3(t_array_info *arrays, int fd);
-void			sort_3_over_stack(t_array_info *arrays, int fd, int stack);
-void			sort_5(t_array_info *arrays, int fd);
-void			sort_5_over_stack(t_array_info *arrays, int fd, int stack);
+void			regular_sort(t_array_info *arrays);
+void			sort_3(t_array_info *arrays);
+void			sort_3_over_stack(t_array_info *arrays, int stack);
+void			sort_5(t_array_info *arrays);
+void			sort_5_over_stack(t_array_info *arrays, int stack);
 /*
 **  UTILS 
 */
 void			print_stacks(t_array_info *arrays);
-void			push_num(t_array_info *arrays, int fd, int stack, int type);
+void			push_num(t_array_info *arrays, int stack, int type);
 char			*read_input(int fd);
 
 #endif
