@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 10:23:42 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/03/31 21:11:10 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/04/03 19:32:20 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	main(int argc, char **argv)
 	t_array_info	arrays;
 	t_flags			flags;
 	int				fd;
-	int				i;
 
 	if (argc == 1)
 		return (0);
@@ -44,18 +43,12 @@ int	main(int argc, char **argv)
 	fd = get_fd(flags.file_output);
 	if (flags.verbose)
 		print_stacks(&arrays);
-	i = 0;
-	while (i++ <= 5)
-		instruction(push_b, fd, &arrays);
-	sort_5_over_stack(&arrays, fd, array_b);
-	print_results(&arrays);
-	return (0);
 	if (arrays.array_a_length <= 3)
 		sort_3_over_stack(&arrays, fd, array_a);
 	else if (arrays.array_a_length <= 5)
 		sort_5(&arrays, fd);
 	else
-		printf("Array too long!\n");
+		regular_sort(&arrays, fd);
 	if (flags.verbose)
 		print_results(&arrays);
 	free(arrays.array_a);

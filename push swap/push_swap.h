@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:39:46 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/04/01 21:21:24 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/04/02 22:57:40 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void			swap(int *array, int length);
 /*
 ** SORTING
 */
-void			bubble_sort(t_array_info *arrays, int fd);
+void			regular_sort(t_array_info *arrays, int fd);
 void			sort_3(t_array_info *arrays, int fd);
 void			sort_3_over_stack(t_array_info *arrays, int fd, int stack);
 void			sort_5(t_array_info *arrays, int fd);
