@@ -18,13 +18,13 @@ void    store_values_to_swap(t_array_info *arrays, int start, int end)
     move_to_index(arrays, start);
     instruction(push_b, arrays);
     print_stacks(arrays);
-    move_to_index(arrays, end);
+    move_to_index(arrays, end - 1);
     instruction(push_b, arrays);
     print_stacks(arrays);
     instruction(rot_b, arrays);
     instruction(push_a, arrays);
     print_stacks(arrays);
-    move_to_index(arrays, start);
+    move_to_index(arrays, start - 1);
     instruction(push_a, arrays);
     print_stacks(arrays);
     exit(0);
