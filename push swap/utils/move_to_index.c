@@ -36,13 +36,14 @@ void	move_to_index(t_array_info *arrays, int index)
 {
 	t_bool move_right;
 
-	if (index < 0 || index > arrays->array_a_length
+	if (index < 0 || index >= arrays->array_a_length
 		|| index == arrays->current_index)
 		return ;
 	if (index < arrays->current_index)
 		get_vector_index_left(arrays, index, &move_right);
 	else
 		get_vector_index_right(arrays, index, &move_right);
+	printf("index = %i; Current indez = %i;\n", index, arrays->array_a_length);
 	if (move_right)
 	{
 		while (arrays->current_index != index)

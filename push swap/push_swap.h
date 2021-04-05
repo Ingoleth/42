@@ -103,6 +103,7 @@ void			swap(int *array, int length);
 ** SORTING
 */
 void			regular_sort(t_array_info *arrays);
+void			quick_sort(t_array_info *arrays, int start, int end);
 void			sort_3(t_array_info *arrays);
 void			sort_3_over_stack(t_array_info *arrays, int stack);
 void			sort_5(t_array_info *arrays);

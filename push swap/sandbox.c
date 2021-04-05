@@ -1,75 +1,129 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <sys/time.h>
 
-#include "stdio.h"
+/*
+	Author: Shibaji Paul, shibaji.paul@gmail.complex
+	Created for Udemy Course.
+*/
 
-// A utility function to swap two elements
-void swap(int* a, int* b)
-{
-    int t = *a;
-    *a = *b;
-    *b = t;
+/*
+  function prototypes
+*/
+
+
+void quickSort(int array[], int lb, int ub);
+
+/**
+    
+    Description: Helper function for quick sort that will choose the pivot and will place 
+    the pivot at exact position where it should be in the sorted array by moving all the
+    numbers less than equals pivot to the left and all larger than pivot to the right of 
+    the array. Partition performs the task in the range lb:ub, both inclusive.
+    lb: lower bound of the array, partition starts from here
+    ub: upper bounfd of the array, partition ends at this index.
+
+    Return value: returns the index such that, lb<=index<=ub where it places the pivot.
+*/
+int partition(int array[], int lb, int ub);
+
+/**
+ Description: to check if the array is sorted or not.
+ Input Parameters:
+    array[]: array of integers
+    n: number of elements in the array
+    order: for order of sorting, if 1 will check if the array is sorted in ascending
+           order, if 0 will check for descending order.
+ return value: 1 if the array is sorted as per supplied order, 0 if not.
+
+*/
+
+int isSorted(int array[], int n, int order);
+
+/**
+ Description: to input integers from console and assign them into the elements of array
+ Input Parameters:
+    array[]: array of integers
+    n: number of elements in the array
+ return value: Nothing
+
+*/
+void inputDataFromConsole(int array[], int n);
+
+/**
+ Description: To print the content of the array into output console
+ Input Parameters:
+    array[]: array of integers
+    n: number of elements in the array
+ return value: Nothing
+
+*/
+void printDataToConsole(int array[], int n);
+
+/**
+ Description: Randomly generates n integer using the rand function and assigns them
+              into the array element.
+ Input Parameters:
+    array[]: array of integers
+    n: number of elements in the array
+ return value: Nothing
+
+*/
+void fillRandomData(int array[], int n);
+
+/**
+    Description: Helper function to get time difference in milli-seconds.
+    Input Parameters:
+        struct timeval start: start time
+        struct timeval end: end time
+    Return value: elapsed time in milli sec (float).
+*/
+float timediff(struct timeval start, struct timeval end);
+
+
+int * copyArray( int src[], int size);
+
+
+/*
+    Implementation of quick sort
+*/
+
+void quickSort(int array[], int lb, int ub){
+    if (lb >= ub)
+        return;
+    int j = partition(array, lb, ub);
+    // There are 2 unsorted sections, lb to j-1 and j+1 to ub.
+    // Sorting lb to j-1 using quick sort
+    quickSort(array, lb, j-1);
+    // sorting j+1 to ub using quick sort.
+    quickSort(array, j+1, ub);
 }
- 
-/* This function takes last element as pivot, places
-the pivot element at its correct position in sorted
-array, and places all smaller (smaller than pivot)
-to left of pivot and all greater elements to right
-of pivot */
-int partition (int arr[], int low, int high)
-{
-    int pivot = arr[high]; // pivot
-    int i = (low - 1); // Index of smaller element and indicates the right position of pivot found so far
- 
-    for (int j = low; j <= high - 1; j++)
-    {
-        // If current element is smaller than the pivot
-        if (arr[j] < pivot)
-        {
-            i++; // increment index of smaller element
-            swap(&arr[i], &arr[j]);
+
+/*
+    Implementation of Partition Function.
+*/
+
+int partition(int array[], int lb, int ub){
+    int down, up, pivot, temp;
+    down = lb;
+    up = ub;
+    pivot = array[lb];
+    while(down < up){
+        while(array[down] <= pivot && down < ub)
+            down++;
+
+        while(array[up] > pivot)
+            up--;
+        if (down < up){
+            temp = array[down];
+            array[down] = array[up];
+            array[up] = temp;
         }
     }
-    swap(&arr[i + 1], &arr[high]);
-    return (i + 1);
-}
- 
-/* The main function that implements QuickSort
-arr[] --> Array to be sorted,
-low --> Starting index,
-high --> Ending index */
-void quickSort(int arr[], int low, int high)
-{
-    if (low < high)
-    {
-        /* pi is partitioning index, arr[p] is now
-        at right place */
-        int pi = partition(arr, low, high);
- 
-        // Separately sort elements before
-        // partition and after partition
-        quickSort(arr, low, pi - 1);
-        quickSort(arr, pi + 1, high);
-    }
-}
- 
-/* Function to print an array */
-void printArray(int arr[], int size)
-{
-    int i;
+    // Now place the pivot at index up, so exchange the pivot index(lb) with the up
+    array[lb] = array[up];
+    array[up] = pivot;
+    return up;
 
-	i = 0;
-	while (i++ < size - 1)
-		printf("%d, ", arr[i]);
-	printf("%i\n", arr[i]);
 }
- 
-// Driver Code
-int main()
-{
-    int arr[] = {10, 7, 8, 9, 1, 5};
-    int n = sizeof(arr) / sizeof(arr[0]);
-    quickSort(arr, 0, n - 1);
-    printArray(arr, n);
-    return 0;
-}
- 
-// This code is contributed by rathbhupendra

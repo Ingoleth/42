@@ -47,7 +47,7 @@ int	main(int argc, char **argv)
 	else if (arrays.array_a_length <= 5)
 		sort_5(&arrays);
 	else
-		regular_sort(&arrays);
+		quick_sort(&arrays, 0, arrays.array_a_length - 1);
 	if (flags.verbose)
 		print_results(&arrays);
 	free(arrays.array_a);
