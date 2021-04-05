@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:39:46 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/04/04 17:56:29 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/04/05 12:28:35 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ void			sort_5_over_stack(t_array_info *arrays, int stack);
 /*
 **  UTILS 
 */
+void			move_to_index(t_array_info *arrays, int index);
 void			print_stacks(t_array_info *arrays);
 void			push_num(t_array_info *arrays, int stack, int type);
 char			*read_input(int fd);

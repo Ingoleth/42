@@ -24,14 +24,13 @@ SRCS_CHECKER = 		checker_main.c							\
 					instructions/get_instructions.c
 
 SRCS_PUSH_SWAP =	push_swap_main.c						\
-					sorting/instruction.c					\
 					sorting/regular_sort.c					\
 					sorting/sort_3.c						\
 					sorting/sort_3_over_stack.c				\
 					sorting/sort_5.c						\
 					sorting/sort_5_over_stack.c				\
-					sorting/sort_100.c						\
-					sorting/sort_500.c						\
+					utils/instruction.c						\
+					utils/move_to_index.c					\
 					utils/push_num.c
 
 LIBFT_A = libft.a

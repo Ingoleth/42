@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 10:23:42 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/04/04 18:00:19 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/04/05 12:31:06 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,11 @@ int	main(int argc, char **argv)
 	arrays.fd = get_fd(flags.file_output);
 	if (flags.verbose)
 		print_stacks(&arrays);
+	move_to_index(&arrays, 4);
+	print_stacks(&arrays);
+	move_to_index(&arrays, 0);
+	print_stacks(&arrays);
+	return (0);
 	if (arrays.array_a_length <= 3)
 		sort_3(&arrays);
 	else if (arrays.array_a_length <= 5)
