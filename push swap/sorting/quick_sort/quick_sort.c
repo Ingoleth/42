@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 12:39:14 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/04/05 12:42:32 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/04/06 12:08:41 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,25 @@
 
 void    store_values_to_swap(t_array_info *arrays, int start, int end)
 {
-    printf("Value left (at %i) = %i; Value right (at %i) = %i;", start, arrays->array_a[start], end, arrays->array_a[end]);
     move_to_index(arrays, start);
     instruction(push_b, arrays);
-    print_stacks(arrays);
     move_to_index(arrays, end - 1);
     instruction(push_b, arrays);
-    print_stacks(arrays);
+	move_to_index(arrays, end - 2);
     instruction(rot_b, arrays);
     instruction(push_a, arrays);
-    print_stacks(arrays);
     move_to_index(arrays, start - 1);
     instruction(push_a, arrays);
-    print_stacks(arrays);
-    exit(0);
+	printf("\n-----------\nDid a swap!\n-----------\n");
+}
+
+void	swap_num(int *array, int down, int up)
+{
+	int temp;
+
+	temp = array[down];
+	array[down] = array[up];
+	array[up] = temp;
 }
 
 int     get_pivot_point(t_array_info *arrays, int start, int end)
@@ -46,8 +51,11 @@ int     get_pivot_point(t_array_info *arrays, int start, int end)
         while (arrays->array_a[up] > pivot)
             up--;
         if (down < up)
-            store_values_to_swap(arrays, down, up);
+			swap_num(arrays->array_a, down, up);
+            //store_values_to_swap(arrays, down, up);
     }
+	printf("No more swaps to do!\n");
+	//print_stacks(arrays);
     arrays->array_a[start] = arrays->array_a[up];
     arrays->array_a[up] = pivot;
     return (up);

@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 12:04:07 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/04/04 18:22:15 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/04/06 12:01:39 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ static void	instr_push(unsigned int instruction, t_array_info *arrays)
 		ft_putstr_fd("pa\n", arrays->fd);
 		push(arrays->array_a, arrays->array_b, &arrays->array_a_length,
 			&arrays->array_b_length);
-		if (arrays->current_index == arrays->array_a_length - 1)
-			arrays->current_index = 0;
 	}
 	else if (instruction == push_b)
 	{
 		ft_putstr_fd("pb\n", arrays->fd);
 		push(arrays->array_b, arrays->array_a, &arrays->array_b_length,
 			&arrays->array_a_length);
+		if (arrays->current_index == arrays->array_a_length)
+			arrays->current_index = 0;
 	}
 }
 

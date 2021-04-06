@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 11:48:57 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/04/05 12:33:06 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/04/06 11:39:51 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	move_to_index(t_array_info *arrays, int index)
 		get_vector_index_left(arrays, index, &move_right);
 	else
 		get_vector_index_right(arrays, index, &move_right);
-	printf("index = %i; Current indez = %i;\n", index, arrays->array_a_length);
 	if (move_right)
 	{
 		while (arrays->current_index != index)
