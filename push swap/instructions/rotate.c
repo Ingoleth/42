@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 02:21:32 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/04/06 11:49:57 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/04/06 13:59:24 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	rotate(int *array, int length)
 	int	i;
 	int	aux;
 
-	printf("Array length = %i; array[0] = %i\n", length, array[0]);
 	if (!array || !length)
 		return ;
 	aux = array[0];
