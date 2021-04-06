@@ -14,8 +14,21 @@
 
 void    store_values_to_swap(t_array_info *arrays, int start, int end)
 {
-    printf("I want to swap %d (at index %d) with %d (at index %d)\n", arrays->array_a[start], start, arrays->array_a[end], end);
+    if (start == end)
+        return ;
+    if (end == arrays->array_a_length - 1 && start == 0)
+    {
+        move_to_index(arrays, end);
+        instruction(swap_a, arrays);
+        return ;
+        
+    }
     move_to_index(arrays, start);
+    if (start + 1 == end)
+    {
+        instruction(swap_a, arrays);
+        return ;
+    }
     instruction(push_b, arrays);
     move_to_index(arrays, end - 1);
     instruction(push_b, arrays);
@@ -24,19 +37,18 @@ void    store_values_to_swap(t_array_info *arrays, int start, int end)
     instruction(push_a, arrays);
     move_to_index(arrays, start);
     instruction(push_a, arrays);
+    if (start == 0)
+        arrays->current_index = 0;
 }
 
-void	swap_num(int *array, int down, int up)
+int get_offset(t_array_info *arrays, int i)
 {
-	int temp;
-
-	printf("I want to swap %d (at array[%d]) with %d (at array [%d])\n", array[down], down, array[up], up);
-	temp = array[down];
-	array[down] = array[up];
-	array[up] = temp;
+    if (i >= arrays->current_index)
+        return (i - arrays->current_index);
+    return (i + arrays->array_a_length -  arrays->current_index);
 }
 
-int     get_pivot_point(t_array_info *arrays, int start, int end)
+int get_pivot_point(t_array_info *arrays, int start, int end)
 {
     int pivot;
     int up;
@@ -44,23 +56,17 @@ int     get_pivot_point(t_array_info *arrays, int start, int end)
 
     up = end;
     down = start;
-    pivot = arrays->array_a[start];
+    pivot = arrays->array_a[get_offset(arrays, start)];
     while (down < up)
     {
-        printf("Pivot = %i\n", pivot);
-        while (arrays->array_a[down] <= pivot && down < end)
+        while (arrays->array_a[get_offset(arrays, down)] <= pivot && down < end)
             down++;
-        while (arrays->array_a[up] > pivot)
+        while (arrays->array_a[get_offset(arrays, up)] > pivot)
             up--;
         if (down < up)
-			swap_num(arrays->array_a, down, up);
-            //store_values_to_swap(arrays, down, up);
+            store_values_to_swap(arrays, down, up);
     }
-	printf("No more swaps to do!\n");
-	//store_values_to_swap(arrays, start, up);
-	printf("I want to swap %d (at array[%d]) with %d (at array [%d])\n", arrays->array_a[start], start, arrays->array_a[up], up);
-    arrays->array_a[start] = arrays->array_a[up];
-	arrays->array_a[up] = pivot;
+    store_values_to_swap(arrays, start, up);
     return (up);
 }
 
@@ -68,10 +74,6 @@ void	quick_sort(t_array_info *arrays, int start, int end)
 {
     int pivot_point;
 
-    print_array(arrays);
-	store_values_to_swap(arrays, 5, 6);
-    print_array(arrays);
-	exit(0);
     if (start < end)
     {
         pivot_point = get_pivot_point(arrays, start, end);
