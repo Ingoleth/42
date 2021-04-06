@@ -113,6 +113,7 @@ void			sort_5_over_stack(t_array_info *arrays, int stack);
 */
 void			move_to_index(t_array_info *arrays, int index);
 void			print_stacks(t_array_info *arrays);
+void			print_array(t_array_info *arrays);
 void			push_num(t_array_info *arrays, int stack, int type);
 char			*read_input(int fd);
 

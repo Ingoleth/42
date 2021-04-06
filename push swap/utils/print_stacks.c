@@ -16,6 +16,7 @@ void	print_array(t_array_info *arrays)
 {
 	int i;
 
+	printf("Array = ");
 	if (arrays->current_index == 0)
 	{
 		i = 0;
@@ -28,7 +29,7 @@ void	print_array(t_array_info *arrays)
 		while (i < arrays->array_a_length)
 			printf("%d ", arrays->array_a[i++]);
 		i = 0;
-		while (i <= arrays->array_a_length - arrays->current_index)
+		while (i <= arrays->array_a_length - arrays->current_index - 1)
 			printf("%d ", arrays->array_a[i++]);
 	}
 	printf("\n");

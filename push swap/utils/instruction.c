@@ -39,6 +39,8 @@ static void	instr_push(unsigned int instruction, t_array_info *arrays)
 		ft_putstr_fd("pa\n", arrays->fd);
 		push(arrays->array_a, arrays->array_b, &arrays->array_a_length,
 			&arrays->array_b_length);
+		if (arrays->current_index == 0)
+			arrays->current_index = arrays->array_a_length - 1;
 	}
 	else if (instruction == push_b)
 	{
