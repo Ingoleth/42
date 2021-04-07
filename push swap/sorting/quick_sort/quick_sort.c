@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 12:39:14 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/04/06 14:05:26 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/04/07 17:06:36 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,6 @@ void    store_values_to_swap(t_array_info *arrays, int start, int end)
     instruction(push_a, arrays);
     if (start == 0)
         arrays->current_index = 0;
-}
-
-int get_offset(t_array_info *arrays, int i)
-{
-    if (i >= arrays->current_index)
-        return (i - arrays->current_index);
-    return (i + arrays->array_a_length -  arrays->current_index);
 }
 
 int get_pivot_point(t_array_info *arrays, int start, int end)

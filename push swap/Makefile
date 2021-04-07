@@ -30,6 +30,8 @@ SRCS_PUSH_SWAP =	push_swap_main.c						\
 					sorting/sort_3_over_stack.c				\
 					sorting/sort_5.c						\
 					sorting/sort_5_over_stack.c				\
+					utils/find_bigger_num.c					\
+					utils/get_offset.c						\
 					utils/instruction.c						\
 					utils/move_to_index.c					\
 					utils/push_num.c
