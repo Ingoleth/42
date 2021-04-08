@@ -53,10 +53,10 @@ static t_bool	add_number_to_list(t_list **smaller_num, int index, int value)
 
 	if (is_number_within_indexes(smaller_num[0], index))
 	{
-		ft_lstdbl_add_back(smaller_num, ft_lstnew(ft_calloc(2, sizeof(int))));
+		ft_lstadd_back(smaller_num, ft_lstnew(ft_calloc(2, sizeof(int))));
 		aux = ft_lstlast(smaller_num[0]);
 		if (aux == NULL || aux->content == NULL)
-			return ;
+			return (false);
 		((int *)aux->content)[0] = index;
 		((int *)aux->content)[1] = value;
 	}
@@ -74,18 +74,17 @@ static t_bool	add_number_to_list(t_list **smaller_num, int index, int value)
 ** If (recursively) the next smaller number is in the path, it gets added to the list.
 */
 
-void	find_smaller_numbers_in_path(t_array_info *arrays, t_list **smaller_num,
+void	find_smaller_nums_in_path(t_array_info *arrays, t_list **smaller_num,
 	int previous_num, int previous_index)
 {
 	int		index;
-	t_list	*aux;
 
 	index = find_bigger_num(arrays, &previous_num, true, previous_num);
 	if (index == previous_index)
 		return ;
 	if (*smaller_num == NULL)
 	{
-		ft_lstdbl_add_back(smaller_num, ft_lstnew(ft_calloc(3, sizeof(int))));
+		ft_lstadd_back(smaller_num, ft_lstnew(ft_calloc(3, sizeof(int))));
 		if (smaller_num[0] == NULL || smaller_num[0]->content == NULL)
 			return ;
 		((int *)smaller_num[0]->content)[0] = index;
@@ -94,5 +93,5 @@ void	find_smaller_numbers_in_path(t_array_info *arrays, t_list **smaller_num,
 	}
 	else if (!add_number_to_list(smaller_num, index, previous_index))
 		return ;
-	find_smaller_number_in_path(arrays, smaller_num, previous_num, index);
+	find_smaller_nums_in_path(arrays, smaller_num, previous_num, index);
 }

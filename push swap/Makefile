@@ -6,34 +6,35 @@ PUSH_SWAP = push_swap
 # HEADER FILES DIRECTORIES
 
 INCLUDES = -Ilibft/ -I.
-SRCS_COMMON = 		handle_input/get_array_from_argv.c		\
-					handle_input/get_input_array.c			\
-					handle_input/get_rand_array.c			\
-					handle_input/handle_flags.c				\
-					handle_input/handle_input.c				\
-					handle_input/initialize_arrays.c		\
-					instructions/push.c						\
-					instructions/rev_rotate.c				\
-					instructions/rotate.c					\
-					instructions/swap.c						\
-					utils/number_checks.c					\
+SRCS_COMMON = 		handle_input/get_array_from_argv.c					\
+					handle_input/get_input_array.c						\
+					handle_input/get_rand_array.c						\
+					handle_input/handle_flags.c							\
+					handle_input/handle_input.c							\
+					handle_input/initialize_arrays.c					\
+					instructions/push.c									\
+					instructions/rev_rotate.c							\
+					instructions/rotate.c								\
+					instructions/swap.c									\
+					utils/number_checks.c								\
 					utils/print_stacks.c
 
-SRCS_CHECKER = 		checker_main.c							\
-					instructions/get_instructions_verbose.c	\
+SRCS_CHECKER = 		checker_main.c										\
+					instructions/get_instructions_verbose.c				\
 					instructions/get_instructions.c
 
-SRCS_PUSH_SWAP =	push_swap_main.c						\
-					sorting/quick_sort/quick_sort.c			\
-					sorting/regular_sort.c					\
-					sorting/sort_3.c						\
-					sorting/sort_3_over_stack.c				\
-					sorting/sort_5.c						\
-					sorting/sort_5_over_stack.c				\
-					utils/find_bigger_num.c					\
-					utils/get_offset.c						\
-					utils/instruction.c						\
-					utils/move_to_index.c					\
+SRCS_PUSH_SWAP =	push_swap_main.c									\
+					sorting/quick_sort/quick_sort.c						\
+					sorting/regular_sort/find_smaller_nums_in_path.c	\
+					sorting/regular_sort/regular_sort.c					\
+					sorting/sort_3.c									\
+					sorting/sort_3_over_stack.c							\
+					sorting/sort_5.c									\
+					sorting/sort_5_over_stack.c							\
+					utils/find_bigger_num.c								\
+					utils/get_offset.c									\
+					utils/instruction.c									\
+					utils/move_to_index.c								\
 					utils/push_num.c
 
 LIBFT_A = libft.a

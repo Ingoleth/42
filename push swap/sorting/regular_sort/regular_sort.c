@@ -20,17 +20,19 @@ void	move_bigger_num_to_b(t_array_info *arrays)
 	t_list *smaller_num;
 	
 	smaller_num = NULL;
-	destination = find_bigger_num(arrays, &bigger_num, false, NULL);
-	find_smaller_number_in_path(arrays, &smaller_num, bigger_num, destination);
-	if (smaller_num->content[0] < destination)
+	destination = find_bigger_num(arrays, &bigger_num, false, 0);
+	find_smaller_nums_in_path(arrays, &smaller_num, bigger_num, destination);
+	if (((int *)smaller_num->content)[0] < destination)
 	{
-		number_of_steps = destination + 2 * ft_lstsize(lst);
+		number_of_steps = destination + 2 * ft_lstsize(smaller_num);
 		if (number_of_steps < arrays->array_a_length - destination)
-			move_smaller_numbers_to_b(arrays, smaller_num, &destination); //If null, do nothing!
+			printf("I've taken this route!\n"); //If null, do nothing!
+		else
+			printf("I've taken this other route!\n");
 	}
 	else
 	{
-		number_of_steps = arrays->array_a_length - destination + 2 * ft_lstsize(lst);
+		number_of_steps = arrays->array_a_length - destination + 2 * ft_lstsize(smaller_num);
 		if (number_of_steps < destination)
 			move_smaller_numbers_to_b(arrays, smaller_num, &destination);
 	}

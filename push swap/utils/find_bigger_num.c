@@ -28,20 +28,17 @@ int	find_bigger_num(t_array_info *arrays, int *value, t_bool capped,
 	index = 0;
 	i = 0;
 	aux = arrays->array_a[0];
-	if (capped)
+	while (i < arrays->array_a_length)
 	{
-		while (i < arrays->array_a_length)
+		if (arrays->array_a[0] > aux
+			&& (!capped || arrays->array_a[0] <= cap_value))
 		{
-			if (arrays->array_a[0] > aux
-				&& (!capped || arrays->array_a[0] <= cap_value))
-			{
-				index = i;
-				aux == arrays->array_a[0];
-			}
-			i++;
+			index = i;
+			aux = arrays->array_a[0];
 		}
-		if (value)
-			*value = aux;
-		return (index);	
+		i++;
 	}
+	if (value)
+		*value = aux;
+	return (index);	
 }

@@ -103,6 +103,8 @@ void			swap(int *array, int length);
 ** SORTING
 */
 void			regular_sort(t_array_info *arrays);
+void			find_smaller_nums_in_path(t_array_info *arrays, t_list **smaller_num,
+					int previous_num, int previous_index);
 void			quick_sort(t_array_info *arrays, int start, int end);
 void			sort_3(t_array_info *arrays);
 void			sort_3_over_stack(t_array_info *arrays, int stack);
@@ -112,6 +114,9 @@ void			sort_5_over_stack(t_array_info *arrays, int stack);
 **  UTILS 
 */
 void			move_to_index(t_array_info *arrays, int index);
+int				get_offset(t_array_info *arrays, int i);
+int				find_bigger_num(t_array_info *arrays, int *value, t_bool capped,
+					int cap_value);
 void			print_stacks(t_array_info *arrays);
 void			print_array(t_array_info *arrays);
 void			push_num(t_array_info *arrays, int stack, int type);
