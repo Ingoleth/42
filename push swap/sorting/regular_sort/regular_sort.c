@@ -63,21 +63,24 @@ void	move_bigger_num_to_b(t_array_info *arrays)
 	smaller_num = NULL;
 	destination = find_bigger_num(arrays, &bigger_num, false, 0);
 	find_smaller_nums_in_path(arrays, &smaller_num, bigger_num, destination);
-	if (((int *)smaller_num->content)[0] < destination)
+	if (smaller_num)
 	{
-		if (check_route_left(destination, smaller_num, arrays->array_a_length))
-			printf("I've taken this route!\n"); //If null, do nothing!
+		if (((int *)smaller_num->content)[0] < destination)
+		{
+			if (check_route_left(destination, smaller_num, arrays->array_a_length))
+			{
+				printf("I've taken this route!\n"); //If null, do nothing!
+				destination -= ft_lstsize(smaller_num);
+			}
+		}
 		else
-			printf("I've taken this other route!\n");
+		{
+			if (check_route_right(destination, smaller_num, arrays->array_a_length))
+				printf("I've taken this route!\n"); //If null, do nothing!
+		}
 	}
-	else
-	{
-		if (check_route_right(destination, smaller_num, arrays->array_a_length))
-			printf("I've taken this route!\n"); //If null, do nothing!
-		else
-			printf("I've taken this other route!\n");
-	}
-	push_num(arrays, array_b, bigger);
+	move_to_index(arrays, get_offset(arrays, destination));
+	instruction(push_b, arrays);
 	if (smaller_num)
 		ft_lstclear(&smaller_num, free);
 }
