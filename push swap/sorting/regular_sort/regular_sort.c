@@ -12,11 +12,52 @@
 
 #include "push_swap.h"
 
+static t_bool	check_route_right(int destination, t_list *smaller_num,
+	int array_lenght)
+{
+	int	route_swapping_smaller_nums;
+	int	alternate_route;
+	int i;
+
+	alternate_route = array_lenght - destination + ft_lstsize(smaller_num) * 2;
+	route_swapping_smaller_nums = ((int *)smaller_num->content)[0] - 1;
+	while (smaller_num->next)
+	{
+		i = ((int *)smaller_num->content)[0];
+		smaller_num = smaller_num->next;
+		route_swapping_smaller_nums += i - ((int *)smaller_num->content)[0];
+	}
+	if (alternate_route > route_swapping_smaller_nums)
+		return (true);
+	else
+		return (false);
+}
+
+static t_bool	check_route_left(int destination, t_list *smaller_num,
+	int array_lenght)
+{
+	int	route_swapping_smaller_nums;
+	int	alternate_route;
+	int i;
+
+	alternate_route = destination + ft_lstsize(smaller_num) * 2;
+	route_swapping_smaller_nums = array_lenght - ((int *)smaller_num->content)[0];
+	while (smaller_num->next)
+	{
+		i = ((int *)smaller_num->content)[0];
+		smaller_num = smaller_num->next;
+		route_swapping_smaller_nums += ((int *)smaller_num->content)[0] - i - 1;
+	}
+	if (alternate_route > route_swapping_smaller_nums)
+		return (true);
+	else
+		return (false);
+}
+
 void	move_bigger_num_to_b(t_array_info *arrays)
 {
 	int	destination;
 	int	bigger_num;
-	int number_of_steps;
 	t_list *smaller_num;
 	
 	smaller_num = NULL;
@@ -24,21 +65,21 @@ void	move_bigger_num_to_b(t_array_info *arrays)
 	find_smaller_nums_in_path(arrays, &smaller_num, bigger_num, destination);
 	if (((int *)smaller_num->content)[0] < destination)
 	{
-		number_of_steps = destination + 2 * ft_lstsize(smaller_num);
-		if (number_of_steps < arrays->array_a_length - destination)
+		if (check_route_left(destination, smaller_num, arrays->array_a_length))
 			printf("I've taken this route!\n"); //If null, do nothing!
 		else
 			printf("I've taken this other route!\n");
 	}
 	else
 	{
-		number_of_steps = arrays->array_a_length - destination + 2 * ft_lstsize(smaller_num);
-		if (number_of_steps < destination)
-			move_smaller_numbers_to_b(arrays, smaller_num, &destination);
+		if (check_route_right(destination, smaller_num, arrays->array_a_length))
+			printf("I've taken this route!\n"); //If null, do nothing!
+		else
+			printf("I've taken this other route!\n");
 	}
-	move_num_to_b(destination);
+	push_num(arrays, array_b, bigger);
 	if (smaller_num)
-		free(smaller_num);
+		ft_lstclear(&smaller_num, free);
 }
 
 void	regular_sort(t_array_info *arrays)

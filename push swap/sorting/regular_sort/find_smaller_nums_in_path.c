@@ -18,24 +18,33 @@
 ** 
 ** Note that the first elements of the linked list has three elements instead of
 ** two, where [0] is the location of the smaller number found and [2] is the
-** destination
+** destination.
+**
+** Additionally, in order to add the number to the list, the number and the
+** destination need to be 2 spaces apart (which are the needeed instructions to
+** move it in place on the list);
 */
 
 static t_bool	is_number_within_indexes(t_list *smaller_num, int index)
 {
-	if
-	(
-		(((int *)smaller_num->content)[0] < index
-		&&
-		index < ((int *)smaller_num->content)[2])
-		||
-		(((int *)smaller_num->content)[2] < index
-		&&
-		index < ((int *)smaller_num->content)[0])
-	)
-		return (true);
-	else
-		return (false);
+	int	bigger_num_index;
+	int	first_num_index;
+	
+	bigger_num_index = ((int *)smaller_num->content)[2];
+	first_num_index = ((int *)smaller_num->content)[0];
+	if (first_num_index < index && index < bigger_num_index)
+	{
+		smaller_num = ft_lstlast(smaller_num);
+		if (((int *)smaller_num->content)[0] + 2 < index)
+			return(true);
+	}
+	else if (bigger_num_index < index && index < first_num_index)
+	{
+		smaller_num = ft_lstlast(smaller_num);
+		if (index < ((int *)smaller_num->content)[0] - 2)
+			return(true);
+	}
+	return (false);
 }
 
 /*
@@ -55,8 +64,14 @@ static t_bool	add_number_to_list(t_list **smaller_num, int index, int value)
 	{
 		ft_lstadd_back(smaller_num, ft_lstnew(ft_calloc(2, sizeof(int))));
 		aux = ft_lstlast(smaller_num[0]);
-		if (aux == NULL || aux->content == NULL)
+		if (aux->content == NULL)
+		{
+			aux = *smaller_num;
+			while (aux->next->next)
+				aux = aux->next;
+			aux->next = 0;
 			return (false);
+		}
 		((int *)aux->content)[0] = index;
 		((int *)aux->content)[1] = value;
 	}
@@ -85,8 +100,14 @@ void	find_smaller_nums_in_path(t_array_info *arrays, t_list **smaller_num,
 	if (*smaller_num == NULL)
 	{
 		ft_lstadd_back(smaller_num, ft_lstnew(ft_calloc(3, sizeof(int))));
-		if (smaller_num[0] == NULL || smaller_num[0]->content == NULL)
+		if (smaller_num[0] == NULL)
 			return ;
+		if (smaller_num[0]->content == NULL)
+		{
+			free(smaller_num);
+			*smaller_num = 0;
+			return ;
+		}
 		((int *)smaller_num[0]->content)[0] = index;
 		((int *)smaller_num[0]->content)[1] = previous_num;
 		((int *)smaller_num[0]->content)[2] = previous_index;
