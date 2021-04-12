@@ -25,7 +25,7 @@ SRCS_CHECKER = 		checker_main.c										\
 
 SRCS_PUSH_SWAP =	push_swap_main.c									\
 					sorting/quick_sort/quick_sort.c						\
-					sorting/regular_sort/find_smaller_nums_in_path.c	\
+					sorting/regular_sort/find_bigger_nums_in_path.c		\
 					sorting/regular_sort/regular_sort.c					\
 					sorting/sort_3.c									\
 					sorting/sort_3_over_stack.c							\

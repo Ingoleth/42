@@ -54,15 +54,22 @@ static t_bool	check_route_left(int destination, t_list *smaller_num,
 		return (false);
 }
 
-void	move_bigger_num_to_b(t_array_info *arrays)
+void	move_smaller_num_to_b(t_array_info *arrays)
 {
 	int	destination;
-	int	bigger_num;
+	int	aux;
 	t_list *smaller_num;
 	
 	smaller_num = NULL;
-	destination = find_bigger_num(arrays, &bigger_num, false, 0);
-	find_smaller_nums_in_path(arrays, &smaller_num, bigger_num, destination);
+	destination = find_bigger_num(arrays, &aux, false, 0);
+	find_bigger_nums_in_path(arrays, &smaller_num, aux, destination);
+	while (smaller_num)
+	{
+		printf("Next index = %i; value = %i\n", ((int *)smaller_num->content)[0], ((int *)smaller_num->content)[1]);
+		smaller_num = smaller_num->next;
+	}
+	
+	exit (0);
 	if (smaller_num)
 	{
 		if (((int *)smaller_num->content)[0] < destination)
@@ -87,12 +94,10 @@ void	move_bigger_num_to_b(t_array_info *arrays)
 
 void	regular_sort(t_array_info *arrays)
 {
-	if (!is_sorted(arrays->array_a, arrays->array_a_length, ascending))
-	{
-		while (arrays->array_a_length > 5)
-			move_bigger_num_to_b(arrays);
-		sort_5_over_stack(arrays, array_a);
-		while (arrays->array_b_length)
-			instruction(push_a, arrays);
-	}
+	while (arrays->array_a_length > 5
+		&& !is_sorted(arrays->array_a, arrays->array_a_length, ascending))
+		move_smaller_num_to_b(arrays);
+	sort_5(arrays);
+	while (arrays->array_b_length)
+		instruction(push_a, arrays);
 }

@@ -19,11 +19,14 @@ void	sort_5_over_stack(t_array_info *arrays, int stack)
 	i = 2;
 	if (stack == array_a)
 	{
-		while (i--)
-			push_num(arrays, array_b, smaller);
-		sort_3_over_stack(arrays, array_a);
-		instruction(push_a, arrays);
-		instruction(push_a, arrays);
+		if (!is_sorted(arrays->array_a, arrays->array_a_length, ascending))
+		{
+			while (i--)
+				push_num(arrays, array_b, smaller);
+			sort_3_over_stack(arrays, array_a);
+			instruction(push_a, arrays);
+			instruction(push_a, arrays);
+		}
 	}
 	else
 	{

@@ -27,20 +27,19 @@
 
 static t_bool	is_number_within_indexes(t_list *smaller_num, int index)
 {
-	int	bigger_num_index;
+	int	smaller_num_index;
 	int	first_num_index;
 	
-	bigger_num_index = ((int *)smaller_num->content)[2];
+	smaller_num_index = ((int *)smaller_num->content)[2];
 	first_num_index = ((int *)smaller_num->content)[0];
-	if (first_num_index < index && index < bigger_num_index)
+	smaller_num = ft_lstlast(smaller_num);
+	if (first_num_index < index && index < smaller_num_index)
 	{
-		smaller_num = ft_lstlast(smaller_num);
 		if (((int *)smaller_num->content)[0] + 2 < index)
 			return(true);
 	}
-	else if (bigger_num_index < index && index < first_num_index)
+	else if (smaller_num_index < index && index < first_num_index)
 	{
-		smaller_num = ft_lstlast(smaller_num);
 		if (index < ((int *)smaller_num->content)[0] - 2)
 			return(true);
 	}
@@ -81,24 +80,22 @@ static t_bool	add_number_to_list(t_list **smaller_num, int index, int value)
 }
 
 /*
-** Finds and lists the smaller numbers found in the path to the destination
-** (biggest number in the array, which will be pushed to b);
+** Finds and lists the bigger numbers found in the path to the destination
+** (smallest number in the array, which will be pushed to b);
 ** The path to destination will be determined by the position
-** of the immediately smaller number to destination found in the array
+** of the immediately bigger number to destination found in the array
 ** 
-** If (recursively) the next smaller number is in the path, it gets added to the list.
+** If (recursively) the next bigger number is in the path, it gets added to the list.
 */
 
-void	find_smaller_nums_in_path(t_array_info *arrays, t_list **smaller_num,
+void	find_bigger_nums_in_path(t_array_info *arrays, t_list **smaller_num,
 	int previous_num, int previous_index)
 {
 	int		index;
 
-	index = find_bigger_num(arrays, &previous_num, true, previous_num);
-	if (index == previous_index)
-		return ;
 	if (*smaller_num == NULL)
 	{
+		printf("Hello there\n");
 		ft_lstadd_back(smaller_num, ft_lstnew(ft_calloc(3, sizeof(int))));
 		if (smaller_num[0] == NULL)
 			return ;
@@ -112,7 +109,14 @@ void	find_smaller_nums_in_path(t_array_info *arrays, t_list **smaller_num,
 		((int *)smaller_num[0]->content)[1] = previous_num;
 		((int *)smaller_num[0]->content)[2] = previous_index;
 	}
-	else if (!add_number_to_list(smaller_num, index, previous_index))
+	else 
+	{
+		index = find_bigger_num(arrays, &previous_num, true, previous_num);
+		printf("Index of the next num = %i; value = %i; Previous index = %i\n", index, previous_num, previous_index);
+		if (smaller_num[0] && index == previous_index)
+			return ;
+		if (!add_number_to_list(smaller_num, index, previous_index))
 		return ;
-	find_smaller_nums_in_path(arrays, smaller_num, previous_num, index);
+	}
+	find_bigger_nums_in_path(arrays, smaller_num, previous_num, index);
 }

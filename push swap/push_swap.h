@@ -103,7 +103,7 @@ void			swap(int *array, int length);
 ** SORTING
 */
 void			regular_sort(t_array_info *arrays);
-void			find_smaller_nums_in_path(t_array_info *arrays, t_list **smaller_num,
+void			find_bigger_nums_in_path(t_array_info *arrays, t_list **smaller_num,
 					int previous_num, int previous_index);
 void			quick_sort(t_array_info *arrays, int start, int end);
 void			sort_3(t_array_info *arrays);
