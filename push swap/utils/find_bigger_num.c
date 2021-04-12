@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 17:04:28 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/04/07 17:09:14 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/04/12 18:32:53 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	find_bigger_num(t_array_info *arrays, int *value, t_bool capped,
 	while (i < arrays->array_a_length)
 	{
 		if (arrays->array_a[i] > aux
-			&& (!capped || arrays->array_a[i] >= cap_value))
+			&& (!capped || arrays->array_a[i] < cap_value))
 		{
 			index = i;
 			aux = arrays->array_a[i];

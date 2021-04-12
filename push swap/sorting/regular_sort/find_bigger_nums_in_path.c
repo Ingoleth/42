@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_smaller_numbers_in_path.c                     :+:      :+:    :+:   */
+/*   find_bigger_nums_in_path.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 17:12:26 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/04/07 17:41:30 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/04/12 20:43:53 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,17 @@
 
 static t_bool	is_number_within_indexes(t_list *smaller_num, int index)
 {
-	int	smaller_num_index;
+	int	bigger_num_index;
 	int	first_num_index;
 	
-	smaller_num_index = ((int *)smaller_num->content)[2];
-	first_num_index = ((int *)smaller_num->content)[0];
+	bigger_num_index = ((int *)smaller_num->content)[2];
 	smaller_num = ft_lstlast(smaller_num);
-	if (first_num_index < index && index < smaller_num_index)
-	{
-		if (((int *)smaller_num->content)[0] + 2 < index)
-			return(true);
-	}
-	else if (smaller_num_index < index && index < first_num_index)
-	{
-		if (index < ((int *)smaller_num->content)[0] - 2)
-			return(true);
-	}
+	first_num_index = ((int *)smaller_num->content)[0];
+	printf("Checking number at index %i; Bigger_num = %i; first_num = %i\n", index, bigger_num_index, first_num_index);
+	if (first_num_index < index && index < bigger_num_index)
+		return(true);
+	else if (bigger_num_index < index && index < first_num_index)
+		return (true);
 	return (false);
 }
 
@@ -93,9 +88,9 @@ void	find_bigger_nums_in_path(t_array_info *arrays, t_list **smaller_num,
 {
 	int		index;
 
+	index = find_bigger_num(arrays, &previous_num, true, previous_num);
 	if (*smaller_num == NULL)
 	{
-		printf("Hello there\n");
 		ft_lstadd_back(smaller_num, ft_lstnew(ft_calloc(3, sizeof(int))));
 		if (smaller_num[0] == NULL)
 			return ;
@@ -111,11 +106,9 @@ void	find_bigger_nums_in_path(t_array_info *arrays, t_list **smaller_num,
 	}
 	else 
 	{
-		index = find_bigger_num(arrays, &previous_num, true, previous_num);
-		printf("Index of the next num = %i; value = %i; Previous index = %i\n", index, previous_num, previous_index);
 		if (smaller_num[0] && index == previous_index)
 			return ;
-		if (!add_number_to_list(smaller_num, index, previous_index))
+		if (!add_number_to_list(smaller_num, index, arrays->array_a[index]))
 		return ;
 	}
 	find_bigger_nums_in_path(arrays, smaller_num, previous_num, index);
