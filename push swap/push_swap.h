@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:39:46 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/04/13 19:48:02 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/04/13 20:10:48 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void			find_smallest_nums_in_path(t_array_info *arrays, t_list **smaller_num,
 					int previous_num, int previous_index);
 void			push_smaller_numbers(t_array_info *arrays, t_list *small_numbers,
 					int direction);
+void			print_smaller_nums_found(t_list *smaller_nums);
 void			quick_sort(t_array_info *arrays, int start, int end);
 void			sort_3(t_array_info *arrays);
 void			sort_3_over_stack(t_array_info *arrays, int stack);

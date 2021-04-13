@@ -6,13 +6,13 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 21:36:59 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/04/13 19:51:14 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/04/13 20:13:35 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static t_bool	check_route_right(int destination, t_list *smaller_num,
+static t_bool	check_route_left(int destination, t_list *smaller_num,
 	int array_lenght)
 {
 	int	route_swapping_smaller_nums;
@@ -33,7 +33,7 @@ static t_bool	check_route_right(int destination, t_list *smaller_num,
 		return (false);
 }
 
-static t_bool	check_route_left(int destination, t_list *smaller_num,
+static t_bool	check_route_right(int destination, t_list *smaller_num,
 	int array_lenght)
 {
 	int	route_swapping_smaller_nums;
@@ -65,14 +65,15 @@ void	move_smaller_num_to_b(t_array_info *arrays)
 	find_smallest_nums_in_path(arrays, &next_smaller_num, aux, destination);
 	if (next_smaller_num)
 	{
+		print_smaller_nums_found(next_smaller_num);
 		if (((int *)next_smaller_num->content)[0] < destination)
 		{
-			if (check_route_left(destination, next_smaller_num, arrays->array_a_length))
+			if (check_route_right(destination, next_smaller_num, arrays->array_a_length))
 				push_smaller_numbers(arrays, next_smaller_num, right);
 		}
 		else
 		{
-			if (check_route_right(destination, next_smaller_num, arrays->array_a_length))
+			if (check_route_left(destination, next_smaller_num, arrays->array_a_length))
 				push_smaller_numbers(arrays, next_smaller_num, left);
 		}
 	}
