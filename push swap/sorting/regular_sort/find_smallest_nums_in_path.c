@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_bigger_nums_in_path.c                         :+:      :+:    :+:   */
+/*   find_smallest_nums_in_path.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 17:12:26 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/04/12 20:43:53 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/04/13 19:33:57 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,12 @@ static t_bool	add_number_to_list(t_list **smaller_num, int index, int value)
 ** If (recursively) the next bigger number is in the path, it gets added to the list.
 */
 
-void	find_bigger_nums_in_path(t_array_info *arrays, t_list **smaller_num,
+void	find_smallest_nums_in_path(t_array_info *arrays, t_list **smaller_num,
 	int previous_num, int previous_index)
 {
 	int		index;
 
-	index = find_bigger_num(arrays, &previous_num, true, previous_num);
+	index = find_smallest_num(arrays, &previous_num, true, previous_num);
 	if (*smaller_num == NULL)
 	{
 		ft_lstadd_back(smaller_num, ft_lstnew(ft_calloc(3, sizeof(int))));
@@ -111,5 +111,5 @@ void	find_bigger_nums_in_path(t_array_info *arrays, t_list **smaller_num,
 		if (!add_number_to_list(smaller_num, index, arrays->array_a[index]))
 		return ;
 	}
-	find_bigger_nums_in_path(arrays, smaller_num, previous_num, index);
+	find_smallest_nums_in_path(arrays, smaller_num, previous_num, index);
 }

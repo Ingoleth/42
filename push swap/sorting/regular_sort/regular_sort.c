@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 21:36:59 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/04/07 17:12:15 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/04/13 19:51:14 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,38 +58,30 @@ void	move_smaller_num_to_b(t_array_info *arrays)
 {
 	int	destination;
 	int	aux;
-	t_list *smaller_num;
+	t_list *next_smaller_num;
 	
-	smaller_num = NULL;
-	destination = find_bigger_num(arrays, &aux, false, 0);
-	find_bigger_nums_in_path(arrays, &smaller_num, aux, destination);
-	while (smaller_num)
+	next_smaller_num = NULL;
+	destination = find_smallest_num(arrays, &aux, false, 0);
+	find_smallest_nums_in_path(arrays, &next_smaller_num, aux, destination);
+	if (next_smaller_num)
 	{
-		printf("Next index = %i; value = %i\n", ((int *)smaller_num->content)[0], ((int *)smaller_num->content)[1]);
-		smaller_num = smaller_num->next;
-	}
-	
-	exit (0);
-	if (smaller_num)
-	{
-		if (((int *)smaller_num->content)[0] < destination)
+		if (((int *)next_smaller_num->content)[0] < destination)
 		{
-			if (check_route_left(destination, smaller_num, arrays->array_a_length))
-			{
-				printf("I've taken this route!\n"); //If null, do nothing!
-				destination -= ft_lstsize(smaller_num);
-			}
+			if (check_route_left(destination, next_smaller_num, arrays->array_a_length))
+				push_smaller_numbers(arrays, next_smaller_num, right);
 		}
 		else
 		{
-			if (check_route_right(destination, smaller_num, arrays->array_a_length))
-				printf("I've taken this route!\n"); //If null, do nothing!
+			if (check_route_right(destination, next_smaller_num, arrays->array_a_length))
+				push_smaller_numbers(arrays, next_smaller_num, left);
 		}
 	}
-	move_to_index(arrays, get_offset(arrays, destination));
-	instruction(push_b, arrays);
-	if (smaller_num)
-		ft_lstclear(&smaller_num, free);
+	push_num(arrays, array_b, smaller);
+	while (arrays->array_b[arrays->array_b_length - 1] > arrays->array_b[0])
+		instruction(rot_b, arrays);
+	if (next_smaller_num)
+		ft_lstclear(&next_smaller_num, free);
+	print_stacks(arrays);
 }
 
 void	regular_sort(t_array_info *arrays)

@@ -25,13 +25,14 @@ SRCS_CHECKER = 		checker_main.c										\
 
 SRCS_PUSH_SWAP =	push_swap_main.c									\
 					sorting/quick_sort/quick_sort.c						\
-					sorting/regular_sort/find_bigger_nums_in_path.c		\
+					sorting/regular_sort/find_smallest_nums_in_path.c	\
+					sorting/regular_sort/push_smaller_numbers.c			\
 					sorting/regular_sort/regular_sort.c					\
 					sorting/sort_3.c									\
 					sorting/sort_3_over_stack.c							\
 					sorting/sort_5.c									\
 					sorting/sort_5_over_stack.c							\
-					utils/find_bigger_num.c								\
+					utils/find_smallest_num.c							\
 					utils/get_offset.c									\
 					utils/instruction.c									\
 					utils/move_to_index.c								\
