@@ -79,7 +79,7 @@ void	move_smaller_num_to_b(t_array_info *arrays)
 	}
 	push_num(arrays, array_b, smaller);
 	while (arrays->array_b[arrays->array_b_length - 1] > arrays->array_b[0])
-		instruction(rot_b, arrays);
+		instruction(rev_rot_b, arrays);
 	if (next_smaller_num)
 		ft_lstclear(&next_smaller_num, free);
 	print_stacks(arrays);

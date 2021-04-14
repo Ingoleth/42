@@ -23,7 +23,7 @@ void	push_smaller_numbers(t_array_info *arrays,	t_list *small_numbers,
 		while (arrays->array_a[0] != ((int *)small_numbers->content)[1])
 		{
 			printf("Current value = %i; Target value = %i;\n",
-				arrays->array_a[i], (((int *)small_numbers->content)[1]));
+				arrays->array_a[0], (((int *)small_numbers->content)[1]));
 			if (direction == right)
 			{
 				i++;
@@ -35,8 +35,9 @@ void	push_smaller_numbers(t_array_info *arrays,	t_list *small_numbers,
 				instruction(rev_rot_a, arrays);
 			}
 		}
+		print_stacks(arrays);
 		instruction(push_b, arrays);
-		instruction(rev_rot_b, arrays);
+		instruction(rot_b, arrays);
 		small_numbers = small_numbers->next;
 	}
 }
