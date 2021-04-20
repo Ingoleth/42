@@ -24,10 +24,7 @@ SRCS_CHECKER = 		checker_main.c										\
 					instructions/get_instructions.c
 
 SRCS_PUSH_SWAP =	push_swap_main.c									\
-					sorting/quick_sort/quick_sort.c						\
-					sorting/regular_sort/find_smallest_nums_in_path.c	\
-					sorting/regular_sort/push_smaller_numbers.c			\
-					sorting/regular_sort/regular_sort.c					\
+					sorting/juggle_sort/juggle_sort.c					\
 					sorting/sort_3.c									\
 					sorting/sort_3_over_stack.c							\
 					sorting/sort_5.c									\

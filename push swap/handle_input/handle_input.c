@@ -45,7 +45,7 @@ void	handle_fd_array(char **argv, t_array_info *arrays,
 {
 	int	fd;
 
-	fd = open(argv[0], O_RDONLY);
+	fd = open("array", O_RDONLY);
 	if (fd == -1)
 	{
 		if (argv[0])

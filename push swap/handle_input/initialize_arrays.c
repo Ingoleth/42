@@ -23,6 +23,5 @@ void	initialize_arrays(int argc, char **argv, t_array_info *arrays, t_flags
 		free(arrays->array_a);
 		exit (1);
 	}
-	arrays->max_array_length = arrays->array_a_length;
 	arrays->instruction_counter = 0;
 }

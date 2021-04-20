@@ -106,9 +106,10 @@ void	find_smallest_nums_in_path(t_array_info *arrays, t_list **smaller_num,
 	}
 	else 
 	{
-		if (smaller_num[0] && index == previous_index)
+		printf("Current index to check: %i\n", index);
+		if (index == previous_index)
 			return ;
-		if (!add_number_to_list(smaller_num, index, arrays->array_a[index]))
+		if (!add_number_to_list(smaller_num, index, arrays->array_a[index])) //Check lenght - smaller_num_lenght > 5 ?
 		return ;
 	}
 	find_smallest_nums_in_path(arrays, smaller_num, previous_num, index);

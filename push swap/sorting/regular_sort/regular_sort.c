@@ -19,13 +19,13 @@ static t_bool	check_route_left(int destination, t_list *smaller_num,
 	int	alternate_route;
 	int i;
 
-	alternate_route = array_lenght - destination + ft_lstsize(smaller_num) * 2;
-	route_swapping_smaller_nums = ((int *)smaller_num->content)[0] - 1;
+	route_swapping_smaller_nums = array_lenght - destination + ft_lstsize(smaller_num) * 2;
+	alternate_route = ((int *)smaller_num->content)[0] - 1;
 	while (smaller_num->next)
 	{
 		i = ((int *)smaller_num->content)[0];
 		smaller_num = smaller_num->next;
-		route_swapping_smaller_nums += i - ((int *)smaller_num->content)[0];
+		alternate_route += i - ((int *)smaller_num->content)[0];
 	}
 	if (alternate_route > route_swapping_smaller_nums)
 		return (true);
@@ -40,14 +40,15 @@ static t_bool	check_route_right(int destination, t_list *smaller_num,
 	int	alternate_route;
 	int i;
 
-	alternate_route = destination + ft_lstsize(smaller_num) * 2;
-	route_swapping_smaller_nums = array_lenght - ((int *)smaller_num->content)[0];
+	alternate_route = array_lenght - ((int *)smaller_num->content)[0];
+	route_swapping_smaller_nums = destination + ft_lstsize(smaller_num) * 2;
 	while (smaller_num->next)
 	{
 		i = ((int *)smaller_num->content)[0];
 		smaller_num = smaller_num->next;
-		route_swapping_smaller_nums += ((int *)smaller_num->content)[0] - i - 1;
+		alternate_route += ((int *)smaller_num->content)[0] - i - 1;
 	}
+	printf("Alternate route = %i; route swapping smaller nums = %i\n", alternate_route, route_swapping_smaller_nums);
 	if (alternate_route > route_swapping_smaller_nums)
 		return (true);
 	else
@@ -82,7 +83,6 @@ void	move_smaller_num_to_b(t_array_info *arrays)
 		instruction(rev_rot_b, arrays);
 	if (next_smaller_num)
 		ft_lstclear(&next_smaller_num, free);
-	print_stacks(arrays);
 }
 
 void	regular_sort(t_array_info *arrays)

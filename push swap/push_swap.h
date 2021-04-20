@@ -37,7 +37,10 @@ typedef struct s_array_info
 	int	*array_b;
 	int	array_a_length;
 	int	array_b_length;
-	int	max_array_length;
+	int sorted_elements_a;
+	int sorted_elements_b;
+	t_list *subdivisions_on_a;
+	t_list *subdivisions_on_b;
 	int	instruction_counter;
 	int fd;
 	int current_index;
@@ -104,6 +107,7 @@ void			swap(int *array, int length);
 /*
 ** SORTING
 */
+void    		juggle_sort_on_b(t_array_info *arrays);
 void			regular_sort(t_array_info *arrays);
 void			find_smallest_nums_in_path(t_array_info *arrays, t_list **smaller_num,
 					int previous_num, int previous_index);
