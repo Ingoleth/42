@@ -38,9 +38,6 @@ typedef struct s_array_info
 	int	array_a_length;
 	int	array_b_length;
 	int sorted_elements_a;
-	int sorted_elements_b;
-	t_list *subdivisions_on_a;
-	t_list *subdivisions_on_b;
 	int	instruction_counter;
 	int fd;
 	int current_index;
