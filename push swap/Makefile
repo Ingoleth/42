@@ -24,11 +24,12 @@ SRCS_CHECKER = 		checker_main.c										\
 					instructions/get_instructions.c
 
 SRCS_PUSH_SWAP =	push_swap_main.c									\
-					sorting/juggle_sort/juggle_sort.c					\
+					sorting/juggle_sort/get_pivot.c						\
+					sorting/juggle_sort/juggle_sort_a.c					\
+					sorting/juggle_sort/juggle_sort_b.c					\
 					sorting/sort_3.c									\
-					sorting/sort_3_over_stack.c							\
+					sorting/juggle_sort/sort_3_over_stack.c				\
 					sorting/sort_5.c									\
-					sorting/sort_5_over_stack.c							\
 					utils/find_smallest_num.c							\
 					utils/get_offset.c									\
 					utils/instruction.c									\

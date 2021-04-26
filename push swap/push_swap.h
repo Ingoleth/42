@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:39:46 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/04/13 20:10:48 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/04/26 16:40:29 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,12 @@ void			swap(int *array, int length);
 /*
 ** SORTING
 */
-void    		juggle_sort_on_b(t_array_info *arrays);
+void			juggle_sort_a(t_array_info *arrays);
+void			juggle_sort_b(t_array_info *arrays, t_list *subdivisions);
+int				get_pivot(int *array, int start, int end);
+void			sort_3_a(t_array_info *arrays, int length);
+void			sort_3_b(t_array_info *arrays, int length);
+void			push_remaining_elements_to_a(t_array_info *arrays, int current_set_size);
 void			regular_sort(t_array_info *arrays);
 void			find_smallest_nums_in_path(t_array_info *arrays, t_list **smaller_num,
 					int previous_num, int previous_index);

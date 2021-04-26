@@ -1,0 +1,52 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_3_over_stack.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/25 23:24:23 by aiglesia          #+#    #+#             */
+/*   Updated: 2021/04/26 23:10:48 by aiglesia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "push_swap.h"
+
+void	sort_3_b(t_array_info *arrays, int length)
+{
+	printf("lenght = %i\n", length);
+	if (is_sorted(arrays->array_b, length, descending) || length < 2)
+		return ;
+	if (length == 2 || (arrays->array_b[0] < arrays->array_b[1]))
+	{
+		instruction (swap_b, arrays);
+		if (length == 2 || is_sorted(arrays->array_b, length, descending))
+			return ;
+	}
+	instruction(rot_b, arrays);
+	instruction(swap_b, arrays);
+	instruction(rev_rot_b, arrays);
+	if (arrays->array_b[0] < arrays->array_b[1])
+		instruction(swap_b, arrays);
+}
+
+void	sort_3_a(t_array_info *arrays, int length)
+{
+	printf("\\|\n");
+	print_stacks(arrays);
+	if (is_sorted(arrays->array_a, length, ascending) || length < 2)
+		return ;
+	if (length == 2 || (arrays->array_a[0] > arrays->array_a[1]))
+	{
+		instruction (swap_a, arrays);
+		printf("|\\\n");
+		if (length == 2 || is_sorted(arrays->array_a, length, ascending))
+			return ;
+	}
+	instruction(rot_a, arrays);
+	instruction(swap_a, arrays);
+	instruction(rev_rot_a, arrays);
+	if (arrays->array_a[0] > arrays->array_a[1])
+		instruction(swap_a, arrays);
+	printf("|\\\n");
+}

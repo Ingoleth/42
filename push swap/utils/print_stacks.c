@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 17:52:33 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/04/13 20:14:58 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/04/26 22:51:08 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,4 @@ void	print_stacks(t_array_info *arrays)
 	printf("          a         b\n\n");
 	printf("A size = %i; B size = %i;\n\n", arrays->array_a_length,
 		arrays->array_b_length);
-	printf("Current index = %i\n", arrays->current_index);
 }

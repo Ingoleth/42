@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   juggle_sort_a.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/25 12:13:13 by aiglesia          #+#    #+#             */
+/*   Updated: 2021/04/26 23:03:01 by aiglesia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
@@ -33,15 +44,15 @@ void    sort_remaining_numbers(t_array_info *arrays, int length)
     }
 }
 
-static int push_and_rotate_backwards(t_array_info *arrays, int *nb_swaps, int i)
+static int push_and_rotate_backwards(t_array_info *arrays, unsigned long int *nb_swaps, int i)
 {
     int pivot;
 
     pivot = get_pivot(arrays->array_a, arrays->sorted_elements_a, arrays->array_a_length);
     while (i)
     {
-        instruction(rot_a, arrays);
-        i--;
+        instruction(rev_rot_a, arrays);
+		i--;
         if (arrays->array_a[0] <= pivot)
         {
             instruction(push_b, arrays);
@@ -51,11 +62,11 @@ static int push_and_rotate_backwards(t_array_info *arrays, int *nb_swaps, int i)
     return (i);
 }
 
-static int push_and_rotate_forwards(t_array_info *arrays, int *nb_swaps, int i)
+static int push_and_rotate_forwards(t_array_info *arrays, unsigned long int *nb_swaps, int i)
 {
     int pivot;
 
-    pivot = get_pivot(arrays, 0, arrays->array_a_length - arrays->sorted_elements_a);
+    pivot = get_pivot(arrays->array_a, 0, arrays->array_a_length - arrays->sorted_elements_a);
     while (i < arrays->array_a_length - arrays->sorted_elements_a)
     {
         if (arrays->array_a[0] <= pivot)
@@ -74,24 +85,26 @@ static int push_and_rotate_forwards(t_array_info *arrays, int *nb_swaps, int i)
 
 void    juggle_sort_a(t_array_info *arrays)
 {
-    int pivot;
     int i;
     unsigned long int nb_swaps;
     t_list *subdivisions;
 
     i = 0;
     subdivisions = NULL;
-    while (arrays->array_a_length > arrays->sorted_elements_a + 5)
+    while (arrays->array_a_length > arrays->sorted_elements_a + 3)
     {
-        nb_swaps = 0;
-        if (i == 0)
-            i = push_and_rotate_forwards(arrays, &nb_swaps, i);
-        else
-            i = push_and_rotate_backwards(arrays, &nb_swaps, i);
-        if (nb_swaps)
-            ft_lstadd_front(&subdivisions, ft_lstnew((void *)nb_swaps));
-    }
-    sort_5_over_stack(arrays, array_a);
+		nb_swaps = 0;
+		if (i == 0)
+			i = push_and_rotate_forwards(arrays, &nb_swaps, i);
+		else
+			i = push_and_rotate_backwards(arrays, &nb_swaps, i);
+		if (nb_swaps)
+			ft_lstadd_front(&subdivisions, ft_lstnew((void *)nb_swaps));
+		printf("I have made a subdivision of size: %li\n", nb_swaps);
+	}
+	while (i--) //check if bigger than sorted elements; if so, rotate the other way around!
+		instruction(rev_rot_a, arrays); //Change so it's smarter
+    sort_3_a(arrays, arrays->array_a_length - arrays->sorted_elements_a);
     arrays->sorted_elements_a += arrays->array_a_length - arrays->sorted_elements_a;
     juggle_sort_b(arrays, subdivisions);
 }
