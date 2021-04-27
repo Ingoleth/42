@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 23:24:23 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/04/26 23:10:48 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/04/27 11:06:13 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	sort_3_b(t_array_info *arrays, int length)
 {
-	printf("lenght = %i\n", length);
 	if (is_sorted(arrays->array_b, length, descending) || length < 2)
 		return ;
 	if (length == 2 || (arrays->array_b[0] < arrays->array_b[1]))
@@ -32,14 +31,11 @@ void	sort_3_b(t_array_info *arrays, int length)
 
 void	sort_3_a(t_array_info *arrays, int length)
 {
-	printf("\\|\n");
-	print_stacks(arrays);
 	if (is_sorted(arrays->array_a, length, ascending) || length < 2)
 		return ;
 	if (length == 2 || (arrays->array_a[0] > arrays->array_a[1]))
 	{
 		instruction (swap_a, arrays);
-		printf("|\\\n");
 		if (length == 2 || is_sorted(arrays->array_a, length, ascending))
 			return ;
 	}
@@ -48,5 +44,4 @@ void	sort_3_a(t_array_info *arrays, int length)
 	instruction(rev_rot_a, arrays);
 	if (arrays->array_a[0] > arrays->array_a[1])
 		instruction(swap_a, arrays);
-	printf("|\\\n");
 }

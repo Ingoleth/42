@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 12:13:13 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/04/26 23:03:01 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/04/27 10:56:24 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,9 @@ void    juggle_sort_a(t_array_info *arrays)
 			i = push_and_rotate_backwards(arrays, &nb_swaps, i);
 		if (nb_swaps)
 			ft_lstadd_front(&subdivisions, ft_lstnew((void *)nb_swaps));
-		printf("I have made a subdivision of size: %li\n", nb_swaps);
 	}
-	while (i--) //check if bigger than sorted elements; if so, rotate the other way around!
-		instruction(rev_rot_a, arrays); //Change so it's smarter
+		while (i--)
+			instruction(rev_rot_a, arrays);
     sort_3_a(arrays, arrays->array_a_length - arrays->sorted_elements_a);
     arrays->sorted_elements_a += arrays->array_a_length - arrays->sorted_elements_a;
     juggle_sort_b(arrays, subdivisions);

@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 12:12:57 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/04/26 23:14:21 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/04/27 10:56:41 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ void    juggle_sort_b(t_array_info* arrays, t_list *subdivisions)
 
     while (subdivisions)
     {
-		printf("Current B subdivision: %li\n", (long int)subdivisions->content);
-		print_stacks(arrays);
         current_set_size = (long int)subdivisions->content;
         i = 0;
         while (current_set_size > 3)
@@ -72,17 +70,11 @@ void    juggle_sort_b(t_array_info* arrays, t_list *subdivisions)
         }
 		while (i--)
 			instruction(rev_rot_b, arrays);
-		print_stacks(arrays);
         juggle_sort_a(arrays);
-		printf("---\n");
 		sort_3_b(arrays, current_set_size);
 		arrays->sorted_elements_a +=current_set_size;
 		while (current_set_size--)
 			instruction(push_a, arrays);
-		printf("---\n");
-		//sort_3_b(arrays, current_set_size); //Rework so it's more efficient
-		//while (current_set_size--)
-		//	instruction(push_a, arrays);
         aux = subdivisions;
         subdivisions = subdivisions->next;
         ft_lstdelone(aux, 0);
