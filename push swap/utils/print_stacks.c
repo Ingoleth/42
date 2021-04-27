@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 17:52:33 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/04/26 22:51:08 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/04/27 19:32:38 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_array(t_array_info *arrays)
 {
-	int i;
+	int	i;
 
 	printf("Array = ");
 	if (arrays->current_index == 0)

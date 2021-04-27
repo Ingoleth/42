@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 14:22:26 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/03/31 20:06:56 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/04/27 19:36:28 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static	void	handle_instructions(t_array_info *arrays, t_flags *flags)
 		get_instructions(arrays, fd);
 }
 
-static	void	print_result(t_array_info *arrays, t_flags *flags)
+static void	print_result(t_array_info *arrays, t_flags *flags)
 {
 	if (!arrays->array_b_length
 		&& is_sorted(arrays->array_a, arrays->array_a_length, ascending))

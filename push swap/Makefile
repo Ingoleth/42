@@ -30,11 +30,7 @@ SRCS_PUSH_SWAP =	push_swap_main.c									\
 					sorting/sort_3.c									\
 					sorting/juggle_sort/sort_3_over_stack.c				\
 					sorting/sort_5.c									\
-					utils/find_smallest_num.c							\
-					utils/get_offset.c									\
 					utils/instruction.c									\
-					utils/move_to_index.c								\
-					utils/print_smaller_nums_found.c					\
 					utils/push_num.c
 
 LIBFT_A = libft.a

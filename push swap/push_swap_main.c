@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 10:23:42 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/04/25 23:05:42 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/04/27 19:39:20 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	main(int argc, char **argv)
 		return (0);
 	initialize_arrays(argc, argv, &arrays, &flags);
 	arrays.fd = get_fd(flags.file_output);
-	//arrays.sorted_elements_a = 5; //REMOVE!
 	if (flags.verbose)
 		print_stacks(&arrays);
 	if (arrays.array_a_length <= 3)

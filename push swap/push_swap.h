@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:39:46 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/04/26 16:40:29 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/04/27 19:38:50 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ typedef struct s_array_info
 	int	*array_b;
 	int	array_a_length;
 	int	array_b_length;
-	int sorted_elements_a;
+	int	sorted_elements_a;
 	int	instruction_counter;
-	int fd;
-	int current_index;
+	int	fd;
+	int	current_index;
 }		t_array_info;
 
 typedef enum e_instructions
@@ -109,12 +109,14 @@ void			juggle_sort_b(t_array_info *arrays, t_list *subdivisions);
 int				get_pivot(int *array, int start, int end);
 void			sort_3_a(t_array_info *arrays, int length);
 void			sort_3_b(t_array_info *arrays, int length);
-void			push_remaining_elements_to_a(t_array_info *arrays, int current_set_size);
+void			push_remaining_elements_to_a(t_array_info *arrays,
+					int current_set_size);
 void			regular_sort(t_array_info *arrays);
-void			find_smallest_nums_in_path(t_array_info *arrays, t_list **smaller_num,
+void			find_smallest_nums_in_path(t_array_info *arrays,
+					t_list **smaller_num,
 					int previous_num, int previous_index);
-void			push_smaller_numbers(t_array_info *arrays, t_list *small_numbers,
-					int direction);
+void			push_smaller_numbers(t_array_info *arrays,
+					t_list *small_numbers, int direction);
 void			print_smaller_nums_found(t_list *smaller_nums);
 void			quick_sort(t_array_info *arrays, int start, int end);
 void			sort_3(t_array_info *arrays);
@@ -126,8 +128,8 @@ void			sort_5_over_stack(t_array_info *arrays, int stack);
 */
 void			move_to_index(t_array_info *arrays, int index);
 int				get_offset(t_array_info *arrays, int i);
-int				find_smallest_num(t_array_info *arrays, int *value, t_bool capped,
-					int cap_value);
+int				find_smallest_num(t_array_info *arrays, int *value,
+					t_bool capped, int cap_value);
 void			print_stacks(t_array_info *arrays);
 void			print_array(t_array_info *arrays);
 void			push_num(t_array_info *arrays, int stack, int type);
