@@ -16,7 +16,7 @@ static	void
 	print_error_and_exit(char **flags_list, t_flags *flags,
 		char **argv, int *argv_pos)
 {
-	free(flags_list);
+	ft_array_clear((void *)flags_list, free);
 	if (flags->mode_argv && !argv[0][*argv_pos])
 		exit(0);
 	ft_putstr_fd("Error\n", STDERR_FILENO);
@@ -73,7 +73,7 @@ static	void	check_argv_mode(t_flags *flags, char **argv,
 {
 	if (!flags->mode_fd && !flags->mode_input && !flags->mode_rand)
 		flags->mode_argv = true;
-	if (flags->mode_argv && !argv[0][*argv_pos])
+	if ((flags->mode_argv && !argv[*argv_pos]) || (flags->mode_input && argv[*argv_pos]))
 		print_error_and_exit(flags_list, flags, argv, argv_pos);
 }
 
@@ -97,9 +97,10 @@ void	handle_flags(char **argv, t_flags *flags, int *argv_pos)
 				print_error_and_exit(flags_list, flags, argv, argv_pos);
 			flags->file_output = true;
 		}
-		handle_input_flags(flags_list, argv, flags, argv_pos);
-		(*argv_pos)++;
+		else
+			handle_input_flags(flags_list, argv, flags, argv_pos);
+		*argv_pos += 1;
 	}
 	check_argv_mode(flags, argv, flags_list, argv_pos);
-	free(flags_list);
+	ft_array_clear((void *)flags_list, free);
 }
