@@ -17,8 +17,9 @@ void	handle_random_input(char **argv, t_array_info *arrays,
 {
 	if (argv[argv_pos + 1] && argv[argv_pos + 1])
 	{
-		if (verbose && !is_number(argv[argv_pos + 1]))
-			ft_printf(STDERR_FILENO, "Array seed must be numeric!\n");
+		if (verbose && (!is_number(argv[argv_pos + 1])
+				|| !ft_atoi(argv[argv_pos + 1])))
+			ft_printf(STDERR_FILENO, "Array seed must be numeric and != 0!\n");
 		else
 		{
 			get_rand_array(ft_atoi(argv[argv_pos]),
@@ -33,6 +34,8 @@ void	handle_random_input(char **argv, t_array_info *arrays,
 		else
 			ft_printf(STDERR_FILENO, "Random seed missing!\n");
 	}
+	else
+		ft_putstr_fd("Error\n", STDERR_FILENO);
 	exit(-1);
 }
 

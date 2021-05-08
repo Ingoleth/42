@@ -40,6 +40,7 @@ void	get_rand_array(int length, unsigned short lfsr, t_array_info *arrays)
 {
 	int				i;
 	int				nb_length;
+	int				sign;
 	unsigned int	bit;
 
 	arrays->array_a = ft_calloc(length + 1, sizeof(int));
@@ -48,15 +49,13 @@ void	get_rand_array(int length, unsigned short lfsr, t_array_info *arrays)
 	i = 0;
 	while (i < length)
 	{
-		nb_length = 6;
-		while (nb_length > 5)
-			nb_length = rand_num(&lfsr, &bit, 1);
+		nb_length = rand_num(&lfsr, &bit, 3);
+		sign = rand_num(&lfsr, &bit, 3);
+		if (sign % 2)
+			nb_length *= -1;
 		if (!is_repeated_array(nb_length, arrays->array_a, i))
 		{
-			arrays->array_a[i] = rand_num(&lfsr, &bit, nb_length);
-			nb_length = rand_num(&lfsr, &bit, 1);
-			if (nb_length % 2)
-				arrays->array_a[i] *= -1;
+			arrays->array_a[i] = nb_length;
 			i++;
 		}
 	}
