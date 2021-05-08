@@ -44,12 +44,12 @@ int	main(int argc, char **argv)
 		print_stacks(&arrays);
 	if (!is_sorted(arrays.array_a, arrays.array_a_length, ascending))
 	{	
-	if (arrays.array_a_length <= 3)
-		sort_3(&arrays);
-	else if (arrays.array_a_length <= 5)
-		sort_5(&arrays);
-	else
-		juggle_sort_a(&arrays);
+		if (arrays.array_a_length <= 3)
+			sort_3(&arrays);
+		else if (arrays.array_a_length <= 5)
+			sort_5(&arrays);
+		else
+			juggle_sort_a(&arrays);
 	}
 	if (flags.verbose)
 		print_results(&arrays);

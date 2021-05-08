@@ -73,7 +73,8 @@ static	void	check_argv_mode(t_flags *flags, char **argv,
 {
 	if (!flags->mode_fd && !flags->mode_input && !flags->mode_rand)
 		flags->mode_argv = true;
-	if ((flags->mode_argv && !argv[*argv_pos]) || (flags->mode_input && argv[*argv_pos]))
+	if ((flags->mode_argv && !argv[*argv_pos]) || (flags->mode_input
+			&& argv[*argv_pos]))
 		print_error_and_exit(flags_list, flags, argv, argv_pos);
 }
 
