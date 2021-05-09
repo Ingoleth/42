@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 12:12:57 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/04/27 19:32:03 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/05/09 16:52:15 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,13 @@ static int	push_and_rotate_forwards(t_array_info *arrays, int
 	*current_set_size, int i)
 {
 	int	pivot;
+	int j;
 
 	pivot = get_pivot(arrays->array_b, 0, *current_set_size);
 	number_to_push(0, 0, 0);
+	j = *current_set_size;
 	//while (number_to_push(arrays->array_b, *current_set_size + 1, pivot))
-	while (i < *current_set_size)
+	while (j)
 	{
 		if (arrays->array_b[0] >= pivot)
 		{
@@ -47,6 +49,7 @@ static int	push_and_rotate_forwards(t_array_info *arrays, int
 			i++;
 			arrays->elements_to_sort_b_inverted++;
 		}
+		j--;
 	}
 	return (i);
 }

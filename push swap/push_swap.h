@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:39:46 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/04/27 19:38:50 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/05/09 15:25:31 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ void			swap(int *array, int length);
 void			juggle_sort_a(t_array_info *arrays);
 void			juggle_sort_b(t_array_info *arrays, t_list *subdivisions);
 int				get_pivot(int *array, int start, int end);
+int				get_pivot_b(int *array, int start, int end);
 void			sort_3_a(t_array_info *arrays, int length);
 void			sort_3_b(t_array_info *arrays, int length);
 void			push_remaining_elements_to_a(t_array_info *arrays,

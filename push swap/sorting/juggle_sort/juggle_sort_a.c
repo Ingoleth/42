@@ -6,13 +6,13 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 12:13:13 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/04/27 19:07:02 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/05/09 17:07:47 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static t_bool number_to_push(int *array, int lenght, int pivot)
+t_bool number_to_push(int *array, int lenght, int pivot)
 {
 	int i;
 
@@ -55,7 +55,8 @@ static int	push_and_rotate_forwards(t_array_info *arrays,
 	pivot = get_pivot(arrays->array_a, 0, arrays->array_a_length
 			- arrays->sorted_elements_a);
 	//number_to_push(arrays->array_a, 1, 1);
-	while (number_to_push(arrays->array_a, arrays->array_a_length - arrays->sorted_elements_a - i, pivot))
+	//while (number_to_push(arrays->array_a, arrays->array_a_length, pivot))	
+	while (i < arrays->array_a_length - arrays->sorted_elements_a)
 	{
 		if (arrays->array_a[0] <= pivot)
 		{
