@@ -131,6 +131,6 @@ void	instruction_verbose(unsigned int instruction, t_array_info *arrays)
 		instr_rotate(instruction, arrays);
 	else if (instruction >= rev_rot_a && instruction <= rev_rot_a_and_b)
 		instr_rev_rotate(instruction, arrays);
-	print_stacks(arrays);
+	//print_stacks(arrays);
 	arrays->instruction_counter++;
 }

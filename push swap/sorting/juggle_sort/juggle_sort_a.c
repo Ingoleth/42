@@ -53,8 +53,8 @@ static int	push_and_rotate_forwards(t_array_info *arrays,
 	pivot = get_pivot(arrays->array_a, 0, arrays->array_a_length
 			- arrays->sorted_elements_a);
 	number_to_push(arrays->array_a, 1, 1);
-	//while (i < arrays->array_a_length - arrays->sorted_elements_a)
-	while (number_to_push(arrays->array_a, arrays->array_a_length - arrays->sorted_elements_a - i, pivot))
+	//while (number_to_push(arrays->array_a, arrays->array_a_length - arrays->sorted_elements_a - i, pivot))
+	while (i < arrays->array_a_length - arrays->sorted_elements_a)
 	{
 		if (arrays->array_a[0] <= pivot)
 		{

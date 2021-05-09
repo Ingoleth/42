@@ -25,13 +25,15 @@ static t_bool number_to_push(int *array, int lenght, int pivot)
 	return (false);
 }
 
-static int	push_and_rotate_forwards(t_array_info *arrays, long int
+static int	push_and_rotate_forwards(t_array_info *arrays, int
 	*current_set_size, int i)
 {
 	int	pivot;
 
 	pivot = get_pivot(arrays->array_b, 0, *current_set_size);
-	while (number_to_push(arrays->array_b, *current_set_size, pivot))
+	number_to_push(0, 0, 0);
+	//while (number_to_push(arrays->array_b, *current_set_size + 1, pivot))
+	while (i < *current_set_size)
 	{
 		if (arrays->array_b[0] >= pivot)
 		{
@@ -47,7 +49,7 @@ static int	push_and_rotate_forwards(t_array_info *arrays, long int
 	return (i);
 }
 
-static int	push_and_rotate_backwards(t_array_info *arrays, long int
+static int	push_and_rotate_backwards(t_array_info *arrays, int
 	*current_set_size, int i)
 {
 	int	pivot;
@@ -80,11 +82,11 @@ t_list	*get_next_subdivision(t_list *subdivisions)
 void	juggle_sort_b(t_array_info *arrays, t_list *subdivisions)
 {
 	int			i;
-	long int	current_set_size;
+	int			current_set_size;
 
 	while (subdivisions)
 	{
-		current_set_size = (long int)subdivisions->content;
+		current_set_size = (int)((long int)subdivisions->content);
 		i = 0;
 		while (current_set_size > 3)
 		{
@@ -92,6 +94,7 @@ void	juggle_sort_b(t_array_info *arrays, t_list *subdivisions)
 				i = push_and_rotate_forwards(arrays, &current_set_size, i);
 			else
 				i = push_and_rotate_backwards(arrays, &current_set_size, i);
+			juggle_sort_a(arrays);
 		}
 		while (i--)
 			instruction(rev_rot_b, arrays);
