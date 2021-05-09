@@ -39,11 +39,13 @@ static int	push_and_rotate_forwards(t_array_info *arrays, int
 		{
 			instruction(push_a, arrays);
 			*current_set_size -= 1;
+			arrays->elements_to_sort_b--;
 		}
 		else
 		{
 			instruction(rot_b, arrays);
 			i++;
+			arrays->elements_to_sort_b_inverted++;
 		}
 	}
 	return (i);
@@ -59,9 +61,12 @@ static int	push_and_rotate_backwards(t_array_info *arrays, int
 	while (i)
 	{
 		instruction(rev_rot_b, arrays);
+		if (arrays->elements_to_sort_b)
+			arrays->elements_to_sort_b_inverted--;
 		i--;
 		if (arrays->array_b[0] >= pivot)
 		{
+			arrays->elements_to_sort_b--;
 			instruction(push_a, arrays);
 			*current_set_size -= 1;
 		}
@@ -87,8 +92,9 @@ void	juggle_sort_b(t_array_info *arrays, t_list *subdivisions)
 	while (subdivisions)
 	{
 		current_set_size = (int)((long int)subdivisions->content);
+		arrays->elements_to_sort_b = current_set_size;
 		i = 0;
-		while (current_set_size > 3)
+		while (current_set_size > 3 || i)
 		{
 			if (i == 0)
 				i = push_and_rotate_forwards(arrays, &current_set_size, i);
@@ -96,10 +102,9 @@ void	juggle_sort_b(t_array_info *arrays, t_list *subdivisions)
 				i = push_and_rotate_backwards(arrays, &current_set_size, i);
 			juggle_sort_a(arrays);
 		}
-		while (i--)
-			instruction(rev_rot_b, arrays);
 		juggle_sort_a(arrays);
 		sort_3_b(arrays, current_set_size);
+		arrays->elements_to_sort_b = 0;
 		arrays->sorted_elements_a += current_set_size;
 		while (current_set_size--)
 			instruction(push_a, arrays);

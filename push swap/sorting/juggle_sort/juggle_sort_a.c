@@ -19,6 +19,7 @@ static t_bool number_to_push(int *array, int lenght, int pivot)
 	i = 0;
 	while (i < lenght)
 	{
+		printf("Lenght = %i; Pivot = %i; Current nb to check = %i\n", lenght, pivot, array[i]);
 		if (array[i++] <= pivot)
 			return (true);
 	}
@@ -35,6 +36,7 @@ static int	push_and_rotate_backwards(t_array_info *arrays, unsigned long int
 	while (i)
 	{
 		instruction(rev_rot_a, arrays);
+		arrays->array_a_offset--;
 		i--;
 		if (arrays->array_a[0] <= pivot)
 		{
@@ -52,9 +54,8 @@ static int	push_and_rotate_forwards(t_array_info *arrays,
 
 	pivot = get_pivot(arrays->array_a, 0, arrays->array_a_length
 			- arrays->sorted_elements_a);
-	number_to_push(arrays->array_a, 1, 1);
-	//while (number_to_push(arrays->array_a, arrays->array_a_length - arrays->sorted_elements_a - i, pivot))
-	while (i < arrays->array_a_length - arrays->sorted_elements_a)
+	//number_to_push(arrays->array_a, 1, 1);
+	while (number_to_push(arrays->array_a, arrays->array_a_length - arrays->sorted_elements_a - i, pivot))
 	{
 		if (arrays->array_a[0] <= pivot)
 		{
@@ -63,6 +64,7 @@ static int	push_and_rotate_forwards(t_array_info *arrays,
 		}
 		else
 		{
+			arrays->array_a_offset++;
 			instruction(rot_a, arrays);
 			i++;
 		}
@@ -78,7 +80,7 @@ void	juggle_sort_a(t_array_info *arrays)
 
 	i = 0;
 	subdivisions = NULL;
-	while (arrays->array_a_length > arrays->sorted_elements_a + 3)
+	while (arrays->array_a_length > arrays->sorted_elements_a + 3 || i)
 	{
 		nb_swaps = 0;
 		if (i == 0)
@@ -88,8 +90,6 @@ void	juggle_sort_a(t_array_info *arrays)
 		if (nb_swaps)
 			ft_lstadd_front(&subdivisions, ft_lstnew((void *)nb_swaps));
 	}
-	while (i--)
-		instruction(rev_rot_a, arrays);
 	sort_3_a(arrays, arrays->array_a_length - arrays->sorted_elements_a);
 	arrays->sorted_elements_a += arrays->array_a_length
 		- arrays->sorted_elements_a;

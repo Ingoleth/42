@@ -35,10 +35,12 @@ static void	print_results(t_array_info *arrays)
 		aux = aux->next;
 	}
 	ft_lstclear(&arrays->instructions_list, free);
+	print_stacks(arrays);
 	if (is_sorted(arrays->array_a, arrays->array_a_length, ascending))
 		printf("Array is sorted!\n");
 	else
 		printf("Array is not sorted!\n");
+	//print_stacks(arrays);
 	printf("Sorted in %i instructions!\n", arrays->instruction_counter);
 }
 

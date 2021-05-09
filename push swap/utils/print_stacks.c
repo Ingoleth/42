@@ -46,7 +46,8 @@ void	print_stacks(t_array_info *arrays)
 		printf("(%3d) ", i);
 		if (i < arrays->array_a_length)
 		{
-			if (i >= arrays->array_a_length - arrays->sorted_elements_a)
+			if (i + arrays->array_a_offset >= arrays->array_a_length - arrays->sorted_elements_a
+			&& i < arrays->array_a_length - arrays->array_a_offset)
 				printf("\033[32m[%7d]\033[0m", arrays->array_a[i]);
 			else
 				printf("[%7d]", arrays->array_a[i]);
@@ -54,7 +55,13 @@ void	print_stacks(t_array_info *arrays)
 		else if (arrays->array_b_length)
 			printf("[       ]");
 		if (i < arrays->array_b_length)
-			printf(" [%7d]", arrays->array_b[i]);
+		{
+			if (i + 1 <= arrays->elements_to_sort_b ||
+				i >= arrays->array_b_length - arrays->elements_to_sort_b_inverted)
+				printf(" \033[44m[%7d]\033[0m", arrays->array_b[i]);
+			else
+				printf(" [%7d]", arrays->array_b[i]);
+		}
 		else if (i < arrays->array_a_length)
 			printf(" [       ]");
 		printf("\n");

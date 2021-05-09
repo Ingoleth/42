@@ -38,6 +38,9 @@ typedef struct s_array_info
 	int	array_a_length;
 	int	array_b_length;
 	int	sorted_elements_a;
+	int elements_to_sort_b;
+	int elements_to_sort_b_inverted;
+	int array_a_offset;
 	int	instruction_counter;
 	int	fd;
 	int	current_index;
