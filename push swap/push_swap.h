@@ -41,6 +41,8 @@ typedef struct s_array_info
 	int	instruction_counter;
 	int	fd;
 	int	current_index;
+	t_bool verbose;
+	t_list *instructions_list;
 }		t_array_info;
 
 typedef enum e_instructions
@@ -97,6 +99,7 @@ t_bool			is_sorted(int *array, int length, int direction);
 void			get_instructions(t_array_info *arrays, int fd);
 void			get_instructions_verbose(t_array_info *arrays, int fd);
 void			instruction(unsigned int instruction, t_array_info *arrays);
+void			instruction_verbose(unsigned int instruction, t_array_info *arrays);
 void			push(int *dst, int *src, int *dst_length, int *src_length);
 void			rotate(int *array, int length);
 void			rev_rotate(int *array, int length);

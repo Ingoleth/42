@@ -40,11 +40,17 @@ void	print_stacks(t_array_info *arrays)
 	int	i;
 
 	i = 0;
+	printf("\033[2J");
 	while (i < arrays->array_a_length || i < arrays->array_b_length)
 	{
 		printf("(%3d) ", i);
 		if (i < arrays->array_a_length)
-			printf("[%7d]", arrays->array_a[i]);
+		{
+			if (i >= arrays->array_a_length - arrays->sorted_elements_a)
+				printf("\033[32m[%7d]\033[0m", arrays->array_a[i]);
+			else
+				printf("[%7d]", arrays->array_a[i]);
+		}
 		else if (arrays->array_b_length)
 			printf("[       ]");
 		if (i < arrays->array_b_length)
@@ -57,4 +63,5 @@ void	print_stacks(t_array_info *arrays)
 	printf("          a         b\n\n");
 	printf("A size = %i; B size = %i;\n\n", arrays->array_a_length,
 		arrays->array_b_length);
+	sleep(1);
 }

@@ -30,6 +30,7 @@ SRCS_PUSH_SWAP =	push_swap_main.c									\
 					sorting/sort_3.c									\
 					sorting/juggle_sort/sort_3_over_stack.c				\
 					sorting/sort_5.c									\
+					utils/instruction_verbose.c							\
 					utils/instruction.c									\
 					utils/push_num.c
 

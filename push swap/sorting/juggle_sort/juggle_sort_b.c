@@ -12,13 +12,26 @@
 
 #include "push_swap.h"
 
+static t_bool number_to_push(int *array, int lenght, int pivot)
+{
+	int i;
+
+	i = 0;
+	while (i < lenght)
+	{
+		if (array[i++] >= pivot)
+			return (true);
+	}
+	return (false);
+}
+
 static int	push_and_rotate_forwards(t_array_info *arrays, long int
 	*current_set_size, int i)
 {
 	int	pivot;
 
 	pivot = get_pivot(arrays->array_b, 0, *current_set_size);
-	while (i < *current_set_size)
+	while (number_to_push(arrays->array_b, *current_set_size, pivot))
 	{
 		if (arrays->array_b[0] >= pivot)
 		{

@@ -12,6 +12,19 @@
 
 #include "push_swap.h"
 
+static t_bool number_to_push(int *array, int lenght, int pivot)
+{
+	int i;
+
+	i = 0;
+	while (i < lenght)
+	{
+		if (array[i++] <= pivot)
+			return (true);
+	}
+	return (false);
+}
+
 static int	push_and_rotate_backwards(t_array_info *arrays, unsigned long int
 	*nb_swaps, int i)
 {
@@ -39,7 +52,9 @@ static int	push_and_rotate_forwards(t_array_info *arrays,
 
 	pivot = get_pivot(arrays->array_a, 0, arrays->array_a_length
 			- arrays->sorted_elements_a);
-	while (i < arrays->array_a_length - arrays->sorted_elements_a)
+	number_to_push(arrays->array_a, 1, 1);
+	//while (i < arrays->array_a_length - arrays->sorted_elements_a)
+	while (number_to_push(arrays->array_a, arrays->array_a_length - arrays->sorted_elements_a - i, pivot))
 	{
 		if (arrays->array_a[0] <= pivot)
 		{
