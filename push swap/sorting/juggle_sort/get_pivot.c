@@ -23,9 +23,10 @@ int	get_pivot(int *array, int start, int end)
 	index = start;
 	mean_num_of_swaps = ((end - start) / 2);
 	swaps = 0;
+	pivot = array[index];
 	while (swaps != mean_num_of_swaps)
 	{
-		pivot = array[index];
+		pivot = array[index++];
 		swaps = 0;
 		i = start;
 		while (i < end)
@@ -36,62 +37,6 @@ int	get_pivot(int *array, int start, int end)
 		swaps = end - start - swaps;
 		if (swaps < 0)
 			swaps *= -1;
-		index++;
-	}
-	return (pivot);
-}
-
-int	get_pivot_b(int *array, int start, int end)
-{
-	int	swaps;
-	int	index;
-	int	pivot;
-	int	i;
-
-	index = start;
-	while (swaps != 3 && index <= end)
-	{
-		pivot = array[index];
-		swaps = 0;
-		i = start;
-		while (i < end)
-		{
-			if (array[i++] <= pivot)
-				swaps++;
-		}
-		index++;
-	}
-	if (swaps != 3)
-	{
-		index = start;
-		while (swaps != 2 && index <= end)
-		{
-			pivot = array[index];
-			swaps = 0;
-			i = start;
-			while (i < end)
-			{
-				if (array[i++] <= pivot)
-					swaps++;
-			}
-			index++;
-		}
-	}
-	if (swaps != 2)
-	{
-		index = start;	
-		while (swaps != 1 && index <= end)
-		{
-			pivot = array[index];
-			swaps = 0;
-			i = start;
-			while (i < end)
-			{
-				if (array[i++] <= pivot)
-					swaps++;
-			}
-			index++;
-		}		
 	}
 	return (pivot);
 }

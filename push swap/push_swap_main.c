@@ -26,22 +26,22 @@ static int	get_fd(t_bool file_output)
 
 static void	print_results(t_array_info *arrays)
 {
-	t_list *aux;
+	t_list	*aux;
 
 	aux = arrays->instructions_list;
+	print_stacks(arrays, 0);
+	if (is_sorted(arrays->array_a, arrays->array_a_length, ascending))
+		printf("\nArray is sorted!\n");
+	else
+		printf("\nArray is not sorted!\n");
+	printf("Sorted in %i instructions!\n", arrays->instruction_counter);
 	while (aux)
 	{
 		ft_putstr_fd(aux->content, arrays->fd);
+		ft_putchar_fd('\n', arrays->fd);
 		aux = aux->next;
 	}
 	ft_lstclear(&arrays->instructions_list, free);
-	print_stacks(arrays);
-	if (is_sorted(arrays->array_a, arrays->array_a_length, ascending))
-		printf("Array is sorted!\n");
-	else
-		printf("Array is not sorted!\n");
-	//print_stacks(arrays);
-	printf("Sorted in %i instructions!\n", arrays->instruction_counter);
 }
 
 int	main(int argc, char **argv)
@@ -54,8 +54,6 @@ int	main(int argc, char **argv)
 	initialize_arrays(argc, argv, &arrays, &flags);
 	arrays.fd = get_fd(flags.file_output);
 	arrays.verbose = flags.verbose;
-	if (flags.verbose)
-		print_stacks(&arrays);
 	if (!is_sorted(arrays.array_a, arrays.array_a_length, ascending))
 	{	
 		if (arrays.array_a_length <= 3)

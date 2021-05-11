@@ -96,7 +96,7 @@ void	get_instructions_verbose(t_array_info *arrays, int fd)
 {
 	char	*line;
 
-	print_stacks(arrays);
+	print_stacks(arrays, 0);
 	while (true)
 	{
 		printf("Please input instructions:\n");
@@ -109,7 +109,7 @@ void	get_instructions_verbose(t_array_info *arrays, int fd)
 			free(line);
 			break ;
 		}
-		print_stacks(arrays);
+		print_stacks(arrays, 0);
 		swap_instruction(line, arrays);
 		push_instruction(line, arrays);
 		rotate_instruction(line, arrays);

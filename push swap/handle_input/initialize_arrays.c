@@ -17,11 +17,12 @@ void	initialize_arrays(int argc, char **argv, t_array_info *arrays, t_flags
 {
 	ft_memset(arrays, 0, sizeof(t_array_info));
 	handle_input(argc, argv, flags, arrays);
+	arrays->display_operations = flags->display_operations;
+	arrays->log = flags->log;
 	arrays->array_b = ft_calloc(arrays->array_a_length + 1, sizeof(int));
 	if (arrays->array_b == NULL)
 	{
 		free(arrays->array_a);
 		exit (1);
 	}
-	arrays->instruction_counter = 0;
 }

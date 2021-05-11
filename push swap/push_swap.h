@@ -28,25 +28,31 @@ typedef struct s_flags
 	t_bool	inst_mode_fd;
 	t_bool	verbose;
 	t_bool	file_output;
+	t_bool	display_operations;
+	t_bool	log;
+	t_bool	profile;
+	t_bool	checker;
+	t_bool	push_swap;
 	int		index;
 }			t_flags;
 
 typedef struct s_array_info
 {
-	int	*array_a;
-	int	*array_b;
-	int	array_a_length;
-	int	array_b_length;
-	int	sorted_elements_a;
-	int elements_to_sort_b;
-	int elements_to_sort_b_inverted;
-	int array_a_offset;
-	int	instruction_counter;
-	int	fd;
-	int	current_index;
-	t_bool verbose;
-	t_list *instructions_list;
-}		t_array_info;
+	int		*array_a;
+	int		*array_b;
+	int		array_a_length;
+	int		array_b_length;
+	int		sorted_elements_a;
+	int		array_a_offset;
+	int		instruction_counter;
+	int		fd;
+	int		current_index;
+	t_bool	verbose;
+	t_bool	display_operations;
+	t_bool	log;
+	t_bool	profiling;
+	t_list	*instructions_list;
+}			t_array_info;
 
 typedef enum e_instructions
 {
@@ -102,7 +108,10 @@ t_bool			is_sorted(int *array, int length, int direction);
 void			get_instructions(t_array_info *arrays, int fd);
 void			get_instructions_verbose(t_array_info *arrays, int fd);
 void			instruction(unsigned int instruction, t_array_info *arrays);
-void			instruction_verbose(unsigned int instruction, t_array_info *arrays);
+void			instruction_verbose(unsigned short instruction,
+					t_array_info *arrays);
+void			instruction_profiling(unsigned short instruction,
+					t_array_info *arrays);
 void			push(int *dst, int *src, int *dst_length, int *src_length);
 void			rotate(int *array, int length);
 void			rev_rotate(int *array, int length);
@@ -110,12 +119,14 @@ void			swap(int *array, int length);
 /*
 ** SORTING
 */
+void			sort_arrays(t_array_info *arrays);
 void			juggle_sort_a(t_array_info *arrays);
 void			juggle_sort_b(t_array_info *arrays, t_list *subdivisions);
 int				get_pivot(int *array, int start, int end);
 int				get_pivot_b(int *array, int start, int end);
 void			sort_3_a(t_array_info *arrays, int length);
 void			sort_3_b(t_array_info *arrays, int length);
+void    		profile(char **argv, int argv_pos);
 void			push_remaining_elements_to_a(t_array_info *arrays,
 					int current_set_size);
 void			regular_sort(t_array_info *arrays);
@@ -137,7 +148,7 @@ void			move_to_index(t_array_info *arrays, int index);
 int				get_offset(t_array_info *arrays, int i);
 int				find_smallest_num(t_array_info *arrays, int *value,
 					t_bool capped, int cap_value);
-void			print_stacks(t_array_info *arrays);
+void			print_stacks(t_array_info *arrays, unsigned short instruction);
 void			print_array(t_array_info *arrays);
 void			push_num(t_array_info *arrays, int stack, int type);
 char			*read_input(int fd);

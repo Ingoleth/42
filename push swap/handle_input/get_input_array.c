@@ -21,7 +21,7 @@ static	void	fill_array(t_array_info *arrays, t_list *array_list)
 	if (!arrays->array_a)
 	{
 		ft_lstclear(&array_list, free);
-		ft_printf(STDERR_FILENO, "ERROR\n");
+		ft_printf(STDERR_FILENO, "Error\n");
 		exit (1);
 	}
 	while (array_list)

@@ -23,6 +23,33 @@ static	void
 	exit(1);
 }
 
+void	handle_functionality_flags(char **flags_list, char **argv,
+	t_flags *flags, int *argv_pos)
+{
+	if (!ft_strncmp(argv[*argv_pos], "-do", 4))
+	{
+		if (flags->display_operations)
+			print_error_and_exit(flags_list, flags, argv, argv_pos);
+		flags->display_operations = true;
+		flags->log = true;
+		flags->verbose = true;
+		printf("Hello!\n");
+	}
+	else if (!ft_strncmp(argv[*argv_pos], "-l", 3))
+	{
+		if (flags->log)
+			print_error_and_exit(flags_list, flags, argv, argv_pos);
+		flags->log = true;
+		flags->verbose = true;
+	}
+	else if (!ft_strncmp(argv[*argv_pos], "-p", 3))
+	{
+		if (flags->profile)
+			print_error_and_exit(flags_list, flags, argv, argv_pos);
+		flags->profile = true;
+	}
+}
+
 void	handle_input_flags(char **flags_list, char **argv,
 	t_flags *flags, int *argv_pos)
 {
@@ -50,6 +77,8 @@ void	handle_input_flags(char **flags_list, char **argv,
 			print_error_and_exit(flags_list, flags, argv, argv_pos);
 		flags->inst_mode_fd = true;
 	}
+	else
+		handle_functionality_flags(flags_list, argv, flags, argv_pos);
 }
 
 static	t_bool	check_flags(char **flags_list, char *str)
@@ -82,7 +111,7 @@ void	handle_flags(char **argv, t_flags *flags, int *argv_pos)
 {
 	char	**flags_list;
 
-	flags_list = ft_split("-ci -fi -ra -ifi -v -fo", ' ');
+	flags_list = ft_split("-ci -fi -ra -ifi -v -fo -l -do -p", ' ');
 	ft_memset(flags, 0, sizeof(t_flags));
 	while (argv[*argv_pos] && check_flags(flags_list, argv[*argv_pos]))
 	{

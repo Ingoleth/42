@@ -73,16 +73,20 @@ void	handle_input(int argc, char **argv,
 		exit(-1);
 	argv_pos = 1;
 	handle_flags(argv, flags, &argv_pos);
-	if (flags->inst_mode_fd)
+	if ((flags->inst_mode_fd && flags->push_swap)
+		|| ((flags->file_output || flags->log || flags->display_operations)
+			&& flags->checker))
 	{
 		if (flags->verbose)
 			ft_putstr_fd(
-				"Instruction file input flag is not available in this mode!\n",
+				"Input flag is not available in this mode!\n",
 				STDIN_FILENO);
 		else
 			ft_putstr_fd("Error\n", STDERR_FILENO);
 		exit(0);
-	}	
+	}
+	if (flags->profile)
+		profile(argv, argv_pos);
 	if (flags->mode_input)
 		get_input_array(STDIN_FILENO, arrays, flags->verbose);
 	else if (flags->mode_fd)
