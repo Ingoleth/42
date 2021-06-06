@@ -13,6 +13,8 @@ typedef	struct s_mini_talk
 	int			current_byte;
 	long int	connected_client;
 	t_list		*clients_on_hold;
+	char		str[1000];
+	int			index;
 }				t_mini_talk;
 
 void	connect_to_client(int sig, siginfo_t *siginfo, void *context);

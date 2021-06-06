@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 20:26:45 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/06/04 22:14:50 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/06/06 12:42:50 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,27 @@ void	send_char(unsigned char chr, int server_pid)
 		pause();
 		current_byte--;
 	}
-	server_pid++;
 }
 
 void	transmission(char *str, int server_pid)
 {
-	write(STDOUT_FILENO, "Starting transmission!\n", 23);
-	while (str)
+	int str_length;
+	int i;
+
+	str_length = ft_strlen(str);
+	i = 0;
+	printf("Str lenght = %i\n%s\n", str_length, str);
+	while (i <= str_length)
 	{
-		kill(server_pid, SIGUSR2);
-		pause();
-		send_char(*str, server_pid);
-		str++;
+		send_char(str[i], server_pid);
+		printf("Sending char \"%c (%i)\"\n", str[i], (int)*str);
+		i++;
 	}
 }
 
 void placeholder()
 {
-	write(STDOUT_FILENO, "Hello\n", 6);
+	//write(STDOUT_FILENO, "Hello\n", 6);
 }
 
 int	main (int argc, char **argv)

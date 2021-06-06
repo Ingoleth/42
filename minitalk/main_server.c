@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 20:26:45 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/06/04 22:26:43 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/06/06 12:30:09 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,15 @@ void	set_sig_handler_function(int signal,
 	sigaction(signal, &sa_1, NULL);
 }
 
+void	reset_transmission()
+{
+	set_sig_handler_function(SIGUSR1, &connect_to_client);
+	g_mini_talk.connected_client = 0;
+	g_mini_talk.current_byte = 7;
+	g_mini_talk.index = 0;
+	printf("%s\n", g_mini_talk.str);
+}
+
 void	receive_transmission(int sig, siginfo_t *siginfo, void *context)
 {
 	context++;
@@ -31,7 +40,7 @@ void	receive_transmission(int sig, siginfo_t *siginfo, void *context)
 			ft_lstnew((void *)((long int)siginfo->si_pid)));
 	else
 	{
-		printf("Transmission started!\n");
+		//printf("Transmission started!\n");
 		if (sig == SIGUSR1)
 			g_mini_talk.chr |= 1UL << g_mini_talk.current_byte;
 		else if (sig == SIGUSR2)
@@ -39,13 +48,17 @@ void	receive_transmission(int sig, siginfo_t *siginfo, void *context)
 		if ((g_mini_talk.current_byte == 0))
 		{
 			if (g_mini_talk.chr == '\0')
-				set_sig_handler_function(SIGUSR1, &connect_to_client);
-			write(STDOUT_FILENO, &g_mini_talk.chr, 1);
-			printf("Hello\n");
-			g_mini_talk.current_byte = 7;
+				reset_transmission();
+			else
+			{
+				g_mini_talk.str[g_mini_talk.index] = g_mini_talk.chr;
+				g_mini_talk.index++;
+				g_mini_talk.current_byte = 7;
+			}
 		}
 		else
 			g_mini_talk.current_byte--;
+		usleep(125);
 		kill(siginfo->si_pid, SIGUSR1);
 	}
 }
@@ -61,6 +74,7 @@ void	connect_to_client(int sig, siginfo_t *siginfo, void *context)
 	g_mini_talk.connected_client = siginfo->si_pid;
 	g_mini_talk.current_byte = 7;
 	write(STDOUT_FILENO, "Pong!\n", 6);
+	usleep(125);
 	kill(g_mini_talk.connected_client, SIGUSR1);
 }
 
@@ -77,7 +91,7 @@ int	main (void)
 	printf("%i\n", pid);
 	while (true)
 	{
-		printf("I am in a loop!\n");
+		//printf("I am in a loop!\n");
 		if (g_mini_talk.clients_on_hold) //Technically, it should block signals till its done;
 		{
 			g_mini_talk.connected_client = (long int)g_mini_talk.clients_on_hold->content;
