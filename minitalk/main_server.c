@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 20:26:45 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/06/06 12:30:09 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/06/10 12:26:26 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,82 +25,77 @@ void	set_sig_handler_function(int signal,
 
 void	reset_transmission()
 {
-	set_sig_handler_function(SIGUSR1, &connect_to_client);
-	g_mini_talk.connected_client = 0;
-	g_mini_talk.current_byte = 7;
-	g_mini_talk.index = 0;
-	printf("%s\n", g_mini_talk.str);
-}
+	t_list *aux;
 
-void	receive_transmission(int sig, siginfo_t *siginfo, void *context)
-{
-	context++;
-	if (siginfo->si_pid != g_mini_talk.connected_client)
-		ft_lstadd_back(&g_mini_talk.clients_on_hold,
-			ft_lstnew((void *)((long int)siginfo->si_pid)));
-	else
+	kill(g_mini_talk.connected_client, SIGUSR1);
+	g_mini_talk.connected_client = 0;
+	g_mini_talk.index = 0;
+	g_mini_talk.signal = 0;
+	printf("%s\n", g_mini_talk.str);
+	if (g_mini_talk.clients_on_hold)
 	{
-		//printf("Transmission started!\n");
-		if (sig == SIGUSR1)
-			g_mini_talk.chr |= 1UL << g_mini_talk.current_byte;
-		else if (sig == SIGUSR2)
-			g_mini_talk.chr &= ~(1UL << g_mini_talk.current_byte);
-		if ((g_mini_talk.current_byte == 0))
-		{
-			if (g_mini_talk.chr == '\0')
-				reset_transmission();
-			else
-			{
-				g_mini_talk.str[g_mini_talk.index] = g_mini_talk.chr;
-				g_mini_talk.index++;
-				g_mini_talk.current_byte = 7;
-			}
-		}
-		else
-			g_mini_talk.current_byte--;
-		usleep(125);
-		kill(siginfo->si_pid, SIGUSR1);
+		aux = g_mini_talk.clients_on_hold;
+		g_mini_talk.clients_on_hold = g_mini_talk.clients_on_hold->next;
+		ft_lstdelone(aux, 0);
+		g_mini_talk.connected_client = (long int)aux->content;
 	}
 }
 
-void	connect_to_client(int sig, siginfo_t *siginfo, void *context)
+void	receive_transmission()
 {
-	sig++;
-	context++;
+	if (g_mini_talk.signal == SIGUSR1)
+		g_mini_talk.chr |= 1UL << g_mini_talk.current_byte;
+	else if (g_mini_talk.signal == SIGUSR2)
+		g_mini_talk.chr &= ~(1UL << g_mini_talk.current_byte);
+	if ((g_mini_talk.current_byte == 0))
+	{
+		if (g_mini_talk.chr == '\0')
+			reset_transmission();
+		else
+		{
+			g_mini_talk.str[g_mini_talk.index] = g_mini_talk.chr;
+			g_mini_talk.index++;
+		}
+		g_mini_talk.current_byte = 7;
+	}
+	else
+		g_mini_talk.current_byte--;
+}
 
-	if (g_mini_talk.connected_client)
-		return ;
-	set_sig_handler_function(SIGUSR1, receive_transmission);
-	g_mini_talk.connected_client = siginfo->si_pid;
-	g_mini_talk.current_byte = 7;
-	write(STDOUT_FILENO, "Pong!\n", 6);
-	usleep(125);
-	kill(g_mini_talk.connected_client, SIGUSR1);
+void	sig_handler_1(int sig, siginfo_t *siginfo, void *context)
+{
+	g_mini_talk.signal = sig;
+	g_mini_talk.signaling_client = siginfo->si_pid;
+	context++;
+}
+
+void	sig_handler_2(int sig, siginfo_t *siginfo, void *context)
+{
+	g_mini_talk.signal = sig;
+	g_mini_talk.signaling_client = siginfo->si_pid;
+	context++;
 }
 
 int	main (void)
 {
-	int	pid;
-	t_list *aux;
-
 	ft_memset(&g_mini_talk, 0, sizeof(t_mini_talk));
-	set_sig_handler_function(SIGUSR1, connect_to_client);
-	set_sig_handler_function(SIGUSR2, receive_transmission);
-
-	pid = getpid();
-	printf("%i\n", pid);
+	set_sig_handler_function(SIGUSR1, sig_handler_1);
+	set_sig_handler_function(SIGUSR2, sig_handler_2);
+	g_mini_talk.current_byte = 7;
+	printf("%i\n", getpid());
 	while (true)
 	{
-		//printf("I am in a loop!\n");
-		if (g_mini_talk.clients_on_hold) //Technically, it should block signals till its done;
-		{
-			g_mini_talk.connected_client = (long int)g_mini_talk.clients_on_hold->content;
-			set_sig_handler_function(SIGUSR1, receive_transmission);
-			aux = g_mini_talk.clients_on_hold;
-			g_mini_talk.clients_on_hold = g_mini_talk.clients_on_hold->next;
-			free(aux);
-			kill(g_mini_talk.connected_client, SIGUSR1);
-		}
 		pause();
+		if (g_mini_talk.connected_client == 0)
+			g_mini_talk.connected_client = g_mini_talk.signaling_client;
+		else
+		{
+			if (g_mini_talk.connected_client != g_mini_talk.signaling_client)
+				ft_lstadd_back(&g_mini_talk.clients_on_hold, ft_lstnew((void *)(g_mini_talk.signaling_client)));
+			else
+				receive_transmission();
+		}
+		usleep(10);
+		kill(g_mini_talk.connected_client, SIGUSR1);
 	}
 }

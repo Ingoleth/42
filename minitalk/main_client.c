@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 20:26:45 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/06/06 12:42:50 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/06/10 12:17:52 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	send_char(unsigned char chr, int server_pid)
 	current_byte = 7;
 	while (0 <= current_byte)
 	{
+		usleep(15);
 		if (chr & (1 << current_byte))
 			kill(server_pid, SIGUSR1);
 		else
@@ -35,11 +36,9 @@ void	transmission(char *str, int server_pid)
 
 	str_length = ft_strlen(str);
 	i = 0;
-	printf("Str lenght = %i\n%s\n", str_length, str);
 	while (i <= str_length)
 	{
 		send_char(str[i], server_pid);
-		printf("Sending char \"%c (%i)\"\n", str[i], (int)*str);
 		i++;
 	}
 }
@@ -58,14 +57,12 @@ int	main (int argc, char **argv)
 		printf("Not enough arguments!\n");
 		return (-1);
 	}
-	printf("Client PID = %i\n", getpid());
 	server_pid = ft_atoi(argv[1]);
 	if (kill(server_pid, -0) == -1)
 	{
 		printf("Erroneous server pid!\n");
 		return (-1);
 	}
-	write(STDOUT_FILENO, "Ping!\n", 6);
 	signal(SIGUSR1, placeholder);
 	kill(server_pid, SIGUSR1);
 	pause();
