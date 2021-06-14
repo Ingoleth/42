@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 12:12:57 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/05/09 16:52:15 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/06/14 12:20:34 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ void	juggle_sort_b(t_array_info *arrays, t_list *subdivisions)
 				i = push_and_rotate_backwards(arrays, &current_set_size, i);
 			juggle_sort_a(arrays);
 		}
-		juggle_sort_a(arrays);
 		sort_3_b(arrays, current_set_size);
 		arrays->sorted_elements_a += current_set_size;
 		while (current_set_size--)
