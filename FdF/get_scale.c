@@ -44,7 +44,7 @@ void get_z_axis_length(int **map, int *z)
     *z = pos - neg;
 }
 
-int get_scale(int **map)
+int get_scale(int **map, int *x_offset, int *y_offset)
 {
     int     x;
     int     y;
@@ -54,5 +54,7 @@ int get_scale(int **map)
     get_x_y_axis_length(map, &x, &y);
     get_z_axis_length(map, &z);
     scale = 1080 / ((float)(z + (y + x)) * sin(M_PI_4 / 2));
+    x_offset++;
+    *y_offset = (float)(z + (y + x)) * sin(M_PI_4 / 2);
     return (scale);
 }

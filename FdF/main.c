@@ -12,9 +12,9 @@ int on_key_pressed(int key_code)
     return (0);
 }
 
-void    draw_tile(int x, int y, int scale, t_data *canvas, t_data *tile)
+void    draw_tile(int x, int y, int scale, t_render_info *render_info)
 {
-    render_image(canvas, tile, scale * x / 2 -scale * y / 2, scale * x / 4 + scale * y / 4, scale);
+    render_image(render_info->canvas, render_info->tile, 1080 / 8 + 420 + scale * x / 2 -scale * y / 2, 1080 / 8 + scale * x / 4 + scale * y / 4, scale);
 }
 
 void    initialize_render_info(t_render_info *render_info)
@@ -24,7 +24,7 @@ void    initialize_render_info(t_render_info *render_info)
     render_info->tile = load_xpm_image(render_info->mlx_ptr, "tile_2.xpm");
     render_info->canvas = initialize_image(render_info->mlx_ptr, 1920, 1280);
     render_info->map = get_map("map");
-    render_info->scale = get_scale(render_info->map);
+    render_info->scale = get_scale(render_info->map, &render_info->x, &render_info->y);
 }
 
 int main(void)
@@ -39,7 +39,7 @@ int main(void)
         while (j <= render_info.map[i][0])
         {
             if (render_info.map[i][j])
-                draw_tile(j - 1, i, render_info.scale, render_info.canvas, render_info.tile);
+                draw_tile(j - 1, i, render_info.scale, &render_info);
             j++;
         }
         j = 1;

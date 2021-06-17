@@ -50,6 +50,6 @@ void		draw_pixel(t_data *image, int x, int y, int color);
 void		draw_pixel_area(t_data *image, t_coords coords, int color);
 void	    render_image(t_data *canvas, t_data *image, int x, int y, float size);
 int			**get_map();
-int			get_scale(int **map);
+int			get_scale(int **map, int *x_offset, int *y_offset);
 
 #endif
