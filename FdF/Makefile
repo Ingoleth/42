@@ -15,6 +15,7 @@ BNS = cub3D_bonus
 SRCS =	main.c				\
 		image.c				\
 		pixel_handling.c	\
+		get_scale.c			\
 		map.c
 LIB_DIR = libft/
 LIBFT_A = libft.a
