@@ -6,24 +6,11 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 12:13:13 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/05/09 17:07:47 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/06/18 21:06:22 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-t_bool	number_to_push(int *array, int lenght, int pivot)
-{
-	int	i;
-
-	i = 0;
-	while (i < lenght)
-	{
-		if (array[i++] <= pivot)
-			return (true);
-	}
-	return (false);
-}
 
 static int	push_and_rotate_backwards(t_array_info *arrays, unsigned long int
 	*nb_swaps, int i)
@@ -85,8 +72,9 @@ void	juggle_sort_a(t_array_info *arrays)
 			i = push_and_rotate_forwards(arrays, &nb_swaps, i);
 		else
 			i = push_and_rotate_backwards(arrays, &nb_swaps, i);
-		if (nb_swaps)
-			ft_lstadd_front(&subdivisions, ft_lstnew((void *)nb_swaps));
+		ft_lstadd_front(&subdivisions, ft_lstnew((void *)nb_swaps));
+		if (is_sorted(arrays->array_a, arrays->array_a_length, ascending))
+			break;
 	}
 	sort_3_a(arrays, arrays->array_a_length - arrays->sorted_elements_a);
 	arrays->sorted_elements_a += arrays->array_a_length

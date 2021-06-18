@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:39:46 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/05/09 15:25:31 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/06/18 20:51:06 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,28 +126,19 @@ int				get_pivot(int *array, int start, int end);
 int				get_pivot_b(int *array, int start, int end);
 void			sort_3_a(t_array_info *arrays, int length);
 void			sort_3_b(t_array_info *arrays, int length);
+t_bool			can_sort_a(t_array_info *arrays, int
+					current_set_size, int i);
+int				find_biggest_num_b(t_array_info *arrays, int start, int end);
+t_bool			check_special_permutations(t_array_info *arrays, int *current_set_size, int *i, int *j);
 void    		profile(char **argv, int argv_pos);
 void			push_remaining_elements_to_a(t_array_info *arrays,
 					int current_set_size);
-void			regular_sort(t_array_info *arrays);
-void			find_smallest_nums_in_path(t_array_info *arrays,
-					t_list **smaller_num,
-					int previous_num, int previous_index);
-void			push_smaller_numbers(t_array_info *arrays,
-					t_list *small_numbers, int direction);
-void			print_smaller_nums_found(t_list *smaller_nums);
-void			quick_sort(t_array_info *arrays, int start, int end);
 void			sort_3(t_array_info *arrays);
-void			sort_3_over_stack(t_array_info *arrays, int stack);
 void			sort_5(t_array_info *arrays);
-void			sort_5_over_stack(t_array_info *arrays, int stack);
 /*
 **  UTILS 
 */
-void			move_to_index(t_array_info *arrays, int index);
 int				get_offset(t_array_info *arrays, int i);
-int				find_smallest_num(t_array_info *arrays, int *value,
-					t_bool capped, int cap_value);
 void			print_stacks(t_array_info *arrays, unsigned short instruction);
 void			print_array(t_array_info *arrays);
 void			push_num(t_array_info *arrays, int stack, int type);

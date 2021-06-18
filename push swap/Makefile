@@ -25,6 +25,8 @@ SRCS_CHECKER = 		checker_main.c										\
 
 SRCS_PUSH_SWAP =	push_swap_main.c									\
 					profiling/profiling.c								\
+					sorting/juggle_sort/can_sort_a.c					\
+					sorting/juggle_sort/check_special_permutations.c	\
 					sorting/juggle_sort/get_pivot.c						\
 					sorting/juggle_sort/juggle_sort_a.c					\
 					sorting/juggle_sort/juggle_sort_b.c					\
