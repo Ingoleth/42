@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:39:46 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/06/18 20:51:06 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/05/09 15:25:31 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,6 @@ void			sort_5(t_array_info *arrays);
 /*
 **  UTILS 
 */
-int				get_offset(t_array_info *arrays, int i);
 void			print_stacks(t_array_info *arrays, unsigned short instruction);
 void			print_array(t_array_info *arrays);
 void			push_num(t_array_info *arrays, int stack, int type);

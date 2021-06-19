@@ -58,6 +58,8 @@ void	get_rand_array(int length, unsigned short lfsr, t_array_info *arrays)
 			arrays->array_a[i] = nb_length;
 			i++;
 		}
+		else
+			lfsr++;
 	}
 	arrays->array_a_length = length;
 }

@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 12:12:57 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/06/18 20:52:09 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/06/14 12:20:34 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	push_and_rotate_forwards(t_array_info *arrays, int
 
 	pivot = get_pivot(arrays->array_b, 0, *current_set_size);
 	j = *current_set_size;
-	while (j)
+	while (j > 0)
 	{
 		if (!check_special_permutations(arrays, current_set_size, &i, &j))
 		{
@@ -44,19 +44,30 @@ static int	push_and_rotate_backwards(t_array_info *arrays, int
 	*current_set_size, int i)
 {
 	int	pivot;
+	int j;
 
+	j = 0;
 	pivot = get_pivot(arrays->array_b, arrays->array_b_length
 			- *current_set_size, arrays->array_b_length);
+	if (i > arrays->array_b_length - i)
+	{
+		while (i++ < arrays->array_b_length)
+			instruction(rot_b, arrays);
+		i = 0;
+	}
 	while (i)
 	{
 		instruction(rev_rot_b, arrays);
 		i--;
-		if (arrays->array_b[0] >= pivot)
+		j++;
+		if (!check_special_permutations(arrays, current_set_size, &i, &j))
 		{
-			instruction(push_a, arrays);
-			*current_set_size -= 1;
-			if (can_sort_a(arrays, *current_set_size, i))
-				juggle_sort_a(arrays);
+			if (arrays->array_b[0] >= pivot)
+			{
+				instruction(push_a, arrays);
+				j--;
+				*current_set_size -= 1;
+			}
 		}
 	}
 	return (i);

@@ -2,8 +2,11 @@
 
 void    initialize_arrays_profiling(t_array_info *arrays, int lenght)
 {
+    int seed;
+
+    seed = rand();
     ft_memset(arrays, 0, sizeof(t_array_info));
-    get_rand_array(lenght, rand(), arrays);
+    get_rand_array(lenght, seed, arrays);
     arrays->array_b = ft_calloc(arrays->array_a_length + 1, sizeof(int));
     arrays->profiling = true;
 	if (arrays->array_b == NULL)
@@ -20,6 +23,7 @@ void    profile(char **argv, int argv_pos)
     t_array_info    arrays;
     long int        mean;
     int             aux;
+    int             max_operations;
 
         array_lenght = ft_atoi(argv[argv_pos++]);
         if (!array_lenght || !argv[argv_pos])
@@ -35,6 +39,7 @@ void    profile(char **argv, int argv_pos)
         }
         mean = 0;
         aux = number_checks;
+        max_operations = 0;
         while (aux--)
         {
             initialize_arrays_profiling(&arrays, array_lenght);
@@ -49,8 +54,10 @@ void    profile(char **argv, int argv_pos)
             }
             free(arrays.array_a);
             free(arrays.array_b);
+            if (arrays.instruction_counter > max_operations)
+                max_operations = arrays.instruction_counter;
             mean += arrays.instruction_counter;
         }
-        printf("Sorted in a mean of %li instructions\n", mean / number_checks);
+        printf("Sorted in a mean of %li instructions;\nMax number of instructions: %i\n", mean / number_checks, max_operations);
         exit (0);
 }
