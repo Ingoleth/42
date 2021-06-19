@@ -1,0 +1,91 @@
+{
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "gcc build active file",
+            "command": "/usr/bin/gcc",
+            "args": [
+                "-g",
+                "${file}",
+                "-o",
+                "${workspaceFolder}/${fileBasenameNoExtension}"
+            ],
+            "options": {
+                "cwd": "/usr/bin"
+            }
+        },
+        {
+            "type": "shell",
+            "label": "gcc build cub3d",
+            "command": "/usr/bin/gcc",
+            "args": [
+                "-g",
+                "${workspaceFolder}/*.c",
+                "${workspaceFolder}/map/*.c",
+                "${workspaceFolder}/map/check_file/*.c",
+                "${workspaceFolder}/libft/*.c",
+                // "${workspaceFolder}/cub3d.a",
+                "-o",
+                "${workspaceFolder}/${fileBasenameNoExtension}"
+            ],
+            "options": {
+                "cwd": "/usr/bin"
+            }
+        },
+		{
+            "type": "shell",
+            "label": "gcc build push_swap",
+            "command": "/usr/bin/gcc",
+            "args": [
+                "-g",
+				"-I${workspaceFolder}/libft",
+                "-I${workspaceFolder}",
+                "${workspaceFolder}/handle_input/get_array_from_argv.c",
+				"${workspaceFolder}/handle_input/get_input_array.c",
+				"${workspaceFolder}/handle_input/get_rand_array.c",
+				"${workspaceFolder}/handle_input/handle_flags.c",
+				"${workspaceFolder}/handle_input/handle_input.c",
+				"${workspaceFolder}/handle_input/initialize_arrays.c",
+				"${workspaceFolder}/instructions/push.c",
+				"${workspaceFolder}/instructions/rev_rotate.c",
+				"${workspaceFolder}/instructions/rotate.c",
+				"${workspaceFolder}/instructions/swap.c",
+				"${workspaceFolder}/utils/number_checks.c",
+				"${workspaceFolder}/utils/print_stacks.c",
+                "${workspaceFolder}/push_swap_main.c",
+				"${workspaceFolder}/profiling/profiling.c",
+				"${workspaceFolder}/sorting/juggle_sort/can_sort_a.c",
+				"${workspaceFolder}/sorting/juggle_sort/check_special_permutations.c",
+				"${workspaceFolder}/sorting/juggle_sort/get_pivot.c",
+				"${workspaceFolder}/sorting/juggle_sort/juggle_sort_a.c",
+				"${workspaceFolder}/sorting/juggle_sort/juggle_sort_b.c",
+				"${workspaceFolder}/sorting/juggle_sort/sort_3_over_stack.c",
+				"${workspaceFolder}/sorting/sort_3.c",
+				"${workspaceFolder}/sorting/sort_5.c",
+				"${workspaceFolder}/utils/instruction_profiling.c",
+				"${workspaceFolder}/utils/instruction_verbose.c",
+				"${workspaceFolder}/utils/instruction.c",
+				"${workspaceFolder}/utils/push_num.c",
+                "${workspaceFolder}/libft.a",
+                "-o",
+                "${workspaceFolder}/push_swap_debug.out"
+            ],
+            "options": {
+                "cwd": "/usr/bin"
+            }
+        },
+        {
+            "type": "shell",
+            "label": "make active project",
+            "command": "/usr/bin/make",
+            "args": [
+                "-C",
+                "${workspaceFolder}"
+            ],
+            "options": {
+                "cwd": "/usr/bin"
+            }
+        }
+    ],
+    "version": "2.0.0"
+}
