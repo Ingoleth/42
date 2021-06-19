@@ -10,7 +10,6 @@ SRCS_COMMON = 		handle_input/get_array_from_argv.c					\
 					handle_input/get_input_array.c						\
 					handle_input/get_rand_array.c						\
 					handle_input/handle_flags.c							\
-					handle_input/handle_input.c							\
 					handle_input/initialize_arrays.c					\
 					instructions/push.c									\
 					instructions/rev_rotate.c							\
@@ -20,10 +19,12 @@ SRCS_COMMON = 		handle_input/get_array_from_argv.c					\
 					utils/print_stacks.c
 
 SRCS_CHECKER = 		checker_main.c										\
+					handle_input/handle_input_checker.c					\
 					instructions/get_instructions_verbose.c				\
 					instructions/get_instructions.c
 
 SRCS_PUSH_SWAP =	push_swap_main.c									\
+					handle_input/handle_input.c							\
 					profiling/profiling.c								\
 					sorting/juggle_sort/can_sort_a.c					\
 					sorting/juggle_sort/check_special_permutations.c	\
@@ -42,14 +43,12 @@ LIBFT_A = libft.a
 # COMPILER FLAGS
 FLAGS = -Wall -Wextra -Werror -g
 
-all: ${CHECKER}
-checker: ${CHECKER}
-bonus: all
+all: ${CHECKER} ${PUSH_SWAP}
 
-${CHECKER}: ${SRCS_COMMON} ${SRCS_CHECKER} ${LIBFT_A}
+${CHECKER}: ${LIBFT_A}
 			gcc ${INCLUDES} ${FLAGS} ${SRCS_COMMON} ${SRCS_CHECKER} ${LIBFT_A} -o ${CHECKER}
 
-${PUSH_SWAP}: ${SRCS_COMMON} ${SRCS_PUSH_SWAP} ${LIBFT_A}
+${PUSH_SWAP}: ${LIBFT_A}
 			gcc ${INCLUDES} ${FLAGS} ${SRCS_COMMON} ${SRCS_PUSH_SWAP} ${LIBFT_A} -o ${PUSH_SWAP}
 
 ${LIBFT_A}:
