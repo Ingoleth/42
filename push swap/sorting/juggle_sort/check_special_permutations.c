@@ -5,16 +5,15 @@ t_bool	check_sortedness(t_array_info *arrays, int *current_set_size, int *i, int
 	int biggest_num;
 
 	biggest_num = find_biggest_num_b(arrays, 0, arrays->array_b_length);
-	/*if (biggest_num == arrays->array_b[arrays->array_b_length - 1] && *j > 1)
+	if (biggest_num == arrays->array_b[arrays->array_b_length - 1] && *i > 1)
 	{
 		*i -= 1;
 		*j += 1;
 		instruction(rev_rot_b, arrays);
-	}*/
-	i++;
-	if (biggest_num == arrays->array_b[1] && *j > 1)
+	}
+	else if (biggest_num == arrays->array_b[1] && *j > 1)
 		instruction(swap_b, arrays);
-	else if (biggest_num == arrays->array_b[0])
+	else if (biggest_num == arrays->array_b[0] && *j > 0)
 	{
 		*j -= 1;
 		*current_set_size -= 1;

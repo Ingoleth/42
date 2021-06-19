@@ -55,7 +55,7 @@ static int	push_and_rotate_backwards(t_array_info *arrays, int
 			instruction(rot_b, arrays);
 		i = 0;
 	}
-	while (i)
+	while (i > 0)
 	{
 		instruction(rev_rot_b, arrays);
 		i--;
