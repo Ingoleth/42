@@ -25,6 +25,7 @@ SRCS_CHECKER = 		checker_main.c										\
 
 SRCS_PUSH_SWAP =	push_swap_main.c									\
 					handle_input/handle_input.c							\
+					handle_input/flag_checker.c							\
 					profiling/profiling.c								\
 					sorting/juggle_sort/can_sort_a.c					\
 					sorting/juggle_sort/check_special_permutations.c	\

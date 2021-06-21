@@ -6,11 +6,22 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 12:12:57 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/06/14 12:20:34 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/06/21 13:58:33 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+t_bool	shorter_through_unordered(t_array_info *arrays, int i)
+{
+	if (i > arrays->array_b_length - i)
+	{
+		while (i++ < arrays->array_b_length)
+			instruction(rot_b, arrays);
+		return (true);
+	}
+	return (false);
+}
 
 static int	push_and_rotate_forwards(t_array_info *arrays, int
 	*current_set_size, int i)
@@ -44,17 +55,13 @@ static int	push_and_rotate_backwards(t_array_info *arrays, int
 	*current_set_size, int i)
 {
 	int	pivot;
-	int j;
+	int	j;
 
 	j = 0;
 	pivot = get_pivot(arrays->array_b, arrays->array_b_length
 			- *current_set_size, arrays->array_b_length);
-	if (i > arrays->array_b_length - i)
-	{
-		while (i++ < arrays->array_b_length)
-			instruction(rot_b, arrays);
-		i = 0;
-	}
+	if (shorter_through_unordered(arrays, i))
+		return (0);
 	while (i > 0)
 	{
 		instruction(rev_rot_b, arrays);

@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:39:46 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/05/09 15:25:31 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/06/21 13:56:00 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ void			get_rand_array(int length, unsigned short lfsr,
 void			get_array_from_argv(char **argv, int argc, int argv_pos,
 					t_array_info *arrays);
 void			handle_flags(char **argv, t_flags *flags, int *argv_pos);
+void			handle_input_flags(char **flags_list, char **argv,
+					t_flags *flags, int *argv_pos);
 t_bool			is_number(char *line);
 t_bool			is_repeated(int nb, t_list *array_list);
 t_bool			is_repeated_array(int nb, int *array, int length);
@@ -129,8 +131,9 @@ void			sort_3_b(t_array_info *arrays, int length);
 t_bool			can_sort_a(t_array_info *arrays, int
 					current_set_size, int i);
 int				find_biggest_num_b(t_array_info *arrays, int start, int end);
-t_bool			check_special_permutations(t_array_info *arrays, int *current_set_size, int *i, int *j);
-void    		profile(char **argv, int argv_pos);
+t_bool			check_special_permutations(t_array_info *arrays,
+					int *current_set_size, int *i, int *j);
+void			profile(char **argv, int argv_pos);
 void			push_remaining_elements_to_a(t_array_info *arrays,
 					int current_set_size);
 void			sort_3(t_array_info *arrays);

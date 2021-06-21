@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_input.c                                     :+:      :+:    :+:   */
+/*   handle_input_checker.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:39:13 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/03/31 20:13:55 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/06/21 13:46:08 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,6 @@ void	handle_random_input(char **argv, t_array_info *arrays,
 	exit(-1);
 }
 
-/*
-** TODO: Check for more arguments --> error if found?
-*/
-
 void	handle_fd_array(char **argv, t_array_info *arrays,
 	t_bool verbose)
 {
@@ -64,15 +60,8 @@ void	handle_fd_array(char **argv, t_array_info *arrays,
 	close(fd);
 }
 
-void	handle_input(int argc, char **argv,
-	t_flags *flags, t_array_info *arrays)
+t_bool	invalid_combination(t_flags *flags)
 {
-	int	argv_pos;
-
-	if (argc == 1)
-		exit(-1);
-	argv_pos = 1;
-	handle_flags(argv, flags, &argv_pos);
 	if ((flags->inst_mode_fd && flags->push_swap)
 		|| ((flags->file_output || flags->log || flags->display_operations)
 			&& flags->checker))
@@ -83,8 +72,22 @@ void	handle_input(int argc, char **argv,
 				STDIN_FILENO);
 		else
 			ft_putstr_fd("Error\n", STDERR_FILENO);
-		exit(0);
+		return (true);
 	}
+	return (false);
+}
+
+void	handle_input(int argc, char **argv,
+	t_flags *flags, t_array_info *arrays)
+{
+	int	argv_pos;
+
+	if (argc == 1)
+		exit(-1);
+	argv_pos = 1;
+	handle_flags(argv, flags, &argv_pos);
+	if (invalid_flag_combination())
+		exit(-1);
 	if (flags->mode_input)
 		get_input_array(STDIN_FILENO, arrays, flags->verbose);
 	else if (flags->mode_fd)

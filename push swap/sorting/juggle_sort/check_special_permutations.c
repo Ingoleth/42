@@ -1,8 +1,9 @@
 #include "push_swap.h"
 
-t_bool	check_sortedness(t_array_info *arrays, int *current_set_size, int *i, int *j)
+t_bool	check_sortedness(t_array_info *arrays,
+		int *current_set_size, int *i, int *j)
 {
-	int biggest_num;
+	int	biggest_num;
 
 	biggest_num = find_biggest_num_b(arrays, 0, arrays->array_b_length);
 	if (biggest_num == arrays->array_b[arrays->array_b_length - 1] && *i > 1)
@@ -25,15 +26,17 @@ t_bool	check_sortedness(t_array_info *arrays, int *current_set_size, int *i, int
 	return (true);
 }
 
-t_bool	check_special_permutations(t_array_info *arrays, int *current_set_size, int *i, int *j)
+t_bool	check_special_permutations(t_array_info *arrays,
+		int *current_set_size, int *i, int *j)
 {
-	t_bool done;
+	t_bool	done;
 
 	done = 0;
 	if (can_sort_a(arrays, *current_set_size, *i))
 	{
 		juggle_sort_a(arrays);
-		while (*current_set_size > 0 && check_sortedness(arrays, current_set_size, i, j))
+		while (*current_set_size > 0 && check_sortedness(arrays,
+				current_set_size, i, j))
 			done = true;
 	}
 	return (done);

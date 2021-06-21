@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 17:52:33 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/04/27 19:32:38 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/06/21 13:34:58 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,10 @@ int	get_colour_b(int i, unsigned short instruction)
 	return (0);
 }
 
-void	print_legend(void)
+void	print_legend(t_array_info *arrays)
 {
+	printf("          a         b\n\nA size = %i; B size = %i;\n\n",
+		arrays->array_a_length, arrays->array_b_length);
 	printf("Push = [\033[%im***\033[0m]\n", 33);
 	printf("Swap = [\033[%im***\033[0m]\n", 34);
 	printf("Rotate = [\033[%im***\033[0m]\n", 35);
@@ -96,10 +98,7 @@ void	print_stacks(t_array_info *arrays, unsigned short int instruction)
 		printf("\n");
 		i++;
 	}
-	printf("          a         b\n\n");
-	printf("A size = %i; B size = %i;\n\n", arrays->array_a_length,
-		arrays->array_b_length);
-	print_legend();
+	print_legend(arrays);
 	if (arrays->display_operations)
 		sleep(1);
 }
