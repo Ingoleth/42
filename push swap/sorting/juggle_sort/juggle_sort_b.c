@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 12:12:57 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/06/21 13:58:33 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/06/22 12:18:16 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,12 @@ static int	push_and_rotate_backwards(t_array_info *arrays, int
 		instruction(rev_rot_b, arrays);
 		i--;
 		j++;
-		if (!check_special_permutations(arrays, current_set_size, &i, &j))
+		check_special_permutations(arrays, current_set_size, &i, &j);
+		if (arrays->array_b[0] >= pivot)
 		{
-			if (arrays->array_b[0] >= pivot)
-			{
-				instruction(push_a, arrays);
-				j--;
-				*current_set_size -= 1;
-			}
+			instruction(push_a, arrays);
+			j--;
+			*current_set_size -= 1;
 		}
 	}
 	return (i);

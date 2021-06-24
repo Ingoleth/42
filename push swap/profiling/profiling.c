@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-void	initialize_arrays_profiling(t_array_info *arrays, int lenght)
+int	initialize_arrays_profiling(t_array_info *arrays, int lenght)
 {
 	int	seed;
 
@@ -14,13 +14,15 @@ void	initialize_arrays_profiling(t_array_info *arrays, int lenght)
 		free(arrays->array_a);
 		exit (1);
 	}
+	return (seed);
 }
 
 int	sorting_run(int array_lenght)
 {
 	t_array_info	arrays;
+	int				seed;
 
-	initialize_arrays_profiling(&arrays, array_lenght);
+	seed = initialize_arrays_profiling(&arrays, array_lenght);
 	if (!is_sorted(arrays.array_a, arrays.array_a_length, ascending))
 	{	
 		if (arrays.array_a_length <= 3)
@@ -29,6 +31,14 @@ int	sorting_run(int array_lenght)
 			sort_5(&arrays);
 		else
 			juggle_sort_a(&arrays);
+	}
+	if (!is_sorted(arrays.array_a, arrays.array_a_length, ascending)
+		|| arrays.array_b[0])
+	{
+		printf("Error on stack sorting run; Seed = %i\n", seed);
+		free(arrays.array_a);
+		free(arrays.array_b);
+		exit(-1);
 	}
 	free(arrays.array_a);
 	free(arrays.array_b);

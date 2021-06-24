@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:39:46 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/06/21 13:56:00 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/06/22 12:48:08 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,6 @@ void			swap(int *array, int length);
 /*
 ** SORTING
 */
-void			sort_arrays(t_array_info *arrays);
 void			juggle_sort_a(t_array_info *arrays);
 void			juggle_sort_b(t_array_info *arrays, t_list *subdivisions);
 int				get_pivot(int *array, int start, int end);
@@ -142,7 +141,6 @@ void			sort_5(t_array_info *arrays);
 **  UTILS 
 */
 void			print_stacks(t_array_info *arrays, unsigned short instruction);
-void			print_array(t_array_info *arrays);
 void			push_num(t_array_info *arrays, int stack, int type);
 char			*read_input(int fd);
 

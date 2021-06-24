@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 17:52:33 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/06/21 13:34:58 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/06/24 11:06:56 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,5 @@ void	print_stacks(t_array_info *arrays, unsigned short int instruction)
 	}
 	print_legend(arrays);
 	if (arrays->display_operations)
-		sleep(1);
+		usleep(500000);
 }

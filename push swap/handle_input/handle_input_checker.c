@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:39:13 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/06/21 13:46:08 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/06/22 12:20:33 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	handle_fd_array(char **argv, t_array_info *arrays,
 	close(fd);
 }
 
-t_bool	invalid_combination(t_flags *flags)
+t_bool	invalid_flag_combination(t_flags *flags)
 {
 	if ((flags->inst_mode_fd && flags->push_swap)
 		|| ((flags->file_output || flags->log || flags->display_operations)
@@ -86,7 +86,7 @@ void	handle_input(int argc, char **argv,
 		exit(-1);
 	argv_pos = 1;
 	handle_flags(argv, flags, &argv_pos);
-	if (invalid_flag_combination())
+	if (invalid_flag_combination(flags))
 		exit(-1);
 	if (flags->mode_input)
 		get_input_array(STDIN_FILENO, arrays, flags->verbose);
