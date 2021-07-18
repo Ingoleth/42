@@ -2,8 +2,8 @@
 
 t_bool	init_mutexes(int size)
 {
-	int i;
-	int error;
+	int	i;
+	int	error;
 
 	i = 0;
 	size += 2;
@@ -18,7 +18,7 @@ t_bool	init_mutexes(int size)
 			return (false);
 		error = pthread_mutex_init(g_philo_common.mutexes[i], NULL);
 		if (error)
-			return(false);
+			return (false);
 		i++;
 	}
 	g_philo_common.communication = g_philo_common.mutexes[size - 1];
@@ -28,7 +28,7 @@ t_bool	init_mutexes(int size)
 
 t_philo	*load_philosopher_data(int i, int size)
 {
-	t_philo *aux;
+	t_philo	*aux;
 
 	aux = malloc(sizeof(t_philo));
 	if (aux == NULL)
@@ -53,7 +53,7 @@ t_philo	*load_philosopher_data(int i, int size)
 
 t_bool	init_threads(int size)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	g_philo_common.threads = malloc((size + 1) * sizeof (pthread_t *));
@@ -70,20 +70,20 @@ t_bool	init_threads(int size)
 		if (g_philo_common.structs[i] == NULL)
 			return (false);
 	}
-	i = 0;
-	while (i < size)
+	i = -1;
+	while (++i < size)
 	{
-		if (pthread_create(&g_philo_common.threads[i], NULL, &live, g_philo_common.structs[i]))
-			return(false);
-		i++;
+		if (pthread_create(&g_philo_common.threads[i], NULL, &live,
+				g_philo_common.structs[i]))
+			return (false);
 	}
 	return (true);
 }
 
-t_bool *init_bool(int size, t_bool initial_value)
+t_bool	*init_bool(int size, t_bool initial_value)
 {
-	t_bool *bool;
-	int i;
+	t_bool	*bool;
+	int		i;
 
 	bool = malloc((size + 1) * sizeof (t_bool));
 	if (bool == NULL)

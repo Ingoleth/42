@@ -1,19 +1,20 @@
 #ifndef PHILOSOPHERS_H
-#define PHILOSOPHERS_H
+# define PHILOSOPHERS_H
 
-#include <pthread.h>
-#include <stdio.h>
-#include <sys/time.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <string.h>
+# include <pthread.h>
+# include <stdio.h>
+# include <sys/time.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <string.h>
 
-typedef	enum e_bool
+typedef enum e_bool
 {
-	false, true
-} t_bool;
+	false,
+	true
+}	t_bool;
 
-typedef	struct philo
+typedef struct s_philo
 {
 	int				eat_amount;
 	int				philo_id;
@@ -24,29 +25,29 @@ typedef	struct philo
 	t_bool			*left_table_fork;
 	pthread_mutex_t	*left_fork_mutex;
 	pthread_mutex_t	*right_fork_mutex;
-} t_philo;
+}	t_philo;
 
 typedef struct s_philo_common
 {
 	t_philo			**structs;
-	pthread_mutex_t **mutexes;
+	pthread_mutex_t	**mutexes;
 	pthread_t		*threads;
 	t_bool			*forks;
 	int				philosophers;
 	int				eat_time;
 	int				eat_amount;
 	int				sleep_time;
-	int			starvation_time;
+	int				starvation_time;
 	t_bool			*end_condition;
 	pthread_mutex_t	*communication;
-	pthread_mutex_t *end_condition_mutex;
-} t_philo_common;
+	pthread_mutex_t	*end_condition_mutex;
+}	t_philo_common;
 
-t_philo_common g_philo_common;
+t_philo_common	g_philo_common;
 
-long    get_current_timestamp(void);
+long	get_current_timestamp(void);
 t_bool	check_number(int *nbr, char *str, t_bool check_zero);
-t_bool	manipulate_fork(int philo_id, t_bool *fork_in_table, pthread_mutex_t *mutex, t_bool take);
+t_bool	manipulate_fork(t_philo *philo, t_bool right_side, t_bool take);
 void	set_end_condition(int philo_id, t_bool he_dead);
 int		init_data(int size);
 int		free_memory(int return_value);

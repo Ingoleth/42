@@ -11,13 +11,10 @@ int	ft_atoi(const char *str)
 	if (!str)
 		return (0);
 	while ((str[i] == '\t' || str[i] == '\n' || str[i] == '\v'
-		|| str[i] == '\f' || str[i] == '\r' || str[i] == ' '))
+			|| str[i] == '\f' || str[i] == '\r' || str[i] == ' '))
 		i++;
-	if (str[i] == '-')
-	{
+	if (str[i++] == '-')
 		sign *= -1;
-		i++;
-	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		if (number == 0)
@@ -93,7 +90,7 @@ t_bool	check_number(int *nbr, char *str, t_bool check_zero)
 		if (!check_zero)
 			return (true);
 		if (*nbr)
-			return(true);
+			return (true);
 	}
-	return(false);
+	return (false);
 }
