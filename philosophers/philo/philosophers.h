@@ -33,6 +33,7 @@ typedef struct s_philo_common
 	pthread_mutex_t	**mutexes;
 	pthread_t		*threads;
 	t_bool			*forks;
+	long			start_time;
 	int				philosophers;
 	int				eat_time;
 	int				eat_amount;

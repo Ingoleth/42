@@ -29,6 +29,7 @@ t_bool	get_forks_or_die(t_philo *philo)
 		if (!philo->left_fork)
 			philo->left_fork = manipulate_fork(philo, false, true);
 	}
+	return (false);
 }
 
 t_bool	eat(t_philo *philo)
@@ -40,7 +41,7 @@ t_bool	eat(t_philo *philo)
 	{
 		philo->eat_amount--;
 		if (philo->eat_amount == 0)
-			set_end_condition(philo->philo_id + 1, false);
+			set_end_condition(philo->philo_id, false);
 	}
 	usleep(g_philo_common.eat_time * 1000);
 	philo->time_since_last_eaten = get_current_timestamp();
@@ -49,7 +50,11 @@ t_bool	eat(t_philo *philo)
 	return (false);
 }
 
-void	philo_sleep(int philo_id) //TODO: What if he dies during the process?
+/*
+**  //TODO: What if he dies during the process?
+*/
+
+void	philo_sleep(int philo_id)
 {
 	display_message(philo_id, "is sleeping");
 	usleep(g_philo_common.sleep_time * 1000);

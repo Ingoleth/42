@@ -97,6 +97,11 @@ t_bool	*init_bool(int size, t_bool initial_value)
 	return (bool);
 }
 
+/*
+** //TODO: Should probably call kill threads
+** 
+*/
+
 int	init_data(int size)
 {
 	g_philo_common.forks = init_bool(size, true);
@@ -107,7 +112,8 @@ int	init_data(int size)
 		return (free_memory(-1));
 	if (!init_mutexes(size))
 		return (free_memory(-1));
-	if (!init_threads(size)) //TODO: Should probably call kill threads
+	g_philo_common.start_time = get_current_timestamp();
+	if (!init_threads(size))
 		return (free_memory(-1));
 	return (0);
 }

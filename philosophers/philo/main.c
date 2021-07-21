@@ -28,12 +28,16 @@ t_bool	check_end_condition(void)
 	if (g_philo_common.end_condition[0])
 		done = true;
 	i = 1;
-	while (!done && i <= g_philo_common.philosophers)
+	if (g_philo_common.eat_amount)
 	{
-		if (!g_philo_common.end_condition[i])
+		while (!done && i <= g_philo_common.philosophers)
 		{
-			ret = false;
-			done = true;
+			if (!g_philo_common.end_condition[i])
+			{
+				ret = false;
+				done = true;
+			}
+			i++;
 		}
 	}
 	pthread_mutex_unlock(g_philo_common.end_condition_mutex);
@@ -64,6 +68,10 @@ int	free_memory(int return_value)
 	return (return_value);
 }
 
+/*
+**	//Might need to set the threads to 0? //TODO: Check seg fault
+**	//free_memory(0);
+*/
 void	kill_threads(void)
 {
 	int	i;
@@ -74,9 +82,26 @@ void	kill_threads(void)
 		pthread_detach(g_philo_common.threads[i]);
 		i++;
 	}
-	//free_memory(0); //Might need to set the threads to 0? //TODO: Check seg fault
 	exit(0);
 }
+
+/*
+** Cada programa debe aceptar el mismo número de opciones:
+** 
+** - número_de_filósofos: es el número de filósfos y también el número de tenedores.
+** 
+** - tiempo_para_morir:  en milisegundos, si un filósofo no empieza a comer
+** tiempo_para_morir milisegundos después de su última comida o de la simulación, muere.
+** 
+** - tiempo_para_comer: en milisegundos, el tiempo que usa cada filósofo para
+** comer. Durante ese tiempo usará dos tenedores.
+** 
+** - tiempo_para _dormir: en milisegundos, el tiempo que un filósofo pasa durmiendo.
+** 
+** -número_de_veces_que_cada_filósofo_debe_comer: este argumento es opcional, si todos los filósofos comen al menos
+** “número_de_veces_que_cada_filósofo_debe_comer” la simulación terminará. Si no se especifica, la simulación terminará solo tras la muerte de un filósofo.
+** 
+*/
 
 int	main(int argc, char const *argv[])
 {
