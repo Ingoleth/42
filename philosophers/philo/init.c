@@ -36,15 +36,15 @@ t_philo	*load_philosopher_data(int i, int size)
 	memset(aux, 0, sizeof(t_philo));
 	aux->eat_amount = g_philo_common.eat_amount;
 	aux->philo_id = i + 1;
-	if (i == size - 1)
+	if (i == 0)
 	{
-		aux->right_table_fork = &g_philo_common.forks[0];
-		aux->right_fork_mutex = g_philo_common.mutexes[0];
+		aux->right_table_fork = &g_philo_common.forks[size - 1];
+		aux->right_fork_mutex = g_philo_common.mutexes[size - 1];
 	}
 	else
 	{
-		aux->right_table_fork = &g_philo_common.forks[i + 1];
-		aux->right_fork_mutex = g_philo_common.mutexes[i + 1];
+		aux->right_table_fork = &g_philo_common.forks[i - 1];
+		aux->right_fork_mutex = g_philo_common.mutexes[i - 1];
 	}
 	aux->left_table_fork = &g_philo_common.forks[i];
 	aux->left_fork_mutex = g_philo_common.mutexes[i];

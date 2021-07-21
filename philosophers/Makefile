@@ -1,7 +1,8 @@
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -pthread
 RM = rm -rf
-SRCS =	philo/init.c			\
+SRCS =	philo/debug.c			\
+		philo/init.c			\
 		philo/main.c			\
 		philo/number_checks.c	\
 		philo/philosopher.c		\

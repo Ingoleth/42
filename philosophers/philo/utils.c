@@ -13,34 +13,61 @@ long	get_current_timestamp(void)
 	return (time_in_ms - g_philo_common.start_time);
 }
 
-t_bool	manipulate_fork(t_philo *philo, t_bool right_side, t_bool take)
+void	leave_fork(t_philo *philo, t_bool right_fork)
 {
 	t_bool			*fork_in_table;
+	t_bool			*philo_fork;
 	pthread_mutex_t	*mutex;
 
-	if (right_side == true)
+	if (right_fork == true)
 	{
+		philo_fork = &philo->right_fork;
 		fork_in_table = philo->right_table_fork;
 		mutex = philo->right_fork_mutex;
 	}
 	else
 	{
+		philo_fork = &philo->left_fork;
 		fork_in_table = philo->left_table_fork;
 		mutex = philo->left_fork_mutex;
 	}
 	pthread_mutex_lock(mutex);
-	if (*fork_in_table && take)
+	if (*fork_in_table)
+		display_message(philo->philo_id, "Has duplicated a fork!\n"); //TODO:REMOVE
+	*fork_in_table = true;
+	*philo_fork = false;
+	display_message(philo->philo_id, "has left a fork!");
+	pthread_mutex_unlock(mutex);
+}
+
+void	take_fork(t_philo *philo, t_bool right_fork)
+{
+	t_bool			*fork_in_table;
+	t_bool			*philo_fork;
+	pthread_mutex_t	*mutex;
+
+	if (right_fork == true)
+	{
+		philo_fork = &philo->right_fork;
+		fork_in_table = philo->right_table_fork;
+		mutex = philo->right_fork_mutex;
+	}
+	else
+	{
+		philo_fork = &philo->left_fork;
+		fork_in_table = philo->left_table_fork;
+		mutex = philo->left_fork_mutex;
+	}
+	if (*philo_fork)
+		return ;
+	pthread_mutex_lock(mutex);
+	if (*fork_in_table)
 	{
 		*fork_in_table = false;
+		*philo_fork = true;
 		display_message(philo->philo_id, "has taken a fork!");
 	}
-	else if ((!fork_in_table) && !take)
-	{
-		*fork_in_table = true;
-		display_message(philo->philo_id, "has left a fork!");
-	}
 	pthread_mutex_unlock(mutex);
-	return (!(*fork_in_table));
 }
 
 void	display_message(int philo_id, char *message)

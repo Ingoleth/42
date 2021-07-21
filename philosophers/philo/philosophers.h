@@ -48,11 +48,13 @@ t_philo_common	g_philo_common;
 
 long	get_current_timestamp(void);
 t_bool	check_number(int *nbr, char *str, t_bool check_zero);
-t_bool	manipulate_fork(t_philo *philo, t_bool right_side, t_bool take);
+void	leave_fork(t_philo *philo, t_bool right_fork);
+void	take_fork(t_philo *philo, t_bool right_fork);
 void	set_end_condition(int philo_id, t_bool he_dead);
 int		init_data(int size);
 int		free_memory(int return_value);
 void	*live(void *arg);
 void	display_message(int philo_id, char *message);
+void	print_philosopher_info(t_philo *philo);
 
 #endif // PHILOSOPHERS_H
