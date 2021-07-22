@@ -56,14 +56,11 @@ void	take_fork(t_philo *philo, t_bool right_fork)
 		fork_in_table = philo->left_table_fork;
 		mutex = philo->left_fork_mutex;
 	}
-	if (*philo_fork)
-		return ;
 	pthread_mutex_lock(mutex);
 	if (*fork_in_table)
 	{
 		*fork_in_table = false;
 		*philo_fork = true;
-		display_message(philo->philo_id, "has taken a fork!");
 	}
 	pthread_mutex_unlock(mutex);
 }

@@ -56,18 +56,13 @@ t_bool	eat(t_philo *philo)
 
 void	philo_sleep(t_philo *philo)
 {
-	int time;
+	int	time;
 
 	time = get_current_timestamp() - philo->time_since_last_eaten;
-	if (time + g_philo_common.sleep_time > g_philo_common.starvation_time)
+	if (time + g_philo_common.sleep_time >= g_philo_common.starvation_time)
 	{
 		display_message(philo->philo_id, "is sleeping");
 		usleep((g_philo_common.starvation_time - time) * 1000);
-		if (philo->left_fork)
-			leave_fork(philo, false);
-		if (philo->right_fork)
-			leave_fork(philo, true);
-		set_end_condition(philo->philo_id, true);
 	}
 	else
 	{
