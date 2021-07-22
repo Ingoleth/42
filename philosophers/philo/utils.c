@@ -32,8 +32,6 @@ void	leave_fork(t_philo *philo, t_bool right_fork)
 		mutex = philo->left_fork_mutex;
 	}
 	pthread_mutex_lock(mutex);
-	if (*fork_in_table)
-		display_message(philo->philo_id, "Has duplicated a fork!\n"); //TODO:REMOVE
 	*fork_in_table = true;
 	*philo_fork = false;
 	display_message(philo->philo_id, "has left a fork!");
@@ -86,9 +84,6 @@ void	set_end_condition(int philo_id, t_bool he_dead)
 		display_message(philo_id, "is dead");
 	}
 	else
-	{
 		g_philo_common.end_condition[philo_id] = true;
-		display_message(philo_id, "is done eating"); //TODO: Remove!
-	}
 	pthread_mutex_unlock(g_philo_common.end_condition_mutex);
 }

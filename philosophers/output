@@ -1,4 +1,16 @@
-0 1 is thinking
 0 2 is thinking
-1000 2 is dead
-1000 1 is dead
+0 2 has taken a fork!
+0 2 has taken a fork!
+0 2 is eating
+0 1 is thinking
+600 2 has left a fork!
+600 2 has left a fork!
+600 2 is sleeping
+600 1 has taken a fork!
+600 1 has taken a fork!
+600 1 is eating
+1200 1 has left a fork!
+1200 1 has left a fork!
+1200 1 is sleeping
+1600 2 is thinking
+1600 2 is dead

@@ -12,9 +12,8 @@ t_bool	should_die(int time_since_last_eaten, int starvation_time)
 
 t_bool	get_forks_or_die(t_philo *philo)
 {
-	while (!philo->left_fork && !philo->right_fork)
+	while (!(philo->left_fork && philo->right_fork))
 	{
-		//print_philosopher_info(philo);
 		if (should_die(philo->time_since_last_eaten,
 				g_philo_common.starvation_time))
 		{
@@ -55,11 +54,27 @@ t_bool	eat(t_philo *philo)
 **  //TODO: What if he dies during the process?
 */
 
-void	philo_sleep(int philo_id)
+void	philo_sleep(t_philo *philo)
 {
-	display_message(philo_id, "is sleeping");
-	usleep(g_philo_common.sleep_time * 1000);
-	display_message(philo_id, "is thinking");
+	int time;
+
+	time = get_current_timestamp() - philo->time_since_last_eaten;
+	if (time + g_philo_common.sleep_time > g_philo_common.starvation_time)
+	{
+		display_message(philo->philo_id, "is sleeping");
+		usleep((g_philo_common.starvation_time - time) * 1000);
+		if (philo->left_fork)
+			leave_fork(philo, false);
+		if (philo->right_fork)
+			leave_fork(philo, true);
+		set_end_condition(philo->philo_id, true);
+	}
+	else
+	{
+		display_message(philo->philo_id, "is sleeping");
+		usleep(g_philo_common.sleep_time * 1000);
+		display_message(philo->philo_id, "is thinking");
+	}
 }
 
 void	*live(void *arg)
@@ -75,7 +90,7 @@ void	*live(void *arg)
 		starved = eat(philo);
 		if (starved)
 			return (NULL);
-		philo_sleep(philo->philo_id);
+		philo_sleep(philo);
 	}
 	return (NULL);
 }
