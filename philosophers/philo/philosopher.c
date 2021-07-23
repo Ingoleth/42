@@ -1,10 +1,14 @@
 #include "philosophers.h"
 
-t_bool	should_die(int time_since_last_eaten, int starvation_time)
+t_bool	should_die(int time_since_last_eaten, int starvation_time, int philo_id)
 {
-	int	current_time;
+	long	current_time;
 
 	current_time = get_current_timestamp();
+	pthread_mutex_lock(g_philo_common.communication);
+	philo_id++;
+	//printf("%li Checking if %i should die; Time since last eaten = %li; starvation time = %i\n", get_current_timestamp(), philo_id, current_time - time_since_last_eaten, starvation_time);
+	pthread_mutex_unlock(g_philo_common.communication);
 	if (current_time - time_since_last_eaten >= starvation_time)
 		return (true);
 	return (false);
@@ -15,7 +19,7 @@ t_bool	get_forks_or_die(t_philo *philo)
 	while (!(philo->left_fork && philo->right_fork))
 	{
 		if (should_die(philo->time_since_last_eaten,
-				g_philo_common.starvation_time))
+				g_philo_common.starvation_time, philo->philo_id))
 		{
 			if (philo->left_fork)
 				leave_fork(philo, false);
@@ -25,9 +29,18 @@ t_bool	get_forks_or_die(t_philo *philo)
 			return (true);
 		}
 		if (!philo->right_fork)
+		{
 			take_fork(philo, true);
+			//if (!philo->right_fork)
+			//	display_message(philo->philo_id, "Tried to take a fork but failed");
+		}
 		if (!philo->left_fork)
+		{
 			take_fork(philo, false);
+			//if (!philo->left_fork)
+			//	display_message(philo->philo_id, "Tried to take a fork but failed");
+		}
+		usleep(1000); //Remove
 	}
 	return (false);
 }
@@ -56,7 +69,7 @@ t_bool	eat(t_philo *philo)
 
 void	philo_sleep(t_philo *philo)
 {
-	int	time;
+	long	time;
 
 	time = get_current_timestamp() - philo->time_since_last_eaten;
 	if (time + g_philo_common.sleep_time >= g_philo_common.starvation_time)

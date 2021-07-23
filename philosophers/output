@@ -1,16 +1,1166 @@
-0 2 is thinking
-0 2 has taken a fork!
-0 2 has taken a fork!
-0 2 is eating
 0 1 is thinking
-600 2 has left a fork!
-600 2 has left a fork!
-600 2 is sleeping
-600 1 has taken a fork!
-600 1 has taken a fork!
-600 1 is eating
-1200 1 has left a fork!
-1200 1 has left a fork!
-1200 1 is sleeping
-1600 2 is thinking
-1600 2 is dead
+0 Checking if 1 should die; Time since last eaten = 0; starvation time = 310
+0 1 has taken a fork
+0 1 has taken a fork
+0 2 is thinking
+0 Checking if 2 should die; Time since last eaten = 0; starvation time = 310
+0 2 Tried to take a fork but failed
+0 2 has taken a fork
+0 3 is thinking
+0 Checking if 3 should die; Time since last eaten = 0; starvation time = 310
+0 3 Tried to take a fork but failed
+0 3 Tried to take a fork but failed
+1 1 is eating
+1 Checking if 2 should die; Time since last eaten = 1; starvation time = 310
+1 2 Tried to take a fork but failed
+1 Checking if 3 should die; Time since last eaten = 1; starvation time = 310
+1 3 Tried to take a fork but failed
+1 3 Tried to take a fork but failed
+2 Checking if 2 should die; Time since last eaten = 2; starvation time = 310
+2 2 Tried to take a fork but failed
+2 Checking if 3 should die; Time since last eaten = 2; starvation time = 310
+2 3 Tried to take a fork but failed
+2 3 Tried to take a fork but failed
+3 Checking if 2 should die; Time since last eaten = 3; starvation time = 310
+3 2 Tried to take a fork but failed
+3 Checking if 3 should die; Time since last eaten = 3; starvation time = 310
+3 3 Tried to take a fork but failed
+3 3 Tried to take a fork but failed
+4 Checking if 2 should die; Time since last eaten = 4; starvation time = 310
+4 2 Tried to take a fork but failed
+4 Checking if 3 should die; Time since last eaten = 4; starvation time = 310
+4 3 Tried to take a fork but failed
+4 3 Tried to take a fork but failed
+5 Checking if 2 should die; Time since last eaten = 5; starvation time = 310
+5 2 Tried to take a fork but failed
+5 Checking if 3 should die; Time since last eaten = 5; starvation time = 310
+5 3 Tried to take a fork but failed
+5 3 Tried to take a fork but failed
+6 Checking if 2 should die; Time since last eaten = 6; starvation time = 310
+6 2 Tried to take a fork but failed
+7 Checking if 3 should die; Time since last eaten = 7; starvation time = 310
+7 3 Tried to take a fork but failed
+7 3 Tried to take a fork but failed
+7 Checking if 2 should die; Time since last eaten = 7; starvation time = 310
+7 2 Tried to take a fork but failed
+8 Checking if 3 should die; Time since last eaten = 8; starvation time = 310
+8 3 Tried to take a fork but failed
+8 3 Tried to take a fork but failed
+9 Checking if 2 should die; Time since last eaten = 9; starvation time = 310
+9 2 Tried to take a fork but failed
+9 Checking if 3 should die; Time since last eaten = 9; starvation time = 310
+9 3 Tried to take a fork but failed
+9 3 Tried to take a fork but failed
+10 Checking if 2 should die; Time since last eaten = 10; starvation time = 310
+10 2 Tried to take a fork but failed
+10 Checking if 3 should die; Time since last eaten = 10; starvation time = 310
+10 3 Tried to take a fork but failed
+10 3 Tried to take a fork but failed
+11 Checking if 2 should die; Time since last eaten = 11; starvation time = 310
+11 2 Tried to take a fork but failed
+11 Checking if 3 should die; Time since last eaten = 11; starvation time = 310
+11 3 Tried to take a fork but failed
+11 3 Tried to take a fork but failed
+12 Checking if 2 should die; Time since last eaten = 12; starvation time = 310
+12 2 Tried to take a fork but failed
+12 Checking if 3 should die; Time since last eaten = 12; starvation time = 310
+12 3 Tried to take a fork but failed
+12 3 Tried to take a fork but failed
+13 Checking if 2 should die; Time since last eaten = 13; starvation time = 310
+13 2 Tried to take a fork but failed
+13 Checking if 3 should die; Time since last eaten = 13; starvation time = 310
+13 3 Tried to take a fork but failed
+13 3 Tried to take a fork but failed
+14 Checking if 2 should die; Time since last eaten = 14; starvation time = 310
+14 2 Tried to take a fork but failed
+14 Checking if 3 should die; Time since last eaten = 14; starvation time = 310
+14 3 Tried to take a fork but failed
+14 3 Tried to take a fork but failed
+15 Checking if 2 should die; Time since last eaten = 15; starvation time = 310
+15 2 Tried to take a fork but failed
+15 Checking if 3 should die; Time since last eaten = 15; starvation time = 310
+15 3 Tried to take a fork but failed
+15 3 Tried to take a fork but failed
+16 Checking if 2 should die; Time since last eaten = 16; starvation time = 310
+16 2 Tried to take a fork but failed
+16 Checking if 3 should die; Time since last eaten = 16; starvation time = 310
+16 3 Tried to take a fork but failed
+16 3 Tried to take a fork but failed
+17 Checking if 2 should die; Time since last eaten = 17; starvation time = 310
+17 2 Tried to take a fork but failed
+17 Checking if 3 should die; Time since last eaten = 17; starvation time = 310
+17 3 Tried to take a fork but failed
+17 3 Tried to take a fork but failed
+18 Checking if 2 should die; Time since last eaten = 18; starvation time = 310
+18 2 Tried to take a fork but failed
+18 Checking if 3 should die; Time since last eaten = 18; starvation time = 310
+18 3 Tried to take a fork but failed
+18 3 Tried to take a fork but failed
+19 Checking if 2 should die; Time since last eaten = 19; starvation time = 310
+19 2 Tried to take a fork but failed
+19 Checking if 3 should die; Time since last eaten = 19; starvation time = 310
+19 3 Tried to take a fork but failed
+19 3 Tried to take a fork but failed
+20 Checking if 2 should die; Time since last eaten = 20; starvation time = 310
+20 2 Tried to take a fork but failed
+21 Checking if 3 should die; Time since last eaten = 21; starvation time = 310
+21 3 Tried to take a fork but failed
+21 3 Tried to take a fork but failed
+21 Checking if 2 should die; Time since last eaten = 21; starvation time = 310
+21 2 Tried to take a fork but failed
+22 Checking if 3 should die; Time since last eaten = 22; starvation time = 310
+22 3 Tried to take a fork but failed
+22 3 Tried to take a fork but failed
+22 Checking if 2 should die; Time since last eaten = 22; starvation time = 310
+22 2 Tried to take a fork but failed
+23 Checking if 3 should die; Time since last eaten = 23; starvation time = 310
+23 3 Tried to take a fork but failed
+23 3 Tried to take a fork but failed
+24 Checking if 2 should die; Time since last eaten = 24; starvation time = 310
+24 2 Tried to take a fork but failed
+24 Checking if 3 should die; Time since last eaten = 24; starvation time = 310
+24 3 Tried to take a fork but failed
+24 3 Tried to take a fork but failed
+25 Checking if 2 should die; Time since last eaten = 25; starvation time = 310
+25 2 Tried to take a fork but failed
+25 Checking if 3 should die; Time since last eaten = 25; starvation time = 310
+25 3 Tried to take a fork but failed
+25 3 Tried to take a fork but failed
+26 Checking if 2 should die; Time since last eaten = 26; starvation time = 310
+26 2 Tried to take a fork but failed
+26 Checking if 3 should die; Time since last eaten = 26; starvation time = 310
+26 3 Tried to take a fork but failed
+26 3 Tried to take a fork but failed
+27 Checking if 2 should die; Time since last eaten = 27; starvation time = 310
+27 2 Tried to take a fork but failed
+27 Checking if 3 should die; Time since last eaten = 27; starvation time = 310
+27 3 Tried to take a fork but failed
+27 3 Tried to take a fork but failed
+28 Checking if 2 should die; Time since last eaten = 28; starvation time = 310
+28 2 Tried to take a fork but failed
+28 Checking if 3 should die; Time since last eaten = 28; starvation time = 310
+28 3 Tried to take a fork but failed
+28 3 Tried to take a fork but failed
+29 Checking if 2 should die; Time since last eaten = 29; starvation time = 310
+29 2 Tried to take a fork but failed
+29 Checking if 3 should die; Time since last eaten = 29; starvation time = 310
+29 3 Tried to take a fork but failed
+29 3 Tried to take a fork but failed
+30 Checking if 2 should die; Time since last eaten = 30; starvation time = 310
+30 2 Tried to take a fork but failed
+30 Checking if 3 should die; Time since last eaten = 30; starvation time = 310
+30 3 Tried to take a fork but failed
+30 3 Tried to take a fork but failed
+31 Checking if 2 should die; Time since last eaten = 31; starvation time = 310
+31 2 Tried to take a fork but failed
+31 Checking if 3 should die; Time since last eaten = 31; starvation time = 310
+31 3 Tried to take a fork but failed
+31 3 Tried to take a fork but failed
+32 Checking if 2 should die; Time since last eaten = 32; starvation time = 310
+32 2 Tried to take a fork but failed
+32 Checking if 3 should die; Time since last eaten = 32; starvation time = 310
+32 3 Tried to take a fork but failed
+32 3 Tried to take a fork but failed
+33 Checking if 2 should die; Time since last eaten = 33; starvation time = 310
+33 2 Tried to take a fork but failed
+33 Checking if 3 should die; Time since last eaten = 33; starvation time = 310
+33 3 Tried to take a fork but failed
+33 3 Tried to take a fork but failed
+34 Checking if 2 should die; Time since last eaten = 34; starvation time = 310
+34 2 Tried to take a fork but failed
+35 Checking if 3 should die; Time since last eaten = 35; starvation time = 310
+35 3 Tried to take a fork but failed
+35 3 Tried to take a fork but failed
+35 Checking if 2 should die; Time since last eaten = 35; starvation time = 310
+35 2 Tried to take a fork but failed
+36 Checking if 3 should die; Time since last eaten = 36; starvation time = 310
+36 3 Tried to take a fork but failed
+36 3 Tried to take a fork but failed
+36 Checking if 2 should die; Time since last eaten = 36; starvation time = 310
+36 2 Tried to take a fork but failed
+37 Checking if 3 should die; Time since last eaten = 37; starvation time = 310
+37 3 Tried to take a fork but failed
+37 3 Tried to take a fork but failed
+38 Checking if 2 should die; Time since last eaten = 38; starvation time = 310
+38 2 Tried to take a fork but failed
+38 Checking if 3 should die; Time since last eaten = 38; starvation time = 310
+38 3 Tried to take a fork but failed
+38 3 Tried to take a fork but failed
+39 Checking if 2 should die; Time since last eaten = 39; starvation time = 310
+39 2 Tried to take a fork but failed
+39 Checking if 3 should die; Time since last eaten = 39; starvation time = 310
+39 3 Tried to take a fork but failed
+39 3 Tried to take a fork but failed
+40 Checking if 2 should die; Time since last eaten = 40; starvation time = 310
+40 2 Tried to take a fork but failed
+40 Checking if 3 should die; Time since last eaten = 40; starvation time = 310
+40 3 Tried to take a fork but failed
+40 3 Tried to take a fork but failed
+41 Checking if 2 should die; Time since last eaten = 41; starvation time = 310
+41 2 Tried to take a fork but failed
+41 Checking if 3 should die; Time since last eaten = 41; starvation time = 310
+41 3 Tried to take a fork but failed
+41 3 Tried to take a fork but failed
+42 Checking if 2 should die; Time since last eaten = 42; starvation time = 310
+42 2 Tried to take a fork but failed
+42 Checking if 3 should die; Time since last eaten = 42; starvation time = 310
+42 3 Tried to take a fork but failed
+42 3 Tried to take a fork but failed
+43 Checking if 2 should die; Time since last eaten = 43; starvation time = 310
+43 2 Tried to take a fork but failed
+43 Checking if 3 should die; Time since last eaten = 43; starvation time = 310
+43 3 Tried to take a fork but failed
+43 3 Tried to take a fork but failed
+44 Checking if 2 should die; Time since last eaten = 44; starvation time = 310
+44 2 Tried to take a fork but failed
+45 Checking if 3 should die; Time since last eaten = 44; starvation time = 310
+45 3 Tried to take a fork but failed
+45 3 Tried to take a fork but failed
+45 Checking if 2 should die; Time since last eaten = 45; starvation time = 310
+45 2 Tried to take a fork but failed
+46 Checking if 3 should die; Time since last eaten = 46; starvation time = 310
+46 3 Tried to take a fork but failed
+46 3 Tried to take a fork but failed
+46 Checking if 2 should die; Time since last eaten = 46; starvation time = 310
+46 2 Tried to take a fork but failed
+47 Checking if 3 should die; Time since last eaten = 47; starvation time = 310
+47 3 Tried to take a fork but failed
+47 3 Tried to take a fork but failed
+47 Checking if 2 should die; Time since last eaten = 47; starvation time = 310
+47 2 Tried to take a fork but failed
+48 Checking if 3 should die; Time since last eaten = 48; starvation time = 310
+48 3 Tried to take a fork but failed
+48 3 Tried to take a fork but failed
+49 Checking if 2 should die; Time since last eaten = 49; starvation time = 310
+49 2 Tried to take a fork but failed
+49 Checking if 3 should die; Time since last eaten = 49; starvation time = 310
+49 3 Tried to take a fork but failed
+49 3 Tried to take a fork but failed
+50 Checking if 2 should die; Time since last eaten = 50; starvation time = 310
+50 2 Tried to take a fork but failed
+50 Checking if 3 should die; Time since last eaten = 50; starvation time = 310
+50 3 Tried to take a fork but failed
+50 3 Tried to take a fork but failed
+51 Checking if 2 should die; Time since last eaten = 51; starvation time = 310
+51 2 Tried to take a fork but failed
+51 Checking if 3 should die; Time since last eaten = 51; starvation time = 310
+51 3 Tried to take a fork but failed
+51 3 Tried to take a fork but failed
+52 Checking if 2 should die; Time since last eaten = 52; starvation time = 310
+52 2 Tried to take a fork but failed
+52 Checking if 3 should die; Time since last eaten = 52; starvation time = 310
+52 3 Tried to take a fork but failed
+52 3 Tried to take a fork but failed
+53 Checking if 2 should die; Time since last eaten = 53; starvation time = 310
+53 2 Tried to take a fork but failed
+54 Checking if 3 should die; Time since last eaten = 54; starvation time = 310
+54 3 Tried to take a fork but failed
+54 3 Tried to take a fork but failed
+54 Checking if 2 should die; Time since last eaten = 54; starvation time = 310
+54 2 Tried to take a fork but failed
+55 Checking if 3 should die; Time since last eaten = 55; starvation time = 310
+55 3 Tried to take a fork but failed
+55 3 Tried to take a fork but failed
+55 Checking if 2 should die; Time since last eaten = 55; starvation time = 310
+55 2 Tried to take a fork but failed
+56 Checking if 3 should die; Time since last eaten = 56; starvation time = 310
+56 3 Tried to take a fork but failed
+56 3 Tried to take a fork but failed
+57 Checking if 2 should die; Time since last eaten = 57; starvation time = 310
+57 2 Tried to take a fork but failed
+57 Checking if 3 should die; Time since last eaten = 57; starvation time = 310
+57 3 Tried to take a fork but failed
+57 3 Tried to take a fork but failed
+58 Checking if 2 should die; Time since last eaten = 58; starvation time = 310
+58 2 Tried to take a fork but failed
+58 Checking if 3 should die; Time since last eaten = 58; starvation time = 310
+58 3 Tried to take a fork but failed
+58 3 Tried to take a fork but failed
+59 Checking if 2 should die; Time since last eaten = 59; starvation time = 310
+59 2 Tried to take a fork but failed
+59 Checking if 3 should die; Time since last eaten = 59; starvation time = 310
+59 3 Tried to take a fork but failed
+59 3 Tried to take a fork but failed
+60 Checking if 2 should die; Time since last eaten = 60; starvation time = 310
+60 2 Tried to take a fork but failed
+60 Checking if 3 should die; Time since last eaten = 60; starvation time = 310
+60 3 Tried to take a fork but failed
+60 3 Tried to take a fork but failed
+61 Checking if 2 should die; Time since last eaten = 61; starvation time = 310
+61 2 Tried to take a fork but failed
+61 Checking if 3 should die; Time since last eaten = 61; starvation time = 310
+61 3 Tried to take a fork but failed
+61 3 Tried to take a fork but failed
+62 Checking if 2 should die; Time since last eaten = 62; starvation time = 310
+62 2 Tried to take a fork but failed
+63 Checking if 3 should die; Time since last eaten = 63; starvation time = 310
+63 3 Tried to take a fork but failed
+63 3 Tried to take a fork but failed
+63 Checking if 2 should die; Time since last eaten = 63; starvation time = 310
+63 2 Tried to take a fork but failed
+64 Checking if 3 should die; Time since last eaten = 64; starvation time = 310
+64 3 Tried to take a fork but failed
+64 3 Tried to take a fork but failed
+64 Checking if 2 should die; Time since last eaten = 64; starvation time = 310
+64 2 Tried to take a fork but failed
+65 Checking if 3 should die; Time since last eaten = 65; starvation time = 310
+65 3 Tried to take a fork but failed
+65 3 Tried to take a fork but failed
+66 Checking if 2 should die; Time since last eaten = 66; starvation time = 310
+66 2 Tried to take a fork but failed
+66 Checking if 3 should die; Time since last eaten = 66; starvation time = 310
+66 3 Tried to take a fork but failed
+66 3 Tried to take a fork but failed
+67 Checking if 2 should die; Time since last eaten = 67; starvation time = 310
+67 2 Tried to take a fork but failed
+67 Checking if 3 should die; Time since last eaten = 67; starvation time = 310
+67 3 Tried to take a fork but failed
+67 3 Tried to take a fork but failed
+68 Checking if 2 should die; Time since last eaten = 68; starvation time = 310
+68 2 Tried to take a fork but failed
+68 Checking if 3 should die; Time since last eaten = 68; starvation time = 310
+68 3 Tried to take a fork but failed
+68 3 Tried to take a fork but failed
+69 Checking if 2 should die; Time since last eaten = 69; starvation time = 310
+69 2 Tried to take a fork but failed
+69 Checking if 3 should die; Time since last eaten = 69; starvation time = 310
+69 3 Tried to take a fork but failed
+69 3 Tried to take a fork but failed
+70 Checking if 2 should die; Time since last eaten = 70; starvation time = 310
+70 2 Tried to take a fork but failed
+70 Checking if 3 should die; Time since last eaten = 70; starvation time = 310
+70 3 Tried to take a fork but failed
+70 3 Tried to take a fork but failed
+71 Checking if 2 should die; Time since last eaten = 71; starvation time = 310
+71 2 Tried to take a fork but failed
+71 Checking if 3 should die; Time since last eaten = 71; starvation time = 310
+71 3 Tried to take a fork but failed
+71 3 Tried to take a fork but failed
+72 Checking if 2 should die; Time since last eaten = 72; starvation time = 310
+72 2 Tried to take a fork but failed
+72 Checking if 3 should die; Time since last eaten = 72; starvation time = 310
+72 3 Tried to take a fork but failed
+72 3 Tried to take a fork but failed
+73 Checking if 2 should die; Time since last eaten = 73; starvation time = 310
+73 2 Tried to take a fork but failed
+73 Checking if 3 should die; Time since last eaten = 73; starvation time = 310
+73 3 Tried to take a fork but failed
+73 3 Tried to take a fork but failed
+74 Checking if 2 should die; Time since last eaten = 74; starvation time = 310
+74 2 Tried to take a fork but failed
+74 Checking if 3 should die; Time since last eaten = 74; starvation time = 310
+74 3 Tried to take a fork but failed
+74 3 Tried to take a fork but failed
+75 Checking if 2 should die; Time since last eaten = 75; starvation time = 310
+75 2 Tried to take a fork but failed
+76 Checking if 3 should die; Time since last eaten = 76; starvation time = 310
+76 3 Tried to take a fork but failed
+76 3 Tried to take a fork but failed
+76 Checking if 2 should die; Time since last eaten = 76; starvation time = 310
+76 2 Tried to take a fork but failed
+77 Checking if 3 should die; Time since last eaten = 77; starvation time = 310
+77 3 Tried to take a fork but failed
+77 3 Tried to take a fork but failed
+78 Checking if 2 should die; Time since last eaten = 78; starvation time = 310
+78 2 Tried to take a fork but failed
+78 Checking if 3 should die; Time since last eaten = 78; starvation time = 310
+78 3 Tried to take a fork but failed
+78 3 Tried to take a fork but failed
+79 Checking if 2 should die; Time since last eaten = 79; starvation time = 310
+79 2 Tried to take a fork but failed
+79 Checking if 3 should die; Time since last eaten = 79; starvation time = 310
+79 3 Tried to take a fork but failed
+79 3 Tried to take a fork but failed
+80 Checking if 2 should die; Time since last eaten = 80; starvation time = 310
+80 2 Tried to take a fork but failed
+80 Checking if 3 should die; Time since last eaten = 80; starvation time = 310
+80 3 Tried to take a fork but failed
+80 3 Tried to take a fork but failed
+81 Checking if 2 should die; Time since last eaten = 81; starvation time = 310
+81 2 Tried to take a fork but failed
+81 Checking if 3 should die; Time since last eaten = 81; starvation time = 310
+81 3 Tried to take a fork but failed
+81 3 Tried to take a fork but failed
+82 Checking if 2 should die; Time since last eaten = 82; starvation time = 310
+82 2 Tried to take a fork but failed
+82 Checking if 3 should die; Time since last eaten = 82; starvation time = 310
+82 3 Tried to take a fork but failed
+82 3 Tried to take a fork but failed
+83 Checking if 2 should die; Time since last eaten = 83; starvation time = 310
+83 2 Tried to take a fork but failed
+83 Checking if 3 should die; Time since last eaten = 83; starvation time = 310
+83 3 Tried to take a fork but failed
+83 3 Tried to take a fork but failed
+84 Checking if 2 should die; Time since last eaten = 84; starvation time = 310
+84 2 Tried to take a fork but failed
+84 Checking if 3 should die; Time since last eaten = 84; starvation time = 310
+84 3 Tried to take a fork but failed
+84 3 Tried to take a fork but failed
+85 Checking if 2 should die; Time since last eaten = 85; starvation time = 310
+85 2 Tried to take a fork but failed
+85 Checking if 3 should die; Time since last eaten = 85; starvation time = 310
+85 3 Tried to take a fork but failed
+85 3 Tried to take a fork but failed
+86 Checking if 2 should die; Time since last eaten = 86; starvation time = 310
+86 2 Tried to take a fork but failed
+86 Checking if 3 should die; Time since last eaten = 86; starvation time = 310
+86 3 Tried to take a fork but failed
+86 3 Tried to take a fork but failed
+87 Checking if 2 should die; Time since last eaten = 87; starvation time = 310
+87 2 Tried to take a fork but failed
+87 Checking if 3 should die; Time since last eaten = 87; starvation time = 310
+87 3 Tried to take a fork but failed
+87 3 Tried to take a fork but failed
+88 Checking if 2 should die; Time since last eaten = 88; starvation time = 310
+88 2 Tried to take a fork but failed
+89 Checking if 3 should die; Time since last eaten = 89; starvation time = 310
+89 3 Tried to take a fork but failed
+89 3 Tried to take a fork but failed
+90 Checking if 2 should die; Time since last eaten = 90; starvation time = 310
+90 2 Tried to take a fork but failed
+90 Checking if 3 should die; Time since last eaten = 90; starvation time = 310
+90 3 Tried to take a fork but failed
+90 3 Tried to take a fork but failed
+91 Checking if 2 should die; Time since last eaten = 91; starvation time = 310
+91 2 Tried to take a fork but failed
+91 Checking if 3 should die; Time since last eaten = 91; starvation time = 310
+91 3 Tried to take a fork but failed
+91 3 Tried to take a fork but failed
+92 Checking if 2 should die; Time since last eaten = 92; starvation time = 310
+92 2 Tried to take a fork but failed
+92 Checking if 3 should die; Time since last eaten = 92; starvation time = 310
+92 3 Tried to take a fork but failed
+92 3 Tried to take a fork but failed
+93 Checking if 3 should die; Time since last eaten = 93; starvation time = 310
+93 3 Tried to take a fork but failed
+93 3 Tried to take a fork but failed
+93 Checking if 2 should die; Time since last eaten = 93; starvation time = 310
+93 2 Tried to take a fork but failed
+94 Checking if 2 should die; Time since last eaten = 94; starvation time = 310
+94 2 Tried to take a fork but failed
+94 Checking if 3 should die; Time since last eaten = 94; starvation time = 310
+94 3 Tried to take a fork but failed
+94 3 Tried to take a fork but failed
+95 Checking if 2 should die; Time since last eaten = 95; starvation time = 310
+95 2 Tried to take a fork but failed
+95 Checking if 3 should die; Time since last eaten = 95; starvation time = 310
+95 3 Tried to take a fork but failed
+95 3 Tried to take a fork but failed
+96 Checking if 3 should die; Time since last eaten = 96; starvation time = 310
+96 3 Tried to take a fork but failed
+96 3 Tried to take a fork but failed
+96 Checking if 2 should die; Time since last eaten = 96; starvation time = 310
+96 2 Tried to take a fork but failed
+97 Checking if 3 should die; Time since last eaten = 97; starvation time = 310
+97 3 Tried to take a fork but failed
+97 3 Tried to take a fork but failed
+97 Checking if 2 should die; Time since last eaten = 97; starvation time = 310
+97 2 Tried to take a fork but failed
+98 Checking if 3 should die; Time since last eaten = 98; starvation time = 310
+98 3 Tried to take a fork but failed
+98 3 Tried to take a fork but failed
+98 Checking if 2 should die; Time since last eaten = 98; starvation time = 310
+98 2 Tried to take a fork but failed
+99 Checking if 3 should die; Time since last eaten = 99; starvation time = 310
+99 3 Tried to take a fork but failed
+99 3 Tried to take a fork but failed
+100 Checking if 2 should die; Time since last eaten = 99; starvation time = 310
+100 2 Tried to take a fork but failed
+100 Checking if 3 should die; Time since last eaten = 100; starvation time = 310
+100 3 Tried to take a fork but failed
+100 3 Tried to take a fork but failed
+101 Checking if 2 should die; Time since last eaten = 101; starvation time = 310
+101 2 Tried to take a fork but failed
+102 Checking if 3 should die; Time since last eaten = 102; starvation time = 310
+102 3 Tried to take a fork but failed
+102 3 Tried to take a fork but failed
+102 Checking if 2 should die; Time since last eaten = 102; starvation time = 310
+102 2 Tried to take a fork but failed
+103 Checking if 3 should die; Time since last eaten = 103; starvation time = 310
+103 3 Tried to take a fork but failed
+103 3 Tried to take a fork but failed
+103 Checking if 2 should die; Time since last eaten = 103; starvation time = 310
+103 2 Tried to take a fork but failed
+104 Checking if 3 should die; Time since last eaten = 104; starvation time = 310
+104 3 Tried to take a fork but failed
+104 3 Tried to take a fork but failed
+104 Checking if 2 should die; Time since last eaten = 104; starvation time = 310
+104 2 Tried to take a fork but failed
+105 Checking if 3 should die; Time since last eaten = 105; starvation time = 310
+105 3 Tried to take a fork but failed
+105 3 Tried to take a fork but failed
+105 Checking if 2 should die; Time since last eaten = 105; starvation time = 310
+105 2 Tried to take a fork but failed
+106 Checking if 3 should die; Time since last eaten = 106; starvation time = 310
+106 3 Tried to take a fork but failed
+106 3 Tried to take a fork but failed
+106 Checking if 2 should die; Time since last eaten = 106; starvation time = 310
+106 2 Tried to take a fork but failed
+107 Checking if 2 should die; Time since last eaten = 107; starvation time = 310
+107 2 Tried to take a fork but failed
+107 Checking if 3 should die; Time since last eaten = 107; starvation time = 310
+107 3 Tried to take a fork but failed
+107 3 Tried to take a fork but failed
+108 Checking if 3 should die; Time since last eaten = 108; starvation time = 310
+108 3 Tried to take a fork but failed
+108 3 Tried to take a fork but failed
+108 Checking if 2 should die; Time since last eaten = 108; starvation time = 310
+108 2 Tried to take a fork but failed
+109 Checking if 2 should die; Time since last eaten = 109; starvation time = 310
+109 Checking if 3 should die; Time since last eaten = 109; starvation time = 310
+109 3 Tried to take a fork but failed
+109 3 Tried to take a fork but failed
+109 2 Tried to take a fork but failed
+110 Checking if 3 should die; Time since last eaten = 110; starvation time = 310
+110 3 Tried to take a fork but failed
+110 3 Tried to take a fork but failed
+110 Checking if 2 should die; Time since last eaten = 110; starvation time = 310
+110 2 Tried to take a fork but failed
+112 Checking if 3 should die; Time since last eaten = 112; starvation time = 310
+112 3 Tried to take a fork but failed
+112 3 Tried to take a fork but failed
+112 Checking if 2 should die; Time since last eaten = 112; starvation time = 310
+112 2 Tried to take a fork but failed
+113 Checking if 3 should die; Time since last eaten = 113; starvation time = 310
+113 3 Tried to take a fork but failed
+113 3 Tried to take a fork but failed
+113 Checking if 2 should die; Time since last eaten = 113; starvation time = 310
+113 2 Tried to take a fork but failed
+114 Checking if 3 should die; Time since last eaten = 114; starvation time = 310
+114 3 Tried to take a fork but failed
+114 3 Tried to take a fork but failed
+114 Checking if 2 should die; Time since last eaten = 114; starvation time = 310
+114 2 Tried to take a fork but failed
+115 Checking if 3 should die; Time since last eaten = 115; starvation time = 310
+115 3 Tried to take a fork but failed
+115 3 Tried to take a fork but failed
+115 Checking if 2 should die; Time since last eaten = 115; starvation time = 310
+115 2 Tried to take a fork but failed
+116 Checking if 3 should die; Time since last eaten = 116; starvation time = 310
+116 3 Tried to take a fork but failed
+116 3 Tried to take a fork but failed
+116 Checking if 2 should die; Time since last eaten = 116; starvation time = 310
+116 2 Tried to take a fork but failed
+117 Checking if 3 should die; Time since last eaten = 117; starvation time = 310
+117 3 Tried to take a fork but failed
+117 3 Tried to take a fork but failed
+117 Checking if 2 should die; Time since last eaten = 117; starvation time = 310
+117 2 Tried to take a fork but failed
+118 Checking if 3 should die; Time since last eaten = 118; starvation time = 310
+118 3 Tried to take a fork but failed
+118 3 Tried to take a fork but failed
+118 Checking if 2 should die; Time since last eaten = 118; starvation time = 310
+118 2 Tried to take a fork but failed
+119 Checking if 3 should die; Time since last eaten = 119; starvation time = 310
+119 3 Tried to take a fork but failed
+119 3 Tried to take a fork but failed
+119 Checking if 2 should die; Time since last eaten = 119; starvation time = 310
+119 2 Tried to take a fork but failed
+120 Checking if 3 should die; Time since last eaten = 120; starvation time = 310
+120 3 Tried to take a fork but failed
+120 3 Tried to take a fork but failed
+120 Checking if 2 should die; Time since last eaten = 120; starvation time = 310
+120 2 Tried to take a fork but failed
+122 Checking if 3 should die; Time since last eaten = 122; starvation time = 310
+122 3 Tried to take a fork but failed
+122 3 Tried to take a fork but failed
+122 Checking if 2 should die; Time since last eaten = 122; starvation time = 310
+122 2 Tried to take a fork but failed
+123 Checking if 3 should die; Time since last eaten = 123; starvation time = 310
+123 3 Tried to take a fork but failed
+123 3 Tried to take a fork but failed
+123 Checking if 2 should die; Time since last eaten = 123; starvation time = 310
+123 2 Tried to take a fork but failed
+124 Checking if 3 should die; Time since last eaten = 124; starvation time = 310
+124 Checking if 2 should die; Time since last eaten = 124; starvation time = 310
+124 2 Tried to take a fork but failed
+124 3 Tried to take a fork but failed
+124 3 Tried to take a fork but failed
+125 Checking if 2 should die; Time since last eaten = 125; starvation time = 310
+125 2 Tried to take a fork but failed
+125 Checking if 3 should die; Time since last eaten = 125; starvation time = 310
+125 3 Tried to take a fork but failed
+125 3 Tried to take a fork but failed
+126 Checking if 3 should die; Time since last eaten = 126; starvation time = 310
+126 3 Tried to take a fork but failed
+126 3 Tried to take a fork but failed
+126 Checking if 2 should die; Time since last eaten = 126; starvation time = 310
+126 2 Tried to take a fork but failed
+127 Checking if 3 should die; Time since last eaten = 127; starvation time = 310
+127 3 Tried to take a fork but failed
+127 Checking if 2 should die; Time since last eaten = 127; starvation time = 310
+127 2 Tried to take a fork but failed
+127 3 Tried to take a fork but failed
+128 Checking if 2 should die; Time since last eaten = 128; starvation time = 310
+128 2 Tried to take a fork but failed
+128 Checking if 3 should die; Time since last eaten = 128; starvation time = 310
+128 3 Tried to take a fork but failed
+128 3 Tried to take a fork but failed
+129 Checking if 2 should die; Time since last eaten = 129; starvation time = 310
+129 2 Tried to take a fork but failed
+129 Checking if 3 should die; Time since last eaten = 129; starvation time = 310
+129 3 Tried to take a fork but failed
+129 3 Tried to take a fork but failed
+130 Checking if 2 should die; Time since last eaten = 130; starvation time = 310
+130 2 Tried to take a fork but failed
+130 Checking if 3 should die; Time since last eaten = 130; starvation time = 310
+130 3 Tried to take a fork but failed
+130 3 Tried to take a fork but failed
+131 Checking if 2 should die; Time since last eaten = 131; starvation time = 310
+131 2 Tried to take a fork but failed
+131 Checking if 3 should die; Time since last eaten = 131; starvation time = 310
+131 3 Tried to take a fork but failed
+131 3 Tried to take a fork but failed
+132 Checking if 2 should die; Time since last eaten = 132; starvation time = 310
+132 2 Tried to take a fork but failed
+132 Checking if 3 should die; Time since last eaten = 132; starvation time = 310
+132 3 Tried to take a fork but failed
+132 3 Tried to take a fork but failed
+134 Checking if 2 should die; Time since last eaten = 134; starvation time = 310
+134 2 Tried to take a fork but failed
+134 Checking if 3 should die; Time since last eaten = 134; starvation time = 310
+134 3 Tried to take a fork but failed
+134 3 Tried to take a fork but failed
+135 Checking if 2 should die; Time since last eaten = 135; starvation time = 310
+135 2 Tried to take a fork but failed
+135 Checking if 3 should die; Time since last eaten = 135; starvation time = 310
+135 3 Tried to take a fork but failed
+135 3 Tried to take a fork but failed
+136 Checking if 2 should die; Time since last eaten = 136; starvation time = 310
+136 2 Tried to take a fork but failed
+136 Checking if 3 should die; Time since last eaten = 136; starvation time = 310
+136 3 Tried to take a fork but failed
+136 3 Tried to take a fork but failed
+137 Checking if 2 should die; Time since last eaten = 137; starvation time = 310
+137 2 Tried to take a fork but failed
+137 Checking if 3 should die; Time since last eaten = 137; starvation time = 310
+137 3 Tried to take a fork but failed
+137 3 Tried to take a fork but failed
+138 Checking if 2 should die; Time since last eaten = 138; starvation time = 310
+138 2 Tried to take a fork but failed
+138 Checking if 3 should die; Time since last eaten = 138; starvation time = 310
+138 3 Tried to take a fork but failed
+138 3 Tried to take a fork but failed
+139 Checking if 2 should die; Time since last eaten = 139; starvation time = 310
+139 2 Tried to take a fork but failed
+139 Checking if 3 should die; Time since last eaten = 139; starvation time = 310
+139 3 Tried to take a fork but failed
+139 3 Tried to take a fork but failed
+140 Checking if 2 should die; Time since last eaten = 140; starvation time = 310
+140 2 Tried to take a fork but failed
+140 Checking if 3 should die; Time since last eaten = 140; starvation time = 310
+140 3 Tried to take a fork but failed
+140 3 Tried to take a fork but failed
+141 Checking if 2 should die; Time since last eaten = 141; starvation time = 310
+141 2 Tried to take a fork but failed
+141 Checking if 3 should die; Time since last eaten = 141; starvation time = 310
+141 3 Tried to take a fork but failed
+141 3 Tried to take a fork but failed
+142 Checking if 3 should die; Time since last eaten = 142; starvation time = 310
+142 3 Tried to take a fork but failed
+142 3 Tried to take a fork but failed
+142 Checking if 2 should die; Time since last eaten = 142; starvation time = 310
+142 2 Tried to take a fork but failed
+144 Checking if 3 should die; Time since last eaten = 144; starvation time = 310
+144 3 Tried to take a fork but failed
+144 3 Tried to take a fork but failed
+144 Checking if 2 should die; Time since last eaten = 144; starvation time = 310
+144 2 Tried to take a fork but failed
+145 Checking if 2 should die; Time since last eaten = 145; starvation time = 310
+145 2 Tried to take a fork but failed
+145 Checking if 3 should die; Time since last eaten = 145; starvation time = 310
+145 3 Tried to take a fork but failed
+145 3 Tried to take a fork but failed
+146 Checking if 3 should die; Time since last eaten = 146; starvation time = 310
+146 3 Tried to take a fork but failed
+146 3 Tried to take a fork but failed
+146 Checking if 2 should die; Time since last eaten = 146; starvation time = 310
+146 2 Tried to take a fork but failed
+147 Checking if 3 should die; Time since last eaten = 147; starvation time = 310
+147 3 Tried to take a fork but failed
+147 3 Tried to take a fork but failed
+147 Checking if 2 should die; Time since last eaten = 147; starvation time = 310
+147 2 Tried to take a fork but failed
+148 Checking if 3 should die; Time since last eaten = 148; starvation time = 310
+148 3 Tried to take a fork but failed
+148 3 Tried to take a fork but failed
+148 Checking if 2 should die; Time since last eaten = 148; starvation time = 310
+148 2 Tried to take a fork but failed
+149 Checking if 3 should die; Time since last eaten = 149; starvation time = 310
+149 3 Tried to take a fork but failed
+149 3 Tried to take a fork but failed
+149 Checking if 2 should die; Time since last eaten = 149; starvation time = 310
+149 2 Tried to take a fork but failed
+150 Checking if 3 should die; Time since last eaten = 150; starvation time = 310
+150 3 Tried to take a fork but failed
+150 3 Tried to take a fork but failed
+150 Checking if 2 should die; Time since last eaten = 150; starvation time = 310
+150 2 Tried to take a fork but failed
+151 Checking if 3 should die; Time since last eaten = 151; starvation time = 310
+151 3 Tried to take a fork but failed
+151 3 Tried to take a fork but failed
+151 Checking if 2 should die; Time since last eaten = 151; starvation time = 310
+151 2 Tried to take a fork but failed
+152 Checking if 3 should die; Time since last eaten = 152; starvation time = 310
+152 3 Tried to take a fork but failed
+152 3 Tried to take a fork but failed
+152 Checking if 2 should die; Time since last eaten = 152; starvation time = 310
+152 2 Tried to take a fork but failed
+154 Checking if 3 should die; Time since last eaten = 154; starvation time = 310
+154 3 Tried to take a fork but failed
+154 3 Tried to take a fork but failed
+154 Checking if 2 should die; Time since last eaten = 154; starvation time = 310
+154 2 Tried to take a fork but failed
+155 Checking if 3 should die; Time since last eaten = 155; starvation time = 310
+155 3 Tried to take a fork but failed
+155 3 Tried to take a fork but failed
+155 Checking if 2 should die; Time since last eaten = 155; starvation time = 310
+155 2 Tried to take a fork but failed
+156 Checking if 3 should die; Time since last eaten = 156; starvation time = 310
+156 3 Tried to take a fork but failed
+156 3 Tried to take a fork but failed
+156 Checking if 2 should die; Time since last eaten = 156; starvation time = 310
+156 2 Tried to take a fork but failed
+157 Checking if 3 should die; Time since last eaten = 157; starvation time = 310
+157 3 Tried to take a fork but failed
+157 3 Tried to take a fork but failed
+157 Checking if 2 should die; Time since last eaten = 157; starvation time = 310
+157 2 Tried to take a fork but failed
+158 Checking if 3 should die; Time since last eaten = 158; starvation time = 310
+158 3 Tried to take a fork but failed
+158 3 Tried to take a fork but failed
+158 Checking if 2 should die; Time since last eaten = 158; starvation time = 310
+158 2 Tried to take a fork but failed
+159 Checking if 3 should die; Time since last eaten = 159; starvation time = 310
+159 3 Tried to take a fork but failed
+159 3 Tried to take a fork but failed
+159 Checking if 2 should die; Time since last eaten = 159; starvation time = 310
+159 2 Tried to take a fork but failed
+160 Checking if 3 should die; Time since last eaten = 160; starvation time = 310
+160 3 Tried to take a fork but failed
+160 3 Tried to take a fork but failed
+160 Checking if 2 should die; Time since last eaten = 160; starvation time = 310
+160 2 Tried to take a fork but failed
+161 Checking if 2 should die; Time since last eaten = 161; starvation time = 310
+161 2 Tried to take a fork but failed
+161 Checking if 3 should die; Time since last eaten = 161; starvation time = 310
+161 3 Tried to take a fork but failed
+161 3 Tried to take a fork but failed
+162 Checking if 2 should die; Time since last eaten = 162; starvation time = 310
+162 2 Tried to take a fork but failed
+162 Checking if 3 should die; Time since last eaten = 162; starvation time = 310
+162 3 Tried to take a fork but failed
+162 3 Tried to take a fork but failed
+164 Checking if 2 should die; Time since last eaten = 164; starvation time = 310
+164 2 Tried to take a fork but failed
+164 Checking if 3 should die; Time since last eaten = 164; starvation time = 310
+164 3 Tried to take a fork but failed
+164 3 Tried to take a fork but failed
+165 Checking if 2 should die; Time since last eaten = 165; starvation time = 310
+165 2 Tried to take a fork but failed
+165 Checking if 3 should die; Time since last eaten = 165; starvation time = 310
+165 3 Tried to take a fork but failed
+165 3 Tried to take a fork but failed
+166 Checking if 2 should die; Time since last eaten = 166; starvation time = 310
+166 2 Tried to take a fork but failed
+166 Checking if 3 should die; Time since last eaten = 166; starvation time = 310
+166 3 Tried to take a fork but failed
+166 3 Tried to take a fork but failed
+167 Checking if 2 should die; Time since last eaten = 167; starvation time = 310
+167 2 Tried to take a fork but failed
+167 Checking if 3 should die; Time since last eaten = 167; starvation time = 310
+167 3 Tried to take a fork but failed
+167 3 Tried to take a fork but failed
+168 Checking if 2 should die; Time since last eaten = 168; starvation time = 310
+168 2 Tried to take a fork but failed
+168 Checking if 3 should die; Time since last eaten = 168; starvation time = 310
+168 3 Tried to take a fork but failed
+168 3 Tried to take a fork but failed
+169 Checking if 2 should die; Time since last eaten = 169; starvation time = 310
+169 2 Tried to take a fork but failed
+169 Checking if 3 should die; Time since last eaten = 169; starvation time = 310
+169 3 Tried to take a fork but failed
+169 3 Tried to take a fork but failed
+170 Checking if 2 should die; Time since last eaten = 170; starvation time = 310
+170 2 Tried to take a fork but failed
+170 Checking if 3 should die; Time since last eaten = 170; starvation time = 310
+170 3 Tried to take a fork but failed
+170 3 Tried to take a fork but failed
+171 Checking if 2 should die; Time since last eaten = 171; starvation time = 310
+171 2 Tried to take a fork but failed
+171 Checking if 3 should die; Time since last eaten = 171; starvation time = 310
+171 3 Tried to take a fork but failed
+171 3 Tried to take a fork but failed
+172 Checking if 2 should die; Time since last eaten = 172; starvation time = 310
+172 2 Tried to take a fork but failed
+173 Checking if 3 should die; Time since last eaten = 173; starvation time = 310
+173 3 Tried to take a fork but failed
+173 3 Tried to take a fork but failed
+174 Checking if 2 should die; Time since last eaten = 174; starvation time = 310
+174 2 Tried to take a fork but failed
+174 Checking if 3 should die; Time since last eaten = 174; starvation time = 310
+174 3 Tried to take a fork but failed
+174 3 Tried to take a fork but failed
+175 Checking if 2 should die; Time since last eaten = 175; starvation time = 310
+175 2 Tried to take a fork but failed
+175 Checking if 3 should die; Time since last eaten = 175; starvation time = 310
+175 3 Tried to take a fork but failed
+175 3 Tried to take a fork but failed
+176 Checking if 2 should die; Time since last eaten = 176; starvation time = 310
+176 2 Tried to take a fork but failed
+176 Checking if 3 should die; Time since last eaten = 176; starvation time = 310
+176 3 Tried to take a fork but failed
+176 3 Tried to take a fork but failed
+177 Checking if 2 should die; Time since last eaten = 177; starvation time = 310
+177 2 Tried to take a fork but failed
+177 Checking if 3 should die; Time since last eaten = 177; starvation time = 310
+177 3 Tried to take a fork but failed
+177 3 Tried to take a fork but failed
+178 Checking if 2 should die; Time since last eaten = 178; starvation time = 310
+178 2 Tried to take a fork but failed
+178 Checking if 3 should die; Time since last eaten = 178; starvation time = 310
+178 3 Tried to take a fork but failed
+178 3 Tried to take a fork but failed
+179 Checking if 2 should die; Time since last eaten = 179; starvation time = 310
+179 2 Tried to take a fork but failed
+179 Checking if 3 should die; Time since last eaten = 179; starvation time = 310
+179 3 Tried to take a fork but failed
+179 3 Tried to take a fork but failed
+180 Checking if 3 should die; Time since last eaten = 180; starvation time = 310
+180 3 Tried to take a fork but failed
+180 3 Tried to take a fork but failed
+180 Checking if 2 should die; Time since last eaten = 180; starvation time = 310
+180 2 Tried to take a fork but failed
+181 Checking if 3 should die; Time since last eaten = 181; starvation time = 310
+181 3 Tried to take a fork but failed
+181 3 Tried to take a fork but failed
+181 Checking if 2 should die; Time since last eaten = 181; starvation time = 310
+181 2 Tried to take a fork but failed
+182 Checking if 2 should die; Time since last eaten = 182; starvation time = 310
+182 2 Tried to take a fork but failed
+182 Checking if 3 should die; Time since last eaten = 182; starvation time = 310
+182 3 Tried to take a fork but failed
+182 3 Tried to take a fork but failed
+183 Checking if 2 should die; Time since last eaten = 183; starvation time = 310
+183 2 Tried to take a fork but failed
+183 Checking if 3 should die; Time since last eaten = 183; starvation time = 310
+183 3 Tried to take a fork but failed
+183 3 Tried to take a fork but failed
+184 Checking if 2 should die; Time since last eaten = 184; starvation time = 310
+184 2 Tried to take a fork but failed
+184 Checking if 3 should die; Time since last eaten = 184; starvation time = 310
+184 3 Tried to take a fork but failed
+184 3 Tried to take a fork but failed
+186 Checking if 2 should die; Time since last eaten = 186; starvation time = 310
+186 2 Tried to take a fork but failed
+186 Checking if 3 should die; Time since last eaten = 186; starvation time = 310
+186 3 Tried to take a fork but failed
+186 3 Tried to take a fork but failed
+187 Checking if 2 should die; Time since last eaten = 187; starvation time = 310
+187 2 Tried to take a fork but failed
+187 Checking if 3 should die; Time since last eaten = 187; starvation time = 310
+187 3 Tried to take a fork but failed
+187 3 Tried to take a fork but failed
+188 Checking if 2 should die; Time since last eaten = 188; starvation time = 310
+188 2 Tried to take a fork but failed
+188 Checking if 3 should die; Time since last eaten = 188; starvation time = 310
+188 3 Tried to take a fork but failed
+188 3 Tried to take a fork but failed
+189 Checking if 2 should die; Time since last eaten = 189; starvation time = 310
+189 2 Tried to take a fork but failed
+189 Checking if 3 should die; Time since last eaten = 189; starvation time = 310
+189 3 Tried to take a fork but failed
+189 3 Tried to take a fork but failed
+190 Checking if 2 should die; Time since last eaten = 190; starvation time = 310
+190 2 Tried to take a fork but failed
+190 Checking if 3 should die; Time since last eaten = 190; starvation time = 310
+190 3 Tried to take a fork but failed
+190 3 Tried to take a fork but failed
+191 Checking if 2 should die; Time since last eaten = 191; starvation time = 310
+191 2 Tried to take a fork but failed
+191 Checking if 3 should die; Time since last eaten = 191; starvation time = 310
+191 3 Tried to take a fork but failed
+191 3 Tried to take a fork but failed
+192 Checking if 3 should die; Time since last eaten = 192; starvation time = 310
+192 3 Tried to take a fork but failed
+192 3 Tried to take a fork but failed
+192 Checking if 2 should die; Time since last eaten = 192; starvation time = 310
+192 2 Tried to take a fork but failed
+193 Checking if 3 should die; Time since last eaten = 193; starvation time = 310
+193 3 Tried to take a fork but failed
+193 3 Tried to take a fork but failed
+193 Checking if 2 should die; Time since last eaten = 193; starvation time = 310
+193 2 Tried to take a fork but failed
+194 Checking if 3 should die; Time since last eaten = 194; starvation time = 310
+194 3 Tried to take a fork but failed
+194 3 Tried to take a fork but failed
+194 Checking if 2 should die; Time since last eaten = 194; starvation time = 310
+194 2 Tried to take a fork but failed
+195 Checking if 3 should die; Time since last eaten = 195; starvation time = 310
+195 3 Tried to take a fork but failed
+195 3 Tried to take a fork but failed
+195 Checking if 2 should die; Time since last eaten = 195; starvation time = 310
+195 2 Tried to take a fork but failed
+196 Checking if 3 should die; Time since last eaten = 196; starvation time = 310
+196 3 Tried to take a fork but failed
+196 3 Tried to take a fork but failed
+196 Checking if 2 should die; Time since last eaten = 196; starvation time = 310
+196 2 Tried to take a fork but failed
+197 Checking if 3 should die; Time since last eaten = 197; starvation time = 310
+197 3 Tried to take a fork but failed
+197 3 Tried to take a fork but failed
+197 Checking if 2 should die; Time since last eaten = 197; starvation time = 310
+197 2 Tried to take a fork but failed
+198 Checking if 3 should die; Time since last eaten = 198; starvation time = 310
+198 3 Tried to take a fork but failed
+198 3 Tried to take a fork but failed
+199 Checking if 2 should die; Time since last eaten = 199; starvation time = 310
+199 2 Tried to take a fork but failed
+200 Checking if 3 should die; Time since last eaten = 200; starvation time = 310
+200 3 Tried to take a fork but failed
+200 3 Tried to take a fork but failed
+200 Checking if 2 should die; Time since last eaten = 200; starvation time = 310
+200 2 Tried to take a fork but failed
+201 Checking if 3 should die; Time since last eaten = 201; starvation time = 310
+201 3 Tried to take a fork but failed
+201 3 Tried to take a fork but failed
+201 Checking if 2 should die; Time since last eaten = 201; starvation time = 310
+201 2 Tried to take a fork but failed
+201 1 is sleeping
+202 Checking if 3 should die; Time since last eaten = 202; starvation time = 310
+202 3 Tried to take a fork but failed
+202 3 has taken a fork
+202 Checking if 2 should die; Time since last eaten = 202; starvation time = 310
+202 2 has taken a fork
+203 Checking if 3 should die; Time since last eaten = 203; starvation time = 310
+203 3 Tried to take a fork but failed
+203 2 is eating
+204 Checking if 3 should die; Time since last eaten = 204; starvation time = 310
+204 3 Tried to take a fork but failed
+205 Checking if 3 should die; Time since last eaten = 205; starvation time = 310
+205 3 Tried to take a fork but failed
+206 Checking if 3 should die; Time since last eaten = 206; starvation time = 310
+206 3 Tried to take a fork but failed
+207 Checking if 3 should die; Time since last eaten = 207; starvation time = 310
+207 3 Tried to take a fork but failed
+208 Checking if 3 should die; Time since last eaten = 208; starvation time = 310
+208 3 Tried to take a fork but failed
+209 Checking if 3 should die; Time since last eaten = 209; starvation time = 310
+209 3 Tried to take a fork but failed
+210 Checking if 3 should die; Time since last eaten = 210; starvation time = 310
+210 3 Tried to take a fork but failed
+211 Checking if 3 should die; Time since last eaten = 211; starvation time = 310
+211 3 Tried to take a fork but failed
+213 Checking if 3 should die; Time since last eaten = 213; starvation time = 310
+213 3 Tried to take a fork but failed
+214 Checking if 3 should die; Time since last eaten = 214; starvation time = 310
+214 3 Tried to take a fork but failed
+215 Checking if 3 should die; Time since last eaten = 215; starvation time = 310
+215 3 Tried to take a fork but failed
+216 Checking if 3 should die; Time since last eaten = 216; starvation time = 310
+216 3 Tried to take a fork but failed
+217 Checking if 3 should die; Time since last eaten = 217; starvation time = 310
+217 3 Tried to take a fork but failed
+218 Checking if 3 should die; Time since last eaten = 218; starvation time = 310
+218 3 Tried to take a fork but failed
+219 Checking if 3 should die; Time since last eaten = 219; starvation time = 310
+219 3 Tried to take a fork but failed
+220 Checking if 3 should die; Time since last eaten = 220; starvation time = 310
+220 3 Tried to take a fork but failed
+221 Checking if 3 should die; Time since last eaten = 221; starvation time = 310
+221 3 Tried to take a fork but failed
+223 Checking if 3 should die; Time since last eaten = 223; starvation time = 310
+223 3 Tried to take a fork but failed
+224 Checking if 3 should die; Time since last eaten = 224; starvation time = 310
+224 3 Tried to take a fork but failed
+225 Checking if 3 should die; Time since last eaten = 225; starvation time = 310
+225 3 Tried to take a fork but failed
+226 Checking if 3 should die; Time since last eaten = 226; starvation time = 310
+226 3 Tried to take a fork but failed
+227 Checking if 3 should die; Time since last eaten = 227; starvation time = 310
+227 3 Tried to take a fork but failed
+228 Checking if 3 should die; Time since last eaten = 228; starvation time = 310
+228 3 Tried to take a fork but failed
+229 Checking if 3 should die; Time since last eaten = 229; starvation time = 310
+229 3 Tried to take a fork but failed
+231 Checking if 3 should die; Time since last eaten = 231; starvation time = 310
+231 3 Tried to take a fork but failed
+232 Checking if 3 should die; Time since last eaten = 232; starvation time = 310
+232 3 Tried to take a fork but failed
+233 Checking if 3 should die; Time since last eaten = 233; starvation time = 310
+233 3 Tried to take a fork but failed
+234 Checking if 3 should die; Time since last eaten = 234; starvation time = 310
+234 3 Tried to take a fork but failed
+235 Checking if 3 should die; Time since last eaten = 235; starvation time = 310
+235 3 Tried to take a fork but failed
+236 Checking if 3 should die; Time since last eaten = 236; starvation time = 310
+236 3 Tried to take a fork but failed
+237 Checking if 3 should die; Time since last eaten = 237; starvation time = 310
+237 3 Tried to take a fork but failed
+238 Checking if 3 should die; Time since last eaten = 238; starvation time = 310
+238 3 Tried to take a fork but failed
+239 Checking if 3 should die; Time since last eaten = 239; starvation time = 310
+239 3 Tried to take a fork but failed
+240 Checking if 3 should die; Time since last eaten = 240; starvation time = 310
+240 3 Tried to take a fork but failed
+241 Checking if 3 should die; Time since last eaten = 241; starvation time = 310
+241 3 Tried to take a fork but failed
+242 Checking if 3 should die; Time since last eaten = 242; starvation time = 310
+242 3 Tried to take a fork but failed
+243 Checking if 3 should die; Time since last eaten = 243; starvation time = 310
+243 3 Tried to take a fork but failed
+245 Checking if 3 should die; Time since last eaten = 245; starvation time = 310
+245 3 Tried to take a fork but failed
+246 Checking if 3 should die; Time since last eaten = 246; starvation time = 310
+246 3 Tried to take a fork but failed
+247 Checking if 3 should die; Time since last eaten = 247; starvation time = 310
+247 3 Tried to take a fork but failed
+248 Checking if 3 should die; Time since last eaten = 248; starvation time = 310
+248 3 Tried to take a fork but failed
+249 Checking if 3 should die; Time since last eaten = 249; starvation time = 310
+249 3 Tried to take a fork but failed
+250 Checking if 3 should die; Time since last eaten = 250; starvation time = 310
+250 3 Tried to take a fork but failed
+251 Checking if 3 should die; Time since last eaten = 251; starvation time = 310
+251 3 Tried to take a fork but failed
+252 Checking if 3 should die; Time since last eaten = 252; starvation time = 310
+252 3 Tried to take a fork but failed
+254 Checking if 3 should die; Time since last eaten = 254; starvation time = 310
+254 3 Tried to take a fork but failed
+255 Checking if 3 should die; Time since last eaten = 255; starvation time = 310
+255 3 Tried to take a fork but failed
+256 Checking if 3 should die; Time since last eaten = 256; starvation time = 310
+256 3 Tried to take a fork but failed
+257 Checking if 3 should die; Time since last eaten = 257; starvation time = 310
+257 3 Tried to take a fork but failed
+258 Checking if 3 should die; Time since last eaten = 258; starvation time = 310
+258 3 Tried to take a fork but failed
+259 Checking if 3 should die; Time since last eaten = 259; starvation time = 310
+259 3 Tried to take a fork but failed
+260 Checking if 3 should die; Time since last eaten = 260; starvation time = 310
+260 3 Tried to take a fork but failed
+261 Checking if 3 should die; Time since last eaten = 261; starvation time = 310
+261 3 Tried to take a fork but failed
+262 Checking if 3 should die; Time since last eaten = 262; starvation time = 310
+262 3 Tried to take a fork but failed
+264 Checking if 3 should die; Time since last eaten = 264; starvation time = 310
+264 3 Tried to take a fork but failed
+265 Checking if 3 should die; Time since last eaten = 265; starvation time = 310
+265 3 Tried to take a fork but failed
+266 Checking if 3 should die; Time since last eaten = 266; starvation time = 310
+266 3 Tried to take a fork but failed
+267 Checking if 3 should die; Time since last eaten = 267; starvation time = 310
+267 3 Tried to take a fork but failed
+268 Checking if 3 should die; Time since last eaten = 268; starvation time = 310
+268 3 Tried to take a fork but failed
+269 Checking if 3 should die; Time since last eaten = 269; starvation time = 310
+269 3 Tried to take a fork but failed
+270 Checking if 3 should die; Time since last eaten = 270; starvation time = 310
+270 3 Tried to take a fork but failed
+271 Checking if 3 should die; Time since last eaten = 271; starvation time = 310
+271 3 Tried to take a fork but failed
+272 Checking if 3 should die; Time since last eaten = 272; starvation time = 310
+272 3 Tried to take a fork but failed
+274 Checking if 3 should die; Time since last eaten = 274; starvation time = 310
+274 3 Tried to take a fork but failed
+275 Checking if 3 should die; Time since last eaten = 275; starvation time = 310
+275 3 Tried to take a fork but failed
+276 Checking if 3 should die; Time since last eaten = 276; starvation time = 310
+276 3 Tried to take a fork but failed
+277 Checking if 3 should die; Time since last eaten = 277; starvation time = 310
+277 3 Tried to take a fork but failed
+278 Checking if 3 should die; Time since last eaten = 278; starvation time = 310
+278 3 Tried to take a fork but failed
+279 Checking if 3 should die; Time since last eaten = 279; starvation time = 310
+279 3 Tried to take a fork but failed
+280 Checking if 3 should die; Time since last eaten = 280; starvation time = 310
+280 3 Tried to take a fork but failed
+281 Checking if 3 should die; Time since last eaten = 281; starvation time = 310
+281 3 Tried to take a fork but failed
+282 Checking if 3 should die; Time since last eaten = 282; starvation time = 310
+282 3 Tried to take a fork but failed
+284 Checking if 3 should die; Time since last eaten = 284; starvation time = 310
+284 3 Tried to take a fork but failed
+285 Checking if 3 should die; Time since last eaten = 285; starvation time = 310
+285 3 Tried to take a fork but failed
+286 Checking if 3 should die; Time since last eaten = 286; starvation time = 310
+286 3 Tried to take a fork but failed
+287 Checking if 3 should die; Time since last eaten = 287; starvation time = 310
+287 3 Tried to take a fork but failed
+288 Checking if 3 should die; Time since last eaten = 288; starvation time = 310
+288 3 Tried to take a fork but failed
+289 Checking if 3 should die; Time since last eaten = 289; starvation time = 310
+289 3 Tried to take a fork but failed
+290 Checking if 3 should die; Time since last eaten = 290; starvation time = 310
+290 3 Tried to take a fork but failed
+292 Checking if 3 should die; Time since last eaten = 292; starvation time = 310
+292 3 Tried to take a fork but failed
+293 Checking if 3 should die; Time since last eaten = 293; starvation time = 310
+293 3 Tried to take a fork but failed
+294 Checking if 3 should die; Time since last eaten = 294; starvation time = 310
+294 3 Tried to take a fork but failed
+295 Checking if 3 should die; Time since last eaten = 295; starvation time = 310
+295 3 Tried to take a fork but failed
+296 Checking if 3 should die; Time since last eaten = 296; starvation time = 310
+296 3 Tried to take a fork but failed
+297 Checking if 3 should die; Time since last eaten = 297; starvation time = 310
+297 3 Tried to take a fork but failed
+298 Checking if 3 should die; Time since last eaten = 298; starvation time = 310
+298 3 Tried to take a fork but failed
+299 Checking if 3 should die; Time since last eaten = 299; starvation time = 310
+299 3 Tried to take a fork but failed
+301 Checking if 3 should die; Time since last eaten = 301; starvation time = 310
+301 3 Tried to take a fork but failed
+301 1 is thinking
+301 Checking if 1 should die; Time since last eaten = 100; starvation time = 310
+301 1 Tried to take a fork but failed
+301 1 Tried to take a fork but failed
+302 Checking if 3 should die; Time since last eaten = 302; starvation time = 310
+302 3 Tried to take a fork but failed
+302 Checking if 1 should die; Time since last eaten = 101; starvation time = 310
+302 1 Tried to take a fork but failed
+302 1 Tried to take a fork but failed
+303 Checking if 3 should die; Time since last eaten = 303; starvation time = 310
+303 3 Tried to take a fork but failed
+303 Checking if 1 should die; Time since last eaten = 102; starvation time = 310
+303 1 Tried to take a fork but failed
+303 1 Tried to take a fork but failed
+304 Checking if 3 should die; Time since last eaten = 304; starvation time = 310
+304 3 Tried to take a fork but failed
+305 Checking if 1 should die; Time since last eaten = 104; starvation time = 310
+305 1 Tried to take a fork but failed
+305 1 Tried to take a fork but failed
+305 Checking if 3 should die; Time since last eaten = 305; starvation time = 310
+305 3 Tried to take a fork but failed
+306 Checking if 1 should die; Time since last eaten = 105; starvation time = 310
+306 1 Tried to take a fork but failed
+306 1 Tried to take a fork but failed
+306 Checking if 3 should die; Time since last eaten = 306; starvation time = 310
+306 3 Tried to take a fork but failed
+307 Checking if 1 should die; Time since last eaten = 106; starvation time = 310
+307 1 Tried to take a fork but failed
+307 1 Tried to take a fork but failed
+307 Checking if 3 should die; Time since last eaten = 307; starvation time = 310
+307 3 Tried to take a fork but failed
+308 Checking if 1 should die; Time since last eaten = 107; starvation time = 310
+308 1 Tried to take a fork but failed
+308 1 Tried to take a fork but failed
+309 Checking if 3 should die; Time since last eaten = 308; starvation time = 310
+309 3 Tried to take a fork but failed
+309 Checking if 1 should die; Time since last eaten = 108; starvation time = 310
+309 1 Tried to take a fork but failed
+309 1 Tried to take a fork but failed
+310 Checking if 3 should die; Time since last eaten = 310; starvation time = 310
+
+
+
+
+
+-----
+hellou
+-----
+
+
+
+
+310 3 is dead

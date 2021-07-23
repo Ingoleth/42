@@ -34,7 +34,6 @@ void	leave_fork(t_philo *philo, t_bool right_fork)
 	pthread_mutex_lock(mutex);
 	*fork_in_table = true;
 	*philo_fork = false;
-	display_message(philo->philo_id, "has left a fork!");
 	pthread_mutex_unlock(mutex);
 }
 
@@ -61,6 +60,7 @@ void	take_fork(t_philo *philo, t_bool right_fork)
 	{
 		*fork_in_table = false;
 		*philo_fork = true;
+		display_message(philo->philo_id, "has taken a fork");
 	}
 	pthread_mutex_unlock(mutex);
 }
@@ -77,8 +77,8 @@ void	set_end_condition(int philo_id, t_bool he_dead)
 	pthread_mutex_lock(g_philo_common.end_condition_mutex);
 	if (he_dead)
 	{
-		g_philo_common.end_condition[0] = true;
 		display_message(philo_id, "is dead");
+		g_philo_common.end_condition[0] = true;
 	}
 	else
 		g_philo_common.end_condition[philo_id] = true;

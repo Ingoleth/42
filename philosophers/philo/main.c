@@ -40,6 +40,8 @@ t_bool	check_end_condition(void)
 			i++;
 		}
 	}
+	else if (!done)
+		ret = false;
 	pthread_mutex_unlock(g_philo_common.end_condition_mutex);
 	return (ret);
 }
