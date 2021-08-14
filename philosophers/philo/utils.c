@@ -76,11 +76,13 @@ void	set_end_condition(int philo_id, t_bool he_dead)
 {
 	pthread_mutex_lock(g_philo_common.end_condition_mutex);
 	if (he_dead)
-	{
-		display_message(philo_id, "is dead");
 		g_philo_common.end_condition[0] = true;
-	}
 	else
 		g_philo_common.end_condition[philo_id] = true;
 	pthread_mutex_unlock(g_philo_common.end_condition_mutex);
+	if (he_dead)
+	{
+		display_message(philo_id, "died");
+		pthread_mutex_lock(g_philo_common.communication);
+	}
 }
