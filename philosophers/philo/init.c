@@ -70,6 +70,7 @@ t_bool	init_threads(int size)
 		if (g_philo_common.structs[i] == NULL)
 			return (false);
 	}
+	g_philo_common.start_time = get_current_timestamp();
 	i = -1;
 	while (++i < size)
 	{
@@ -112,7 +113,6 @@ int	init_data(int size)
 		return (free_memory(-1));
 	if (!init_mutexes(size))
 		return (free_memory(-1));
-	g_philo_common.start_time = get_current_timestamp();
 	if (!init_threads(size))
 		return (free_memory(-1));
 	return (0);

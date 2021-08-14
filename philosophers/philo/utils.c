@@ -13,56 +13,34 @@ long	get_current_timestamp(void)
 	return (time_in_ms - g_philo_common.start_time);
 }
 
-void	leave_fork(t_philo *philo, t_bool right_fork)
+void	leave_forks(t_philo *philo)
 {
-	t_bool			*fork_in_table;
-	t_bool			*philo_fork;
-	pthread_mutex_t	*mutex;
-
-	if (right_fork == true)
-	{
-		philo_fork = &philo->right_fork;
-		fork_in_table = philo->right_table_fork;
-		mutex = philo->right_fork_mutex;
-	}
-	else
-	{
-		philo_fork = &philo->left_fork;
-		fork_in_table = philo->left_table_fork;
-		mutex = philo->left_fork_mutex;
-	}
-	pthread_mutex_lock(mutex);
-	*fork_in_table = true;
-	*philo_fork = false;
-	pthread_mutex_unlock(mutex);
+	pthread_mutex_lock(philo->left_fork_mutex);
+	pthread_mutex_lock(philo->right_fork_mutex);
+	philo->left_fork = false;
+	philo->right_fork = false;
+	*philo->right_table_fork = true;
+	*philo->left_table_fork = true;
+	pthread_mutex_unlock(philo->left_fork_mutex);
+	pthread_mutex_unlock(philo->right_fork_mutex);
 }
 
-void	take_fork(t_philo *philo, t_bool right_fork)
+void	get_forks(t_philo *philo)
 {
-	t_bool			*fork_in_table;
-	t_bool			*philo_fork;
-	pthread_mutex_t	*mutex;
-
-	if (right_fork == true)
+	pthread_mutex_lock(philo->left_fork_mutex);
+	pthread_mutex_lock(philo->right_fork_mutex);
+	if (*philo->left_table_fork && *philo->right_table_fork)
 	{
-		philo_fork = &philo->right_fork;
-		fork_in_table = philo->right_table_fork;
-		mutex = philo->right_fork_mutex;
-	}
-	else
-	{
-		philo_fork = &philo->left_fork;
-		fork_in_table = philo->left_table_fork;
-		mutex = philo->left_fork_mutex;
-	}
-	pthread_mutex_lock(mutex);
-	if (*fork_in_table)
-	{
-		*fork_in_table = false;
-		*philo_fork = true;
+		philo->left_fork = true;
+		philo->right_fork = true;
+		*philo->right_table_fork = false;
+		*philo->left_table_fork = false;
+		display_message(philo->philo_id, "has taken a fork");
 		display_message(philo->philo_id, "has taken a fork");
 	}
-	pthread_mutex_unlock(mutex);
+	pthread_mutex_unlock(philo->left_fork_mutex);
+	pthread_mutex_unlock(philo->right_fork_mutex);
+
 }
 
 void	display_message(int philo_id, char *message)

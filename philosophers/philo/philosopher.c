@@ -30,17 +30,12 @@ t_bool	get_forks_or_die(t_philo *philo)
 	{
 		if (should_die(philo->time_since_last_eaten, g_philo_common.starvation_time))
 		{
-			if (philo->left_fork)
-				leave_fork(philo, false);
-			if (philo->right_fork)
-				leave_fork(philo, true);
+			if (philo->left_fork && philo->right_fork)
+				leave_forks(philo);
 			set_end_condition(philo->philo_id, true);
 			return (true);
 		}
-		if (!philo->right_fork)
-			take_fork(philo, true);
-		if (!philo->left_fork)
-			take_fork(philo, false);
+		get_forks(philo);
 	}
 	return (false);
 }
@@ -58,8 +53,7 @@ t_bool	eat(t_philo *philo)
 	}
 	philo->time_since_last_eaten = get_current_timestamp();
 	smart_sleep(g_philo_common.eat_time, philo->time_since_last_eaten);
-	leave_fork(philo, true);
-	leave_fork(philo, false);
+	leave_forks(philo);
 	return (true);
 }
 

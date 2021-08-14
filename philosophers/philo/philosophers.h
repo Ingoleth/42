@@ -48,8 +48,8 @@ t_philo_common	g_philo_common;
 
 long	get_current_timestamp(void);
 t_bool	check_number(int *nbr, char *str, t_bool check_zero);
-void	leave_fork(t_philo *philo, t_bool right_fork);
-void	take_fork(t_philo *philo, t_bool right_fork);
+void	leave_forks(t_philo *philo);
+void	get_forks(t_philo *philo);
 void	set_end_condition(int philo_id, t_bool he_dead);
 int		init_data(int size);
 int		free_memory(int return_value);
