@@ -13,36 +13,6 @@ long	get_current_timestamp(void)
 	return (time_in_ms - g_philo_common.start_time);
 }
 
-void	leave_forks(t_philo *philo)
-{
-	pthread_mutex_lock(philo->left_fork_mutex);
-	pthread_mutex_lock(philo->right_fork_mutex);
-	philo->left_fork = false;
-	philo->right_fork = false;
-	*philo->right_table_fork = true;
-	*philo->left_table_fork = true;
-	pthread_mutex_unlock(philo->left_fork_mutex);
-	pthread_mutex_unlock(philo->right_fork_mutex);
-}
-
-void	get_forks(t_philo *philo)
-{
-	pthread_mutex_lock(philo->left_fork_mutex);
-	pthread_mutex_lock(philo->right_fork_mutex);
-	if (*philo->left_table_fork && *philo->right_table_fork)
-	{
-		philo->left_fork = true;
-		philo->right_fork = true;
-		*philo->right_table_fork = false;
-		*philo->left_table_fork = false;
-		display_message(philo->philo_id, "has taken a fork");
-		display_message(philo->philo_id, "has taken a fork");
-	}
-	pthread_mutex_unlock(philo->left_fork_mutex);
-	pthread_mutex_unlock(philo->right_fork_mutex);
-
-}
-
 void	display_message(int philo_id, char *message)
 {
 	pthread_mutex_lock(g_philo_common.communication);

@@ -37,16 +37,9 @@ t_philo	*load_philosopher_data(int i, int size)
 	aux->eat_amount = g_philo_common.eat_amount;
 	aux->philo_id = i + 1;
 	if (i == 0)
-	{
-		aux->right_table_fork = &g_philo_common.forks[size - 1];
 		aux->right_fork_mutex = g_philo_common.mutexes[size - 1];
-	}
 	else
-	{
-		aux->right_table_fork = &g_philo_common.forks[i - 1];
 		aux->right_fork_mutex = g_philo_common.mutexes[i - 1];
-	}
-	aux->left_table_fork = &g_philo_common.forks[i];
 	aux->left_fork_mutex = g_philo_common.mutexes[i];
 	return (aux);
 }
@@ -71,12 +64,13 @@ t_bool	init_threads(int size)
 			return (false);
 	}
 	g_philo_common.start_time = get_current_timestamp();
-	i = -1;
-	while (++i < size)
+	i = 0;
+	while (i < size)
 	{
 		if (pthread_create(&g_philo_common.threads[i], NULL, &live,
 				g_philo_common.structs[i]))
 			return (false);
+		usleep(1000);
 	}
 	return (true);
 }
@@ -105,9 +99,6 @@ t_bool	*init_bool(int size, t_bool initial_value)
 
 int	init_data(int size)
 {
-	g_philo_common.forks = init_bool(size, true);
-	if (g_philo_common.forks == NULL)
-		return (free_memory(-1));
 	g_philo_common.end_condition = init_bool(size + 1, false);
 	if (g_philo_common.end_condition == NULL)
 		return (free_memory(-1));

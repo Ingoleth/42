@@ -50,8 +50,6 @@ int	free_memory(int return_value)
 {
 	int	i;
 
-	if (g_philo_common.forks)
-		free(g_philo_common.forks);
 	if (g_philo_common.threads)
 		free(g_philo_common.threads);
 	if (g_philo_common.mutexes)
@@ -111,7 +109,7 @@ void	kill_threads(void)
 ** 
 */
 
-int	main(int argc, char const *argv[])
+int	main(int argc, char const *argv[]) //TODO arc == 6 && argv = 0
 {
 	if (argc < 5 || argc > 6)
 		return (-1);
