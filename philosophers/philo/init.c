@@ -44,6 +44,36 @@ t_philo	*load_philosopher_data(int i, int size)
 	return (aux);
 }
 
+t_bool init_philosopher_threads(int size)
+{
+	int i;
+
+	i = 0;
+	while (i < size)
+	{
+		if (!(i % 2))
+		{
+			if (pthread_create(&g_philo_common.threads[i], NULL, &live,
+					g_philo_common.structs[i]))
+				return (false);
+			usleep(1000);
+		}
+		i++;
+	}
+	i = 0;
+	while (i < size)
+	{
+		if (i % 2)
+		{
+			if (pthread_create(&g_philo_common.threads[i], NULL, &live,
+					g_philo_common.structs[i]))
+				return (false);
+		}
+		i++;
+	}
+	return (true);
+}
+
 t_bool	init_threads(int size)
 {
 	int	i;
@@ -64,15 +94,7 @@ t_bool	init_threads(int size)
 			return (false);
 	}
 	g_philo_common.start_time = get_current_timestamp();
-	i = 0;
-	while (i < size)
-	{
-		if (pthread_create(&g_philo_common.threads[i], NULL, &live,
-				g_philo_common.structs[i]))
-			return (false);
-		usleep(1000);
-	}
-	return (true);
+	return (init_philosopher_threads(size));
 }
 
 t_bool	*init_bool(int size, t_bool initial_value)

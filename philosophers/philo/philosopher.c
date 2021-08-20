@@ -33,7 +33,9 @@ t_bool	should_die(t_philo *philo, int starvation_time)
 void	eat(t_philo *philo)
 {
 	pthread_mutex_lock(philo->left_fork_mutex);
+	display_message(philo->philo_id, "has taken a fork");
 	pthread_mutex_lock(philo->right_fork_mutex);
+	display_message(philo->philo_id, "has taken a fork");
 	display_message(philo->philo_id, "is eating");
 	if (philo->eat_amount)
 	{
@@ -43,6 +45,7 @@ void	eat(t_philo *philo)
 	}
 	philo->time_since_last_eaten = get_current_timestamp();
 	smart_sleep(g_philo_common.eat_time, philo->time_since_last_eaten);
+	display_message(philo->philo_id, "is sleeping");
 	pthread_mutex_unlock(philo->left_fork_mutex);
 	pthread_mutex_unlock(philo->right_fork_mutex);
 }
@@ -53,7 +56,6 @@ void	*live(void *arg)
 
 	philo = (t_philo *)arg;
 	philo->time_since_last_eaten = get_current_timestamp();
-	display_message(philo->philo_id, "waves hello");
 	while (true)
 	{		
 		if (should_die(philo, g_philo_common.starvation_time))
@@ -62,8 +64,10 @@ void	*live(void *arg)
 			return (NULL);
 		}
 		eat(philo);
-		display_message(philo->philo_id, "is sleeping");
-		if (smart_sleep(g_philo_common.sleep_time, philo->time_since_last_eaten))
+		if (get_current_timestamp() - philo->time_since_last_eaten + g_philo_common.eat_time
+			> g_philo_common.starvation_time)
+			smart_sleep(g_philo_common.eat_time, philo->time_since_last_eaten);
+		else if (smart_sleep(g_philo_common.sleep_time, philo->time_since_last_eaten))
 			display_message(philo->philo_id, "is thinking");
 	}
 	return (NULL);
