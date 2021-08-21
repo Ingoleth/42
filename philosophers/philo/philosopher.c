@@ -41,13 +41,15 @@ void	eat(t_philo *philo)
 	{
 		philo->eat_amount--;
 		if (philo->eat_amount == 0)
-			set_end_condition(philo->philo_id, false);
+			set_end_condition(philo, false);
 	}
 	philo->time_since_last_eaten = get_current_timestamp();
-	smart_sleep(g_philo_common.eat_time, philo->time_since_last_eaten);
-	display_message(philo->philo_id, "is sleeping");
-	pthread_mutex_unlock(philo->left_fork_mutex);
-	pthread_mutex_unlock(philo->right_fork_mutex);
+	if (smart_sleep(g_philo_common.eat_time, philo->time_since_last_eaten))
+	{
+		display_message(philo->philo_id, "is sleeping");
+		pthread_mutex_unlock(philo->left_fork_mutex);
+		pthread_mutex_unlock(philo->right_fork_mutex);
+	}
 }
 
 void	*live(void *arg)
@@ -60,7 +62,7 @@ void	*live(void *arg)
 	{		
 		if (should_die(philo, g_philo_common.starvation_time))
 		{
-			set_end_condition(philo->philo_id, true);
+			set_end_condition(philo, true);
 			return (NULL);
 		}
 		eat(philo);

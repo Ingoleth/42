@@ -43,7 +43,7 @@ t_philo_common	g_philo_common;
 
 long	get_current_timestamp(void);
 t_bool	check_number(int *nbr, char *str, t_bool check_zero);
-void	set_end_condition(int philo_id, t_bool he_dead);
+void	set_end_condition(t_philo *philo, t_bool he_dead);
 int		init_data(int size);
 int		free_memory(int return_value);
 void	*live(void *arg);

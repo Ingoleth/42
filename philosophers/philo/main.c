@@ -85,6 +85,24 @@ void	kill_threads(void)
 	exit(0);
 }
 
+t_bool	check_if_dead()
+{
+	int i;
+
+	i = 0;
+	while (i < g_philo_common.philosophers)
+	{
+		if (get_current_timestamp() - g_philo_common.structs[i]->time_since_last_eaten
+			> g_philo_common.starvation_time)
+		{
+			display_message(i + 1, "died");
+			return(true);
+		}
+		i++;
+	}
+	return(false);
+}
+
 /*
 ** Cada programa debe aceptar el mismo número de opciones:
 ** 
@@ -119,7 +137,7 @@ int	main(int argc, char const *argv[]) //TODO arc == 6 && argv = 0
 		return (-1);
 	while (true)
 	{
-		if (check_end_condition())
+		if (check_end_condition() || check_if_dead())
 			kill_threads();
 	}
 	return (0);
