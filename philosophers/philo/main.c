@@ -27,17 +27,16 @@ t_bool	check_end_condition(void)
 	pthread_mutex_lock(g_philo_common.end_condition_mutex);
 	if (g_philo_common.end_condition[0])
 		done = true;
-	i = 1;
+	i = 0;
 	if (g_philo_common.eat_amount)
 	{
-		while (!done && i <= g_philo_common.philosophers)
+		while (!done && ++i <= g_philo_common.philosophers)
 		{
 			if (!g_philo_common.end_condition[i])
 			{
 				ret = false;
 				done = true;
 			}
-			i++;
 		}
 	}
 	else if (!done)
@@ -46,61 +45,23 @@ t_bool	check_end_condition(void)
 	return (ret);
 }
 
-int	free_memory(int return_value)
-{
-	int	i;
-
-	if (g_philo_common.threads)
-		free(g_philo_common.threads);
-	if (g_philo_common.mutexes)
-	{
-		i = 0;
-		while (g_philo_common.mutexes[i])
-		{
-			pthread_mutex_destroy(g_philo_common.mutexes[i]);
-			free(g_philo_common.mutexes[i++]);
-		}
-		free(g_philo_common.mutexes);
-		g_philo_common.mutexes = NULL;
-	}
-	if (g_philo_common.end_condition)
-		free(g_philo_common.end_condition);
-	return (return_value);
-}
-
-/*
-**	//Might need to set the threads to 0? //TODO: Check seg fault
-**	//free_memory(0);
-*/
-void	kill_threads(void)
+t_bool	check_if_dead(void)
 {
 	int	i;
 
 	i = 0;
 	while (i < g_philo_common.philosophers)
 	{
-		pthread_detach(g_philo_common.threads[i]);
-		i++;
-	}
-	exit(0);
-}
-
-t_bool	check_if_dead()
-{
-	int i;
-
-	i = 0;
-	while (i < g_philo_common.philosophers)
-	{
-		if (get_current_timestamp() - g_philo_common.structs[i]->time_since_last_eaten
+		if (get_current_timestamp()
+			- g_philo_common.structs[i]->time_since_last_eaten
 			> g_philo_common.starvation_time)
 		{
 			display_message(i + 1, "died");
-			return(true);
+			return (true);
 		}
 		i++;
 	}
-	return(false);
+	return (false);
 }
 
 /*
@@ -127,7 +88,7 @@ t_bool	check_if_dead()
 ** 
 */
 
-int	main(int argc, char const *argv[]) //TODO arc == 6 && argv = 0
+int	main(int argc, char const *argv[])
 {
 	if (argc < 5 || argc > 6)
 		return (-1);

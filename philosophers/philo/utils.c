@@ -36,3 +36,44 @@ void	set_end_condition(t_philo *philo, t_bool he_dead)
 		pthread_mutex_lock(g_philo_common.communication);
 	}
 }
+
+int	free_memory(int return_value)
+{
+	int	i;
+
+	if (g_philo_common.threads)
+		free(g_philo_common.threads);
+	if (g_philo_common.mutexes)
+	{
+		i = 0;
+		while (g_philo_common.mutexes[i])
+		{
+			pthread_mutex_destroy(g_philo_common.mutexes[i]);
+			free(g_philo_common.mutexes[i++]);
+		}
+		free(g_philo_common.mutexes);
+	}
+	if (g_philo_common.end_condition)
+		free(g_philo_common.end_condition);
+	if (g_philo_common.structs)
+	{
+		i = 0;
+		while (g_philo_common.structs[i])
+			free(g_philo_common.structs[i++]);
+		free(g_philo_common.structs);
+	}
+	return (return_value);
+}
+
+void	kill_threads(void)
+{
+	int	i;
+
+	i = 0;
+	while (i < g_philo_common.philosophers)
+	{
+		pthread_detach(g_philo_common.threads[i]);
+		i++;
+	}
+	exit(free_memory(0));
+}

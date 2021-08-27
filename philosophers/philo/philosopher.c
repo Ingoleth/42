@@ -2,7 +2,7 @@
 
 t_bool	smart_sleep(int sleep_time, long int time_since_last_eaten)
 {
-	long int elapsed_time;
+	long int	elapsed_time;
 
 	elapsed_time = get_current_timestamp() - time_since_last_eaten;
 	if (elapsed_time + sleep_time > g_philo_common.starvation_time)
@@ -66,10 +66,11 @@ void	*live(void *arg)
 			return (NULL);
 		}
 		eat(philo);
-		if (get_current_timestamp() - philo->time_since_last_eaten + g_philo_common.eat_time
-			> g_philo_common.starvation_time)
+		if (get_current_timestamp() - philo->time_since_last_eaten
+			+ g_philo_common.eat_time > g_philo_common.starvation_time)
 			smart_sleep(g_philo_common.eat_time, philo->time_since_last_eaten);
-		else if (smart_sleep(g_philo_common.sleep_time, philo->time_since_last_eaten))
+		else if (smart_sleep(g_philo_common.sleep_time,
+				philo->time_since_last_eaten))
 			display_message(philo->philo_id, "is thinking");
 	}
 	return (NULL);
