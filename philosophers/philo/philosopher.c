@@ -14,22 +14,6 @@ t_bool	smart_sleep(int sleep_time, long int time_since_last_eaten)
 	return (true);
 }
 
-t_bool	should_die(t_philo *philo, int starvation_time)
-{
-	long	current_time;
-
-	if (philo->left_fork_mutex == philo->right_fork_mutex)
-	{
-		display_message(philo->philo_id, "has taken a fork");
-		usleep(g_philo_common.starvation_time * 1000);
-		return (true);
-	}
-	current_time = get_current_timestamp();
-	if (current_time - philo->time_since_last_eaten >= starvation_time)
-		return (true);
-	return (false);
-}
-
 void	eat(t_philo *philo)
 {
 	pthread_mutex_lock(philo->left_fork_mutex);
@@ -41,7 +25,12 @@ void	eat(t_philo *philo)
 	{
 		philo->eat_amount--;
 		if (philo->eat_amount == 0)
+		{
+			pthread_mutex_lock(g_philo_common.end_condition_mutex);
+			g_philo_common.end_condition[philo->philo_id] = true;
+			pthread_mutex_unlock(g_philo_common.end_condition_mutex);
 			set_end_condition(philo, false);
+		}
 	}
 	philo->time_since_last_eaten = get_current_timestamp();
 	if (smart_sleep(g_philo_common.eat_time, philo->time_since_last_eaten))
@@ -60,11 +49,6 @@ void	*live(void *arg)
 	philo->time_since_last_eaten = get_current_timestamp();
 	while (true)
 	{		
-		if (should_die(philo, g_philo_common.starvation_time))
-		{
-			set_end_condition(philo, true);
-			return (NULL);
-		}
 		eat(philo);
 		if (get_current_timestamp() - philo->time_since_last_eaten
 			+ g_philo_common.eat_time > g_philo_common.starvation_time)
