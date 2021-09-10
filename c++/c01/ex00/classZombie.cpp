@@ -1,11 +1,6 @@
 #include "classZombie.hpp"
 #include <iostream>
 
-classZombie::classZombie() //Can I not have you?
-{
-
-}
-
 classZombie::classZombie(std::string name)
 {
 	this->name = name;
@@ -13,13 +8,7 @@ classZombie::classZombie(std::string name)
 
 classZombie::~classZombie()
 {
-	if (name.length())
-		std::cout << name << " died..." << std::endl;	
-}
-
-void	classZombie::setName(std::string name)
-{
-	this->name = name;
+	std::cout << name << " died..." << std::endl;	
 }
 
 void	classZombie::announce(void)
