@@ -80,25 +80,18 @@ void	print_stacks(t_array_info *arrays, unsigned short int instruction)
 	int	i;
 
 	i = 0;
-	if (arrays->display_operations)
-		printf("\033[2J");
 	while (i < arrays->array_a_length || i < arrays->array_b_length)
 	{
 		printf("(%3d) ", i);
 		if (i < arrays->array_a_length)
-			printf("[\033[%im%7d\033[0m]",
-				get_colour_a(arrays, i, instruction), arrays->array_a[i]);
+			printf("[%7d]", i, instruction), arrays->array_a[i]);
 		else if (arrays->array_b_length)
 			printf("[       ]");
 		if (i < arrays->array_b_length)
-			printf(" [\033[%im%7d\033[0m]",
-				get_colour_b(i, instruction), arrays->array_b[i]);
+			printf(" [%7d]", arrays->array_b[i]);
 		else if (i < arrays->array_a_length)
 			printf(" [       ]");
 		printf("\n");
 		i++;
 	}
-	print_legend(arrays);
-	if (arrays->display_operations)
-		usleep(500000);
 }

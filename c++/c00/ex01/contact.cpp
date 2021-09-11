@@ -50,7 +50,11 @@ void	contact::printContactField(std::string field)
 	if (field.size() <= 10)
 		std::cout << field;
 	else
+	{
+		for (size_t i = 0; i < 10; i++)
+			std::cout << field[i];
 		std::cout << '.';
+	}
 }
 
 bool	contact::printContactName(int index)
