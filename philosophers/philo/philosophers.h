@@ -49,7 +49,7 @@ t_bool	init_threads(int size);
 int		free_memory(int return_value);
 void	*live(void *arg);
 void	display_message(int philo_id, char *message);
-void	kill_threads(void);
 int		free_memory(int return_value);
+t_bool	check_end();
 
 #endif // PHILOSOPHERS_H

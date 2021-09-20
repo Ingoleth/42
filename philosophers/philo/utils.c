@@ -15,6 +15,8 @@ long	get_current_timestamp(void)
 
 void	display_message(int philo_id, char *message)
 {
+	if (check_end())
+		return ;
 	pthread_mutex_lock(g_philo_common.communication);
 	printf("%li %i %s\n", get_current_timestamp(), philo_id, message);
 	pthread_mutex_unlock(g_philo_common.communication);
@@ -22,18 +24,19 @@ void	display_message(int philo_id, char *message)
 
 void	set_end_condition(t_philo *philo, t_bool he_dead)
 {
-	pthread_mutex_lock(g_philo_common.end_condition_mutex);
-	if (he_dead)
-		g_philo_common.end_condition[0] = true;
-	else
-		g_philo_common.end_condition[philo->philo_id] = true;
-	pthread_mutex_unlock(g_philo_common.end_condition_mutex);
 	if (he_dead)
 	{
 		display_message(philo->philo_id, "died");
-		pthread_mutex_unlock(philo->left_fork_mutex);
-		pthread_mutex_unlock(philo->right_fork_mutex);
-		pthread_mutex_lock(g_philo_common.communication);
+		free(philo);
+		pthread_mutex_lock(g_philo_common.end_condition_mutex);
+		g_philo_common.end_condition[0] = true;
+		pthread_mutex_unlock(g_philo_common.end_condition_mutex);
+	}
+	else
+	{
+		pthread_mutex_lock(g_philo_common.end_condition_mutex);
+		g_philo_common.end_condition[philo->philo_id] = true;
+		pthread_mutex_unlock(g_philo_common.end_condition_mutex);
 	}
 }
 
@@ -65,15 +68,12 @@ int	free_memory(int return_value)
 	return (return_value);
 }
 
-void	kill_threads(void)
+t_bool check_end()
 {
-	int	i;
+	t_bool ret;
 
-	i = 0;
-	while (i < g_philo_common.philosophers)
-	{
-		pthread_detach(g_philo_common.threads[i]);
-		i++;
-	}
-	exit(free_memory(0));
+	pthread_mutex_lock(g_philo_common.end_condition_mutex);
+	ret = g_philo_common.end_condition[0];
+	pthread_mutex_unlock(g_philo_common.end_condition_mutex);
+	return (ret);
 }

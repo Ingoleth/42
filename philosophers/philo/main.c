@@ -41,6 +41,9 @@ t_bool	check_end_condition(void)
 	}
 	else if (!done)
 		ret = false;
+	printf("%i\n", ret);
+	if (!g_philo_common.end_condition[0])
+		g_philo_common.end_condition[0] = ret;
 	pthread_mutex_unlock(g_philo_common.end_condition_mutex);
 	return (ret);
 }
@@ -90,16 +93,24 @@ t_bool	check_if_dead(void)
 
 int	main(int argc, char const *argv[])
 {
+	int i;
+
 	if (argc < 5 || argc > 6)
 		return (-1);
 	if (get_input((char **)argv))
 		return (-1);
 	if (init_data(g_philo_common.philosophers))
 		return (-1);
-	while (true)
+	while (i)
 	{
+		printf("%i-\n", check_end());
 		if (check_end_condition() || check_if_dead())
-			kill_threads();
+			i = 0;
+	}
+	while (i < g_philo_common.philosophers)
+	{
+		pthread_join(g_philo_common.threads[i], NULL);
+		i++;
 	}
 	return (0);
 }
