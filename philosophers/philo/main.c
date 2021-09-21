@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/21 10:16:50 by root              #+#    #+#             */
+/*   Updated: 2021/09/21 10:19:10 by aiglesia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philosophers.h"
 
 t_bool	get_input(char **argv)
@@ -20,29 +32,23 @@ t_bool	check_end_condition(void)
 {
 	int		i;
 	t_bool	ret;
-	t_bool	done;
 
-	done = false;
 	ret = true;
-	pthread_mutex_lock(g_philo_common.end_condition_mutex);
 	if (g_philo_common.end_condition[0])
-		done = true;
+		return (true);
+	if (!g_philo_common.eat_amount)
+		return (false);
 	i = 0;
-	if (g_philo_common.eat_amount)
+	pthread_mutex_lock(g_philo_common.end_condition_mutex);
+	while (++i <= g_philo_common.philosophers)
 	{
-		while (!done && ++i <= g_philo_common.philosophers)
+		if (!g_philo_common.end_condition[i])
 		{
-			if (!g_philo_common.end_condition[i])
-			{
-				ret = false;
-				done = true;
-			}
+			ret = false;
+			break ;
 		}
 	}
-	else if (!done)
-		ret = false;
-	printf("%i\n", ret);
-	if (!g_philo_common.end_condition[0])
+	if (ret == true)
 		g_philo_common.end_condition[0] = ret;
 	pthread_mutex_unlock(g_philo_common.end_condition_mutex);
 	return (ret);
@@ -60,6 +66,7 @@ t_bool	check_if_dead(void)
 			> g_philo_common.starvation_time)
 		{
 			display_message(i + 1, "died");
+			g_philo_common.end_condition[0] = true;
 			return (true);
 		}
 		i++;
@@ -93,24 +100,27 @@ t_bool	check_if_dead(void)
 
 int	main(int argc, char const *argv[])
 {
-	int i;
+	int	i;
 
 	if (argc < 5 || argc > 6)
-		return (-1);
+		return (1);
 	if (get_input((char **)argv))
-		return (-1);
+		return (1);
 	if (init_data(g_philo_common.philosophers))
-		return (-1);
+		return (1);
+	i = 1;
 	while (i)
 	{
-		printf("%i-\n", check_end());
 		if (check_end_condition() || check_if_dead())
 			i = 0;
 	}
+	while (g_philo_common.mutexes[i])
+		pthread_mutex_unlock(g_philo_common.mutexes[i++]);
+	i = 0;
 	while (i < g_philo_common.philosophers)
 	{
 		pthread_join(g_philo_common.threads[i], NULL);
 		i++;
 	}
-	return (0);
+	return (free_memory(0));
 }

@@ -84,7 +84,7 @@ void	print_stacks(t_array_info *arrays, unsigned short int instruction)
 	{
 		printf("(%3d) ", i);
 		if (i < arrays->array_a_length)
-			printf("[%7d]", i, instruction), arrays->array_a[i]);
+			printf("[%7d]", instruction);
 		else if (arrays->array_b_length)
 			printf("[       ]");
 		if (i < arrays->array_b_length)

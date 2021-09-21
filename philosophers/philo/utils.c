@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/21 10:19:06 by aiglesia          #+#    #+#             */
+/*   Updated: 2021/09/21 10:19:07 by aiglesia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philosophers.h"
 
 /*
@@ -44,33 +56,22 @@ int	free_memory(int return_value)
 {
 	int	i;
 
-	if (g_philo_common.threads)
-		free(g_philo_common.threads);
-	if (g_philo_common.mutexes)
+	free(g_philo_common.threads);
+	free(g_philo_common.structs);
+	i = 0;
+	while (g_philo_common.mutexes[i])
 	{
-		i = 0;
-		while (g_philo_common.mutexes[i])
-		{
-			pthread_mutex_destroy(g_philo_common.mutexes[i]);
-			free(g_philo_common.mutexes[i++]);
-		}
-		free(g_philo_common.mutexes);
+		pthread_mutex_destroy(g_philo_common.mutexes[i]);
+		free(g_philo_common.mutexes[i++]);
 	}
-	if (g_philo_common.end_condition)
-		free(g_philo_common.end_condition);
-	if (g_philo_common.structs)
-	{
-		i = 0;
-		while (g_philo_common.structs[i])
-			free(g_philo_common.structs[i++]);
-		free(g_philo_common.structs);
-	}
+	free(g_philo_common.mutexes);
+	free(g_philo_common.end_condition);
 	return (return_value);
 }
 
-t_bool check_end()
+t_bool	check_end(void)
 {
-	t_bool ret;
+	t_bool	ret;
 
 	pthread_mutex_lock(g_philo_common.end_condition_mutex);
 	ret = g_philo_common.end_condition[0];

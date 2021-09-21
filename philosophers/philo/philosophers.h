@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philosophers.h                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/21 10:18:58 by aiglesia          #+#    #+#             */
+/*   Updated: 2021/09/21 10:21:19 by aiglesia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
 
@@ -50,6 +62,6 @@ int		free_memory(int return_value);
 void	*live(void *arg);
 void	display_message(int philo_id, char *message);
 int		free_memory(int return_value);
-t_bool	check_end();
+t_bool	check_end(void);
 
-#endif // PHILOSOPHERS_H
+#endif

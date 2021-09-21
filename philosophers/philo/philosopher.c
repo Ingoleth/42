@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philosopher.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/21 10:18:42 by aiglesia          #+#    #+#             */
+/*   Updated: 2021/09/21 10:19:51 by aiglesia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philosophers.h"
 
 t_bool	smart_sleep(int sleep_time, long int time_since_last_eaten)
@@ -5,7 +17,7 @@ t_bool	smart_sleep(int sleep_time, long int time_since_last_eaten)
 	long int	elapsed_time;
 
 	if (check_end())
-		return (false);
+		return (true);
 	elapsed_time = get_current_timestamp() - time_since_last_eaten;
 	if (elapsed_time + sleep_time > g_philo_common.starvation_time)
 	{
@@ -20,7 +32,7 @@ t_bool	should_die(t_philo *philo, int starvation_time)
 {
 	long	current_time;
 
-	if(check_end(true))
+	if (check_end())
 		return (true);
 	if (philo->left_fork_mutex == philo->right_fork_mutex)
 	{
@@ -71,13 +83,17 @@ void	*live(void *arg)
 			set_end_condition(philo, true);
 			return (NULL);
 		}
-		eat(philo);
-		if (get_current_timestamp() - philo->time_since_last_eaten
-			+ g_philo_common.eat_time > g_philo_common.starvation_time)
-			smart_sleep(g_philo_common.eat_time, philo->time_since_last_eaten);
-		else if (smart_sleep(g_philo_common.sleep_time,
-				philo->time_since_last_eaten))
-			display_message(philo->philo_id, "is thinking");
+		if (!check_end())
+		{
+			eat(philo);
+			if (get_current_timestamp() - philo->time_since_last_eaten
+				+ g_philo_common.eat_time > g_philo_common.starvation_time)
+				smart_sleep(g_philo_common.eat_time,
+					philo->time_since_last_eaten);
+			else if (smart_sleep(g_philo_common.sleep_time,
+					philo->time_since_last_eaten))
+				display_message(philo->philo_id, "is thinking");
+		}
 	}
 	return (NULL);
 }
