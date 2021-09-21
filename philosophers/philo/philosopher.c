@@ -12,6 +12,22 @@
 
 #include "philosophers.h"
 
+void	safe_sleep(int	miliseconds)
+{
+	const long	start = get_current_timestamp();
+	const long	end = start + miliseconds;
+	long		current = start;
+
+	while (!check_end() && current < end)
+	{
+		if (end - current > 100)
+			usleep(100000);
+		else
+			usleep((end - current) * 1000);
+		current = get_current_timestamp();
+	}
+}
+
 t_bool	smart_sleep(int sleep_time, long int time_since_last_eaten)
 {
 	long int	elapsed_time;
@@ -21,10 +37,10 @@ t_bool	smart_sleep(int sleep_time, long int time_since_last_eaten)
 	elapsed_time = get_current_timestamp() - time_since_last_eaten;
 	if (elapsed_time + sleep_time > g_philo_common.starvation_time)
 	{
-		usleep((g_philo_common.starvation_time - elapsed_time) * 1000);
+		safe_sleep(g_philo_common.starvation_time - elapsed_time);
 		return (false);
 	}
-	usleep(sleep_time * 1000);
+	safe_sleep(sleep_time);
 	return (true);
 }
 
