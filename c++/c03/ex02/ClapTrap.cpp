@@ -6,7 +6,7 @@
 
 ClapTrap::ClapTrap()
 {
-		this->name = nullptr;
+		this->name = "Unnamed";
 		hitPoints = 10;
 		energyPoints = 10;
 		attackDamage = 0;

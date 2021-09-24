@@ -4,6 +4,14 @@
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
+ScavTrap::ScavTrap()
+{
+	hitPoints = 100;
+	energyPoints = 50;
+	attackDamage = 20;
+	std::cout << "ScavTrap \"" << name << "\" created (via default constructor)!\n";
+}
+
 ScavTrap::ScavTrap(const std::string name) : ClapTrap(name)
 {
 		this->name = name;
