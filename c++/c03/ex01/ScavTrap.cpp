@@ -26,6 +26,19 @@ ScavTrap::ScavTrap( const ScavTrap & src ) : ClapTrap(src)
 	std::cout << "ScavTrap \"" << name << "\" created!\n";
 }
 
+/*
+** -------------------------------- OVERLOAD --------------------------------
+*/
+
+ScavTrap &				ScavTrap::operator=( ScavTrap const & rhs )
+{
+	name = rhs.name;
+	hitPoints = rhs.hitPoints;
+	energyPoints = rhs.energyPoints;
+	attackDamage = rhs.attackDamage;
+	return (*this);
+}
+
 
 /*
 ** -------------------------------- DESTRUCTOR --------------------------------

@@ -37,6 +37,19 @@ FragTrap::~FragTrap()
 }
 
 /*
+** -------------------------------- OVERLOAD --------------------------------
+*/
+
+FragTrap &				FragTrap::operator=( FragTrap const & rhs )
+{
+	name = rhs.name;
+	hitPoints = rhs.hitPoints;
+	energyPoints = rhs.energyPoints;
+	attackDamage = rhs.attackDamage;
+	return (*this);
+}
+
+/*
 ** --------------------------------- METHODS ----------------------------------
 */
 

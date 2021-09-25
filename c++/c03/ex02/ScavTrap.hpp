@@ -14,6 +14,7 @@ class ScavTrap: public ClapTrap
 		ScavTrap( ScavTrap const & src );
 		~ScavTrap();
 
+		ScavTrap &		operator=( ScavTrap const & rhs );
 		void guardGate();
 
 private:

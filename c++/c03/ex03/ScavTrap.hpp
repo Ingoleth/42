@@ -5,7 +5,7 @@
 # include <string>
 # include "ClapTrap.hpp"
 
-class ScavTrap: public virtual ClapTrap
+class ScavTrap: public ClapTrap
 {
 	public:
 
@@ -14,6 +14,7 @@ class ScavTrap: public virtual ClapTrap
 		ScavTrap( ScavTrap const & src );
 		~ScavTrap();
 
+		ScavTrap &		operator=( ScavTrap const & rhs );
 		void guardGate();
 
 private:
