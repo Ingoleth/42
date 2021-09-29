@@ -4,14 +4,11 @@
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-Character::Character()
-{
-}
+Character::Character() : _name("Unnamed") {}
 
-Character::Character( const Character & src )
-{
-}
+Character::Character( const Character & src ) : _name(src.getName()) { *this = src; }
 
+Character::Character ( const std::string name ) : _name(name) {}
 
 /*
 ** -------------------------------- DESTRUCTOR --------------------------------
@@ -19,6 +16,8 @@ Character::Character( const Character & src )
 
 Character::~Character()
 {
+	for (size_t i = 0; inventory[i]; i++)
+		delete inventory[i];
 }
 
 
@@ -28,16 +27,16 @@ Character::~Character()
 
 Character &				Character::operator=( Character const & rhs )
 {
-	//if ( this != &rhs )
-	//{
-		//this->_value = rhs.getValue();
-	//}
+	for (size_t i = 0; inventory[i]; i++)
+		delete inventory[i];
+	for (size_t i = 0; rhs.inventory[i]; i++)
+		inventory[i] = rhs.inventory[i]->clone();
 	return *this;
 }
 
 std::ostream &			operator<<( std::ostream & o, Character const & i )
 {
-	//o << "Value = " << i.getValue();
+	o << i.getName();
 	return o;
 }
 
@@ -46,22 +45,29 @@ std::ostream &			operator<<( std::ostream & o, Character const & i )
 ** --------------------------------- METHODS ----------------------------------
 */
 
-	void equip(AMateria* m)
+	void Character::equip(AMateria* m)
 	{
+		int i = 0;
 
+		while (inventory[i])
+			i++;
+		if (i > 3)
+			return ;
+		inventory[i] = m;
 	}
 
-	void unequip(int idx)
+	void Character::unequip(int idx)
 	{
-
+		if (idx < 0 || idx > 3)
+			return ;
+		inventory[idx] = NULL;	
 	}
 
-	void use(int idx, ICharacter& target)
+	void Character::use(int idx, ICharacter& target)
 	{
-		if (inventory[idx])
-		{
-			
-		}
+		if (idx < 0 || idx > 3 || !inventory[idx])
+			return ;
+		inventory[idx]->use(target);
 	}
 
 /*
