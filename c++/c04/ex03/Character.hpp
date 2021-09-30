@@ -3,7 +3,7 @@
 
 # include <iostream>
 # include <string>
-#include "Icharacter.hpp"
+#include "ICharacter.hpp"
 
 class Character : public virtual ICharacter
 {

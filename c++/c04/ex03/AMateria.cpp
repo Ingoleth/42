@@ -35,7 +35,7 @@ std::ostream &			operator<<( std::ostream & o, AMateria const & i )
 
 void	AMateria::use(ICharacter& target)
 {
-	(target);
+	(void)(target);
 }
 
 /*

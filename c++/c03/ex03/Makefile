@@ -1,8 +1,17 @@
-all: DiamondTrap
+NAME	= DiamondTrap
+SRCS	=  main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
+OBJS	= $(SRCS:.cpp=.o)
+CXX		= clang++
+CPPFLAGS	= -Wall -Werror -Wextra -std=c++98
+
+all: $(NAME)
+
+$(NAME):	$(OBJS)
+	$(CXX) $(CPPFLAGS) $(OBJS) -o $(NAME)
 
 clean:
-	rm -rf DiamondTrap
+	rm -f $(OBJS)
+fclean: clean
+	rm -f $(NAME)
 
-re:	clean all
-DiamondTrap:
-	clang++ -Wall -Werror -Wextra main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp -o DiamondTrap
+re:	fclean all

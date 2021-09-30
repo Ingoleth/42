@@ -2,6 +2,8 @@
 # define ICHARACTER_HPP
 
 # include <string>
+
+class AMateria;
 #include "AMateria.hpp"
 
 class ICharacter

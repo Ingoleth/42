@@ -3,7 +3,9 @@
 
 # include <iostream>
 # include <string>
-# include "Icharacter.hpp"
+
+class ICharacter;
+# include "ICharacter.hpp"
 
 class AMateria
 {
@@ -16,7 +18,7 @@ class AMateria
 		AMateria();
 		AMateria(std::string const & type);
 		AMateria( AMateria const & src );
-		~AMateria();
+		virtual ~AMateria();
 
 		AMateria &		operator=( AMateria const & rhs );
 
