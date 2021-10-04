@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 10:16:50 by root              #+#    #+#             */
-/*   Updated: 2021/09/21 10:19:10 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/09/22 15:45:59 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ t_bool	get_input(char **argv)
 		return (true);
 	if (!check_number(&g_philo_common.sleep_time, argv[4], true))
 		return (true);
-	if (argv[5] && !check_number(&g_philo_common.eat_amount, argv[5], false))
+	if ((argv[5] && !check_number(&g_philo_common.eat_amount, argv[5], true)))
+		return (true);
+	if (!g_philo_common.philosophers)
 		return (true);
 	return (false);
 }
@@ -65,8 +67,10 @@ t_bool	check_if_dead(void)
 			- g_philo_common.structs[i]->time_since_last_eaten
 			> g_philo_common.starvation_time)
 		{
-			display_message(i + 1, "died");
+			pthread_mutex_lock(g_philo_common.end_condition_mutex);
 			g_philo_common.end_condition[0] = true;
+			pthread_mutex_unlock(g_philo_common.end_condition_mutex);
+			printf("%li %i died\n", get_current_timestamp(), i + 1);
 			return (true);
 		}
 		i++;

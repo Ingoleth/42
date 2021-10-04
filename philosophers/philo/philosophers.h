@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 10:18:58 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/09/21 10:21:19 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/09/22 14:41:48 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,12 @@ t_philo_common	g_philo_common;
 
 long	get_current_timestamp(void);
 t_bool	check_number(int *nbr, char *str, t_bool check_zero);
-void	set_end_condition(t_philo *philo, t_bool he_dead);
+void	set_end_condition(t_philo *philo);
 int		init_data(int size);
 t_bool	init_threads(int size);
 int		free_memory(int return_value);
 void	*live(void *arg);
 void	display_message(int philo_id, char *message);
 int		free_memory(int return_value);
-t_bool	check_end(void);
 
 #endif

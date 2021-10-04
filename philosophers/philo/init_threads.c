@@ -6,7 +6,7 @@
 /*   By: aiglesia <aiglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 10:18:19 by aiglesia          #+#    #+#             */
-/*   Updated: 2021/09/21 10:18:21 by aiglesia         ###   ########.fr       */
+/*   Updated: 2021/09/22 15:54:32 by aiglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_bool	init_philosopher_threads(int size)
 			if (pthread_create(&g_philo_common.threads[i], NULL, &live,
 					g_philo_common.structs[i]))
 				return (false);
-			usleep(1000);
+			usleep(500);
 		}
 	}
 	i = -1;
