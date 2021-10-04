@@ -1,6 +1,6 @@
 #include "phoneBook.hpp"
 
-int main(int argc, char const *argv[])
+int main()
 {
 	contact test;
 	phoneBook pBook;

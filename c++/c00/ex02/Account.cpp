@@ -120,7 +120,8 @@ void	Account::displayStatus(void) const
 
 void	Account::_displayTimestamp( void )
 {
-	std::cout << "[";
-	//std::cout << "19920104_091532"; TODO: Add Timestamp
-	std::cout << "] ";
+	char timestamp[19];
+	std::time_t time = std::time(NULL);
+	std::strftime(timestamp, 19, "[%Y%m%d_%H%M%S] ", std::localtime(&time));
+	std::cout << timestamp;
 }

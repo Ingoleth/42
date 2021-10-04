@@ -97,7 +97,7 @@ void	phoneBook::search()
 	}
 	while (true)
 	{
-		std::cout << std::endl << "Please select a contact:" << std::endl;
+		std::cout << std::endl << "Please select a contact id:" << std::endl;
 		std::getline(std::cin, aux);
 		try
 		{
@@ -108,7 +108,7 @@ void	phoneBook::search()
 		}
 		catch(...)
 		{
-			std::cout << "Invalid contact id;" << std::endl;
+			std::cout << "Invalid contact id;";
 		}
 	}
 	contact_list[index].printContactInfo();

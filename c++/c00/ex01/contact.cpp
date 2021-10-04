@@ -45,24 +45,34 @@ bool	contact::printContactInfo(void)
 
 void	contact::printContactField(std::string field)
 {
-	std::cout << std::right;
-	std::cout << std::setw(10);
+	std::cout << '|';
 	if (field.size() <= 10)
+	{
+		std::ios oldState(nullptr); // Copies std original state
+		std::cout << std::right;
+		std::cout << std::setw(10);
 		std::cout << field;
+		std::cout.copyfmt(oldState); // Resets std state
+	}
 	else
 	{
-		for (size_t i = 0; i < 10; i++)
+		for (size_t i = 0; i < 9; i++)
 			std::cout << field[i];
 		std::cout << '.';
 	}
+	std::cout << '|';
 }
 
 bool	contact::printContactName(int index)
 {
 	if (firstName.size() == 0)
 		return (false);
+	std::ios oldState(nullptr); // Copies std original state
+	oldState.copyfmt(std::cout);
 	std::cout << std::setiosflags(std::ios::right);
 	std::cout << std::setw(10) << index;
+	std::cout.copyfmt(oldState); // Resets std state
+
 	printContactField(firstName);
 	printContactField(lastName);
 	printContactField(nickname);
