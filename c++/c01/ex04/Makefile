@@ -1,8 +1,17 @@
-all: replace
+NAME	= replace
+SRCS	= main.cpp
+OBJS	= $(SRCS:.cpp=.o)
+CXX		= clang++
+CPPFLAGS	= -Wall -Werror -Wextra -std=c++98
+
+all: $(NAME)
+
+$(NAME):	$(OBJS)
+	$(CXX) $(CPPFLAGS) $(OBJS) -o $(NAME)
 
 clean:
-	rm -rf replace
+	rm -f $(OBJS)
+fclean: clean
+	rm -f $(NAME)
 
-re:	clean all
-replace:
-	clang++ -Wall -Werror -Wextra main.cpp -o replace
+re:	fclean all

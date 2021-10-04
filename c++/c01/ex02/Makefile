@@ -1,8 +1,17 @@
-all: hi_this_is_brain
+NAME	= hi_this_is_brain
+SRCS	= main.cpp 
+OBJS	= $(SRCS:.cpp=.o)
+CXX		= clang++
+CPPFLAGS	= -Wall -Werror -Wextra -std=c++98
+
+all: $(NAME)
+
+$(NAME):	$(OBJS)
+	$(CXX) $(CPPFLAGS) $(OBJS) -o $(NAME)
 
 clean:
-	rm -rf hi_this_is_brain
+	rm -f $(OBJS)
+fclean: clean
+	rm -f $(NAME)
 
-re:	clean all
-hi_this_is_brain:
-	clang++ -Wall -Werror -Wextra main.cpp -o hi_this_is_brain
+re:	fclean all

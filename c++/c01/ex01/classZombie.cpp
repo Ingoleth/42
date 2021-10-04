@@ -1,10 +1,7 @@
 #include "classZombie.hpp"
 #include <iostream>
 
-classZombie::classZombie() //Can I not have you?
-{
-
-}
+classZombie::classZombie() : name ("unnamed") {}
 
 classZombie::classZombie(std::string name)
 {

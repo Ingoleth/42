@@ -1,8 +1,17 @@
-all: karen
+NAME	= karen
+SRCS	= main.cpp karen.cpp
+OBJS	= $(SRCS:.cpp=.o)
+CXX		= clang++
+CPPFLAGS	= -Wall -Werror -Wextra -std=c++98
+
+all: $(NAME)
+
+$(NAME):	$(OBJS)
+	$(CXX) $(CPPFLAGS) $(OBJS) -o $(NAME)
 
 clean:
-	rm -rf karen
+	rm -f $(OBJS)
+fclean: clean
+	rm -f $(NAME)
 
-re:	clean all
-karen:
-	clang++ -Wall -Werror -Wextra main.cpp karen.cpp -o karen
+re:	fclean all

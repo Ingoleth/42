@@ -1,8 +1,17 @@
-all: Fixed
+NAME	= Fixed
+SRCS	= main.cpp Animal.cpp Fixed.cpp
+OBJS	= $(SRCS:.cpp=.o)
+CXX		= clang++
+CPPFLAGS	= -Wall -Werror -Wextra -std=c++98
+
+all: $(NAME)
+
+$(NAME):	$(OBJS)
+	$(CXX) $(CPPFLAGS) $(OBJS) -o $(NAME)
 
 clean:
-	rm -rf Fixed
+	rm -f $(OBJS)
+fclean: clean
+	rm -f $(NAME)
 
-re:	clean all
-Fixed:
-	clang++ -Wall -Werror -Wextra main.cpp Fixed.cpp -o Fixed
+re:	fclean all

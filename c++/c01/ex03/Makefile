@@ -1,8 +1,17 @@
-all: output
+NAME	= human
+SRCS	= main.cpp humanA.cpp humanB.cpp weapon.cpp
+OBJS	= $(SRCS:.cpp=.o)
+CXX		= clang++
+CPPFLAGS	= -Wall -Werror -Wextra -std=c++98
+
+all: $(NAME)
+
+$(NAME):	$(OBJS)
+	$(CXX) $(CPPFLAGS) $(OBJS) -o $(NAME)
 
 clean:
-	rm -rf output
+	rm -f $(OBJS)
+fclean: clean
+	rm -f $(NAME)
 
-re:	clean all
-output:
-	clang++ -Wall -Werror -Wextra main.cpp humanA.cpp humanB.cpp weapon.cpp -o output
+re:	fclean all
