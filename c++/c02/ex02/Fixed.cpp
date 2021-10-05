@@ -94,7 +94,7 @@ bool Fixed::operator == (const Fixed &obj)
 
 bool Fixed::operator != (const Fixed &obj)
 {
-	if (this->value <= obj.getRawBits())
+	if (this->value != obj.getRawBits())
 		return (true);
 	return (false);
 }

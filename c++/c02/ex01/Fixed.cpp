@@ -6,7 +6,7 @@
 void Fixed::operator = (const Fixed &obj)
 {
 	std::cout << "Assignation operator called\n";
-	this->value = obj.getRawBits();
+	this->value = obj.value;
 }
 
 std::ostream& operator<<(std::ostream& os, const Fixed& nb)
@@ -26,7 +26,7 @@ Fixed::Fixed()
 Fixed::Fixed(const Fixed &obj)
 {
 	std::cout << "Copy constructor called\n";
-	this->value = obj.getRawBits();
+	*this = obj;
 }
 
 Fixed::Fixed(const int value)

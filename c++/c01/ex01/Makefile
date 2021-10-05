@@ -1,8 +1,17 @@
-all: zombieHorde
+NAME	= zombieHorde
+SRCS	= main.cpp zombieHorde.cpp classZombie.cpp
+OBJS	= $(SRCS:.cpp=.o)
+CXX		= clang++
+CPPFLAGS	= -Wall -Werror -Wextra -std=c++98
+
+all: $(NAME)
+
+$(NAME):	$(OBJS)
+	$(CXX) $(CPPFLAGS) $(OBJS) -o $(NAME)
 
 clean:
-	rm -rf zombieHorde
+	rm -f $(OBJS)
+fclean: clean
+	rm -f $(NAME)
 
-re:	clean all
-zombieHorde:
-	clang++ -Wall -Werror -Wextra main.cpp zombieHorde.cpp classZombie.cpp -o zombieHorde
+re:	fclean all
