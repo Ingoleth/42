@@ -11,9 +11,9 @@ humanB::~humanB()
 {
 }
 
-void	humanB::setWeapon(class weapon &weapon)
+void	humanB::setWeapon(class weapon *weapon)
 {
-	this->weapon = &weapon;
+	this->weapon = weapon;
 }
 
 void	humanB::attack(void)

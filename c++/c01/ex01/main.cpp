@@ -7,9 +7,9 @@ int main(void)
 {
 	Zombie *horde;
 	int i = 0;
-	int N = 3;
+	int N = 2;
 
-	horde = zombieHorde(N, "Frederick Megan");
+	horde = zombieHorde(N, "Pete Frank");
 	if (horde)
 	{
 		while (i < N)
@@ -19,6 +19,5 @@ int main(void)
 		}
 		delete[] horde;
 	}
-	
 	return 0;
 }

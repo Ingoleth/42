@@ -64,15 +64,19 @@ void karen::filter(std::string input)
 	case 0:
 		std::cout << "[ " << inputOptions[0] << " ]\n";
 		(this->*fnptr[0])();
+		std::cout << std::endl;
 	case 1:
 		std::cout << "[ " << inputOptions[1] << " ]\n";
 		(this->*fnptr[1])();
+		std::cout << std::endl;
 	case 2:
 		std::cout << "[ " << inputOptions[2] << " ]\n";
 		(this->*fnptr[2])();
+		std::cout << std::endl;
 	case 3:
 		std::cout << "[ " << inputOptions[3] << " ]\n";
 		(this->*fnptr[3])();
+		std::cout << std::endl;
 		break;
 	default:
 		std::cout << "[ Probably complaining about insignificant problems ]\n";

@@ -24,7 +24,7 @@ int	getnames(int N, std::string name, std::string *ptr)
 				return (N);
 			ptr[i - 1] = name.substr(prev_pos + 1, pos - prev_pos - 1);
 		}
-	}	while (pos != -1);
+	}	while (pos != -1 && i <= N);
 	if (i > N)
 		return (N);
 	ptr[i - 1] = name.substr(prev_pos + 1, pos - prev_pos - 1);
@@ -36,15 +36,13 @@ Zombie *zombieHorde(int N, std::string name)
 	Zombie		*ptr;
 	int			i;
 	std::string	name_list[N];
-	
-	ptr = new Zombie[N];
-	
+
 	if (getnames(N, name, name_list) != N)
 	{
 		std::cout << "Not enough names to create the horde!\n";
-		delete[] ptr;
 		return (nullptr);
 	}
+	ptr = new Zombie[N];
 	i = 0;
 	while (i < N)
 	{

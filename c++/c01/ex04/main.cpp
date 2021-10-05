@@ -20,7 +20,6 @@ void	replace(std::string &line, std::string strToFind, std::string strToReplace)
 		line.insert(i, strToReplace);
 		i += strToReplace.length();
 	}
-	
 }
 
 int	main(int argc, char **argv)
@@ -30,14 +29,16 @@ int	main(int argc, char **argv)
 	std::string		line;
 
 	if (argc != 4)
-		return (print_error("Invalid arguments!\n"));
+		return (print_error("Invalid arguments!"));
+	if (!argv[2][0])
+		return (print_error("String to replace can't be empty!"));
 	inputFile.open(argv[1], std::ios::in);
 	if (!inputFile.is_open())
-		return (print_error("Failed to open input file!\n"));
+		return (print_error("Failed to open input file!"));
 	line = argv[1] + (std::string)".replace";
 	outputFile.open(line, std::ios::out);
 	if (!outputFile.is_open())
-		return (print_error("Failed to open output file!\n"));
+		return (print_error("Failed to open output file!"));
 	while (std::getline(inputFile, line))
 	{
 		replace(line, argv[2], argv[3]);

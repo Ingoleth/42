@@ -1,5 +1,5 @@
 NAME	= zombie
-SRCS	= main.cpp
+SRCS	= main.cpp classZombie.cpp
 OBJS	= $(SRCS:.cpp=.o)
 CXX		= clang++
 CPPFLAGS	= -Wall -Werror -Wextra -std=c++98
