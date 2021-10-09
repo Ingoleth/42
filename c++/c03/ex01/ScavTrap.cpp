@@ -12,7 +12,7 @@ ScavTrap::ScavTrap()
 	std::cout << "ScavTrap \"" << name << "\" created (via default constructor)!\n";
 }
 
-ScavTrap::ScavTrap(const std::string name) : ClapTrap(name)
+ScavTrap::ScavTrap(const std::string name)
 {
 		this->name = name;
 		hitPoints = 100;

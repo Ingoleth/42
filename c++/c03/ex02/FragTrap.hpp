@@ -14,14 +14,7 @@ class FragTrap: public ClapTrap
 		FragTrap( FragTrap const & src );
 		~FragTrap();
 		
-		FragTrap &				FragTrap::operator=( FragTrap const & rhs )
-{
-	name = rhs.name;
-	hitPoints = rhs.hitPoints;
-	energyPoints = rhs.energyPoints;
-	attackDamage = rhs.attackDamage;
-	return (*this);
-}
+		FragTrap &operator=( FragTrap const & rhs );
 
 		void highFivesGuys();
 

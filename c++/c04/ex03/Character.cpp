@@ -70,6 +70,11 @@ std::ostream &			operator<<( std::ostream & o, Character const & i )
 		inventory[idx]->use(target);
 	}
 
+	const std::string &Character::getName() const
+	{
+		return ( _name );
+	}
+
 /*
 ** --------------------------------- ACCESSOR ---------------------------------
 */
