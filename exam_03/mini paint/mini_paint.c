@@ -1,119 +1,81 @@
 #include "mini_paint.h"
 
-void print(t_render *render_data)
+void print_screen(t_data *data)
 {
-	int max_size;
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	max_size = render_data->width * render_data->height;
-	while (i < max_size)
+	for (int i = 0; i < data->heigth; i++)
 	{
-		while (j < render_data->width)
-		{
-			write(STDOUT_FILENO, &render_data->screen[i + j], 1);
-			j++;
-		}
-		write(STDOUT_FILENO, "\n", 1);
-		j = 0;
-		i += render_data->width;
+		write(1, &data->screen[data->width * i], data->width);
+		write(1, "\n", 1);
 	}
 }
 
-void	draw(int i, int j, char c, t_render *render_data)
+int get_screen_data(t_data *data)
 {
-	render_data->screen[i * render_data->width + j] = c;	
-}
-
-int	get_zone(t_render *render_data, FILE *file)
-{
-	if (fscanf(file, "%d %d %c\n", &render_data->width, &render_data->height, &render_data->background) != 3)
+	if (fscanf(data->file, "%i %i %c\n", &data->width, &data->heigth, &data->background) == 3)
+	{
+		if (data->heigth <= 0 || data->heigth > 300 || data->width <= 0 || data->width > 300)
+			return (0);
+		if (!(data->screen = malloc(data->heigth * data->width + 1)))
+			return (0);
+		memset(data->screen, data->background, data->heigth * data->width);
+		data->screen[data->heigth * data->width] = 0;
 		return (1);
-	if (render_data->height < 1 || render_data->height > 300 || render_data->width < 1 || render_data->width > 300)
-		return (1);
-	if (!(render_data->screen = malloc((render_data->height * render_data->width + 1) * sizeof(char))))
-		return (1);
-	render_data->screen[render_data->height * render_data->width] = 0;
-	memset(render_data->screen, render_data->background, render_data->height * render_data->width);
+	}
 	return (0);
 }
 
-void draw_circle(t_render *render_data, t_circle circle)
+int print_circles(t_data *data)
 {
-	float distance;
-	float i;
-	float j;
-	int characters_checked;
-	int max_size;
-
-	max_size = render_data->width * render_data->height;
-	characters_checked = 0;
-	i = 0;
-	j = 0;
-	while (characters_checked < max_size)
-	{
-		while (j < render_data->width)
-		{
-			distance = sqrt((circle.x - j) * (circle.x - j) + (circle.y - i) * (circle.y - i));
-			if (circle.type == 'c' && circle.radius - distance < 1.0 && circle.radius - distance >= 0)
-				draw(i, j, circle.drawing_char, render_data);
-			if (circle.type == 'C' && distance <= circle.radius)
-				draw(i, j, circle.drawing_char, render_data);
-			j++;
-		}
-		j = 0;
-		i++;
-		characters_checked += render_data->width;
-	}
-}
-
-int	get_circles(t_render *render_data, FILE *file)
-{
-	int error;
 	t_circle circle;
+	int ret;
+	float distance;
 
-	while ((error = fscanf(file, "%c %f %f %f %c\n", &circle.type, &circle.x, &circle.y, &circle.radius, &circle.drawing_char)) == 5)
+	while ((ret = fscanf(data->file, "%c %f %f %f %c\n", &circle.type, &circle.x, &circle.y, &circle.radius, &circle.to_write)) == 5)
 	{
-		if (circle.radius <= 0.00000000 || (circle.type != 'c' && circle.type != 'C'))
-			return (1);
-		draw_circle(render_data, circle);
+		if (circle.radius <= 0 || (circle.type != 'c' && circle.type != 'C'))
+			return (0);
+		for(int i = 0; i < data->heigth; i++)
+		{
+			for(int j = 0; j < data->width; j++)
+			{
+				distance = sqrtf(powf(circle.x - j, 2) + powf(circle.y - i, 2));
+				if (distance <= circle.radius)
+				{
+					if (circle.type != 'c' || distance > circle.radius - 1)
+						data->screen[i * data->width + j] = circle.to_write;
+				}
+			}	
+		}
 	}
-	if (error == -1)
+	if (ret != -1)
 		return (0);
 	return (1);
+	
 }
 
-int main(int argc, char const *argv[])
+int main (int argc, char **argv)
 {
-	int			error;
-	FILE		*file;
-	t_render	render_data;
+	t_data data;
 
 	if (argc != 2)
 	{
-		write(STDOUT_FILENO, "Error: argument\n", 16);
+		write(1, "Error: argument\n", 16);
 		return (1);
 	}
-	memset(&render_data, 0, sizeof(render_data));
-	error = 0;
-	if ((file = fopen(argv[1], "r")) == NULL)
-		error = 1;
-	else
+	memset(&data, 0, sizeof(t_data));
+	if ((data.file = fopen(argv[1], "r")))
 	{
-		error = get_zone(&render_data, file);
-		if (!error)
-			error = get_circles(&render_data, file);
+		if (get_screen_data(&data))
+		{
+			if (print_circles(&data))
+			{
+				print_screen(&data);
+				free(data.screen);
+				return (0);
+			}
+			free(data.screen);
+		}
 	}
-	if (error)
-	{
-		if (render_data.screen)
-			free(render_data.screen);
-		write(STDOUT_FILENO, "Error: Operation file corrupted\n", 32);
-		return (1);
-	}
-	print(&render_data);
-	fclose(file);
-	return (0);
+	write(1, "Error: Operation file corrupted\n", 32);
+	return (1);	
 }
