@@ -16,13 +16,12 @@ class MateriaSource : public virtual IMateriaSource
 		~MateriaSource();
 		void learnMateria(AMateria *materiaToLearn);
 		AMateria* createMateria(std::string const & type);
+		void	displayKnownMateria( void ) const;
 
 		MateriaSource &		operator=( MateriaSource const & rhs );
 
 	private:
 		AMateria *knownMateria[4];
 };
-
-std::ostream &			operator<<( std::ostream & o, MateriaSource const & i );
 
 #endif /* *************************************************** MATERIASOURCE_H */

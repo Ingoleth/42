@@ -1,4 +1,5 @@
 #include "MateriaSource.hpp"
+#include "AMateria.hpp"
 
 /*
 ** ------------------------------- CONSTRUCTOR --------------------------------
@@ -6,11 +7,13 @@
 
 MateriaSource::MateriaSource()
 {
+	for (size_t i = 0; i < 4; i++)
+		knownMateria[i] = nullptr;
 }
 
 MateriaSource::MateriaSource( const MateriaSource & src )
 {
-	*this = src
+	*this = src;
 }
 
 
@@ -20,10 +23,12 @@ MateriaSource::MateriaSource( const MateriaSource & src )
 
 MateriaSource::~MateriaSource()
 {
-	for (size_t i = 0; knownMateria[i]; i++)
-		delete knownMateria[i];
+	for (size_t i = 0; i < 4; i++)
+	{
+		if (knownMateria[i])
+			delete knownMateria[i];
+	}
 }
-
 
 /*
 ** --------------------------------- OVERLOAD ---------------------------------
@@ -32,31 +37,26 @@ MateriaSource::~MateriaSource()
 MateriaSource &				MateriaSource::operator=( MateriaSource const & rhs )
 {
 	for (size_t i = 0; i < 4; i++)
-	{
-		knownMateria[i] = rhs.knownMateria[i];
-	}
+		knownMateria[i] = rhs.knownMateria[i]->clone();
 	return *this;
 }
-
-std::ostream &			operator<<( std::ostream & o, MateriaSource const & i )
-{
-	//o << "Value = " << i.getValue();
-	return o;
-}
-
 
 /*
 ** --------------------------------- METHODS ----------------------------------
 */
 
-void MateriaSource::learnMateria(AMateria*materiaToLearn)
+void MateriaSource::learnMateria(AMateria *materiaToLearn)
 {
 	int i = 0;
 
 	while (knownMateria[i])
+	{
+		if (knownMateria[i] == materiaToLearn)
+			return ;
 		i++;
+	}
 	if (i == 4)
-		return ;
+		return ;// delete the thing?
 	knownMateria[i] = materiaToLearn;
 }
 
@@ -71,6 +71,18 @@ AMateria* MateriaSource::createMateria(std::string const & type)
 		i++;
 	}
 	return (NULL);
+}
+
+void	MateriaSource::displayKnownMateria( void ) const
+{
+	for (size_t j = 0; j < 4; j++)
+	{
+		std::cout << j << ".- ";
+		if (knownMateria[j] != nullptr)
+			std::cout << knownMateria[j]->getType() << "\n";
+		else
+			std::cout << "empty\n";
+	}
 }
 
 /*

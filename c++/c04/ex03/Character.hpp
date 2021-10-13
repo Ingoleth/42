@@ -14,10 +14,12 @@ class Character : public virtual ICharacter
 		Character( Character const & src );
 		Character( std::string name );
 		~Character();
-		void equip(AMateria* m);
-		void unequip(int idx);
-		void use(int idx, ICharacter& target);
-		const std::string &getName() const;
+		void				equip(AMateria* m);
+		void				unequip(int idx);
+		void				use(int idx, ICharacter& target);
+		const std::string	&getName() const;
+		AMateria			*getInventorySlot(int i) const;
+		void				display_info( void ) const;
 
 		Character &		operator=( Character const & rhs );
 
