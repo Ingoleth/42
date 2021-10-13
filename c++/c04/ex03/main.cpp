@@ -26,7 +26,7 @@ int main()
 	}
 	IMateriaSource* src = new MateriaSource();
 	AMateria *tmp;
-	tmp = new Ice();
+	tmp = new Cure();
 	std::cout << "\nThe second call to learnMateria does nothing since the memory address of the materia to learn is the same as the one already known\n";
 	src->learnMateria(tmp);
 	src->learnMateria(tmp);
@@ -39,12 +39,18 @@ int main()
 	std::cout << "\nCure materia is not learnt because all materias are known!\n";
 	tmp = new Cure ();
 	src->learnMateria(tmp);
+	delete tmp;
 	src->displayKnownMateria();
 
-	IMateriaSource* src2 = src;
-	delete src;
-	std::cout << "\nMateriaSrc is properly (deep) copied:\n";
-	src2->displayKnownMateria();
-	delete tmp;
+	//IMateriaSource* src2 = src;
+	//delete src;
+	//std::cout << "\nMateriaSrc is properly (deep) copied:\n";
+	//src2->displayKnownMateria();
+
+	std::cout << "----------------\nCharacter tests: \n----------------\n";
+	ICharacter *bob = new Character("Bob");
+	//tmp = src2->createMateria("ice");
+	//bob->equip(tmp);
+	bob->display_info();
 }
 
