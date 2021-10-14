@@ -4,6 +4,9 @@
 # include <iostream>
 # include <string>
 
+class GradeTooLowException;
+class GradeTooHighException;
+
 class Bureaucrat
 {
 
@@ -11,17 +14,30 @@ class Bureaucrat
 
 		Bureaucrat();
 		Bureaucrat( Bureaucrat const & src );
+		Bureaucrat(std::string name, int grade);
 		~Bureaucrat();
 		int getGrade() const;
 		const std::string &getName( void ) const;
 		void incrementGrade( void );
 		void decrementGrade( void );
 
+		class GradeTooLowException : public std::exception
+		{  
+			public:  
+				const char * what() const throw();
+		};
+
+		class GradeTooHighException : public std::exception
+		{  
+			public:  
+				const char * what() const throw();
+		};
+
 		Bureaucrat &		operator=( Bureaucrat const & rhs );
 
 	protected:
-		const std::string name;
-		int grade;
+		const std::string	_name;
+		int					_grade;
 
 };
 

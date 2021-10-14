@@ -5,22 +5,24 @@
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-Bureaucrat::Bureaucrat()
-{
-}
+Bureaucrat::Bureaucrat() : _name("unnamed"), _grade(150){}
 
-Bureaucrat::Bureaucrat( const Bureaucrat & src )
-{
-}
+Bureaucrat::Bureaucrat( const Bureaucrat & src ) : _name(src._name), _grade(src._grade) {}
 
+Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name)
+{
+	if (grade < 1)
+		throw (GradeTooHighException());
+	else if (grade > 150)
+		throw (GradeTooLowException());
+	_grade = grade;
+}
 
 /*
 ** -------------------------------- DESTRUCTOR --------------------------------
 */
 
-Bureaucrat::~Bureaucrat()
-{
-}
+Bureaucrat::~Bureaucrat() {}
 
 
 /*
@@ -29,16 +31,13 @@ Bureaucrat::~Bureaucrat()
 
 Bureaucrat &				Bureaucrat::operator=( Bureaucrat const & rhs )
 {
-	//if ( this != &rhs )
-	//{
-		//this->_value = rhs.getValue();
-	//}
+	this->_grade = rhs._grade;
 	return *this;
 }
 
 std::ostream &			operator<<( std::ostream & o, Bureaucrat const & i )
 {
-	//o << "Value = " << i.getValue();
+	o << "<" << i.getName() << ">, bureaucrat grade <" << i.getGrade() << ">";
 	return o;
 }
 
@@ -48,24 +47,26 @@ std::ostream &			operator<<( std::ostream & o, Bureaucrat const & i )
 */
 		int Bureaucrat::getGrade() const
 		{
-			return (grade);
+			return (_grade);
 		}
 
 		const std::string &Bureaucrat::getName() const
 		{
-			return (name);
+			return (_name);
 		}
 
-		void incrementGrade( void )
+		void Bureaucrat::incrementGrade( void )
 		{
-			if (grade == 1)
-				throw (1);
-			grade--;
+			if (_grade == 1)
+				throw (GradeTooHighException());
+			_grade--;
 		}
 
-		void decrementGrade( void )
+		void Bureaucrat::decrementGrade( void )
 		{
-
+			if (_grade == 150)
+				throw (GradeTooLowException());
+			_grade++;
 		}
 
 /*
@@ -74,23 +75,3 @@ std::ostream &			operator<<( std::ostream & o, Bureaucrat const & i )
 
 
 /* ************************************************************************** */
-
-
-
-class GradeTooLowException : public exception
-{  
-    public:  
-        const char * what() const throw()  
-        {  
-            return "Grade is already the lowest!\n";  
-        }  
-};
-
-class GradeTooHighException : public exception
-{  
-    public:  
-        const char * what() const throw()  
-        {  
-            return "Grade is already the higest!\n";  
-        }  
-};
