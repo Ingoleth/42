@@ -45,16 +45,6 @@ std::ostream &			operator<<( std::ostream & o, Bureaucrat const & i )
 /*
 ** --------------------------------- METHODS ----------------------------------
 */
-		int Bureaucrat::getGrade() const
-		{
-			return (_grade);
-		}
-
-		const std::string &Bureaucrat::getName() const
-		{
-			return (_name);
-		}
-
 		void Bureaucrat::incrementGrade( void )
 		{
 			if (_grade == 1)
@@ -73,5 +63,20 @@ std::ostream &			operator<<( std::ostream & o, Bureaucrat const & i )
 ** --------------------------------- ACCESSOR ---------------------------------
 */
 
+	int Bureaucrat::getGrade() const
+	{
+		return (_grade);
+	}
+
+	const std::string &Bureaucrat::getName() const
+	{
+		return (_name);
+	}
 
 /* ************************************************************************** */
+
+
+
+/*
+** -------------------------------- EXCEPTIONS --------------------------------
+*/

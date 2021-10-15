@@ -18,8 +18,8 @@ class Bureaucrat
 		~Bureaucrat();
 		int getGrade() const;
 		const std::string &getName( void ) const;
-		void incrementGrade( void );
-		void decrementGrade( void );
+		void incrementGrade( void ) throw(GradeTooHighException);
+		void decrementGrade( void ) throw(GradeTooLowException);
 
 		class GradeTooLowException : public std::exception
 		{  
