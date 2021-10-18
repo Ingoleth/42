@@ -38,12 +38,13 @@ int main( void )
 		TotallyNotPaprika.thinkOutloud();
 	}
 	std::cout << "\n\n\n------------\nArray tests:\n------------\n";
-	Animal *array[100];
+	Animal *array[4];
 	int i = 0;
-	while(i < 50)
+	while(i < 2)
 		array[i++] = new Cat();
-	while(i < 100)
+	while(i < 4)
 		array[i++] = new Dog();
+	std::cout << "\n\nArray has been created\n\n";
 	while (--i >= 0)
 		delete(array[i]);
 	return 0;

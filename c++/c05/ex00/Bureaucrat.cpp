@@ -45,14 +45,14 @@ std::ostream &			operator<<( std::ostream & o, Bureaucrat const & i )
 /*
 ** --------------------------------- METHODS ----------------------------------
 */
-		void Bureaucrat::incrementGrade( void )
+		void Bureaucrat::incrementGrade( void ) throw(GradeTooHighException)
 		{
 			if (_grade == 1)
 				throw (GradeTooHighException());
 			_grade--;
 		}
 
-		void Bureaucrat::decrementGrade( void )
+		void Bureaucrat::decrementGrade( void ) throw(GradeTooLowException)
 		{
 			if (_grade == 150)
 				throw (GradeTooLowException());
@@ -63,15 +63,15 @@ std::ostream &			operator<<( std::ostream & o, Bureaucrat const & i )
 ** --------------------------------- ACCESSOR ---------------------------------
 */
 
-	int Bureaucrat::getGrade() const
-	{
-		return (_grade);
-	}
+int Bureaucrat::getGrade() const
+{
+	return (_grade);
+}
 
-	const std::string &Bureaucrat::getName() const
-	{
-		return (_name);
-	}
+const std::string &Bureaucrat::getName() const
+{
+	return (_name);
+}
 
 /* ************************************************************************** */
 
@@ -80,3 +80,13 @@ std::ostream &			operator<<( std::ostream & o, Bureaucrat const & i )
 /*
 ** -------------------------------- EXCEPTIONS --------------------------------
 */
+
+const char	*Bureaucrat::GradeTooHighException::what() const throw()
+{
+	return ("Grade can't be smaller than 1!");
+}
+
+const char	*Bureaucrat::GradeTooLowException::what() const throw()
+{
+	return ("Grade can't be bigger than 150");
+}

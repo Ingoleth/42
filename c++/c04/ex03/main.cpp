@@ -26,7 +26,7 @@ int main()
 	}
 	IMateriaSource* src = new MateriaSource();
 	AMateria *tmp;
-	tmp = new Cure();
+	tmp = new Ice();
 	std::cout << "\nThe second call to learnMateria does nothing since the memory address of the materia to learn is the same as the one already known\n";
 	src->learnMateria(tmp);
 	src->learnMateria(tmp);
@@ -42,15 +42,26 @@ int main()
 	delete tmp;
 	src->displayKnownMateria();
 
-	//IMateriaSource* src2 = src;
-	//delete src;
-	//std::cout << "\nMateriaSrc is properly (deep) copied:\n";
-	//src2->displayKnownMateria();
+	IMateriaSource *src2 = src->clone();
+	delete src;
+	std::cout << "\nMateriaSrc is properly (deep) copied:\n";
+	src2->displayKnownMateria();
 
 	std::cout << "----------------\nCharacter tests: \n----------------\n";
-	ICharacter *bob = new Character("Bob");
-	//tmp = src2->createMateria("ice");
-	//bob->equip(tmp);
-	bob->display_info();
+	Character bob("bob");
+	Character bob2("bob2");
+
+	tmp = src2->createMateria("ice");
+	bob.equip(tmp);
+	bob.equip(tmp);
+	bob2 = bob;
+	bob.display_info();
+	std::cout << std::endl;
+	bob.unequip(0);
+	bob.display_info();
+	bob.unequip(0);
+	std::cout << std::endl;
+	delete (tmp);
+	bob2.display_info();
 }
 

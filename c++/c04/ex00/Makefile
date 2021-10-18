@@ -1,5 +1,5 @@
 NAME	= animals
-SRCS	= main.cpp Animal.cpp Dog.cpp Cat.cpp WrongCat.cpp
+SRCS	= main.cpp WrongAnimal.cpp Animal.cpp Dog.cpp Cat.cpp WrongCat.cpp
 OBJS	= $(SRCS:.cpp=.o)
 CXX		= clang++
 CPPFLAGS	= -Wall -Werror -Wextra -std=c++98

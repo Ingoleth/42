@@ -36,6 +36,7 @@ MateriaSource::~MateriaSource()
 
 MateriaSource &				MateriaSource::operator=( MateriaSource const & rhs )
 {
+	std::cout << "Copy operator called!\n";
 	for (size_t i = 0; i < 4; i++)
 		knownMateria[i] = rhs.knownMateria[i]->clone();
 	return *this;
@@ -83,6 +84,11 @@ void	MateriaSource::displayKnownMateria( void ) const
 		else
 			std::cout << "empty\n";
 	}
+}
+
+IMateriaSource		*MateriaSource::clone( void ) const
+{
+	 return (new MateriaSource(*this));
 }
 
 /*

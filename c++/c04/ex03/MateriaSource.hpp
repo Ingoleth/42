@@ -19,6 +19,7 @@ class MateriaSource : public virtual IMateriaSource
 		void	displayKnownMateria( void ) const;
 
 		MateriaSource &		operator=( MateriaSource const & rhs );
+		IMateriaSource		*clone( void ) const;
 
 	private:
 		AMateria *knownMateria[4];
