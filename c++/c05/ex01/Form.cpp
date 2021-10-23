@@ -8,6 +8,16 @@ Form::Form() : _isSigned(false), _name("Unnamed"), _gradeToExecute(150), _gradeT
 
 Form::Form( const Form & src ) : _isSigned(src._isSigned), _name(src._name), _gradeToExecute(src._gradeToExecute), _gradeToSign(src._gradeToSign) {}
 
+Form::Form(const std::string  &name, const int &signGrade, const int &execGrade) : _isSigned(false), _name(name)
+{
+	if (signGrade < 1 || execGrade < 1)
+		throw (GradeTooHighException());
+	else if (signGrade > 150 || execGrade > 150)
+		throw (GradeTooLowException());
+	_gradeToExecute = execGrade;
+	_gradeToSign = signGrade;
+}
+
 /*
 ** -------------------------------- DESTRUCTOR --------------------------------
 */
@@ -30,7 +40,7 @@ Form &				Form::operator=( Form const &) // Can't really do you, can I?;
 
 std::ostream &			operator<<( std::ostream & o, Form const & i )
 {
-	o << "Form " << i.getName() << " (Signed = " << i.getIsSigned() << "; Grade to sign: " << i.getGradeToSign() << "; Grade to execute = " << i.getGradeToExecute();
+	o << "Form " << i.getName() << " (Signed = " << i.getIsSigned() << "; Grade to sign: " << i.getGradeToSign() << "; Grade to execute = " << i.getGradeToExecute() << ")";
 	return o;
 }
 
@@ -39,19 +49,11 @@ std::ostream &			operator<<( std::ostream & o, Form const & i )
 ** --------------------------------- METHODS ----------------------------------
 */
 
-void Form::sign(const Bureaucrat &signer) throw (Form::GradeTooHighException, Form::GradeTooLowException)
+void Form::beSigned(const Bureaucrat &signer) throw (Form::GradeTooLowException)
 {
-	try
-	{
-		if (signer.getGrade() < _gradeToSign)
+		if (signer.getGrade() > _gradeToSign)
 			throw (GradeTooLowException());
 		_isSigned = true;
-	}
-	catch(const std::exception& e)
-	{
-		std::cout << signer.getName() << " cannot sign because "; 
-		std::cerr << e.what() << '\n';
-	}
 }	
 
 /*
@@ -65,12 +67,12 @@ int Form::getGradeToSign() const
 
 int Form::getGradeToExecute() const
 {
-	return (_gradeToSign);
+	return (_gradeToExecute);
 }
 
 int Form::getIsSigned() const
 {
-	return (_gradeToSign);
+	return (_isSigned);
 }
 
 const std::string &Form::getName() const
@@ -84,12 +86,12 @@ const std::string &Form::getName() const
 
 const char	*Form::GradeTooLowException::what() const throw()
 {
-	return ("Grade too low!");
+	return ("grade is too low!");
 }
 
 const char	*Form::GradeTooHighException::what() const throw()
 {
-	return ("Grade too high!");
+	return ("Grade is too high!");
 }
 
 /* ************************************************************************** */

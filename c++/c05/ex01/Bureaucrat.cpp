@@ -1,6 +1,7 @@
 #include "Bureaucrat.hpp"
 #include <exception>
 
+
 /*
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
@@ -59,6 +60,19 @@ std::ostream &			operator<<( std::ostream & o, Bureaucrat const & i )
 			_grade++;
 		}
 
+	void Bureaucrat::sign(Form &Form)
+	{
+		try
+		{
+			Form.beSigned(*this);
+			std::cout << _name << " signs " << Form.getName() << std::endl;
+		}
+		catch(const std::exception& e)
+		{
+			std::cout << _name << " cannot sign " << Form.getName() << " because "; 
+			std::cerr << e.what() << '\n';
+		}
+	}
 /*
 ** --------------------------------- ACCESSOR ---------------------------------
 */
