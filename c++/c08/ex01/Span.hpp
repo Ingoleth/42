@@ -3,6 +3,7 @@
 
 # include <iostream>
 # include <string>
+# include <vector>
 
 class Span
 {
@@ -11,16 +12,20 @@ class Span
 
 		Span();
 		Span( Span const & src );
+		Span(size_t size);
 		~Span();
+		void	addNumber(int nb) throw (std::range_error);
+		int		shortestSpan( void );
+		int		longestSpan( void ) const;
+		void	fillWithRandNums( void );
+		void	printDebugInfo( void );
 
 		Span &		operator=( Span const & rhs );
 
 	private:
-		size_t _size;
-		size_t _shortestSpan;
-		size_t _longestSpan;
+		size_t _max_size;
+		std::vector <int> _elements;
+		bool _sorted;
 };
-
-std::ostream &			operator<<( std::ostream & o, Span const & i );
 
 #endif /* ************************************************************ SPAN_H */
