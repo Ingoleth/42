@@ -3,6 +3,6 @@
 int main()
 {
 	Vector <int> a;
-	//Vector <int> b(a);
+	Vector <int> b(a);
 	return 0;
 }

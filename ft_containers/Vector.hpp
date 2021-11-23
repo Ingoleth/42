@@ -9,19 +9,20 @@ class Vector
 
 	public:
 
-		Vector() : mem()
+		Vector() : mem(), _storedElems(0), _allocMem (1)
 		{
-			array = mem.allocate(0);
+			array = mem.allocate(1);
 		}
-		Vector( Vector const & src ) : array(0)
+
+		Vector( Vector const & src ) : _array(0)
 		{
 			*this = src;
 		}
 		
 		~Vector()
 		{
-			mem.destroy(array);
-			mem.deallocate(array, size);
+			mem.destroy(_array); //TODO Might only delete the first element; Test with a class?
+			mem.deallocate(_array, _allocMem);
 		}
 
 		Vector &		operator=( Vector const & rhs )
@@ -29,21 +30,26 @@ class Vector
 			if (array) //Might not work?
 			{
 				mem.destroy(array);
-				mem.deallocate(array, size);
+				mem.deallocate(array, _allocMem);
+				std::cout << "Hello\n";
 			}
-			size = rhs.size;
-			array = mem.allocate(size);
-			for (size_t i = 0; i < size; i++)
+			if (rhs._array)
 			{
-				array[i] = rhs.array[i];
+				_allocMem = rhs._allocMem;
+				_array = _mem.allocate(_allocMem);
+				for (size_t i = 0; i < _storedeElems; i++)
+				{
+					_array[i] = rhs._array[i];
+				}
 			}
 			return (*this);
 		}
 
 	private:
-		std::allocator <T>	mem;
-		T					*array;
-		size_t				size;
+		std::allocator <T>	_mem;
+		T					*_array;
+		size_t				_allocMem;
+		size_t				_storedElems;
 
 };
 
