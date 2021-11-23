@@ -118,27 +118,27 @@ class Vector
 ** ------------------------------ ELEMENT ACCESS -------------------------------
 */
 
-	    reference operator[] (size_type n)
+	    T &operator[] (size_t n)
 		{
 			return (_array[n]);
 		}
 	
-		const T	&operator[] (size_type n) const
+		const T	&operator[] (size_t n) const
 		{
 			return (_array[n]);
 		}
 	
-		reference at (size_type n)
+		T &at (size_t n)
 		{
 			if (n >= _allocMem)
-				throw (std::out_of_range());
+				throw (std::out_of_range("Because reasons"));
 			return (_array[n]);
 		}
 	
-		const T	&at (size_type n) const
+		const T	&at (size_t n) const
 		{
 			if (n >= _allocMem)
-				throw (std::out_of_range());
+				throw (std::out_of_range("Because reasons"));
 			return (_array[n]);
 		}
 

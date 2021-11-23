@@ -14,12 +14,29 @@ int main()
 	v.front() = 5;
 	std::cout << v.capacity() << std::endl;
 	std::cout << v.front() << std::endl;
-	
+	try
+	{
+		v.at(10);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+
 	a.reserve(5);
 	std::cout << a.capacity() << std::endl;
 	a.resize(10);
 	a.front() = 5;
 	std::cout << a.capacity() << std::endl;
 	std::cout << a.front() << std::endl;
+	try
+	{
+		a.at(10);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	
 	return 0;
 }
