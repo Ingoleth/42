@@ -2,41 +2,53 @@
 #include <vector>
 #include <iostream>
 
+class test
+{
+private:
+	/* data */
+public:
+	test(/* args */);
+	test(test &src)
+	{
+		std::cout << "I have been created via copy! " << src.getValue() << std::endl;
+	}
+	~test();
+	int getValue( void ) const
+	{
+		return (0);
+	}
+};
+
+test::test(/* args */)
+{
+	std::cout << "I have been created\n";
+}
+
+test::~test()
+{
+	std::cout << "I have been destroyed\n";
+}
+
+std::ostream &			operator<<( std::ostream & o, test const & i )
+{
+	o << "hello " << i.getValue() << "\n";
+	return o;
+}
+
 int main()
 {
 	
-	Vector <int> a;
+	Vector <test> a;
+	std::vector<test> v;
 
-	std::vector<int> v;
-	v.reserve(5);
-	std::cout << v.capacity() << std::endl;
-	v.resize(10);
-	v.front() = 5;
-	std::cout << v.capacity() << std::endl;
-	std::cout << v.front() << std::endl;
-	try
-	{
-		v.at(10);
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
+	std::cout << "Vector test:\n";
 
-	a.reserve(5);
-	std::cout << a.capacity() << std::endl;
-	a.resize(10);
-	a.front() = 5;
-	std::cout << a.capacity() << std::endl;
-	std::cout << a.front() << std::endl;
-	try
-	{
-		a.at(10);
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-	
+
+	test c;
+	std::cout << "ft_Vector test:\n";
+	a.assign(10, c);
+	std::cout << a.back();
+	a.pop_back();
+
 	return 0;
 }

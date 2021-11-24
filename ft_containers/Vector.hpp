@@ -78,11 +78,8 @@ class Vector
 					aux_size *= 2;
 				for (size_t i = 0; i < _storedElems; i++)
 					aux_ptr[i] = _array[i];
-				if (val)
-				{
-					for (size_t i = _storedElems; i < n; i++)
-						aux_ptr[i] = T(val); //Might petar;
-				}
+				for (size_t i = _storedElems; i < n; i++)
+					aux_ptr[i] = T(val); //Might petar;
 			}
 			_mem.deallocate(_array, _allocMem);
 			_array = aux_ptr;
@@ -162,6 +159,48 @@ class Vector
 			return (_array[_allocMem - 1]);
 		}
 
+
+
+		/*void assign (InputIterator first, InputIterator last) //ask garrafa about them templates
+		{
+			size_t aux_size = last - first - 1;
+			if (aux_size > _allocMem)
+				reserve(aux_size);
+			for (InputIterator i = first, InputIterator j = begin(); i < last; i++, j++)
+				j = i;
+		}*/
+		void assign (size_t n, const T& val) //TODO check if n <?
+		{
+			if (n > _allocMem)
+				reserve(n);
+			std::cout << "Hello there!\n";
+			for (size_t i = 0; i < n; i++)
+			{
+				std::cout << i << std::endl;
+				_array[n] = val;
+			}
+		}
+
+		void push_back (const T& val)
+		{
+			if (_storedElems + 1 > _allocMem)
+				reserve(_storedElems + 1);
+			back() = val;
+		}
+
+		void pop_back()
+		{
+			_mem.destroy(&back(), 1); //Check
+			_storedElems--;
+		}
+
+
+		void clear() //Iterator invalidation? -->     std::cout << "After clear:"; std::for_each(container.begin(), container.end(), print); -> No outputea nada
+		{
+			_mem.destroy(_array, _storedElems);
+			_storedElems = 0;
+		}
+
 	private:
 		std::allocator <T>	_mem;
 		T					*_array;
@@ -169,5 +208,8 @@ class Vector
 		size_t				_storedElems;
 
 };
+
+
+
 
 #endif /* ********************************************************** VECTOR_H */
