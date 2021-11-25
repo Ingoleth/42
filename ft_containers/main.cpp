@@ -1,4 +1,4 @@
-#include "Vector.hpp"
+//#include "Vector.hpp"
 #include <vector>
 #include <iostream>
 
@@ -38,17 +38,22 @@ std::ostream &			operator<<( std::ostream & o, test const & i )
 int main()
 {
 	
-	Vector <test> a;
-	std::vector<test> v;
+	std::vector <int> a;
+
+	a.reserve(5);
+	a.push_back(1);
+	a.push_back(2);
+
+	std::cout << a.capacity() << std::endl;
+	std::cout << a.size() << std::endl;
+	a.push_back(3);
+	std::cout << a.back() << std::endl;
+	std::cout << a[a.size() - 1] << std::endl;
+	std::cout << a[a.capacity() - 1] << std::endl;
 
 	std::cout << "Vector test:\n";
 
 
-	test c;
-	std::cout << "ft_Vector test:\n";
-	a.assign(10, c);
-	std::cout << a.back();
-	a.pop_back();
 
 	return 0;
 }
