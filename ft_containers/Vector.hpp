@@ -2,10 +2,119 @@
 # define VECTOR_HPP
 
 # include <iostream>
-# include <iterator>
+# include "Iterator.hpp"
 
 namespace ft
 {
+
+	template<typename T>
+	class VectorIterator: IteratorTrait
+	{
+
+	public:
+		typedef T value_type;
+		typedef value_type* pointer;
+		typedef value_type const * const_pointer;
+		typedef value_type& reference;
+		typedef value_type const & const_reference;
+		typedef std::ptrdiff_t difference_type;
+	
+	protected:
+
+		pointer p;
+	
+	public:
+
+		VectorIterator(): p(0) {}
+
+		VectorIterator(pointer p): p(p) {}
+
+		VectorIterator(VectorIterator const &other): p(other.p) {}
+
+		virtual ~VectorIterator() {}
+
+		VectorIterator &operator=(VectorIterator const &other) {
+			this->p = other.p;
+			return (*this);
+		}
+
+		reference operator*() {
+			return (*this->p);
+		}
+		const_reference operator*() const {
+			return (*this->p);
+		}
+		pointer operator->() {
+			return (this->p);
+		}
+		const_pointer operator->() const {
+			return (this->p);
+		}
+		reference operator[](int val) {
+			return (*(this->p + val));
+		}
+		const_reference operator[](int val) const {
+			return (*(this->p + val));
+		}
+
+		VectorIterator operator++(int) {
+			VectorIterator tmp(*this);
+			++this->p;
+			return (tmp);
+		}
+		VectorIterator &operator++() {
+			++this->p;
+			return (*this);
+		}
+		VectorIterator operator--(int) {
+			VectorIterator tmp(*this);
+			--this->p;
+			return (tmp);
+		}
+		VectorIterator &operator--() {
+			--this->p;
+			return (*this);
+		}
+
+		VectorIterator &operator+=(int value) {
+			this->p += value;
+			return (*this);
+		}
+		VectorIterator operator+(int value) const {
+			VectorIterator tmp(*this);
+			return (tmp += value);
+		}
+		VectorIterator &operator-=(int value) {
+			this->p -= value;
+			return (*this);
+		}
+		VectorIterator operator-(int value) const {
+			VectorIterator tmp(*this);
+			return (tmp -= value);
+		}
+		difference_type operator-(VectorIterator const &other) const {
+			return (this->p - other.p);
+		}
+
+		bool operator==(VectorIterator const &other) const {
+			return (this->p == other.p);
+		}
+		bool operator!=(VectorIterator const &other) const {
+			return (this->p != other.p);
+		}
+		bool operator<(VectorIterator const &other) const {
+			return (this->p < other.p);
+		}
+		bool operator<=(VectorIterator const &other) const {
+			return (this->p <= other.p);
+		}
+		bool operator>(VectorIterator const &other) const {
+			return (this->p > other.p);
+		}
+		bool operator>=(VectorIterator const &other) const {
+			return (this->p >= other.p);
+		}
+	};
 
 	template < class T, class Alloc = std::allocator<T> >
 	class vector
@@ -19,16 +128,20 @@ namespace ft
 			typedef typename allocator_type::const_reference					const_reference;
 			typedef typename allocator_type::pointer							pointer;
 			typedef typename allocator_type::const_pointer						const_pointer;
-			typedef ft::random_access_iterator<value_type>						iterator;
-			typedef ft::random_access_iterator<const value_type>				const_iterator;
-			typedef ft::reverse_iterator<iterator>								reverse_iterator;
-			typedef ft::reverse_iterator<const_iterator>						const_reverse_iterator;
-			typedef typename ft::iterator_traits<iterator>::difference_type		difference_type; 
+			typedef ft::VectorIterator<value_type>								iterator;
+			typedef ft::VectorIterator<const value_type>						const_iterator;
+			typedef ft::ReverseIterator<iterator>								reverse_iterator;
+			typedef ft::ReverseIterator<const_iterator>						const_reverse_iterator;
+			//typedef typename ft::iterator_traits<iterator>::difference_type		difference_type; 
 			typedef typename allocator_type::size_type							size_type;
+
+	/*									 
+	** --------------------------------- CONSTRUCTOR ---------------------------------
+	*/
 
 			vector() : _mem(), _capacity(1), _storedElems(0)
 			{
-				_array = _mem.allocate(1 * sizeof(T));
+				_array = _mem.allocate(1 * sizeof(value_type));
 			}
 
 			vector( vector const & src ) : _array(0)
@@ -53,7 +166,8 @@ namespace ft
 				if (rhs._array)
 				{
 					_capacity = rhs._capacity;
-					_array = _mem.allocate(_capacity * sizeof(T));
+					_array = _mem.allocate(_capacity * sizeof(value_type));
+					_storedElems = rhs._storedElems;
 					for (size_t i = 0; i < _storedElems; i++)
 						_array[i] = rhs._array[i];
 				}
@@ -63,7 +177,45 @@ namespace ft
 	/*									 
 	** --------------------------------- ITERATORS ----------------------------------
 	*/
+		iterator begin()
+		{
+			return (_array);
+		}
 
+		const_iterator begin() const
+		{
+			return (_array);
+		}
+
+		iterator end()
+		{
+			return (_array[_storedElems]);
+		}
+
+		const_iterator end() const
+		{
+			return (_array[_storedElems]);
+		}
+
+		reverse_iterator rbegin()
+		{
+			return (_array[_storedElems - 1]);
+		}
+
+		const_reverse_iterator rbegin() const
+		{
+			return (_array[_storedElems - 1]);
+		}
+
+		reverse_iterator rend()
+		{
+			return (_array - 1);
+		}
+
+		const_reverse_iterator rend() const
+		{
+			return (_array - 1);
+		}
 	/*									 
 	** --------------------------------- CAPACITY ----------------------------------
 	*/
@@ -78,9 +230,9 @@ namespace ft
 				return (0);//return (INT_MAX / sizeof(T));
 			}
 
-			void resize (size_t n, T val = T())
+			void resize (size_t n, value_type val = value_type())
 			{
-				T *aux_ptr;
+				value_type *aux_ptr;
 				size_t aux_size;
 
 				//|| n > max_size()) //throw length error
@@ -100,7 +252,7 @@ namespace ft
 					for (size_t i = 0; i < _storedElems; i++)
 						aux_ptr[i] = _array[i];
 					for (size_t i = _storedElems; i < n; i++)
-						aux_ptr[i] = T(val); //Might petar;
+						aux_ptr[i] = value_type(val); //Might petar;
 				}
 				_mem.deallocate(_array, _capacity);
 				_array = aux_ptr;
@@ -120,7 +272,7 @@ namespace ft
 		
 			void reserve (size_t n)
 			{
-				T		*aux_ptr;
+				value_type		*aux_ptr;
 
 				if (n < _capacity) //|| n > max_size()) //throw length error
 					return ;
@@ -136,64 +288,63 @@ namespace ft
 	** ------------------------------ ELEMENT ACCESS -------------------------------
 	*/
 
-			T &operator[] (size_t n)
+			reference operator[] (size_t n)
 			{
 				return (_array[n]);
 			}
 		
-			const T	&operator[] (size_t n) const
+			const_reference	operator[] (size_t n) const
 			{
 				return (_array[n]);
 			}
 		
-			T &at (size_t n)
+			reference at (size_t n)
 			{
 				if (n >= _capacity)
 					throw (std::out_of_range("Because reasons"));
 				return (_array[n]);
 			}
 		
-			const T	&at (size_t n) const
+			const_reference	at(size_t n) const
 			{
 				if (n >= _capacity)
 					throw (std::out_of_range("Because reasons"));
 				return (_array[n]);
 			}
 
-			T &front()
+			reference	front()
 			{
 				return (_array[0]);
 			}
 
-			const T &front() const
+			const_reference	front() const
 			{
 				return (_array[0]);
 			}
 
-			T &back()
+			reference	back()
 			{
-				return (_array[_capacity - 1]);
+				return (_array[_storedElems - 1]);
 			}
 
-			const T&back() const
+			const_reference back() const
 			{
-				return (_array[_capacity - 1]);
+				return (_array[_storedElems - 1]);
 			}
 
 	/*
 	** ------------------------------ MODIFIERS -------------------------------
 	*/
-
-			void assign (std::iterator <T> first, std::iterator last) //ask garrafa about them templates
+			void assign (iterator first, iterator last) //ask garrafa about them templates
 			{
 				size_t aux_size = last - first - 1;
 				if (aux_size > _capacity)
 					reserve(aux_size);
-				for (std::iterator <T> i = first, std::iterator <T> j = begin(); i < last; i++, j++)
-					j = i;
+				for (iterator it = first, it2 = begin(); it != last; it++, it2++)
+					*it2 = *it;
 			}
 
-			void assign (size_t n, const T& val) //TODO check if n <?
+			void assign (size_t n, const_reference val) //TODO check if n <?
 			{
 				if (n > _capacity)
 					reserve(n);
@@ -203,13 +354,16 @@ namespace ft
 					std::cout << i << std::endl;
 					_array[n] = val;
 				}
+				if (_storedElems < n)
+					_storedElems = n;
 			}
 
-			void push_back (const T& val)
+			void push_back (const_reference val)
 			{
 				if (_storedElems + 1 > _capacity)
 					reserve(_storedElems + 1);
-				_mem.construct(&back(), val);
+				_mem.construct(back() + 1, val);
+				_storedElems++;
 			}
 
 			void pop_back()
@@ -226,7 +380,7 @@ namespace ft
 			}
 
 		private:
-			std::allocator <T>	_mem;
+			std::allocator <value_type>	_mem;
 			pointer				_array;
 			size_t				_capacity;
 			size_t				_storedElems;

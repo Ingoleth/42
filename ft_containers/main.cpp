@@ -1,6 +1,7 @@
 //#include "Vector.hpp"
 #include <vector>
 #include <iostream>
+#include "Vector.hpp"
 
 class test
 {
@@ -52,7 +53,6 @@ int main()
 	std::cout << a[a.capacity() - 1] << std::endl;
 
 	std::cout << "Vector test:\n";
-
 
 
 	return 0;
