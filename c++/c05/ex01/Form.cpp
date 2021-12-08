@@ -49,8 +49,10 @@ std::ostream &			operator<<( std::ostream & o, Form const & i )
 ** --------------------------------- METHODS ----------------------------------
 */
 
-void Form::beSigned(const Bureaucrat &signer) throw (Form::GradeTooLowException)
+void Form::beSigned(const Bureaucrat &signer) throw (Form::GradeTooLowException, Form::SignedException)
 {
+		if (_isSigned)
+			throw (SignedException());
 		if (signer.getGrade() > _gradeToSign)
 			throw (GradeTooLowException());
 		_isSigned = true;
@@ -83,6 +85,11 @@ const std::string &Form::getName() const
 /*
 ** -------------------------------- EXCEPTIONS --------------------------------
 */
+
+const char	*Form::SignedException::what() const throw()
+{
+	return ("form is already signed");
+}
 
 const char	*Form::GradeTooLowException::what() const throw()
 {

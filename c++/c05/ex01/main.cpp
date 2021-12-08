@@ -8,8 +8,9 @@ int main( void )
 
 	std::cout << A << std::endl;
 	std::cout << Bob << std::endl;
-	Bob.sign(A);
+	Bob.signForm(A);
 	Bob.incrementGrade();
-	Bob.sign(A);
+	Bob.signForm(A);
+	Bob.signForm(A);
 	return 0;
 }

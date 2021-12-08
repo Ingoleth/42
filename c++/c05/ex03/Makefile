@@ -1,5 +1,5 @@
-NAME	= Form
-SRCS	= main.cpp Bureaucrat.cpp Form.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp ShrubberyCreationForm.cpp
+NAME	= Intern
+SRCS	= main.cpp Bureaucrat.cpp Form.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp ShrubberyCreationForm.cpp Intern.cpp
 OBJS	= $(SRCS:.cpp=.o)
 CXX		= clang++
 CPPFLAGS	= -Wall -Werror -Wextra -std=c++98

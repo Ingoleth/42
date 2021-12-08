@@ -60,7 +60,7 @@ std::ostream &			operator<<( std::ostream & o, Bureaucrat const & i )
 			_grade++;
 		}
 
-	void Bureaucrat::sign(Form &Form)
+	void Bureaucrat::signForm(Form &Form)
 	{
 		try
 		{

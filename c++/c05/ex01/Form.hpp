@@ -11,6 +11,11 @@ class Form
 
 	public:
 
+		class SignedException : public std::exception
+		{  
+			public:  
+				const char * what() const throw();
+		};
 
 		class GradeTooLowException : public std::exception
 		{  
@@ -34,7 +39,7 @@ class Form
 		int getGradeToExecute() const;
 		int getIsSigned() const;
 		const std::string &getName() const;
-		void beSigned(const Bureaucrat &signer) throw (Form::GradeTooLowException);
+		void beSigned(const Bureaucrat &signer) throw (Form::GradeTooLowException, Form::SignedException);
 	
 	private:
 		bool				_isSigned;
