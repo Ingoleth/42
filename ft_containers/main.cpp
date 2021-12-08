@@ -53,7 +53,8 @@ int main()
 	std::cout << a[a.capacity() - 1] << std::endl;
 
 	std::cout << "Vector test:\n";
-
+	ft::vector<int> b;
+	ft::vector<int>::iterator it = b.begin();
 
 	return 0;
 }

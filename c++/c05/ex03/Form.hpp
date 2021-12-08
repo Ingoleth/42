@@ -48,11 +48,11 @@ class Form
 		virtual void executeForm() const = 0;
 	
 	private:
-		std::string const	_name;
-		std::string const	_target;
+		const std::string	_name;
+		const std::string	_target;
 		bool				_isSigned;
-		int					_gradeToExecute;
-		int					_gradeToSign;
+		const int			_gradeToExecute;
+		const int			_gradeToSign;
 };
 
 std::ostream &			operator<<( std::ostream & o, Form const & i );
