@@ -42,28 +42,5 @@ int main( void )
 		std::cout << *copy_it << std::endl;
 		++copy_it;
 	}
-
-	// LIST TESTS
-	std::cout << "\n\nLIST TESTS:\n\n";
-	std::list<int> mylst;
-	mylst.push_back(5);
-	mylst.push_back(17);
-	std::cout << "List last element: " << mylst.back() << '\n';
-	mylst.pop_back();
-	std::cout << "List size: " << mylst.size() << '\n';
-	mylst.push_back(3);
-	mylst.push_back(5);
-	mylst.push_back(737);
-	mylst.push_back(0);
-	std::list<int>::iterator iter = mylst.begin();
-	std::list<int>::iterator itend = mylst.end();
-	++iter;
-	--iter;
-	while (iter != itend)
-	{
-		std::cout << *iter << '\n';
-		++iter;
-	}
-	std::list<int> list_2(mylst);
 	return (0);
 }

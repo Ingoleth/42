@@ -12,12 +12,12 @@ namespace ft
 	{
 
 	public:
-		typedef T value_type;
-		typedef value_type* pointer;
-		typedef value_type const * const_pointer;
-		typedef value_type& reference;
-		typedef value_type const & const_reference;
-		typedef std::ptrdiff_t difference_type;
+		typedef T																value_type;
+		typedef value_type														*pointer;
+		typedef value_type														const * const_pointer;
+		typedef value_type														&reference;
+		typedef value_type const												&const_reference;
+		typedef std::ptrdiff_t													difference_type;
 	
 	protected:
 
@@ -131,17 +131,39 @@ namespace ft
 			typedef ft::VectorIterator<value_type>								iterator;
 			typedef ft::VectorIterator<const value_type>						const_iterator;
 			typedef ft::ReverseIterator<iterator>								reverse_iterator;
-			typedef ft::ReverseIterator<const_iterator>						const_reverse_iterator;
-			//typedef typename ft::iterator_traits<iterator>::difference_type		difference_type; 
+			typedef ft::ReverseIterator<const_iterator>							const_reverse_iterator;
 			typedef typename allocator_type::size_type							size_type;
 
 	/*									 
 	** --------------------------------- CONSTRUCTOR ---------------------------------
 	*/
 
-			vector() : _mem(), _capacity(1), _storedElems(0)
+			explicit vector (const allocator_type& alloc = allocator_type()) : _mem(alloc), _capacity(1), _storedElems(0)
 			{
 				_array = _mem.allocate(1 * sizeof(value_type));
+			}
+
+			explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) : _mem(alloc), _capacity(1), _storedElems(0)
+			{
+				while (_capacity < n)
+					_capacity *= 2;
+				_array = _mem.allocate(_capacity * sizeof(value_type));
+				for (size_t i = 0; i < _capacity; i++)
+					_mem.construct(&_array[i], val);
+				_storedElems = n;
+			}
+
+			template <class InputIterator>
+        	vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()) : _mem(alloc), _capacity(1), _storedElems(0)
+			{
+				_storedElems = last - first;
+				while (_capacity < _storedElems)
+					_capacity *= 2;
+				while (first < last)
+				{
+					_mem.construct(*&first, *first);
+					first++;
+				}
 			}
 
 			vector( vector const & src ) : _array(0)
@@ -189,32 +211,32 @@ namespace ft
 
 		iterator end()
 		{
-			return (_array[_storedElems]);
+			return (&_array[_storedElems]);
 		}
 
 		const_iterator end() const
 		{
-			return (_array[_storedElems]);
+			return (&_array[_storedElems]);
 		}
 
 		reverse_iterator rbegin()
 		{
-			return (_array[_storedElems - 1]);
+			return (end());
 		}
 
 		const_reverse_iterator rbegin() const
 		{
-			return (_array[_storedElems - 1]);
+			return (end());
 		}
 
 		reverse_iterator rend()
 		{
-			return (_array - 1);
+			return (begin());
 		}
 
 		const_reverse_iterator rend() const
 		{
-			return (_array - 1);
+			return (begin());
 		}
 	/*									 
 	** --------------------------------- CAPACITY ----------------------------------
@@ -362,7 +384,7 @@ namespace ft
 			{
 				if (_storedElems + 1 > _capacity)
 					reserve(_storedElems + 1);
-				_mem.construct(back() + 1, val);
+				_mem.construct(&*end(), val);
 				_storedElems++;
 			}
 

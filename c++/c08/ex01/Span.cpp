@@ -14,7 +14,11 @@ Span::Span( const Span & src )
 	*this = src;
 }
 
-Span::Span( size_t size ) : _max_size(size), _elements(0), _sorted(false){}
+Span::Span( size_t size ) throw(std::length_error) : _max_size(size), _elements(0), _sorted(false)
+{
+	if (_max_size > std::vector<int>().max_size())
+		throw(std::length_error("Can't create a vector of that size!"));
+}
 
 
 /*
@@ -51,7 +55,7 @@ void Span::addNumber(int nb) throw (std::range_error)
 	_elements.push_back(nb);
 }
 
-int Span::longestSpan( void ) const
+int Span::longestSpan( void ) const throw (std::length_error)
 {
 	if (_elements.size() <= 1)
 		throw std::length_error("Two numbers are required for a span calculation");
@@ -62,7 +66,7 @@ int Span::longestSpan( void ) const
 	return (*max_elem - *min_elem);
 } 	
 
-int Span::shortestSpan( void )
+int Span::shortestSpan( void ) throw (std::length_error)
 {
 	if (_elements.size() <= 1)
 		throw std::length_error("Two numbers are required for a span calculation");
@@ -79,7 +83,6 @@ int Span::shortestSpan( void )
 		if (new_span < span)
 			span = new_span;
 	}
-	return (span);
 	return (span);
 		
 		return (0);

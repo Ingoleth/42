@@ -18,16 +18,16 @@ int main( void )
 
 
 
-	std::cout << "\n\nCopy span = span\n";
+	std::cout << "\n\nCopy span = span\n\n";
 	Span	copy_span = span;
-	std::cout << "Copy span[0] = 20\n";
+	std::cout << "A 20 is added to copy spawn\n";
 	copy_span.addNumber(20);
 	copy_span.printDebugInfo();
 	std::cout << "\nCopy span\n";
 	std::cout << "Shortest span: " << copy_span.shortestSpan() << '\n';
 	std::cout << "Longest span: " << copy_span.longestSpan() << '\n';
 
-	std::cout << "\nSpan span doesn't change\n";
+	std::cout << "\nSpan doesn't change in the original:\n";
 	std::cout << "Shortest span: " << span.shortestSpan() << '\n';
 	std::cout << "Longest span: " << span.longestSpan() << '\n';
 
@@ -41,6 +41,15 @@ int main( void )
 
 
 	std::cout << "\n\nException test\n";
+	try
+	{
+		Span except_span(std::vector<int>().max_size() + 1);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	
 	Span	except_span(1);
 	except_span.addNumber(5);
 	try

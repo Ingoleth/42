@@ -41,20 +41,18 @@ int main()
 	
 	std::vector <int> a;
 
-	a.reserve(5);
+	std::cout << "Vector test:\n";
+	ft::vector<int> b(3, 3);
+	
 	a.push_back(1);
 	a.push_back(2);
-
-	std::cout << a.capacity() << std::endl;
-	std::cout << a.size() << std::endl;
 	a.push_back(3);
-	std::cout << a.back() << std::endl;
-	std::cout << a[a.size() - 1] << std::endl;
-	std::cout << a[a.capacity() - 1] << std::endl;
 
-	std::cout << "Vector test:\n";
-	ft::vector<int> b;
-	ft::vector<int>::iterator it = b.begin();
+	for(std::vector<int>::reverse_iterator it = a.rbegin(); it < a.rend(); it++)
+		std::cout << *it << std::endl;
+
+	for (ft::vector<int>::reverse_iterator it = b.rbegin(); it < b.rend(); it++)
+		std::cout << *it << std::endl;
 
 	return 0;
 }

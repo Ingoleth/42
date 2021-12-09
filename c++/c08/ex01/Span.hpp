@@ -12,11 +12,11 @@ class Span
 
 		Span();
 		Span( Span const & src );
-		Span(size_t size);
+		Span(size_t size) throw(std::length_error);
 		~Span();
 		void	addNumber(int nb) throw (std::range_error);
-		int		shortestSpan( void );
-		int		longestSpan( void ) const;
+		int		shortestSpan( void ) throw (std::length_error);
+		int		longestSpan( void ) const throw (std::length_error);
 		void	fillWithRandNums( void );
 		void	printDebugInfo( void );
 

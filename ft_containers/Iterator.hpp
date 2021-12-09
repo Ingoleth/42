@@ -8,12 +8,12 @@ namespace ft
 	template<typename It>
 	class ReverseIterator: public It
 	{
-		using typename It::value_type;
-		using typename It::pointer;
-		using typename It::const_pointer;
-		using typename It::reference;
-		using typename It::const_reference;
-		using typename It::difference_type;
+		//typename It::value_type;
+		//typename It::pointer;
+		//typename It::const_pointer;
+		//typename It::reference;
+		//yypename It::const_reference;
+		//typename It::difference_type;
 	public:
 		ReverseIterator(): It() {}
 		ReverseIterator(It const &it): It(it) {}
@@ -25,19 +25,19 @@ namespace ft
 			return (*this);
 		}
 
-		reference operator*() {
+		typename It::reference operator*() {
 			It tmp(*this);
 			return (*--tmp);
 		}
-		const_reference operator*() const {
+		typename It::const_reference operator*() const {
 			It tmp(*this);
 			return (*--tmp);
 		}
-		pointer operator->() {
+		typename It::pointer operator->() {
 			It tmp(*this);
 			return (&*--tmp);
 		}
-		const_pointer operator->() const {
+		typename It::const_pointer operator->() const {
 			It tmp(*this);
 			return (&*--tmp);
 		}
@@ -56,6 +56,18 @@ namespace ft
 		}
 		It &operator--() {
 			return (this->It::operator++());
+		}
+		bool operator<(ReverseIterator const &other) const {
+			return (this->It::operator>(other));
+		}
+		bool operator<=(ReverseIterator const &other) const {
+			return (this->It::operator>=(other));
+		}
+		bool operator>(ReverseIterator const &other) const {
+			return (this->It::operator<(other));
+		}
+		bool operator>=(ReverseIterator const &other) const {
+			return (this->It::operator<=(other));
 		}
 	};
 }
