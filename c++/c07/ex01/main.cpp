@@ -19,6 +19,7 @@ int main( void )
 	::iter(a, 3, ::increment);
 	::iter(a, 3, ::list);
 
+	//::iter(b, 2, ::increment);
 	::iter(b, 2, ::list);
 	
 return 0;
