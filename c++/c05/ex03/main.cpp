@@ -33,7 +33,7 @@ int main( void )
 	bureaucrat1.executeForm(*presidential);
 	std::cout << '\n';
 
-	Form *whatever = intern.makeForm("totally real form", "DefinitelyNotBlitzcrank");
+	Form *whatever = intern.makeForm("totally real form", "Definitely Not Blitzcrank");
 	(void)whatever;
 
 	delete shrubbery;

@@ -102,23 +102,46 @@ void is_char(char c)
 
 int main (int argc, char **argv)
 {
-	int i;
 	std::string aux;
 
-	if (argc != 2 || !argv[1][0])
+	if (argc == 2 && argv[1][0])
 	{
-		std::cout << "Invalid arguments" << std::endl;
-		return (1);
+		argv++;
+		aux = *argv;
+		try
+		{
+			if (!(aux.find('.') == aux.find('f')))
+				throw(std::exception());
+			is_integer(std::stoi(*argv, 0));
+			return (0);
+		}
+		catch(const std::exception& e)
+		{
+			try
+			{
+				std::stof(*argv, 0);
+				is_float(*argv);
+				return (0);
+			}
+			catch(const std::exception& e)
+			{
+				try
+				{
+					std::stod(*argv, 0);
+					is_double(*argv);
+					return (0);
+				}
+				catch(const std::exception& e)
+				{
+					if(aux.length() == 1 && argv[0][0] >= 32 && argv[0][0] <= 126)
+					{
+						is_char(**argv);
+						return (0);
+					}
+				}
+			}
+		}
 	}
-	i = 0;
-	aux = argv[1];
-	if ((aux >= "0" && aux <= "9" && aux.length() == 1) ||
-		(aux.find('.') == aux.find('f')))
-		is_integer(atoi(argv[1]));
-	else if (argv[1][0] >= 32 && argv[1][0] <= 126 && !argv[1][1])
-		is_char(argv[1][0]);
-	else if (!(aux.find('.') == aux.find('f')))
-		is_float(argv[1]);
-	else
-		is_double(argv[1]);
+	std::cout << "Invalid arguments" << std::endl;
+	return (1);
 }
