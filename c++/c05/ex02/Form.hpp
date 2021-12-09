@@ -49,7 +49,7 @@ class Form
 	
 	private:
 		const std::string		_name;
-		const std::string const	_target;
+		const std::string		_target;
 		bool					_isSigned;
 		const int				_gradeToExecute;
 		const int				_gradeToSign;

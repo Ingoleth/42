@@ -6,11 +6,11 @@
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-ShrubberyCreationForm::ShrubberyCreationForm() : Form("ShrubberyCreationForm", "unnamed", 145, 137){}
+ShrubberyCreationForm::ShrubberyCreationForm() : Form("ShrubberyCreationForm", "unnamed", 137, 145){}
 
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target) : Form("ShrubberyCreationForm", target, 145, 137){}
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target) : Form("ShrubberyCreationForm", target, 137, 145){}
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &src) : Form("ShrubberyCreationForm", src.getTarget(), 145, 137) {}
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &src) : Form("ShrubberyCreationForm", src.getTarget(), 137, 145) {}
 
 /*
 ** -------------------------------- DESTRUCTOR --------------------------------

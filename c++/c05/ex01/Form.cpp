@@ -8,14 +8,12 @@ Form::Form() : _isSigned(false), _name("Unnamed"), _gradeToExecute(150), _gradeT
 
 Form::Form( const Form & src ) : _isSigned(src._isSigned), _name(src._name), _gradeToExecute(src._gradeToExecute), _gradeToSign(src._gradeToSign) {}
 
-Form::Form(const std::string  &name, const int &signGrade, const int &execGrade) : _isSigned(false), _name(name)
+Form::Form(const std::string  &name, const int &signGrade, const int &execGrade) : _isSigned(false), _name(name), _gradeToExecute(execGrade), _gradeToSign(signGrade)
 {
 	if (signGrade < 1 || execGrade < 1)
 		throw (GradeTooHighException());
 	else if (signGrade > 150 || execGrade > 150)
 		throw (GradeTooLowException());
-	_gradeToExecute = execGrade;
-	_gradeToSign = signGrade;
 }
 
 /*

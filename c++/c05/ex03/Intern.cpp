@@ -59,7 +59,7 @@ Form*			Intern::makeForm( std::string name, std::string target )
 			return (this->*functions[i])(target);
 		}
 	}
-	std::cout << "Intern doesn't know which form to create\n";
+	std::cout << "Intern doesn't know what form to create\n";
 	return (NULL);
 }
 

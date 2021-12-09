@@ -10,7 +10,7 @@ RobotomyRequestForm::RobotomyRequestForm() : Form("RobotomyRequest", "unnamed", 
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string &target) : Form("RobotomyRequest", target, 45, 72) {}
 
-RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const &src) : Form("RobotomyRequest", src.getTarget(), 25, 5) {}
+RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const &src) : Form("RobotomyRequest", src.getTarget(), 45, 72) {}
 
 /*
 ** -------------------------------- DESTRUCTOR --------------------------------

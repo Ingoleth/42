@@ -4,11 +4,11 @@
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-PresidentialPardonForm::PresidentialPardonForm() : Form("PresidentialPardon", "unnamed", 25, 5) {}
+PresidentialPardonForm::PresidentialPardonForm() : Form("PresidentialPardon", "unnamed", 5, 25) {}
 
-PresidentialPardonForm::PresidentialPardonForm(const std::string &target) : Form("PresidentialPardonForm", target, 25, 5) {}
+PresidentialPardonForm::PresidentialPardonForm(const std::string &target) : Form("PresidentialPardonForm", target, 5, 25) {}
 
-PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm const &src) : Form("PresidentialPardon", src.getTarget(), 25, 5) {}
+PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm const &src) : Form("PresidentialPardon", src.getTarget(), 5, 25) {}
 
 /*
 ** -------------------------------- DESTRUCTOR --------------------------------
