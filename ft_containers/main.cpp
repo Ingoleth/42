@@ -1,5 +1,6 @@
 //#include "Vector.hpp"
 #include <vector>
+#include <list>
 #include <iostream>
 #include "Vector.hpp"
 
@@ -38,21 +39,14 @@ std::ostream &			operator<<( std::ostream & o, test const & i )
 
 int main()
 {
-	
-	std::vector <int> a;
+	std::vector<int>a;
+	ft::vector<int>b;
 
-	std::cout << "Vector test:\n";
-	ft::vector<int> b(3, 3);
-	
-	a.push_back(1);
-	a.push_back(2);
-	a.push_back(3);
-
-	for(std::vector<int>::reverse_iterator it = a.rbegin(); it < a.rend(); it++)
-		std::cout << *it << std::endl;
-
-	for (ft::vector<int>::reverse_iterator it = b.rbegin(); it < b.rend(); it++)
-		std::cout << *it << std::endl;
+	a.assign(3, 3);
+	b.assign(a.begin(), a.end());
+	std::cout << a.capacity() << std::endl;
+	std::cout << b.capacity() << std::endl;
+	a.pop_back();
 
 	return 0;
 }

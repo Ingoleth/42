@@ -2,6 +2,7 @@
 # define VECTOR_HPP
 
 # include <iostream>
+# include "utils.hpp"
 # include "Iterator.hpp"
 
 namespace ft
@@ -143,7 +144,7 @@ namespace ft
 				_array = _mem.allocate(1 * sizeof(value_type));
 			}
 
-			explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) : _mem(alloc), _capacity(1), _storedElems(0)
+			explicit vector(size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) : _mem(alloc), _capacity(1), _storedElems(0)
 			{
 				while (_capacity < n)
 					_capacity *= 2;
@@ -153,8 +154,8 @@ namespace ft
 				_storedElems = n;
 			}
 
-			template <class InputIterator>
-        	vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()) : _mem(alloc), _capacity(1), _storedElems(0)
+   			template <class InputIterator>
+        	vector(typename enable_if <false, InputIterator>::type first, InputIterator last, const allocator_type& alloc = allocator_type()) : _mem(alloc), _capacity(1), _storedElems(0)
 			{
 				_storedElems = last - first;
 				while (_capacity < _storedElems)
@@ -173,7 +174,8 @@ namespace ft
 			
 			~vector()
 			{
-				_mem.destroy(_array); //TODO Might only delete the first element; Test with a class?
+				for (size_t i = 0; i < _storedElems; i++)
+					_mem.destroy(&_array[i]); //TODO Might only delete the first element; Test with a class?
 				_mem.deallocate(_array, _capacity);
 			}
 
@@ -181,7 +183,8 @@ namespace ft
 			{
 				if (_array) //Might not work?
 				{
-					_mem.destroy(_array);
+					for (size_t i = 0; i < _storedElems; i++)
+						_mem.destroy(&_array[i]);
 					_mem.deallocate(_array, _capacity);
 					std::cout << "Hello\n";
 				}
@@ -300,7 +303,10 @@ namespace ft
 					return ;
 				aux_ptr = _mem.allocate(n, _array);
 				for (size_t i = 0; i < _storedElems; i++)
+				{
 					aux_ptr[i] = _array[i];
+					_mem.destroy(&_array[i]);
+				}
 				_mem.deallocate(_array, _capacity);
 				_array = aux_ptr;
 				_capacity = n;
@@ -322,7 +328,7 @@ namespace ft
 		
 			reference at (size_t n)
 			{
-				if (n >= _capacity)
+				if (n >= _storedElems) // check
 					throw (std::out_of_range("Because reasons"));
 				return (_array[n]);
 			}
@@ -357,20 +363,37 @@ namespace ft
 	/*
 	** ------------------------------ MODIFIERS -------------------------------
 	*/
-			void assign (iterator first, iterator last) //ask garrafa about them templates
+			template <class InputIterator>
+			void assign (typename enable_if <true, InputIterator>::type first, InputIterator last) //TODO check if n <? //THIS IS A THINGAMABOB! /// UFFFFFFFFFFFFFFFF
 			{
-				size_t aux_size = last - first - 1;
+				size_t aux_size = last - first;
 				if (aux_size > _capacity)
-					reserve(aux_size);
-				for (iterator it = first, it2 = begin(); it != last; it++, it2++)
+				{
+					for (size_t i = 0; i < _storedElems; i++)
+						_mem.destroy(&_array[i]);
+					_mem.deallocate(_array, _capacity);
+					_capacity = n;
+					_array = _mem.allocate(_capacity, _array);
+				}
+				while (InputIterator it)
+				{
+					/* code */
+				}
+				
+				for (InputIterator it = first, iterator it2 = begin(); it != last; it++, it2++)
 					*it2 = *it;
 			}
 
-			void assign (size_t n, const_reference val) //TODO check if n <?
+			void assign (size_t n, const_reference val)
 			{
 				if (n > _capacity)
-					reserve(n);
-				std::cout << "Hello there!\n";
+				{
+					for (size_t i = 0; i < _storedElems; i++)
+						_mem.destroy(&_array[i]);
+					_mem.deallocate(_array, _capacity);
+					_capacity = n;
+					_array = _mem.allocate(_capacity, _array);
+				}
 				for (size_t i = 0; i < n; i++)
 				{
 					std::cout << i << std::endl;
@@ -382,22 +405,29 @@ namespace ft
 
 			void push_back (const_reference val)
 			{
-				if (_storedElems + 1 > _capacity)
-					reserve(_storedElems + 1);
-				_mem.construct(&*end(), val);
-				_storedElems++;
+				if (_storedElems < max_size())
+				{
+					if (_storedElems + 1 > _capacity)
+						reserve(_storedElems + 1);
+					_mem.construct(&*end(), val);
+					_storedElems++;
+				}
 			}
 
 			void pop_back()
 			{
-				_mem.destroy(&back(), 1); //Check
-				_storedElems--;
+				if (_storedElems)
+				{
+					_mem.destroy(&back(), 1); //Check
+					_storedElems--;
+				}
 			}
 
 
-			void clear() //Iterator invalidation? -->     std::cout << "After clear:"; std::for_each(container.begin(), container.end(), print); -> No outputea nada
+			void clear()
 			{
-				_mem.destroy(_array, _storedElems);
+				for (size_t i = 0; i < _storedElems; i++)
+					_mem.destroy(&_array[i]);
 				_storedElems = 0;
 			}
 

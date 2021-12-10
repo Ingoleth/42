@@ -3,7 +3,7 @@
 
 namespace ft
 {
-	struct IteratorTrait {};
+	struct IteratorTrait{};
 
 	template<typename It>
 	class ReverseIterator: public It
@@ -12,7 +12,7 @@ namespace ft
 		//typename It::pointer;
 		//typename It::const_pointer;
 		//typename It::reference;
-		//yypename It::const_reference;
+		//typename It::const_reference;
 		//typename It::difference_type;
 	public:
 		ReverseIterator(): It() {}
