@@ -4,6 +4,7 @@
 # include <iostream>
 # include "utils.hpp"
 # include "Iterator.hpp"
+# include <limits>
 
 namespace ft
 {
@@ -255,37 +256,17 @@ namespace ft
 
 			size_t max_size( void ) const
 			{
-				return (__INT_MAX__);//return (INT_MAX / sizeof(T));
+				return(std::numeric_limits<size_type>::max() / sizeof(value_type));
 			}
 
-			void resize (size_t n, value_type val = value_type())
+			void resize (size_t n, value_type val = value_type()) //Check when smaller not to do stupid things
 			{
-				value_type *aux_ptr;
-				size_t aux_size;
-
-				//|| n > max_size()) //throw length error
-				aux_size = _capacity;
-				aux_ptr = _mem.allocate(aux_size, _array);
-				if (_storedElems > n)
-				{
-					while (aux_size / 2 > n)
-						aux_size /= 2; //Might petar?
-					for (size_t i = 0; i < n; i++)
-						aux_ptr[i] = _array[i];
-				}
-				else
-				{
-					while (aux_size < n)
-						aux_size *= 2;
-					for (size_t i = 0; i < _storedElems; i++)
-						aux_ptr[i] = _array[i];
-					for (size_t i = _storedElems; i < n; i++)
-						aux_ptr[i] = value_type(val); //Might petar;
-				}
-				_mem.deallocate(_array, _capacity);
-				_array = aux_ptr;
-				_capacity = aux_size;
-				_storedElems = n;
+				while (n > _storedElems)
+					pop_back();
+				if (n < _capacity)
+					reserve(n);
+				while (_storedElems != n)
+					push_back(val);
 			}
 
 			size_t capacity ( void ) const
