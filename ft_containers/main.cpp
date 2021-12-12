@@ -39,14 +39,11 @@ std::ostream &			operator<<( std::ostream & o, test const & i )
 
 int main()
 {
-	std::vector<int>a;
+	ft::vector<int>a;
 	ft::vector<int>b;
 
-	a.assign(3, 3);
-	b.assign(a.begin(), a.end());
-	std::cout << a.capacity() << std::endl;
-	std::cout << b.capacity() << std::endl;
-	a.pop_back();
+	std::cout << (a < b) << std::endl;
+	std::cout << (b < a) << std::endl;	
 
 	return 0;
 }

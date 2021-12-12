@@ -155,16 +155,19 @@ namespace ft
 			}
 
    			template <class InputIterator>
-        	vector(typename enable_if <false, InputIterator>::type first, InputIterator last, const allocator_type& alloc = allocator_type()) : _mem(alloc), _capacity(1), _storedElems(0)
+			vector(typename enable_if <false, InputIterator>::type first, InputIterator last, const allocator_type& alloc = allocator_type()) : _mem(alloc), _capacity(1), _storedElems(0)
 			{
-				_storedElems = last - first;
-				while (_capacity < _storedElems)
-					_capacity *= 2;
-				while (first < last)
+				int i = 0;
+				_capacity = std::distance(first, last);
+				_array = _mem.allocate(_capacity * sizeof(value_type));
+
+				while (first != last)
 				{
-					_mem.construct(*&first, *first);
+					_mem.construct(&_array[i], *first);
 					first++;
+					i++;
 				}
+				_storedElems = _capacity;
 			}
 
 			vector( vector const & src ) : _array(0)
@@ -252,7 +255,7 @@ namespace ft
 
 			size_t max_size( void ) const
 			{
-				return (0);//return (INT_MAX / sizeof(T));
+				return (__INT_MAX__);//return (INT_MAX / sizeof(T));
 			}
 
 			void resize (size_t n, value_type val = value_type())
@@ -366,22 +369,25 @@ namespace ft
 			template <class InputIterator>
 			void assign (typename enable_if <true, InputIterator>::type first, InputIterator last) //TODO check if n <? //THIS IS A THINGAMABOB! /// UFFFFFFFFFFFFFFFF
 			{
-				size_t aux_size = last - first;
+				size_t aux_size = std::distance(first, last);
 				if (aux_size > _capacity)
 				{
 					for (size_t i = 0; i < _storedElems; i++)
 						_mem.destroy(&_array[i]);
 					_mem.deallocate(_array, _capacity);
-					_capacity = n;
+					_capacity = aux_size;
 					_array = _mem.allocate(_capacity, _array);
 				}
-				while (InputIterator it)
+				clear();
+				iterator it = begin();
+				while (first != last)
 				{
-					/* code */
+					_mem.construct(&*it, *first);
+					first++;
+					it++;
 				}
-				
-				for (InputIterator it = first, iterator it2 = begin(); it != last; it++, it2++)
-					*it2 = *it;
+				if (_storedElems < aux_size)
+					_storedElems = aux_size;
 			}
 
 			void assign (size_t n, const_reference val)
@@ -394,11 +400,9 @@ namespace ft
 					_capacity = n;
 					_array = _mem.allocate(_capacity, _array);
 				}
+				clear();
 				for (size_t i = 0; i < n; i++)
-				{
-					std::cout << i << std::endl;
-					_array[n] = val;
-				}
+					_mem.construct(&_array[i], val);
 				if (_storedElems < n)
 					_storedElems = n;
 			}
@@ -418,7 +422,7 @@ namespace ft
 			{
 				if (_storedElems)
 				{
-					_mem.destroy(&back(), 1); //Check
+					_mem.destroy(&back()); //Check
 					_storedElems--;
 				}
 			}
@@ -429,6 +433,40 @@ namespace ft
 				for (size_t i = 0; i < _storedElems; i++)
 					_mem.destroy(&_array[i]);
 				_storedElems = 0;
+			}
+
+/*
+** ------------------------------ LOGICAL OPERATORS -------------------------------
+*/
+
+			bool operator==(vector other)
+			{
+				return(equal(other.begin(), other.end(), begin(), end()));
+			}
+
+			bool operator!=(vector other)
+			{
+				return (!operator==(other));
+			}
+
+			bool operator<(vector other)
+			{
+				return (lexicographical_compare(begin(), end(), other.begin(), other.end()));
+			}
+
+			bool operator>(vector other)
+			{
+				return (!operator<(other));
+			}
+
+			bool operator>=(vector other)
+			{
+				return (!operator<(other) || operator==(other));
+			}
+
+			bool operator<=(vector other)
+			{
+				return (!operator<(other) || operator==(other));
 			}
 
 		private:
