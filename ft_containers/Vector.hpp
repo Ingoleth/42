@@ -121,6 +121,7 @@ namespace ft
 	template < class T, class Alloc = std::allocator<T> >
 	class vector
 	{
+		friend void swap(vector<T>a, vector<T> b);
 
 		public:
 
@@ -457,6 +458,14 @@ namespace ft
 			size_t				_storedElems;
 
 	};
+
+	template<typename T>
+	void swap(vector<T>a, vector<T> b)
+	{
+		std::swap(a._array, b._array);
+		std::swap(a._capacity, b._capacity);
+		std::swap(a._storedElems, b._storedElems);
+	}
 
 }
 

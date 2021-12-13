@@ -39,11 +39,17 @@ std::ostream &			operator<<( std::ostream & o, test const & i )
 
 int main()
 {
-	ft::vector<int>a;
-	ft::vector<int>b;
+	std::vector<int>a;
+	std::vector<int>b;
 
-	std::cout << (a < b) << std::endl;
-	std::cout << (b < a) << std::endl;	
+	b.reserve(10);
+
+	b.push_back(1);
+
+	std::swap(a, b);
+	std::cout << a.size() << std::endl;
+	std::cout << a.capacity() << std::endl;
+
 
 	return 0;
 }
