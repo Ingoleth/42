@@ -2,6 +2,7 @@
 #include <vector>
 #include <list>
 #include <iostream>
+#include "stack.hpp"
 #include "Vector.hpp"
 
 class test
@@ -39,17 +40,8 @@ std::ostream &			operator<<( std::ostream & o, test const & i )
 
 int main()
 {
-	std::vector<int>a;
+	ft::stack<int>a;
 	std::vector<int>b;
-
-	b.reserve(10);
-
-	b.push_back(1);
-
-	std::swap(a, b);
-	std::cout << a.size() << std::endl;
-	std::cout << a.capacity() << std::endl;
-
 
 	return 0;
 }

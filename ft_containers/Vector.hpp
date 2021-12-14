@@ -451,7 +451,7 @@ namespace ft
 				return (!operator<(other) || operator==(other));
 			}
 
-		private:
+		protected:
 			std::allocator <value_type>	_mem;
 			pointer				_array;
 			size_t				_capacity;
