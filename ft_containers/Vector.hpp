@@ -31,12 +31,12 @@ namespace ft
 
 		VectorIterator(pointer p): p(p) {}
 
-		VectorIterator(VectorIterator const &other): p(other.p) {}
+		VectorIterator(VectorIterator const &src): p(src.p) {}
 
 		virtual ~VectorIterator() {}
 
-		VectorIterator &operator=(VectorIterator const &other) {
-			this->p = other.p;
+		VectorIterator &operator=(VectorIterator const &src) {
+			this->p = src.p;
 			return (*this);
 		}
 
@@ -94,27 +94,27 @@ namespace ft
 			VectorIterator tmp(*this);
 			return (tmp -= value);
 		}
-		difference_type operator-(VectorIterator const &other) const {
-			return (this->p - other.p);
+		difference_type operator-(VectorIterator const &src) const {
+			return (this->p - src.p);
 		}
 
-		bool operator==(VectorIterator const &other) const {
-			return (this->p == other.p);
+		bool operator==(VectorIterator const &src) const {
+			return (this->p == src.p);
 		}
-		bool operator!=(VectorIterator const &other) const {
-			return (this->p != other.p);
+		bool operator!=(VectorIterator const &src) const {
+			return (this->p != src.p);
 		}
-		bool operator<(VectorIterator const &other) const {
-			return (this->p < other.p);
+		bool operator<(VectorIterator const &src) const {
+			return (this->p < src.p);
 		}
-		bool operator<=(VectorIterator const &other) const {
-			return (this->p <= other.p);
+		bool operator<=(VectorIterator const &src) const {
+			return (this->p <= src.p);
 		}
-		bool operator>(VectorIterator const &other) const {
-			return (this->p > other.p);
+		bool operator>(VectorIterator const &src) const {
+			return (this->p > src.p);
 		}
-		bool operator>=(VectorIterator const &other) const {
-			return (this->p >= other.p);
+		bool operator>=(VectorIterator const &src) const {
+			return (this->p >= src.p);
 		}
 	};
 
@@ -417,40 +417,6 @@ namespace ft
 				_storedElems = 0;
 			}
 
-/*
-** ------------------------------ LOGICAL OPERATORS -------------------------------
-*/
-
-			bool operator==(vector other)
-			{
-				return(equal(other.begin(), other.end(), begin(), end()));
-			}
-
-			bool operator!=(vector other)
-			{
-				return (!operator==(other));
-			}
-
-			bool operator<(vector other)
-			{
-				return (lexicographical_compare(begin(), end(), other.begin(), other.end()));
-			}
-
-			bool operator>(vector other)
-			{
-				return (!operator<(other));
-			}
-
-			bool operator>=(vector other)
-			{
-				return (!operator<(other) || operator==(other));
-			}
-
-			bool operator<=(vector other)
-			{
-				return (!operator<(other) || operator==(other));
-			}
-
 		protected:
 			std::allocator <value_type>	_mem;
 			pointer				_array;
@@ -465,6 +431,46 @@ namespace ft
 		std::swap(a._array, b._array);
 		std::swap(a._capacity, b._capacity);
 		std::swap(a._storedElems, b._storedElems);
+	}
+
+	/*
+** ------------------------------ LOGICAL OPERATORS -------------------------------
+*/
+
+	template <typename T>
+	bool operator==(vector<T> a, vector<T> b)
+	{
+		return(equal(a.begin(), a.end(), b.begin(), b.end()));
+	}
+
+	template <typename T>
+	bool operator!=(vector<T> a, vector<T> b)
+	{
+		return (!operator==(a, b));
+	}
+
+	template <typename T>
+	bool operator<(vector<T> a, vector<T> b)
+	{
+		return (lexicographical_compare(a.begin(), a.end(), b.begin(), b.end()));
+	}
+
+	template <typename T>
+	bool operator>(vector<T> a, vector<T> b)
+	{
+		return (!operator<(a, b));
+	}
+
+	template <typename T>
+	bool operator>=(vector<T> a, vector<T> b)
+	{
+		return (!operator<(a, b) || operator==(a, b));
+	}
+
+	template <typename T>
+	bool operator<=(vector<T> a, vector<T> b)
+	{
+		return (!operator<(a, b) || operator==(a, b));
 	}
 
 }
