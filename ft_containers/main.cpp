@@ -4,6 +4,7 @@
 #include <iostream>
 #include "stack.hpp"
 #include "Vector.hpp"
+#include "BinaryTree.hpp"
 
 class test
 {
@@ -40,8 +41,8 @@ std::ostream &			operator<<( std::ostream & o, test const & i )
 
 int main()
 {
-	ft::stack<int>a;
-	std::vector<int>b;
+
+
 
 	return 0;
 }
