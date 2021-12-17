@@ -42,10 +42,13 @@ std::ostream &			operator<<( std::ostream & o, test const & i )
 
 int main()
 {
-	ft::BTNode<int>a(10);
+	ft::BTNode<int> *a;
 
-	a.add(13, &a);
-	a.add(16, &a);
-	std::cout <<  a.heigth(&a) << std::endl;
+	a = new ft::BTNode<int>(10);
+	a->add(13, a);
+	a->add(9, a);
+	a->add(16, a);
+	std::cout <<  a->findSmallest(a)->data << std::endl;
+	std::cout << a->findBiggest(a)->data << std::endl;
 	return 0;
 }

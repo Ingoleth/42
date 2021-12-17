@@ -67,6 +67,20 @@ namespace ft
 			return (find(to_find, node->right, lastNode));
 		}
 
+		BTNode *findSmallest(BTNode *node)
+		{
+			while (node->left)
+				node = node->left;
+			return node;
+		}
+
+		BTNode *findBiggest(BTNode *node)
+		{
+			while (node->right)
+				node = node->right;
+			return node;
+		}
+
 		void add(const T& _data, BTNode *root)
 		{
 			BTNode *aux;
@@ -76,11 +90,13 @@ namespace ft
 			new BTNode(_data, aux);
 		}
 
+
+
 		size_t size(BTNode *node)
 		{
 			if (!node)
-				return (true);
-			return(1 + size(left) + size(right));
+				return (0);
+			return(1 + size(node->left) + size(node->right));
 		}
 
 		size_t depth(BTNode *node)
