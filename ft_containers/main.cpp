@@ -5,6 +5,7 @@
 #include "stack.hpp"
 #include "Vector.hpp"
 #include "BinaryTree.hpp"
+#include <map>
 
 class test
 {
@@ -41,8 +42,10 @@ std::ostream &			operator<<( std::ostream & o, test const & i )
 
 int main()
 {
+	ft::BTNode<int>a(10);
 
-
-
+	a.add(13, &a);
+	a.add(16, &a);
+	std::cout <<  a.heigth(&a) << std::endl;
 	return 0;
 }
