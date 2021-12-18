@@ -84,13 +84,18 @@ namespace ft
 		void add(const T& _data, BTNode *root)
 		{
 			BTNode *aux;
-			if (find(_data, root, &aux))
+			if (!root || find(_data, root, &aux))
 				return ;
-			aux->displayNodeInfo();
 			new BTNode(_data, aux);
 		}
 
-
+		void remove(const T& _data, BTNode *root)
+		{
+			BTNode *aux;
+			if (!root || !(aux = find(_data, root)))
+				return ;
+			
+		}
 
 		size_t size(BTNode *node)
 		{
@@ -113,6 +118,38 @@ namespace ft
 			return(1 + std::max(heigth(node->left), heigth(node->right)));
 		}
 
+		BTNode *getNext(BTNode *currentNode) // Check return value when biggest num?
+		{
+			if (currentNode->right)
+				return (currentNode->right);
+			T &auxdata = currentNode->data;
+			while (true)
+			{
+				currentNode = currentNode->top;
+				if (!currentNode)
+					break;
+				if (currentNode->data > auxdata)
+					return (currentNode);
+			}
+			return (0);
+		}
+
+		BTNode *getPrevious(BTNode *currentNode) // Check return value when biggest num?
+		{
+			if (currentNode->left)
+				return (currentNode->left);
+			T &auxdata = currentNode->data;
+			while (true)
+			{
+				currentNode = currentNode->top;
+				if (!currentNode)
+					break;
+				if (currentNode->data < auxdata)
+					return (currentNode);
+			}
+			return (0);
+		}
+
 		void displayNodeInfo()
 		{
 			std::cout << "\n-------------------------------\n";
@@ -124,5 +161,15 @@ namespace ft
 			std::cout << "Content = " << data << std::endl;
 			std::cout << "-------------------------------\n";
 		}
+
+		void displayInOrder(BTNode *root)
+		{
+			if (root)
+			{
+				displayInOrder(root->left);
+				std::cout << root->data << " ";
+				displayInOrder(root->right);
+			}
+    }
 	};
 }

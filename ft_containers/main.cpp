@@ -44,11 +44,17 @@ int main()
 {
 	ft::BTNode<int> *a;
 
-	a = new ft::BTNode<int>(10);
-	a->add(13, a);
-	a->add(9, a);
-	a->add(16, a);
-	std::cout <<  a->findSmallest(a)->data << std::endl;
-	std::cout << a->findBiggest(a)->data << std::endl;
+	a = new ft::BTNode<int>(11);
+	//a->add(13, a);
+	//a->add(9, a);
+	//a->add(16, a);
+	//a->add(10, a);
+	a = a->findBiggest(a);
+	while (a)
+	{
+		std::cout << a->data << " ";
+		a = a->getPrevious(a);
+	}
+	
 	return 0;
 }
