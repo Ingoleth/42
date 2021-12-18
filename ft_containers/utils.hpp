@@ -6,6 +6,9 @@
 namespace ft
 {
 
+	#define TESTED_NAMESPACE ft
+	#define TESTED_TYPE int
+
 	template<bool B, class T = void>
 	struct enable_if {};
 	
@@ -14,6 +17,73 @@ namespace ft
 	{ 
 		typedef T type;
 	};
+
+	template <class T, T val>
+		struct integral_constant {
+			static	const T value = val;
+			typedef	T value_type;
+			typedef	integral_constant<T, val> type;
+			operator value_type() { return val; }
+	};
+
+	//Most longwinded way of saying const bool IN HISTORY
+	//Should be banned by law
+	struct true_type : public integral_constant<bool,true>
+	{
+		typedef true_type	type;
+	};
+
+	struct false_type : public integral_constant<bool,false>
+	{
+		typedef false_type	type;
+	};
+	// typedef integral_constant<bool,true> true_type;
+	// typedef integral_constant<bool,false> false_type;
+
+
+	template<typename T>
+		struct is_integral : public false_type {};
+	template <>
+		struct is_integral<bool> : public true_type {};
+	template <>
+		struct is_integral<char> : public true_type {};
+	template <>
+		struct is_integral<int> : public true_type {};
+	template <>
+		struct is_integral<long int> : public true_type {};
+	//and so on...
+
+	template<typename T> //FIXME: creo que no lo utilizo
+	struct	has_iterator_category {
+		typedef char yes[1];
+		typedef char no[2];
+
+		template<typename C>
+		static yes & test(typename C::iterator_category *);
+		
+		template<typename C>
+		static no & test(...);
+
+		static const bool value = sizeof(test<T>(NULL)) == sizeof(yes);
+	};
+
+	template < class From, class To >
+		struct is_convertible_simple
+		{
+			typedef char yes[1];
+			typedef char no[2];
+
+			static yes & test(To);
+			static no & test(...);
+			static From returnFrom();
+
+			static const bool value = (sizeof(test(returnFrom())) == sizeof(yes));
+		};
+
+	template < class From, class To >
+		struct is_convertible
+		: public integral_constant<bool, is_convertible_simple<From, To>::value> 
+		{ };
 
 	/*
 	** --------------------------------- PAIR ----------------------------------
