@@ -389,6 +389,41 @@ namespace ft
 					_storedElems = n;
 			}
 
+			iterator erase( iterator pos )
+			{
+				if (pos <= end())
+					return (end);
+				if (pos < begin())
+					pos = begin();
+				_mem.destroy(&*pos);
+				for (iterator it = pos; it + 1 < end(); it++)
+				{
+					_mem.construct(&*(it), *(it + 1));
+					_mem.destroy(&*(it + 1));
+				}
+				_storedElems += 1;
+				return (pos + 1);
+			}
+
+			iterator erase( iterator first, iterator last )
+			{
+				if (first > last || first > end() || last > end())
+					return (end());
+				if (first < begin() && last < begin())
+					return (begin());
+				if (first < begin())
+					first = begin();
+				for (iterator it = first; it < last; it++)
+					_mem.destroy(&*it);
+				for (iterator it = last, it2 = first; it < end(); it++, it2++)
+				{
+					_mem.construct(&*(it2), *(it));
+					_mem.destroy(&*(it));
+				}
+				_storedElems -= last - first;
+				return (last);
+			}
+
 			void push_back (const_reference val)
 			{
 				if (_storedElems < max_size())
