@@ -23,11 +23,9 @@ namespace ft
 		typedef std::random_access_iterator_tag									iterator_category;
 	
 	protected:
-
-		pointer p;
 	
 	public:
-
+		pointer p;
 		VectorIterator(): p(0) {}
 
 		VectorIterator(pointer p): p(p) {}
@@ -119,6 +117,13 @@ namespace ft
 		}
 	};
 
+	template<typename T>
+	std::ostream &			operator<<( std::ostream & o, VectorIterator<T> const & i )
+{
+	o << i.p;
+	return o;
+}
+
 	template < class T, class Alloc = std::allocator<T> >
 	class vector
 	{
@@ -191,7 +196,6 @@ namespace ft
 					for (size_t i = 0; i < _storedElems; i++)
 						_mem.destroy(&_array[i]);
 					_mem.deallocate(_array, _capacity);
-					std::cout << "Hello\n";
 				}
 				if (rhs._array)
 				{
@@ -284,7 +288,7 @@ namespace ft
 			{
 				value_type		*aux_ptr;
 
-				if (n < _capacity) //|| n > max_size()) //throw length error
+				if (n <= _capacity) //|| n > max_size()) //throw length error
 					return ;
 				aux_ptr = _mem.allocate(n, _array);
 				for (size_t i = 0; i < _storedElems; i++)
@@ -422,6 +426,67 @@ namespace ft
 				}
 				_storedElems -= last - first;
 				return (last);
+			}
+
+			iterator insert(iterator pos, const T& value )
+			{
+				if (pos >= end())
+					return (end());
+				if (pos < begin())
+					return (begin());
+				size_t offset = pos - begin();
+				reserve(_storedElems + 1);
+				pos = begin() + offset;
+				for (iterator it = end(); it > pos; it--)
+				{
+					_mem.construct(&*(it), *(it - 1));
+					_mem.destroy(&*(it - 1));
+				}
+				_mem.construct(&*pos, value);
+				_storedElems += 1;
+				return (pos + 1);
+			}
+
+			void insert( iterator pos, size_type count, const T& value ) //TODO: Make a function to shift elements left and right?
+			{
+				if (pos >= end())
+					return ;
+				if (pos < begin())
+					return ;
+				size_t offset = pos - begin();
+				reserve(_storedElems + 1);
+				pos = begin() + offset;
+				for (iterator it = end() + count; it >= pos + count; it--)
+				{
+					_mem.construct(&*(it), *(it - count));
+					_mem.destroy(&*(it - count));
+				}
+				for (iterator aux = pos + count; pos < aux; pos++)
+					_mem.construct(&*pos, value);
+				_storedElems += count;
+				return ;
+			}
+
+			template< class InputIt > //Might need more thingies!
+			void insert( iterator pos, InputIt first, InputIt last )
+			{
+				if (pos >= end())
+					return ;
+				if (pos < begin())
+					return ;
+				size_t offset = pos - begin();
+				reserve(_storedElems + 1);
+				pos = begin() + offset;
+				size_t count = std::distance(first, last);
+				for (iterator it = end() + count; it >= pos + count; it--)
+				{
+					_mem.construct(&*(it), *(it - count));
+					_mem.destroy(&*(it - count));
+				}
+				for (iterator aux = pos + count; first < last; pos++, first++)
+					_mem.construct(&*pos, *first);
+				_storedElems += count;
+				return ;
 			}
 
 			void push_back (const_reference val)

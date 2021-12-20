@@ -47,40 +47,27 @@ void printSize(TESTED_NAMESPACE::vector<TESTED_TYPE>& a)
 
 int main()
 {
-	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(7);
-	TESTED_NAMESPACE::vector<TESTED_TYPE> vct_two(4);
-	TESTED_NAMESPACE::vector<TESTED_TYPE> vct_three;
-	TESTED_NAMESPACE::vector<TESTED_TYPE> vct_four;
 
-	for (unsigned long int i = 0; i < vct.size(); ++i)
-		vct[i] = (vct.size() - i) * 3;
-	for (unsigned long int i = 0; i < vct_two.size(); ++i)
-		vct_two[i] = (vct_two.size() - i) * 5;
-	printSize(vct);
-	printSize(vct_two);
+	using namespace ft;
 
-	vct_three.assign(vct.begin(), vct.end());
-	vct.assign(vct_two.begin(), vct_two.end());
-	vct_two.assign(2, 42);
-	vct_four.assign(4, 21);
+	vector<int> a;
+	vector<int> b;
 
-	std::cout << "\t### After assign(): ###" << std::endl;
+	a.push_back(1);
+	a.push_back(3);
+	a.push_back(4);
 
-	printSize(vct);
-	printSize(vct_two);
-	printSize(vct_three);
-	printSize(vct_four);
+	b = a;
 
-	vct_four.assign(6, 84);
-	printSize(vct_four);
+	b.push_back(5);
+	a.push_back(0);
 
-	std::cout << "\t### assign() on enough capacity and low size: ###" << std::endl;
+	a.insert(a.begin(), b.begin(), b.end());
 
-	vct.assign(5, 53);
-	vct_two.assign(vct_three.begin(), vct_three.begin() + 3);
+	for (vector<int>::iterator it = a.begin(); it < a.end(); it++)
+		std::cout << *it << " ";
 
-	printSize(vct);
-	printSize(vct_two);
+	std::cout << "\n";
 
 	return 0;
 }
