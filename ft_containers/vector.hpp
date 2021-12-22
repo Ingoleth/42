@@ -517,6 +517,15 @@ namespace ft
 				_storedElems = 0;
 			}
 
+			void swap( vector& other )
+			{
+				pointer aux;
+
+				aux =_array;
+				_array = other._array;
+				other._array = aux;
+			}
+
 		protected:
 			std::allocator <value_type>	_mem;
 			pointer				_array;
