@@ -34,14 +34,9 @@ void	draw_circle(t_data *data, t_circle circle)
 		while (j < data->width)
 		{
 			distance = sqrt((circle.x - j) * (circle.x - j) + (circle.y - i) * (circle.y - i));
-			if (circle.type == 'c')
+			if (distance <= circle.radius)
 			{
-				if (circle.radius - distance >= 0 && circle.radius - distance < 1)
-					data->screen[chars_done + (int)j] = circle.c;
-			}
-			else
-			{
-				if (distance <= circle.radius)
+				if (circle.type == 'C' || circle.radius - distance < 1)
 					data->screen[(int)i * data->width + (int)j] = circle.c;	
 			}
 			j++;
@@ -70,25 +65,11 @@ int	perform_operations(t_data *data, FILE *file)
 
 void print_screen(t_data *data)
 {
-	int i;
-	int j;
-	int max_chars;
-
-	i = 0;
-	j = 0;
-	max_chars = data->width * data->height;
-	while (i < max_chars)
+	for(int i = 0; i < data->height; i++)
 	{
-		while (j < data->width)
-		{
-			write(STDOUT_FILENO, &data->screen[i + j], 1);
-			j++;
-		}
-		write(STDOUT_FILENO, "\n", 1);
-		i += data->width;
-		j = 0;
+		write(1, &data->screen[i * data->width], data->width);
+		write(1, "\n", 1);
 	}
-	
 }
 
 int main (int argc, char **argv)
