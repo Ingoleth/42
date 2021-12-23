@@ -434,7 +434,7 @@ namespace ft
 
 			iterator insert(iterator pos, const T& value )
 			{
-				if (pos >= end())
+				if (pos > end())
 					return (end());
 				if (pos < begin())
 					return (begin());
@@ -453,12 +453,13 @@ namespace ft
 
 			void insert( iterator pos, size_type count, const T& value ) //TODO: Make a function to shift elements left and right?
 			{
+				std::cout << "Hello there\n";
 				if (pos >= end())
 					return ;
 				if (pos < begin())
 					return ;
 				size_t offset = pos - begin();
-				reserve(_storedElems + 1);
+				reserve(_storedElems + count);
 				pos = begin() + offset;
 				for (iterator it = end() + count; it >= pos + count; it--)
 				{
@@ -480,9 +481,9 @@ namespace ft
 				if (pos < begin())
 					return ;
 				size_t offset = pos - begin();
-				reserve(_storedElems + 1);
-				pos = begin() + offset;
 				size_t count = std::distance(first, last);
+				reserve(_storedElems + count);
+				pos = begin() + offset;
 				for (iterator it = end() + count; it >= pos + count; it--)
 				{
 					_mem.construct(&*(it), *(it - count));
@@ -544,7 +545,7 @@ namespace ft
 		std::swap(a._array, b._array);
 		std::swap(a._capacity, b._capacity);
 		std::swap(a._storedElems, b._storedElems);
-		std::swap(a._mem, b._mem); //might not be needed...
+		std::swap(a._mem, b._mem); 
 	}
 
 	/*
