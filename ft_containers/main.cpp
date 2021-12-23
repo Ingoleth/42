@@ -6,6 +6,7 @@
 #include "vector.hpp"
 #include "BinaryTree.hpp"
 #include <map>
+#include "tests/tests.hpp"
 
 class test
 {
@@ -40,34 +41,14 @@ std::ostream &			operator<<( std::ostream & o, test const & i )
 	return o;
 }
 
-void printSize(TESTED_NAMESPACE::vector<TESTED_TYPE>& a)
-{
-	std::cout << a.size() << std::endl;
-}
-
 int main()
 {
+	//ft::vector<std::string> v1;
 
-	using namespace ft;
-
-	vector<int> a;
-	vector<int> b;
-
-	a.push_back(1);
-	a.push_back(3);
-	a.push_back(4);
-
-	b = a;
-
-	b.push_back(5);
-	a.push_back(0);
-
-	a.insert(a.begin(), b.begin(), b.end());
-
-	for (vector<int>::iterator it = a.begin(); it < a.end(); it++)
-		std::cout << *it << " ";
-
-	std::cout << "\n";
-
+	//v1.resize(10, "test");
+	test_vector();
+	//for (ft::vector<std::string>::iterator it = v1.begin(); it < v1.end(); it++)
+	//	std::cout << *it << std::endl;
 	return 0;
 }
+

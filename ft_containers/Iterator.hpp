@@ -3,7 +3,33 @@
 
 namespace ft
 {
-	struct IteratorTrait{};
+	template<typename _Tp>
+		struct IteratorTrait
+		{
+			
+		};
+
+	// POITNER SPECIALIZATION
+	template<typename _Tp>
+		class IteratorTrait<_Tp*>
+		{
+			typedef std::random_access_iterator_tag	iterator_category;
+			typedef _Tp								value_type;
+			typedef std::ptrdiff_t					difference_type;
+			typedef _Tp*							pointer;
+			typedef _Tp&							reference;
+		};
+	// CONST SPECIALIZATION
+	template<typename _Tp>
+		class IteratorTrait<const _Tp*>
+		{
+			typedef std::random_access_iterator_tag	iterator_category;
+			typedef _Tp								value_type;
+			typedef std::ptrdiff_t					difference_type;
+			typedef const _Tp*							pointer;
+			typedef const _Tp&							reference;
+		};
+
 
 	template<typename It>
 	class ReverseIterator: public It

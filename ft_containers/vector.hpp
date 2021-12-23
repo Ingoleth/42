@@ -10,7 +10,7 @@ namespace ft
 {
 
 	template<typename T>
-	class VectorIterator: IteratorTrait
+	class VectorIterator : public IteratorTrait<T>
 	{
 
 	public:
@@ -163,8 +163,9 @@ namespace ft
 			}
 
 			template <typename InputIterator>
-			vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(),
-			typename enable_if<is_convertible<typename InputIterator::iterator_category, std::input_iterator_tag>::value, void>::type* = NULL)
+			vector (InputIterator first, InputIterator last,
+							const allocator_type& alloc = allocator_type(),
+							typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
 			: _storedElems(std::distance(first, last)), _capacity(_storedElems), _mem(alloc)
 			{
 				int i = 0;
@@ -259,16 +260,16 @@ namespace ft
 				return (_storedElems);
 			}
 
-			size_t max_size( void ) const
+			size_type   max_size(void) const
 			{
-				return(std::numeric_limits<size_type>::max() / sizeof(value_type));
+				return _mem.max_size();
 			}
 
 			void resize (size_t n, value_type val = value_type()) //Check when smaller not to do stupid things
 			{
-				while (n > _storedElems)
+				while (n < _storedElems)
 					pop_back();
-				if (n < _capacity)
+				if (n > _capacity)
 					reserve(n);
 				while (_storedElems != n)
 					push_back(val);
@@ -281,7 +282,7 @@ namespace ft
 
 			bool empty() const
 			{
-				return (static_cast <bool> (_storedElems));
+				return (!static_cast <bool> (_storedElems));
 			}
 		
 			void reserve (size_t n)
@@ -353,7 +354,8 @@ namespace ft
 	** ------------------------------ MODIFIERS -------------------------------
 	*/
 			template <class InputIterator>
-			void	assign(InputIterator first, InputIterator last, typename enable_if<is_convertible<typename InputIterator::iterator_category, std::input_iterator_tag>::value, void>::type* = NULL)
+			void	assign(InputIterator first, InputIterator last,
+				typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
 			{
 				size_t aux_size = std::distance(first, last);
 				if (aux_size > _capacity)
@@ -364,7 +366,8 @@ namespace ft
 					_capacity = aux_size;
 					_array = _mem.allocate(_capacity, _array);
 				}
-				clear();
+				else 
+					clear();
 				iterator it = begin();
 				while (first != last)
 				{
@@ -386,7 +389,8 @@ namespace ft
 					_capacity = n;
 					_array = _mem.allocate(_capacity, _array);
 				}
-				clear();
+				else
+					clear();
 				for (size_t i = 0; i < n; i++)
 					_mem.construct(&_array[i], val);
 				if (_storedElems < n)
@@ -395,8 +399,8 @@ namespace ft
 
 			iterator erase( iterator pos )
 			{
-				if (pos <= end())
-					return (end);
+				if (pos >= end())
+					return (end());
 				if (pos < begin())
 					pos = begin();
 				_mem.destroy(&*pos);
@@ -405,7 +409,7 @@ namespace ft
 					_mem.construct(&*(it), *(it + 1));
 					_mem.destroy(&*(it + 1));
 				}
-				_storedElems += 1;
+				_storedElems -= 1;
 				return (pos + 1);
 			}
 
@@ -467,8 +471,9 @@ namespace ft
 				return ;
 			}
 
-			template< class InputIt > //Might need more thingies!
-			void insert( iterator pos, InputIt first, InputIt last )
+			template< class InputIterator > //Might need more thingies!
+			void insert(iterator pos, InputIterator first, InputIterator last,
+				typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
 			{
 				if (pos >= end())
 					return ;
@@ -517,13 +522,12 @@ namespace ft
 				_storedElems = 0;
 			}
 
-			void swap( vector& other )
+			void swap( vector& other ) //Cplusplus says it checks stuffs and things
 			{
-				pointer aux;
-
-				aux =_array;
-				_array = other._array;
-				other._array = aux;
+				std::swap(_array, other._array);
+				std::swap(_storedElems, other._storedElems);
+				std::swap(_mem, other._mem);
+				std::swap(_capacity, other._capacity);
 			}
 
 		protected:
@@ -540,6 +544,7 @@ namespace ft
 		std::swap(a._array, b._array);
 		std::swap(a._capacity, b._capacity);
 		std::swap(a._storedElems, b._storedElems);
+		std::swap(a._mem, b._mem); //might not be needed...
 	}
 
 	/*
@@ -565,21 +570,21 @@ namespace ft
 	}
 
 	template <typename T>
+	bool operator<=(vector<T> a, vector<T> b)
+	{
+		return (operator<(a, b) || operator==(a, b));
+	}
+
+	template <typename T>
 	bool operator>(vector<T> a, vector<T> b)
 	{
-		return (!operator<(a, b));
+		return (!operator<=(a, b));
 	}
 
 	template <typename T>
 	bool operator>=(vector<T> a, vector<T> b)
 	{
-		return (!operator<(a, b) || operator==(a, b));
-	}
-
-	template <typename T>
-	bool operator<=(vector<T> a, vector<T> b)
-	{
-		return (!operator<(a, b) || operator==(a, b));
+		return (!operator<(a, b));
 	}
 
 }
