@@ -453,7 +453,6 @@ namespace ft
 
 			void insert( iterator pos, size_type count, const T& value ) //TODO: Make a function to shift elements left and right?
 			{
-				std::cout << "Hello there\n";
 				if (pos >= end())
 					return ;
 				if (pos < begin())
