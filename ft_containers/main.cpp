@@ -46,7 +46,8 @@ int main()
 	//ft::vector<std::string> v1;
 
 	//v1.resize(10, "test");
-	test_vector();
+	//test_vector();
+	test_stack();
 	//for (ft::vector<std::string>::iterator it = v1.begin(); it < v1.end(); it++)
 	//	std::cout << *it << std::endl;
 	return 0;

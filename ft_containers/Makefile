@@ -1,5 +1,5 @@
 NAME	= ft_containers
-SRCS	= main.cpp tests/vector.cpp
+SRCS	= main.cpp tests/vector.cpp tests/stack.cpp
 OBJS	= $(SRCS:.cpp=.o)
 CXX		= clang++
 CPPFLAGS	= -Wall -Werror -Wextra -std=c++98

@@ -8,6 +8,7 @@
 # include <queue>
 # include <iostream>
 # include "../vector.hpp"
+# include "../stack.hpp"
 
 # ifdef __linux__
 #  define RESET "\e[0m"

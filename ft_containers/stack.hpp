@@ -1,3 +1,5 @@
+#ifndef STACK_HPP
+# define STACK_HPP
 #include "vector.hpp"
 
 namespace ft
@@ -56,36 +58,38 @@ namespace ft
 	template <typename T>
 	 bool operator==(const stack <T> &a, const stack <T> &b)
 		{
-			return(a == b);
+			return(a.data == b.data);
 		}
 
 	template <typename T>
 	bool operator!=(const stack <T> &a, const stack <T> &b)
 		{
-			return (a != b);
+			return (a.data != b.data);
 		}
 
 	template <typename T>
 	bool operator<(const stack <T> &a, const stack <T> &b)
 		{
-			return (a < b);
+			return (a.data < b.data);
 		}
 
 	template <typename T>
 	bool operator>(const stack <T> &a, const stack <T> &b)
 		{
-			return (a > b);
+			return (a.data > b.data);
 		}
 
 	template <typename T>
 	bool operator>=(const stack <T> &a, const stack <T> &b)
 		{
-			return (a >= b);
+			return (a.data >= b.data);
 		}
 
 	template <typename T>
 	bool operator<=(const stack <T> &a, const stack <T> &b)
 		{
-			return (a <= b);
+			return (a.data <= b.data);
 		}
 }
+
+#endif
