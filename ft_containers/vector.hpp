@@ -34,86 +34,112 @@ namespace ft
 
 		virtual ~VectorIterator() {}
 
-		VectorIterator &operator=(VectorIterator const &src) {
+		VectorIterator &operator=(VectorIterator const &src)
+		{
 			this->p = src.p;
 			return (*this);
 		}
 
-		reference operator*() {
+		reference operator*()
+		{
 			return (*this->p);
 		}
-		const_reference operator*() const {
+		const_reference operator*() const
+		{
 			return (*this->p);
 		}
 		pointer operator->() {
 			return (this->p);
 		}
-		const_pointer operator->() const {
+		const_pointer operator->() const
+		{
 			return (this->p);
 		}
-		reference operator[](int val) {
+		reference operator[](int val)
+		{
 			return (*(this->p + val));
 		}
-		const_reference operator[](int val) const {
+		const_reference operator[](int val) const
+		{
 			return (*(this->p + val));
 		}
 
-		VectorIterator operator++(int) {
+		VectorIterator operator++(int)
+		{
 			VectorIterator tmp(*this);
 			++this->p;
 			return (tmp);
 		}
-		VectorIterator &operator++() {
+		VectorIterator &operator++()
+		{
 			++this->p;
 			return (*this);
 		}
-		VectorIterator operator--(int) {
+		VectorIterator operator--(int)
+		{
 			VectorIterator tmp(*this);
 			--this->p;
 			return (tmp);
 		}
-		VectorIterator &operator--() {
+		VectorIterator &operator--()
+		{
 			--this->p;
 			return (*this);
 		}
 
-		VectorIterator &operator+=(int value) {
+		VectorIterator &operator+=(int value)
+		{
 			this->p += value;
 			return (*this);
 		}
-		VectorIterator operator+(int value) const {
+		VectorIterator operator+(int value) const
+		{
 			VectorIterator tmp(*this);
 			return (tmp += value);
 		}
-		VectorIterator &operator-=(int value) {
+		VectorIterator &operator-=(int value)
+		{
 			this->p -= value;
 			return (*this);
 		}
-		VectorIterator operator-(int value) const {
+		VectorIterator operator-(int value) const
+		{
 			VectorIterator tmp(*this);
 			return (tmp -= value);
 		}
-		difference_type operator-(VectorIterator const &src) const {
+		difference_type operator-(VectorIterator const &src) const
+		{
 			return (this->p - src.p);
 		}
 
-		bool operator==(VectorIterator const &src) const {
+		bool operator==(VectorIterator const &src) const
+		{
 			return (this->p == src.p);
 		}
-		bool operator!=(VectorIterator const &src) const {
+		bool operator!=(VectorIterator const &src) const
+		{
 			return (this->p != src.p);
 		}
-		bool operator<(VectorIterator const &src) const {
+		bool operator<(VectorIterator const &src) const
+		{
 			return (this->p < src.p);
 		}
-		bool operator<=(VectorIterator const &src) const {
+		bool operator<=(VectorIterator const &src) const
+		{
 			return (this->p <= src.p);
 		}
-		bool operator>(VectorIterator const &src) const {
+		bool operator>(VectorIterator const &src) const
+		{
 			return (this->p > src.p);
 		}
-		bool operator>=(VectorIterator const &src) const {
+		bool operator>=(VectorIterator const &src) const
+		{
 			return (this->p >= src.p);
+		}
+
+		operator	VectorIterator<const T>(void) const
+		{
+			return VectorIterator<const T>(const_cast<T *>(p));
 		}
 	};
 
@@ -152,21 +178,18 @@ namespace ft
 				_array = _mem.allocate(1 * sizeof(value_type));
 			}
 
-			explicit vector(size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) : _mem(alloc), _capacity(1), _storedElems(0)
+			explicit vector(size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) : _mem(alloc), _capacity(n), _storedElems(n)
 			{
-				while (_capacity < n)
-					_capacity *= 2;
 				_array = _mem.allocate(_capacity * sizeof(value_type));
 				for (size_t i = 0; i < _capacity; i++)
 					_mem.construct(&_array[i], val);
-				_storedElems = n;
 			}
 
 			template <typename InputIterator>
 			vector (InputIterator first, InputIterator last,
 							const allocator_type& alloc = allocator_type(),
 							typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
-			: _storedElems(std::distance(first, last)), _capacity(_storedElems), _mem(alloc)
+			: _mem(alloc), _capacity(std::distance(first, last)), _storedElems(_capacity)
 			{
 				int i = 0;
 				_array = _mem.allocate(_capacity * sizeof(value_type));
@@ -532,19 +555,16 @@ namespace ft
 
 		protected:
 			std::allocator <value_type>	_mem;
-			pointer				_array;
-			size_t				_capacity;
-			size_t				_storedElems;
+			pointer						_array;
+			size_t						_capacity;
+			size_t						_storedElems;
 
 	};
 
 	template<typename T>
 	void swap(vector<T>a, vector<T> b)
 	{
-		std::swap(a._array, b._array);
-		std::swap(a._capacity, b._capacity);
-		std::swap(a._storedElems, b._storedElems);
-		std::swap(a._mem, b._mem); 
+		a.swap(b);
 	}
 
 	/*
@@ -588,8 +608,5 @@ namespace ft
 	}
 
 }
-
-
-
 
 #endif /* ********************************************************** VECTOR_H */
