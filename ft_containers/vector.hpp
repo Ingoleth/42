@@ -173,10 +173,7 @@ namespace ft
 	** --------------------------------- CONSTRUCTOR ---------------------------------
 	*/
 
-			explicit vector (const allocator_type& alloc = allocator_type()) : _mem(alloc), _capacity(1), _storedElems(0)
-			{
-				_array = _mem.allocate(1 * sizeof(value_type));
-			}
+			explicit vector (const allocator_type& alloc = allocator_type()) : _mem(alloc), _array(0), _capacity(0), _storedElems(0) {}
 
 			explicit vector(size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) : _mem(alloc), _capacity(n), _storedElems(n)
 			{
@@ -215,7 +212,7 @@ namespace ft
 
 			vector &		operator=( vector const & rhs )
 			{
-				if (_array) //Might not work?
+				if (_capacity) //Might not work?
 				{
 					for (size_t i = 0; i < _storedElems; i++)
 						_mem.destroy(&_array[i]);
@@ -227,7 +224,7 @@ namespace ft
 					_array = _mem.allocate(_capacity * sizeof(value_type));
 					_storedElems = rhs._storedElems;
 					for (size_t i = 0; i < _storedElems; i++)
-						_array[i] = rhs._array[i];
+						_mem.construct(&_array[i], rhs._array[i]);
 				}
 				return (*this);
 			}
