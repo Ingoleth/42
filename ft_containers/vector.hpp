@@ -177,7 +177,7 @@ namespace ft
 
 			explicit vector(size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) : _mem(alloc), _capacity(n), _storedElems(n)
 			{
-				_array = _mem.allocate(_capacity * sizeof(value_type));
+				_array = _mem.allocate(_capacity);
 				for (size_t i = 0; i < _capacity; i++)
 					_mem.construct(&_array[i], val);
 			}
@@ -189,7 +189,7 @@ namespace ft
 			: _mem(alloc), _capacity(std::distance(first, last)), _storedElems(_capacity)
 			{
 				int i = 0;
-				_array = _mem.allocate(_capacity * sizeof(value_type));
+				_array = _mem.allocate(_capacity);
 				while (first != last)
 				{
 					_mem.construct(&_array[i], *first);
@@ -221,7 +221,7 @@ namespace ft
 				if (rhs._capacity)
 				{
 					_capacity = rhs._capacity;
-					_array = _mem.allocate(_capacity * sizeof(value_type));
+					_array = _mem.allocate(_capacity);
 					_storedElems = rhs._storedElems;
 					for (size_t i = 0; i < _storedElems; i++)
 						_mem.construct(&_array[i], rhs._array[i]);
@@ -313,10 +313,7 @@ namespace ft
 					return ;
 				aux_ptr = _mem.allocate(n, _array);
 				for (size_t i = 0; i < _storedElems; i++)
-				{
 					aux_ptr[i] = _array[i];
-					_mem.destroy(&_array[i]);
-				}
 				_mem.deallocate(_array, _capacity);
 				_array = aux_ptr;
 				_capacity = n;
@@ -339,7 +336,7 @@ namespace ft
 			reference at (size_t n)
 			{
 				if (n >= _storedElems) // check
-					throw (std::out_of_range("Because reasons"));
+					throw (std::out_of_range("Because reasons")); //Change!!!!
 				return (_array[n]);
 			}
 		
@@ -425,10 +422,7 @@ namespace ft
 					pos = begin();
 				_mem.destroy(&*pos);
 				for (iterator it = pos; it + 1 < end(); it++)
-				{
-					_mem.construct(&*(it), *(it + 1));
-					_mem.destroy(&*(it + 1));
-				}
+					*it = *(it + 1);
 				_storedElems -= 1;
 				return (pos + 1);
 			}
@@ -444,10 +438,7 @@ namespace ft
 				for (iterator it = first; it < last; it++)
 					_mem.destroy(&*it);
 				for (iterator it = last, it2 = first; it < end(); it++, it2++)
-				{
-					_mem.construct(&*(it2), *(it));
-					_mem.destroy(&*(it));
-				}
+					*it2 = *it;
 				_storedElems -= last - first;
 				return (last);
 			}
@@ -462,10 +453,7 @@ namespace ft
 				reserve(_storedElems + 1);
 				pos = begin() + offset;
 				for (iterator it = end(); it > pos; it--)
-				{
-					_mem.construct(&*(it), *(it - 1));
-					_mem.destroy(&*(it - 1));
-				}
+					*it = *(it - 1);
 				_mem.construct(&*pos, value);
 				_storedElems += 1;
 				return (pos + 1);
@@ -481,10 +469,7 @@ namespace ft
 				reserve(_storedElems + count);
 				pos = begin() + offset;
 				for (iterator it = end() + count; it >= pos + count; it--)
-				{
-					_mem.construct(&*(it), *(it - count));
-					_mem.destroy(&*(it - count));
-				}
+					*it = *(it - count);
 				for (iterator aux = pos + count; pos < aux; pos++)
 					_mem.construct(&*pos, value);
 				_storedElems += count;
@@ -504,10 +489,7 @@ namespace ft
 				reserve(_storedElems + count);
 				pos = begin() + offset;
 				for (iterator it = end() + count; it >= pos + count; it--)
-				{
-					_mem.construct(&*(it), *(it - count));
-					_mem.destroy(&*(it - count));
-				}
+					*it = *(it - count);
 				for (iterator aux = pos + count; first < last; pos++, first++)
 					_mem.construct(&*pos, *first);
 				_storedElems += count;
