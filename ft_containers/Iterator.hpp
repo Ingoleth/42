@@ -44,6 +44,11 @@ namespace ft
 		ReverseIterator(): It() {}
 		ReverseIterator(It const &it): It(it) {}
 		ReverseIterator(ReverseIterator const &other): It(other.p) {}
+
+		It base() const
+		{
+			return (this->p);
+		}
 		
 		ReverseIterator &operator=(ReverseIterator const &other)
 		{
@@ -75,26 +80,39 @@ namespace ft
 		It &operator++() {
 			return (this->It::operator--());
 		}
-		ReverseIterator operator--(int) {
+		ReverseIterator operator--(int)
+		{
 			ReverseIterator tmp(*this);
 			operator--();
 			return (tmp);
 		}
-		It &operator--() {
+
+		It &operator--()
+		{
 			return (this->It::operator++());
 		}
-		bool operator<(ReverseIterator const &other) const {
+		bool operator<(ReverseIterator const &other) const
+		{
 			return (this->It::operator>(other));
 		}
-		bool operator<=(ReverseIterator const &other) const {
+		bool operator<=(ReverseIterator const &other) const
+		{
 			return (this->It::operator>=(other));
 		}
-		bool operator>(ReverseIterator const &other) const {
+		bool operator>(ReverseIterator const &other) const
+		{
 			return (this->It::operator<(other));
 		}
-		bool operator>=(ReverseIterator const &other) const {
+		bool operator>=(ReverseIterator const &other) const
+		{
 			return (this->It::operator<=(other));
 		}
+
+		operator	ReverseIterator<const It>(void) const
+		{
+			return ReverseIterator<const It>(this->p);
+		}
+
 	};
 }
 
