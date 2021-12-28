@@ -198,7 +198,7 @@ namespace ft
 				}
 			}
 
-			vector( vector const & src ) : _array(0)
+			vector( vector const & src ) : _array(0), _capacity(0), _storedElems(0) //Not quite sure I like this...
 			{
 				*this = src;
 			}
@@ -218,7 +218,7 @@ namespace ft
 						_mem.destroy(&_array[i]);
 					_mem.deallocate(_array, _capacity);
 				}
-				if (rhs._array)
+				if (rhs._capacity)
 				{
 					_capacity = rhs._capacity;
 					_array = _mem.allocate(_capacity * sizeof(value_type));
