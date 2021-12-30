@@ -7,16 +7,14 @@ namespace ft
 	template < class T, class _Sequence = vector<T> >
 	class stack
 	{
+	public:
 
+		
 		typedef typename    _Sequence::value_type		value_type;
 		typedef typename    _Sequence::reference		reference;
 		typedef typename    _Sequence::const_reference	const_reference;
 		typedef typename    _Sequence::size_type        size_type;
 		typedef             _Sequence                   container_type;
-
-	protected:
-		container_type data;
-	public:
 		
 		//explicit stack () : data(){};
 
@@ -53,40 +51,61 @@ namespace ft
 		{
 			data.pop_back();
 		}
+
+	template <class Tn, class _SequenceN>
+	friend bool operator==(const stack <Tn, _SequenceN> &a, const stack <Tn, _SequenceN> &b);
+
+	template <class Tn, class _SequenceN>
+	friend	bool operator!=(const stack <Tn, _SequenceN> &a, const stack <Tn, _SequenceN> &b);
+
+	template <class Tn, class _SequenceN>
+	friend	bool operator<(const stack <Tn, _SequenceN> &a, const stack <Tn, _SequenceN> &b);
+
+	template <class Tn, class _SequenceN>
+	friend	bool operator>(const stack <Tn, _SequenceN> &a, const stack <Tn, _SequenceN> &b);
+
+	template <class Tn, class _SequenceN>
+	friend	bool operator>=(const stack <Tn, _SequenceN> &a, const stack <Tn, _SequenceN> &b);
+
+	template <class Tn, class _SequenceN>
+	friend	bool operator<=(const stack <Tn, _SequenceN> &a, const stack <Tn, _SequenceN> &b);
+
+		protected:
+			container_type data;
 	};
 
-	template <typename T>
-	 bool operator==(const stack <T> &a, const stack <T> &b)
+	template <class T,  class _Sequence>
+	 bool operator==(const stack <T, _Sequence> &a, const stack <T, _Sequence> &b)
 		{
 			return(a.data == b.data);
 		}
 
-	template <typename T>
-	bool operator!=(const stack <T> &a, const stack <T> &b)
+	template <class T,  class _Sequence>
+	bool operator!=(const stack <T, _Sequence> &a, const stack <T, _Sequence> &b)
 		{
 			return (a.data != b.data);
 		}
 
-	template <typename T>
-	bool operator<(const stack <T> &a, const stack <T> &b)
+	template <class T,  class _Sequence>
+	bool operator<(const stack <T, _Sequence> &a, const stack <T, _Sequence> &b)
 		{
 			return (a.data < b.data);
 		}
 
-	template <typename T>
-	bool operator>(const stack <T> &a, const stack <T> &b)
+	template <class T,  class _Sequence>
+	bool operator>(const stack <T, _Sequence> &a, const stack <T, _Sequence> &b)
 		{
 			return (a.data > b.data);
 		}
 
-	template <typename T>
-	bool operator>=(const stack <T> &a, const stack <T> &b)
+	template <class T,  class _Sequence>
+	bool operator>=(const stack <T, _Sequence> &a, const stack <T, _Sequence> &b)
 		{
 			return (a.data >= b.data);
 		}
 
-	template <typename T>
-	bool operator<=(const stack <T> &a, const stack <T> &b)
+	template <class T,  class _Sequence>
+	bool operator<=(const stack <T, _Sequence> &a, const stack <T, _Sequence> &b)
 		{
 			return (a.data <= b.data);
 		}
