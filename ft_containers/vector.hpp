@@ -28,7 +28,8 @@ namespace ft
 		pointer p;
 		VectorIterator(): p(0) {}
 
-		VectorIterator(pointer p): p(p) {}
+
+		VectorIterator(const pointer p): p(p) {}
 
 		VectorIterator(VectorIterator const &src): p(src.p) {}
 
@@ -48,17 +49,21 @@ namespace ft
 		{
 			return (*this->p);
 		}
-		pointer operator->() {
+
+		pointer operator->()
+		{
 			return (this->p);
 		}
 		const_pointer operator->() const
 		{
 			return (this->p);
 		}
+
 		reference operator[](int val)
 		{
 			return (*(this->p + val));
 		}
+
 		const_reference operator[](int val) const
 		{
 			return (*(this->p + val));
@@ -70,85 +75,120 @@ namespace ft
 			++this->p;
 			return (tmp);
 		}
+
 		VectorIterator &operator++()
 		{
 			++this->p;
 			return (*this);
 		}
+
 		VectorIterator operator--(int)
 		{
 			VectorIterator tmp(*this);
 			--this->p;
 			return (tmp);
 		}
+
 		VectorIterator &operator--()
 		{
 			--this->p;
 			return (*this);
 		}
 
-		VectorIterator &operator+=(int value)
+		VectorIterator &operator+=(difference_type value)
 		{
 			this->p += value;
 			return (*this);
 		}
-		VectorIterator operator+(int value) const
+
+		VectorIterator operator+(difference_type value) const
 		{
 			VectorIterator tmp(*this);
 			return (tmp += value);
 		}
-		VectorIterator &operator-=(int value)
+	
+		VectorIterator &operator-=(difference_type value)
 		{
 			this->p -= value;
 			return (*this);
 		}
-		VectorIterator operator-(int value) const
+
+		difference_type	operator-(const VectorIterator<T>& value) const
+		{
+			return this->base() - value.base();
+		}
+
+		VectorIterator operator-(difference_type value) const //Change
 		{
 			VectorIterator tmp(*this);
 			return (tmp -= value);
 		}
-		difference_type operator-(VectorIterator const &src) const
+
+		T *base() const
 		{
-			return (this->p - src.p);
+			return (this->p);
 		}
 
-		bool operator==(VectorIterator const &src) const
+		operator VectorIterator<const T>()
 		{
-			return (this->p == src.p);
-		}
-		bool operator!=(VectorIterator const &src) const
-		{
-			return (this->p != src.p);
-		}
-		bool operator<(VectorIterator const &src) const
-		{
-			return (this->p < src.p);
-		}
-		bool operator<=(VectorIterator const &src) const
-		{
-			return (this->p <= src.p);
-		}
-		bool operator>(VectorIterator const &src) const
-		{
-			return (this->p > src.p);
-		}
-		bool operator>=(VectorIterator const &src) const
-		{
-			return (this->p >= src.p);
+			return(static_cast<const T *> (p));
 		}
 
-		operator	VectorIterator<const T>(void) const
-		{
-			return VectorIterator<const T>(const_cast<T *>(p));
-		}
 	};
+
+	template<typename T, typename U>
+	bool operator==(VectorIterator<T> const &a, VectorIterator<U> const &b)
+	{
+		return (a.base() == b.base());
+	}
+
+	template<typename T>
+	bool operator==(VectorIterator<T> const &a, T *const &b)
+	{
+		return (a.base() == b);
+	}
+
+	template<typename T, typename U>
+	bool operator!=(VectorIterator<T> const &a, VectorIterator<U> const &b)
+	{
+		return (a.base() != b.base());
+	}
+
+	template<typename T, typename U>
+	bool operator<(VectorIterator<T> const &a, VectorIterator<U> const &b)
+	{
+		return (a.base() < b.base());
+	}
+
+	template<typename T, typename U>
+	bool operator<=(VectorIterator<T> const &a, VectorIterator<U> const &b)
+	{
+		return (a.base() <= b.base());
+	}
+	template<typename T, typename U>
+	bool operator>(VectorIterator<T> const &a, VectorIterator<U> const &b)
+	{
+		return (a.base() > b.base());
+	}
+
+	template<typename T, typename U>
+	bool operator>=(VectorIterator<T> const &a, VectorIterator<U> const &b)
+	{
+		return (a.base() >= b.base());
+	}
+
+	template <typename T>
+	VectorIterator<T>	operator+(int lhs, VectorIterator<T> rhs)
+	{
+		return (VectorIterator<T>(rhs.base() + lhs));
+	}
 
 	template<typename T>
 	std::ostream &			operator<<( std::ostream & o, VectorIterator<T> const & i )
-{
-	o << i.p;
-	return o;
-}
+	{
+		o << i.p;
+		return o;
+	}
 
 	template < class T, class Alloc = std::allocator<T> >
 	class vector
@@ -424,7 +464,7 @@ namespace ft
 				for (iterator it = pos; it + 1 < end(); it++)
 					*it = *(it + 1);
 				_storedElems -= 1;
-				return (pos + 1);
+				return (pos);
 			}
 
 			iterator erase( iterator first, iterator last )
@@ -440,15 +480,11 @@ namespace ft
 				for (iterator it = last, it2 = first; it < end(); it++, it2++)
 					*it2 = *it;
 				_storedElems -= last - first;
-				return (last);
+				return (first);
 			}
 
 			iterator insert(iterator pos, const T& value )
 			{
-				if (pos > end())
-					return (end());
-				if (pos < begin())
-					return (begin());
 				size_t offset = pos - begin();
 				reserve(_storedElems + 1);
 				pos = begin() + offset;
@@ -456,15 +492,11 @@ namespace ft
 					*it = *(it - 1);
 				_mem.construct(&*pos, value);
 				_storedElems += 1;
-				return (pos + 1);
+				return (pos);
 			}
 
 			void insert( iterator pos, size_type count, const T& value ) //TODO: Make a function to shift elements left and right?
 			{
-				if (pos >= end())
-					return ;
-				if (pos < begin())
-					return ;
 				size_t offset = pos - begin();
 				reserve(_storedElems + count);
 				pos = begin() + offset;
@@ -480,17 +512,13 @@ namespace ft
 			void insert(iterator pos, InputIterator first, InputIterator last,
 				typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
 			{
-				if (pos >= end())
-					return ;
-				if (pos < begin())
-					return ;
 				size_t offset = pos - begin();
 				size_t count = std::distance(first, last);
-				reserve(_storedElems + count);
+				reserve(_storedElems + count); //Peta al hacer el reserve, for some reason :(
 				pos = begin() + offset;
 				for (iterator it = end() + count; it >= pos + count; it--)
 					*it = *(it - count);
-				for (iterator aux = pos + count; first < last; pos++, first++)
+				for (iterator aux = pos + count; first != last; pos++, first++)
 					_mem.construct(&*pos, *first);
 				_storedElems += count;
 				return ;
@@ -540,12 +568,6 @@ namespace ft
 
 	};
 
-	template<typename T>
-	void swap(vector<T>a, vector<T> b)
-	{
-		a.swap(b);
-	}
-
 	/*
 ** ------------------------------ LOGICAL OPERATORS -------------------------------
 */
@@ -584,6 +606,12 @@ namespace ft
 	bool operator>=(vector<T> a, vector<T> b)
 	{
 		return (!operator<(a, b));
+	}
+
+	template<typename T, class Allocator>
+	void swap(ft::vector<T, Allocator> &a, ft::vector<T, Allocator> &b)
+	{
+		a.swap(b);
 	}
 
 }

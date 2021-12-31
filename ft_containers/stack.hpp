@@ -15,8 +15,6 @@ namespace ft
 		typedef typename    _Sequence::const_reference	const_reference;
 		typedef typename    _Sequence::size_type        size_type;
 		typedef             _Sequence                   container_type;
-		
-		//explicit stack () : data(){};
 
 		explicit stack(const container_type &src = container_type()) : data(src) {};
 
