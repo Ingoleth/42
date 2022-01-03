@@ -23,13 +23,13 @@ namespace ft
 		typedef std::random_access_iterator_tag									iterator_category;
 	
 	protected:
-	
-	public:
 		pointer p;
+	public:
+
 		VectorIterator(): p(0) {}
 
 
-		VectorIterator(const pointer p): p(p) {}
+		VectorIterator(const pointer _p): p(_p) {}
 
 		VectorIterator(VectorIterator const &src): p(src.p) {}
 
@@ -113,11 +113,6 @@ namespace ft
 			return (*this);
 		}
 
-		difference_type	operator-(const VectorIterator<T>& value) const
-		{
-			return this->base() - value.base();
-		}
-
 		VectorIterator operator-(difference_type value) const //Change
 		{
 			VectorIterator tmp(*this);
@@ -132,6 +127,11 @@ namespace ft
 		operator VectorIterator<const T>()
 		{
 			return(static_cast<const T *> (p));
+		}
+
+		operator void*()
+		{
+			return(static_cast<void *> (p));
 		}
 
 	};
@@ -183,6 +183,13 @@ namespace ft
 		return (VectorIterator<T>(rhs.base() + lhs));
 	}
 
+	template<class T, class U>
+	typename ft::VectorIterator<T>::difference_type
+	operator-(const VectorIterator<T>& value1, const VectorIterator<U>& value2)
+	{
+		return value1.base() - value2.base();
+	}
+
 	template<typename T>
 	std::ostream &			operator<<( std::ostream & o, VectorIterator<T> const & i )
 	{
@@ -193,7 +200,6 @@ namespace ft
 	template < class T, class Alloc = std::allocator<T> >
 	class vector
 	{
-		friend void swap(vector<T>a, vector<T> b);
 
 		public:
 
@@ -354,7 +360,8 @@ namespace ft
 				aux_ptr = _mem.allocate(n, _array);
 				for (size_t i = 0; i < _storedElems; i++)
 					aux_ptr[i] = _array[i];
-				_mem.deallocate(_array, _capacity);
+				if (_array) //Might not be needed
+					_mem.deallocate(_array, _capacity);
 				_array = aux_ptr;
 				_capacity = n;
 			}
@@ -500,7 +507,7 @@ namespace ft
 				size_t offset = pos - begin();
 				reserve(_storedElems + count);
 				pos = begin() + offset;
-				for (iterator it = end() + count; it >= pos + count; it--)
+				for (iterator it = end() + count - 1; it >= pos + count; it--)
 					*it = *(it - count);
 				for (iterator aux = pos + count; pos < aux; pos++)
 					_mem.construct(&*pos, value);
@@ -516,7 +523,7 @@ namespace ft
 				size_t count = std::distance(first, last);
 				reserve(_storedElems + count); //Peta al hacer el reserve, for some reason :(
 				pos = begin() + offset;
-				for (iterator it = end() + count; it >= pos + count; it--)
+				for (iterator it = end() + count - 1; it >= pos + count; it--)
 					*it = *(it - count);
 				for (iterator aux = pos + count; first != last; pos++, first++)
 					_mem.construct(&*pos, *first);
@@ -575,6 +582,8 @@ namespace ft
 	template <typename T>
 	bool operator==(vector<T> a, vector<T> b)
 	{
+		if (a.size() != b.size())
+				return (false);
 		return(equal(a.begin(), a.end(), b.begin(), b.end()));
 	}
 
@@ -593,23 +602,23 @@ namespace ft
 	template <typename T>
 	bool operator<=(vector<T> a, vector<T> b)
 	{
-		return (operator<(a, b) || operator==(a, b));
+		return (!(b < a));
 	}
 
 	template <typename T>
 	bool operator>(vector<T> a, vector<T> b)
 	{
-		return (!operator<=(a, b));
+		return (b < a);
 	}
 
 	template <typename T>
 	bool operator>=(vector<T> a, vector<T> b)
 	{
-		return (!operator<(a, b));
+		return (!(a < b));
 	}
 
-	template<typename T, class Allocator>
-	void swap(ft::vector<T, Allocator> &a, ft::vector<T, Allocator> &b)
+	template < class T, class Alloc>
+	void swap(ft::vector<T, Alloc> &a, ft::vector<T, Alloc> &b)
 	{
 		a.swap(b);
 	}
