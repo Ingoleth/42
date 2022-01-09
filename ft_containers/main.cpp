@@ -1,4 +1,3 @@
-//#include "Vector.hpp"
 #include <vector>
 #include <list>
 #include <iostream>
@@ -43,13 +42,24 @@ std::ostream &			operator<<( std::ostream & o, test const & i )
 
 int main()
 {
-	//ft::vector<std::string> v1;
+	ft::BTNode<int> *root = new ft::BTNode<int>();
 
-	//v1.resize(10, "test");
-	test_vector();
-	//test_stack();
-	//for (ft::vector<std::string>::iterator it = v1.begin(); it < v1.end(); it++)
-	//	std::cout << *it << std::endl;
+	root->data = 2;
+	/*for (size_t i = 1; i < 5; i++)
+	{
+		root->add(i, root);
+	}*/
+	root->add(4, root);
+	root->add(3, root);
+	root->add(1, root);
+	root->add(5, root);
+
+
+	//root->remove(2, root);
+
+	root->displayInOrder(root);
+
+	
 	return 0;
 }
 

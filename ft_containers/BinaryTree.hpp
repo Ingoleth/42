@@ -1,4 +1,6 @@
 #include "utils.hpp"
+# ifndef BINARY_TREE
+# define BINARY_TREE
 
 namespace ft
 {
@@ -28,6 +30,7 @@ namespace ft
 
 		BTNode(const T& _data, BTNode *parent) //Assumes that data is not equal to parent data; Sets the parents data pointer to the instance;
 		{
+
 			top = parent;
 			left = 0;
 			right = 0;
@@ -56,45 +59,60 @@ namespace ft
 		{
 			if (!node)
 				return (0);
+			*lastNode = node;
 			if (to_find == node->data)
 				return (node);
-			else if (to_find < node->data)
-			{
-				*lastNode = node;
+			if (to_find < node->data)
 				return (find(to_find, node->left, lastNode));
-			}
-			*lastNode = node;
 			return (find(to_find, node->right, lastNode));
 		}
 
 		BTNode *findSmallest(BTNode *node)
 		{
-			while (node->left)
-				node = node->left;
+			if (node)
+			{
+				while (node->left)
+					node = node->left;
+			}
 			return node;
 		}
 
 		BTNode *findBiggest(BTNode *node)
 		{
-			while (node->right)
-				node = node->right;
+			if (node)
+			{
+				while (node->right)
+					node = node->right;
+			}
 			return node;
 		}
 
-		void add(const T& _data, BTNode *root)
+		pair<ft::BTNode<T> *, bool>add(const T& _data, BTNode *root) //There's much to do here...
 		{
 			BTNode *aux;
-			if (!root || find(_data, root, &aux))
-				return ;
-			new BTNode(_data, aux);
+
+			if (find(_data, root, &aux))
+				return make_pair(aux, false);
+			return(make_pair(new BTNode(_data, aux), true));
 		}
 
 		void remove(const T& _data, BTNode *root)
 		{
 			BTNode *aux;
-			if (!root || !(aux = find(_data, root)))
+
+			if (!root || !find(_data, root, &aux))
 				return ;
-			
+			//Handle if root?
+			if (aux->top->data < aux->data)
+				aux->top->right = NULL;
+			else
+				aux->top->left = NULL;
+			aux->top = NULL;
+			aux = aux->findSmallest(aux);
+			std::cout << aux->data << std::cout;
+			return ;
+			for (; aux; aux = aux->getNext(aux)) //REDO LOGIC so it reuses the nodes...
+				root->add(aux->data, root);
 		}
 
 		size_t size(BTNode *node)
@@ -167,9 +185,10 @@ namespace ft
 			if (root)
 			{
 				displayInOrder(root->left);
-				std::cout << root->data << " ";
+				std::cout << root->data << "\n";
 				displayInOrder(root->right);
 			}
-    }
+	}
 	};
+#endif
 }

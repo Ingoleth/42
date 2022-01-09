@@ -136,9 +136,10 @@ namespace ft
 	}
 
 	template <typename T1, typename T2>
-	pair <T1, T2> &make_pair(T1 first, T2 second)
+	pair <T1, T2> make_pair(T1 first, T2 second)
 	{
-		return (pair<T1, T2>(first, second));
+		pair<T1, T2> aux(first, second);
+		return (aux);
 	}
 
 	/*
