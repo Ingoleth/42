@@ -55,9 +55,9 @@ int main()
 	root->add(5, root);
 
 
-	//root->remove(2, root);
+	root->remove(2, root);
 
-	root->displayInOrder(root);
+	//root->displayInOrder(root);
 
 	
 	return 0;

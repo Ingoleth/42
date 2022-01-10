@@ -98,21 +98,21 @@ namespace ft
 
 		void remove(const T& _data, BTNode *root)
 		{
-			BTNode *aux;
+			BTNode *aux = NULL;
 
 			if (!root || !find(_data, root, &aux))
 				return ;
 			//Handle if root?
+			std::cout << aux << std::endl;
 			if (aux->top->data < aux->data)
 				aux->top->right = NULL;
 			else
 				aux->top->left = NULL;
-			aux->top = NULL;
-			aux = aux->findSmallest(aux);
-			std::cout << aux->data << std::cout;
-			return ;
-			for (; aux; aux = aux->getNext(aux)) //REDO LOGIC so it reuses the nodes...
-				root->add(aux->data, root);
+			std::cout << "-----\n";
+			displayInOrder(root);
+			std::cout << "-----\n";
+			//insert_node(aux->left, aux->top);
+			//insert_node(aux->right, aux->top);
 		}
 
 		size_t size(BTNode *node)
@@ -188,7 +188,28 @@ namespace ft
 				std::cout << root->data << "\n";
 				displayInOrder(root->right);
 			}
-	}
+		}
+
+		private:
+
+		//Inserts a node and its descendants onto the tree. Note that find is used to find the nearest node on the tree;
+		void insert_node(BTNode *node, BTNode *root)
+		{
+			if (!node)
+				return;
+			insert_node(node->left, root);
+			insert_node(node->right, root);
+			BTNode *parent = NULL;
+			find(node->data, root, &parent);
+			if (parent) //Technically needed...
+			{
+				if (parent->data > data)
+					parent->left = this;
+				else
+					parent->right = this;
+				node->top = parent;
+			}
+		}
 	};
 #endif
 }
