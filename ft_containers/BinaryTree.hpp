@@ -35,7 +35,7 @@ namespace ft
 			left = 0;
 			right = 0;
 			data = _data;
-			if (parent) //Technically needed...
+			if (parent) // Might not be Technically needed...
 			{
 				if (parent->data > data)
 					parent->left = this;
@@ -47,7 +47,7 @@ namespace ft
 		BTNode *find(T to_find, BTNode *node) //Maybe not make it recurssion based?
 		{
 			if (!node)
-				return (0);
+				return (NULL);
 			if (to_find == node->data)
 				return (node);
 			else if (to_find < node->data)
@@ -58,7 +58,7 @@ namespace ft
 		BTNode *find(T to_find, BTNode *node, BTNode **lastNode)
 		{
 			if (!node)
-				return (0);
+				return (NULL);
 			*lastNode = node;
 			if (to_find == node->data)
 				return (node);
@@ -100,19 +100,24 @@ namespace ft
 		{
 			BTNode *aux = NULL;
 
-			if (!root || !find(_data, root, &aux))
+			if (!root || !(aux = find(_data, root)))
 				return ;
-			//Handle if root?
-			std::cout << aux << std::endl;
+			if (root == aux)
+			{
+				std::cout << "Hello\n";
+				//Memory leak;
+				root = aux->right;
+				if (root)
+					root->top = NULL;
+				insert_node(aux->left, root);
+				return ;
+			}	
 			if (aux->top->data < aux->data)
 				aux->top->right = NULL;
 			else
 				aux->top->left = NULL;
-			std::cout << "-----\n";
-			displayInOrder(root);
-			std::cout << "-----\n";
-			//insert_node(aux->left, aux->top);
-			//insert_node(aux->right, aux->top);
+			insert_node(aux->left, aux->top);
+			insert_node(aux->right, aux->top);
 		}
 
 		size_t size(BTNode *node)
@@ -200,15 +205,17 @@ namespace ft
 			insert_node(node->left, root);
 			insert_node(node->right, root);
 			BTNode *parent = NULL;
-			find(node->data, root, &parent);
-			if (parent) //Technically needed...
+			if (!root)
 			{
-				if (parent->data > data)
-					parent->left = this;
-				else
-					parent->right = this;
-				node->top = parent;
+				root = node;
+				return ;
 			}
+			find(node->data, root, &parent);
+			if (parent->data > data)
+				parent->left = this;
+			else
+				parent->right = this;
+			node->top = parent;
 		}
 	};
 #endif

@@ -57,7 +57,7 @@ int main()
 
 	root->remove(2, root);
 
-	//root->displayInOrder(root);
+	root->displayInOrder(root);
 
 	
 	return 0;
