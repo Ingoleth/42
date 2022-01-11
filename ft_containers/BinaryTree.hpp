@@ -110,8 +110,6 @@ namespace ft
 			
 			if (!aux)
 				return;
-			aux->left = NULL;
-			aux->right = NULL;
 			delete aux;
 		}
 
@@ -202,11 +200,41 @@ namespace ft
 			displayTree(Node->left);
 		}
 
+		void balanceTree(BTNode **Node)
+		{
+			if (!*Node)
+				return;
+
+			int imbalance = heigth((*Node)->left) - heigth((*Node)->right);
+			BTNode *aux = NULL;
+
+			while (imbalance <= -2)
+			{
+				aux = *Node;
+				*Node = (*Node)->right;
+				(*Node)->top = aux->top;
+				aux->right = NULL;
+				insert_node(aux, *Node);
+				imbalance += 2;
+			}
+			while (imbalance >= 2)
+			{
+				aux = *Node;
+				*Node = (*Node)->left;
+				(*Node)->top = aux->top;
+				aux->left = NULL;
+				insert_node(aux, *Node);
+				imbalance -= 2;
+			}
+			balanceTree(&(*Node)->left);
+			balanceTree(&(*Node)->right);
+		}
+
 	private:
 		
 		void insert_node(BTNode *node, BTNode *parent)
 		{
-			if (!node)
+			if (!node || !parent)
 				return ;
 			find(node->data, parent, &parent);
 			if (parent->data < node->data)
@@ -214,7 +242,6 @@ namespace ft
 			else
 				parent->left = node;
 			node->top = parent;
-			
 		}
 
 		BTNode *removeNode(const T& _data, BTNode **root) //Override so it does the search elsewhere?
@@ -228,21 +255,21 @@ namespace ft
 				*root = (*root)->right;
 				(*root)->top = NULL;
 				insert_node(aux->left, *root);
-				return (aux);
 			}
-			if (aux->top->data < aux->data)
-				aux->top->right = NULL;
 			else
-				aux->top->left = NULL;
-			insert_node(aux->left, aux->top);
-			insert_node(aux->right, aux->top);
+			{
+				if (aux->top->data < aux->data)
+					aux->top->right = NULL;
+				else
+					aux->top->left = NULL;
+				insert_node(aux->left, aux->top);
+				insert_node(aux->right, aux->top);
+			}
+			aux->left = NULL;
+			aux->right = NULL;
+			aux->top = NULL;
 			return (aux);
 		}
-
-		/*void balanceTree(BTNode *Node)
-		{
-
-		}*/
 	};
 #endif
 }
