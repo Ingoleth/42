@@ -95,11 +95,16 @@ namespace ft
 			return node;
 		}
 
-		pair<ft::BTNode<T> *, bool>add(const T& _data, BTNode *root) //There's much to do here...
+		pair<ft::BTNode<T> *, bool>add(const T& _data, BTNode **root) //There's much to do here...
 		{
 			BTNode *aux;
 
-			if (find(_data, root, &aux))
+			if (!*root)
+			{
+				*root = new BTNode(_data);
+				return make_pair(*root, true);
+			}
+			if (find(_data, *root, &aux))
 				return make_pair(aux, false);
 			return(make_pair(new BTNode(_data, aux), true));
 		}
@@ -271,5 +276,5 @@ namespace ft
 			return (aux);
 		}
 	};
-#endif
 }
+#endif

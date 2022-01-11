@@ -1,10 +1,9 @@
-#ifndef VECTOR_HPP
-# define VECTOR_HPP
+#ifndef CONTAINERS_MAP_HPP
+# define CONTAINERS_MAP_HPP
 
 # include <functional>
 # include <memory>
 
-# include "utils.hpp"
 # include "Iterator.hpp"
 # include "BinaryTree.hpp"
 
@@ -25,20 +24,20 @@ namespace ft
 		protected:
 			pointer p;
 
-		VectorIterator(): p(0) {}
+		MapIterator(): p(0) {}
 
-		VectorIterator(const pointer _p): p(_p) {}
+		MapIterator(const pointer _p): p(_p) {}
 
-		VectorIterator(VectorIterator const &src): p(src.p) {}
+		MapIterator(MapIterator const &src): p(src.p) {}
 
-		virtual ~VectorIterator() {}
+		virtual ~MapIterator() {}
 
-		BTNode *base( void )
+		BTNode<value_type> *base( void )
 		{
 			return (p);
 		}
 
-		VectorIterator &operator=(VectorIterator const &src)
+		MapIterator &operator=(MapIterator const &src)
 		{
 			this->p = src.p;
 			return (*this);
@@ -63,27 +62,27 @@ namespace ft
 		}
 
 		/*
-			VectorIterator operator++(int)
+			MapIterator operator++(int)
 		{
-			VectorIterator tmp(*this);
+			MapIterator tmp(*this);
 			++this->p;
 			return (tmp);
 		}
 
-		VectorIterator &operator++()
+		MapIterator &operator++()
 		{
 			++this->p;
 			return (*this);
 		}
 
-		VectorIterator operator--(int)
+		MapIterator operator--(int)
 		{
-			VectorIterator tmp(*this);
+			MapIterator tmp(*this);
 			--this->p;
 			return (tmp);
 		}
 
-		VectorIterator &operator--()
+		MapIterator &operator--()
 		{
 			--this->p;
 			return (*this);
@@ -118,24 +117,12 @@ namespace ft
 	** --------------------------------- CONSTRUCTOR ---------------------------------
 	*/
 
-		map() : ptr()
-		{
-
-		}
-
-		map(/* args */)
-		{
-
-		}
-	
-		~map() //TODO: Check node memory management...
-		{
-
-		}
+		map() : tree(NULL), _mem() {}
 
 		~map()
 		{
-
+			if (tree)
+				delete tree;
 		}
 
 	/*									 
@@ -210,38 +197,35 @@ namespace ft
 
 	pair<iterator,bool> insert (const value_type& val)
 	{
-		if (!tree)
-			return (make_pair((tree = new BTNode(val)), true));
-		else
-			return(add(val, root));
+		tree->add(val, &tree);
 	}
 
 	iterator insert (iterator position, const value_type& val)
 	{
-		BTNode *ptr = position.base();
-		if (ptr->data < val)
-			add(val, ptr);
+		BTNode <value_type>*ptr = position.base();
+		if (ptr->findSmallest()->data < val)
+			add(val, &ptr);
 		else
-			add(val, root);
+			add(val, &tree);
 	}
 
 	template <class InputIterator>
 	void insert (InputIterator first, InputIterator last)
 	{
 		for (; first != last; first++)
-			insert(*first);
+			tree->add(*first, &tree);
 	}
 
 	void erase (iterator position)
 	{
-		tree->remove(*position, tree); //TODO:pair stuff, ya know...
+		tree->remove(*position, tree);
 	}
 
 	/*size_type erase (const key_type& k)
 	{
 	}*/
 	
-	void erase (iterator first, iterator last); //How da fuck do I remove stuff without you removing all the things?
+	void erase (iterator first, iterator last) //How da fuck do I remove stuff without you removing all the things?
 	{
 		for (iterator aux = first++; first != last; first = aux)
 			erase(first);
@@ -289,8 +273,9 @@ namespace ft
 		iterator upper_bound (const key_type& k);
 		const_iterator upper_bound (const key_type& k) const;
 
-		pair<const_iterator,const_iterator>	equal_range (const key_type& k) const;
-		pair<iterator,iterator>	equal_range (const key_type& k);
+		//pair<const_iterator,const_iterator>	equal_range (const key_type& k) const;
+		
+		//pair<iterator,iterator>	equal_range (const key_type& k);
 
 	/*
 	** --------------------------------- ALLOCATOR ---------------------------------
@@ -302,7 +287,7 @@ namespace ft
 		}
 
 	private:
-		BTNode<ft::pair<Key, T> > *tree;
+		BTNode<value_type> *tree;
 		allocator_type _mem;
 	};
 

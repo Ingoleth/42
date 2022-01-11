@@ -4,8 +4,10 @@
 #include "stack.hpp"
 #include "vector.hpp"
 #include "BinaryTree.hpp"
+#include "Map.hpp"
 #include <map>
 #include "tests/tests.hpp"
+#include <string>
 
 class test
 {
@@ -42,24 +44,9 @@ std::ostream &			operator<<( std::ostream & o, test const & i )
 
 int main()
 {
-	ft::BTNode<int> *root = new ft::BTNode<int>();
+	ft::map<int, std::string> map;
 
-	root->data = 2;
-	/*for (size_t i = 1; i < 5; i++)
-	{
-		root->add(i, root);
-	}*/
-	root->add(4, root);
-	root->add(3, root);
-	root->add(1, root);
-	root->add(5, root);
-
-
-	root->remove(2, root);
-
-	root->displayInOrder(root);
-
+	map.insert(ft::make_pair(1, "Hello"));
 	
 	return 0;
 }
-
