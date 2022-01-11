@@ -44,6 +44,14 @@ namespace ft
 			}
 		}
 
+		~BTNode()
+		{
+			if (left)
+				delete left;
+			if (right)
+				delete right;
+		}
+
 		BTNode *find(T to_find, BTNode *node) //Maybe not make it recurssion based?
 		{
 			if (!node)
@@ -98,23 +106,13 @@ namespace ft
 
 		void remove(const T& _data, BTNode **root)
 		{
-			BTNode *aux = NULL;
-
-			if (!*root || !(aux = find(_data, *root)))
-				return ;
-			if (*root == aux)
-			{
-				*root = (*root)->right;
-				(*root)->top = NULL;
-				insert_node(aux->left, *root);
-				return ;
-			}
-			if (aux->top->data < aux->data)
-				aux->top->right = NULL;
-			else
-				aux->top->left = NULL;
-			insert_node(aux->left, aux->top);
-			insert_node(aux->right, aux->top);
+			BTNode *aux = removeNode(_data, root);
+			
+			if (!aux)
+				return;
+			aux->left = NULL;
+			aux->right = NULL;
+			delete aux;
 		}
 
 		size_t size(BTNode *node)
@@ -192,6 +190,18 @@ namespace ft
 			}
 		}
 
+		void displayTree(BTNode *Node)
+		{
+			if (!Node)
+				return;
+			displayTree(Node->right);
+			size_t sangría = Node->depth(Node);
+			while (sangría--)
+				std::cout << '\t';
+			std::cout << Node->data << "\n";
+			displayTree(Node->left);
+		}
+
 	private:
 		
 		void insert_node(BTNode *node, BTNode *parent)
@@ -206,6 +216,33 @@ namespace ft
 			node->top = parent;
 			
 		}
+
+		BTNode *removeNode(const T& _data, BTNode **root) //Override so it does the search elsewhere?
+		{
+			BTNode *aux = NULL;
+
+			if (!*root || !(aux = find(_data, *root)))
+				return (NULL);
+			if (*root == aux)
+			{
+				*root = (*root)->right;
+				(*root)->top = NULL;
+				insert_node(aux->left, *root);
+				return (aux);
+			}
+			if (aux->top->data < aux->data)
+				aux->top->right = NULL;
+			else
+				aux->top->left = NULL;
+			insert_node(aux->left, aux->top);
+			insert_node(aux->right, aux->top);
+			return (aux);
+		}
+
+		/*void balanceTree(BTNode *Node)
+		{
+
+		}*/
 	};
 #endif
 }
