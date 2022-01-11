@@ -59,9 +59,9 @@ namespace ft
 		{
 			if (!node)
 				return (NULL);
-			*lastNode = node;
 			if (to_find == node->data)
 				return (node);
+			*lastNode = node;
 			if (to_find < node->data)
 				return (find(to_find, node->left, lastNode));
 			return (find(to_find, node->right, lastNode));
@@ -96,22 +96,19 @@ namespace ft
 			return(make_pair(new BTNode(_data, aux), true));
 		}
 
-		void remove(const T& _data, BTNode *root)
+		void remove(const T& _data, BTNode **root)
 		{
 			BTNode *aux = NULL;
 
-			if (!root || !(aux = find(_data, root)))
+			if (!*root || !(aux = find(_data, *root)))
 				return ;
-			if (root == aux)
+			if (*root == aux)
 			{
-				std::cout << "Hello\n";
-				//Memory leak;
-				root = aux->right;
-				if (root)
-					root->top = NULL;
-				insert_node(aux->left, root);
+				*root = (*root)->right;
+				(*root)->top = NULL;
+				insert_node(aux->left, *root);
 				return ;
-			}	
+			}
 			if (aux->top->data < aux->data)
 				aux->top->right = NULL;
 			else
@@ -144,7 +141,7 @@ namespace ft
 		BTNode *getNext(BTNode *currentNode) // Check return value when biggest num?
 		{
 			if (currentNode->right)
-				return (currentNode->right);
+				return (findSmallest(currentNode->right));
 			T &auxdata = currentNode->data;
 			while (true)
 			{
@@ -160,7 +157,7 @@ namespace ft
 		BTNode *getPrevious(BTNode *currentNode) // Check return value when biggest num?
 		{
 			if (currentNode->left)
-				return (currentNode->left);
+				return (findBiggest(currentNode->left));
 			T &auxdata = currentNode->data;
 			while (true)
 			{
@@ -178,9 +175,9 @@ namespace ft
 			std::cout << "\n-------------------------------\n";
 			std::cout << "Node located at: " << this << std::endl;
 			std::cout << "-------------------------------\n";
-			std::cout << "Parent = " << top << std::endl;
-			std::cout << "Left = " << left << std::endl;
-			std::cout << "Right = " << right << std::endl;
+			std::cout << "Parent = " << top << " (" << (this->top ? this->top->data : 0) << ")\n";
+			std::cout << "Left = " << left << " (" << (this->left ? this->left->data : 0) << ")\n";
+			std::cout << "Right = " << right << " (" << (this->right ? this->right->data : 0) << ")\n";
 			std::cout << "Content = " << data << std::endl;
 			std::cout << "-------------------------------\n";
 		}
@@ -195,27 +192,19 @@ namespace ft
 			}
 		}
 
-		private:
-
-		//Inserts a node and its descendants onto the tree. Note that find is used to find the nearest node on the tree;
-		void insert_node(BTNode *node, BTNode *root)
+	private:
+		
+		void insert_node(BTNode *node, BTNode *parent)
 		{
 			if (!node)
-				return;
-			insert_node(node->left, root);
-			insert_node(node->right, root);
-			BTNode *parent = NULL;
-			if (!root)
-			{
-				root = node;
 				return ;
-			}
-			find(node->data, root, &parent);
-			if (parent->data > data)
-				parent->left = this;
+			find(node->data, parent, &parent);
+			if (parent->data < node->data)
+				parent->right = node;
 			else
-				parent->right = this;
+				parent->left = node;
 			node->top = parent;
+			
 		}
 	};
 #endif
