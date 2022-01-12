@@ -130,12 +130,12 @@ namespace ft
 	*/
 		iterator begin()
 		{
-			return (findSmallestNode(tree));
+			return (tree->findSmallestNode(tree));
 		}
 
 		const_iterator begin() const
 		{
-			return (findSmallestNode(tree));
+			return (tree->findSmallestNode(tree));
 		}
 
 		iterator end()

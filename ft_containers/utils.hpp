@@ -127,13 +127,13 @@ namespace ft
 	template <typename T1, typename T2>
 	bool operator<(const pair<T1, T2> &a, const pair<T1, T2> &b)
 	{
-		return (a.first < b.first && a.second < b.second);
+		return a.first < b.first || (!(b.first < a.first) && a.second < b.second);
 	}
 
 	template <typename T1, typename T2>
 	bool operator>(const pair<T1, T2> &a, const pair<T1, T2> &b)
 	{
-		return (a.first > b.first && a.second > b.second);
+		return (b < a);
 	}
 	
 	template <typename T1, typename T2>
@@ -145,13 +145,13 @@ namespace ft
 	template <typename T1, typename T2>
 	bool operator<=(const pair<T1, T2> &a, const pair<T1, T2> &b)
 	{
-		return (a == b || a < b);
+		return (!(b < a));
 	}
 
 	template <typename T1, typename T2>
 	bool operator>=(const pair<T1, T2> &a, const pair<T1, T2> &b)
 	{
-		return (a == b || a > b);
+		return (!(b > a));
 	}
 
 	template <typename T1, typename T2>

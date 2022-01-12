@@ -27,13 +27,13 @@ namespace ft
 			right = 0;
 		}
 
-		BTNode(const T& _data, BTNode *parent) : data(_data) //Assumes that data is not equal to parent data; Sets the parents data pointer to the instance;
+		BTNode(const T& _data, BTNode *parent) : data(_data)
 		{
 
 			top = parent;
 			left = 0;
 			right = 0;
-			if (parent) // Might not be Technically needed...
+			if (parent)
 			{
 				if (parent->data > data)
 					parent->left = this;
@@ -48,15 +48,6 @@ namespace ft
 				delete left;
 			if (right)
 				delete right;
-		}
-
-		void remove(const T& _data, BTNode **root)
-		{
-			BTNode *aux = removeNode(_data, root);
-			
-			if (!aux)
-				return;
-			delete aux;
 		}
 
 		size_t size(BTNode *node)
@@ -80,36 +71,24 @@ namespace ft
 			return(1 + std::max(heigth(node->left), heigth(node->right)));
 		}
 
-		BTNode *getNext(BTNode *currentNode) // Check return value when biggest num?
+		BTNode *findSmallestNode(BTNode *node)
 		{
-			if (currentNode->right)
-				return (findSmallestNode(currentNode->right));
-			T &auxdata = currentNode->data;
-			while (true)
+			if (node)
 			{
-				currentNode = currentNode->top;
-				if (!currentNode)
-					break;
-				if (currentNode->data > auxdata)
-					return (currentNode);
+				while (node->left)
+					node = node->left;
 			}
-			return (0);
+			return node;
 		}
 
-		BTNode *getPrevious(BTNode *currentNode) // Check return value when biggest num?
+		BTNode *findBiggestNode(BTNode *node)
 		{
-			if (currentNode->left)
-				return (findBiggestNode(currentNode->left));
-			T &auxdata = currentNode->data;
-			while (true)
+			if (node)
 			{
-				currentNode = currentNode->top;
-				if (!currentNode)
-					break;
-				if (currentNode->data < auxdata)
-					return (currentNode);
+				while (node->right)
+					node = node->right;
 			}
-			return (0);
+			return node;
 		}
 
 		void displayNodeInfo()
@@ -117,9 +96,9 @@ namespace ft
 			std::cout << "\n-------------------------------\n";
 			std::cout << "Node located at: " << this << std::endl;
 			std::cout << "-------------------------------\n";
-			std::cout << "Parent = " << top << " (" << (this->top ? this->top->data : 0) << ")\n";
-			std::cout << "Left = " << left << " (" << (this->left ? this->left->data : 0) << ")\n";
-			std::cout << "Right = " << right << " (" << (this->right ? this->right->data : 0) << ")\n";
+			std::cout << "Parent = " << top << " (" << (this->top ? this->top->data : T()) << ")\n";
+			std::cout << "Left = " << left << " (" << (this->left ? this->left->data : T()) << ")\n";
+			std::cout << "Right = " << right << " (" << (this->right ? this->right->data : T()) << ")\n";
 			std::cout << "Content = " << data << std::endl;
 			std::cout << "-------------------------------\n";
 		}
@@ -139,84 +118,12 @@ namespace ft
 			if (!Node)
 				return;
 			displayTree(Node->right);
-			size_t sangría = Node->depth(Node);
-			while (sangría--)
+			size_t offset = Node->depth(Node);
+			while (offset--)
 				std::cout << '\t';
 			std::cout << Node->data << "\n";
 			displayTree(Node->left);
 		}
-
-		void balanceTree(BTNode **Node)
-		{
-			if (!*Node)
-				return;
-
-			int imbalance = heigth((*Node)->left) - heigth((*Node)->right);
-			BTNode *aux = NULL;
-
-			while (imbalance <= -2)
-			{
-				aux = *Node;
-				*Node = (*Node)->right;
-				(*Node)->top = aux->top;
-				aux->right = NULL;
-				insert_node(aux, *Node);
-				imbalance += 2;
-			}
-			while (imbalance >= 2)
-			{
-				aux = *Node;
-				*Node = (*Node)->left;
-				(*Node)->top = aux->top;
-				aux->left = NULL;
-				insert_node(aux, *Node);
-				imbalance -= 2;
-			}
-			balanceTree(&(*Node)->left);
-			balanceTree(&(*Node)->right);
-		}
-
-	private:
-		
-		void insert_node(BTNode *node, BTNode *parent)
-		{
-			if (!node || !parent)
-				return ;
-			findInNode(node->data, parent, &parent);
-			if (parent->data < node->data)
-				parent->right = node;
-			else
-				parent->left = node;
-			node->top = parent;
-		}
-
-		BTNode *removeNode(const T& _data, BTNode **root) //Override so it does the search elsewhere?
-		{
-			BTNode *aux = NULL;
-
-			if (!*root || !(aux = findInNode(_data, *root)))
-				return (NULL);
-			if (*root == aux)
-			{
-				*root = (*root)->right;
-				(*root)->top = NULL;
-				insert_node(aux->left, *root);
-			}
-			else
-			{
-				if (aux->top->data < aux->data)
-					aux->top->right = NULL;
-				else
-					aux->top->left = NULL;
-				insert_node(aux->left, aux->top);
-				insert_node(aux->right, aux->top);
-			}
-			aux->left = NULL;
-			aux->right = NULL;
-			aux->top = NULL;
-			return (aux);
-		}
-
 	};
 
 		template <class T>
@@ -244,26 +151,38 @@ namespace ft
 			return (findInNode(to_find, node->right, lastNode));
 		}
 
-		template <class T>
-		BTNode<T> *findSmallestNode(BTNode<T> *node)
+		template <typename T>
+		BTNode<T> *getNext(BTNode<T> *currentNode) // Check return value when biggest num?
 		{
-			if (node)
+			if (currentNode->right)
+				return (findSmallestNode(currentNode->right));
+			T &auxdata = currentNode->data;
+			while (true)
 			{
-				while (node->left)
-					node = node->left;
+				currentNode = currentNode->top;
+				if (!currentNode)
+					break;
+				if (currentNode->data > auxdata)
+					return (currentNode);
 			}
-			return node;
+			return (0);
 		}
 
-		template <class T>
-		BTNode<T> *findBiggestNode(BTNode<T> *node)
+		template <typename T>
+		BTNode<T> *getPrevious(BTNode<T> *currentNode) // Check return value when biggest num?
 		{
-			if (node)
+			if (currentNode->left)
+				return (findBiggestNode(currentNode->left));
+			T &auxdata = currentNode->data;
+			while (true)
 			{
-				while (node->right)
-					node = node->right;
+				currentNode = currentNode->top;
+				if (!currentNode)
+					break;
+				if (currentNode->data < auxdata)
+					return (currentNode);
 			}
-			return node;
+			return (0);
 		}
 
 		template <class T>
@@ -279,6 +198,76 @@ namespace ft
 			if (findInNode(_data, *root, &aux))
 				return ft::make_pair(aux, false);
 			return(ft::make_pair(new BTNode<T>(_data, aux), true));
+		}
+
+
+		template <class T>
+		void insert_node(BTNode<T> *node, BTNode<T> *parent)
+		{
+			if (!node || !parent)
+				return ;
+			findInNode(node->data, parent, &parent);
+			if (parent->data < node->data)
+				parent->right = node;
+			else
+				parent->left = node;
+			node->top = parent;
+		}
+
+		template <class T>
+		void balanceTree(BTNode<T> **Node)
+		{
+			if (!*Node)
+				return;
+
+			int imbalance = heigth((*Node)->left) - heigth((*Node)->right);
+			BTNode<T> *aux = NULL;
+
+			while (imbalance <= -2)
+			{
+				aux = *Node;
+				*Node = (*Node)->right;
+				(*Node)->top = aux->top;
+				aux->right = NULL;
+				insert_node(aux, *Node);
+				imbalance += 2;
+			}
+			while (imbalance >= 2)
+			{
+				aux = *Node;
+				*Node = (*Node)->left;
+				(*Node)->top = aux->top;
+				aux->left = NULL;
+				insert_node(aux, *Node);
+				imbalance -= 2;
+			}
+			balanceTree(&(*Node)->left);
+			balanceTree(&(*Node)->right);
+		}
+
+		template <class T>
+		void removeNode(const T& _data, BTNode<T> **root)
+		{
+			BTNode<T> *aux = NULL;
+
+			if (!*root || !(aux = findInNode(_data, *root)))
+				return ;
+			if (*root == aux)
+			{
+				*root = (*root)->right;
+				(*root)->top = NULL;
+				insert_node(aux->left, *root);
+			}
+			else
+			{
+				if (aux->top->data < aux->data)
+					aux->top->right = NULL;
+				else
+					aux->top->left = NULL;
+				insert_node(aux->left, aux->top);
+				insert_node(aux->right, aux->top);
+			}
+			delete aux;
 		}
 }
 #endif

@@ -45,10 +45,14 @@ std::ostream &			operator<<( std::ostream & o, test const & i )
 int main()
 {
 	ft::map<int, std::string> map;
-
-	map.insert(ft::make_pair(1, "Hello"));
-	map.insert(ft::make_pair(2, "Goodbye"));
-	map.insert(ft::make_pair(0, "Hey listen!"));
+	ft::pair<int, std::string> a = ft::make_pair(0, "Hey listen!");
+	ft::pair<int, std::string> b = ft::make_pair(1, "Hello");
+	ft::pair<int, std::string> c = ft::make_pair(2, "Goodbye");
+	
+	map.insert(a);
+	map.insert(b);
+	map.insert(c);
+	map.insert(c);
 	map.debugMap();
 	ft::map<int, std::string>::iterator it = map.begin();
 	std::cout << it->second << std::endl;
