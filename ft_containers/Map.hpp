@@ -14,7 +14,7 @@ namespace ft
 	{
 		public:
 			typedef T																value_type;
-			typedef BTNode<value_type>												*pointer;
+			typedef value_type														*pointer;
 			typedef value_type														const * const_pointer;
 			typedef value_type														&reference;
 			typedef value_type const												&const_reference;
@@ -23,7 +23,7 @@ namespace ft
 
 		MapIterator(): p(0) {}
 
-		MapIterator(const pointer _p): p(_p) {}
+		MapIterator(BTNode<value_type> *_p): p(_p) {}
 
 		MapIterator(MapIterator const &src): p(src.p) {}
 
@@ -42,20 +42,20 @@ namespace ft
 
 		reference operator*()
 		{
-			return (*this->p.data);
+			return (p->data);
 		}
 		const_reference operator*() const
 		{
-			return (*this->p.data);
+			return (p->data);
 		}
 
 		pointer operator->()
 		{
-			return (this->p);
+			return (&p->data);
 		}
 		const_pointer operator->() const
 		{
-			return (this->p);
+			return (&p->data);
 		}
 
 		/*
@@ -87,7 +87,7 @@ namespace ft
 		*/
 
 		protected:
-			pointer p;
+			BTNode<value_type> *p;
 	};
 
 	template<class _Key, class _Tp, class _Compare = std::less<_Key>, class _Alloc = std::allocator<ft::pair<const _Key, _Tp> > >
@@ -130,12 +130,12 @@ namespace ft
 	*/
 		iterator begin()
 		{
-			return (tree->findSmallest(tree));
+			return (findSmallestNode(tree));
 		}
 
 		const_iterator begin() const
 		{
-			return (tree->findSmallest(tree));
+			return (findSmallestNode(tree));
 		}
 
 		iterator end()
@@ -197,23 +197,25 @@ namespace ft
 
 	pair<iterator,bool> insert (const value_type& val)
 	{
-		return (tree->add(val, &tree));
+		ft::pair<BTNode<value_type> *, bool> ret = addNode(val, &tree);
+
+		return (ft::make_pair(iterator(ret.first), ret.second));
 	}
 
 	iterator insert (iterator position, const value_type& val)
 	{
 		BTNode <value_type>*ptr = position.base();
 		if (ptr->findSmallest()->data < val)
-			add(val, &ptr);
+			addNode(val, &ptr);
 		else
-			add(val, &tree);
+			addNode(val, &tree);
 	}
 
 	template <class InputIterator>
 	void insert (InputIterator first, InputIterator last)
 	{
 		for (; first != last; first++)
-			tree->add(*first, &tree);
+			addNode(*first, &tree);
 	}
 
 	void erase (iterator position)
@@ -247,7 +249,7 @@ namespace ft
 
 		iterator find (const key_type& k)
 		{
-			iterator it = tree->find(k, tree);
+			iterator it = tree->findInNode(k, tree);
 
 			if (it)
 				return it;
@@ -256,7 +258,7 @@ namespace ft
 
 		const_iterator find (const key_type& k) const
 		{
-			iterator it = tree->find(k, tree);
+			iterator it = tree->findInNode(k, tree);
 
 			if (it)
 				return it;
@@ -265,7 +267,7 @@ namespace ft
 
 		size_type count (const key_type& k) const
 		{
-			return (static_cast <size_type> (static_cast <bool> (find(k, tree))));
+			return (static_cast <size_type> (static_cast <bool> (findInNode(k, tree))));
 		}
 
 		iterator lower_bound (const key_type& k); //Think it through

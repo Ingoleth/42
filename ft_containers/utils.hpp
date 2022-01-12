@@ -105,8 +105,8 @@ namespace ft
 
 		template <class U, class V>
 			pair (const pair<U,V>& pr):
-				first(static_cast<first_type>(pr.first)),
-				second(static_cast<second_type>(pr.second)) {}
+				first(pr.first),
+				second(pr.second) {}
 	
 		// initialization
 		pair (const first_type& a, const second_type& b): first(first_type(a)), second(second_type(b)) {}

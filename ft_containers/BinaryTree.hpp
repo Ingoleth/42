@@ -50,63 +50,6 @@ namespace ft
 				delete right;
 		}
 
-		BTNode *find(T to_find, BTNode *node) //Maybe not make it recurssion based?
-		{
-			if (!node)
-				return (NULL);
-			if (to_find == node->data)
-				return (node);
-			else if (to_find < node->data)
-				return (find(to_find, node->left));
-			return (find(to_find, node->right));
-		}
-
-		BTNode *find(T to_find, BTNode *node, BTNode **lastNode)
-		{
-			if (!node)
-				return (NULL);
-			if (to_find == node->data)
-				return (node);
-			*lastNode = node;
-			if (to_find < node->data)
-				return (find(to_find, node->left, lastNode));
-			return (find(to_find, node->right, lastNode));
-		}
-
-		BTNode *findSmallest(BTNode *node)
-		{
-			if (node)
-			{
-				while (node->left)
-					node = node->left;
-			}
-			return node;
-		}
-
-		BTNode *findBiggest(BTNode *node)
-		{
-			if (node)
-			{
-				while (node->right)
-					node = node->right;
-			}
-			return node;
-		}
-
-		pair<ft::BTNode<T> *, bool>add(const T& _data, BTNode **root) //There's much to do here...
-		{
-			BTNode *aux;
-
-			if (!*root)
-			{
-				*root = new BTNode(_data);
-				return ft::make_pair(*root, true);
-			}
-			if (find(_data, *root, &aux))
-				return ft::make_pair(aux, false);
-			return(ft::make_pair(new BTNode(_data, aux), true));
-		}
-
 		void remove(const T& _data, BTNode **root)
 		{
 			BTNode *aux = removeNode(_data, root);
@@ -140,7 +83,7 @@ namespace ft
 		BTNode *getNext(BTNode *currentNode) // Check return value when biggest num?
 		{
 			if (currentNode->right)
-				return (findSmallest(currentNode->right));
+				return (findSmallestNode(currentNode->right));
 			T &auxdata = currentNode->data;
 			while (true)
 			{
@@ -156,7 +99,7 @@ namespace ft
 		BTNode *getPrevious(BTNode *currentNode) // Check return value when biggest num?
 		{
 			if (currentNode->left)
-				return (findBiggest(currentNode->left));
+				return (findBiggestNode(currentNode->left));
 			T &auxdata = currentNode->data;
 			while (true)
 			{
@@ -239,7 +182,7 @@ namespace ft
 		{
 			if (!node || !parent)
 				return ;
-			find(node->data, parent, &parent);
+			findInNode(node->data, parent, &parent);
 			if (parent->data < node->data)
 				parent->right = node;
 			else
@@ -251,7 +194,7 @@ namespace ft
 		{
 			BTNode *aux = NULL;
 
-			if (!*root || !(aux = find(_data, *root)))
+			if (!*root || !(aux = findInNode(_data, *root)))
 				return (NULL);
 			if (*root == aux)
 			{
@@ -273,6 +216,69 @@ namespace ft
 			aux->top = NULL;
 			return (aux);
 		}
+
 	};
+
+		template <class T>
+		BTNode<T> *findInNode(T to_find, BTNode<T> *node)
+		{
+			if (!node)
+				return (NULL);
+			if (to_find == node->data)
+				return (node);
+			else if (to_find < node->data)
+				return (findInNode(to_find, node->left));
+			return (findInNode(to_find, node->right));
+		}
+
+		template <class T>
+		BTNode<T> *findInNode(T to_find, BTNode<T> *node, BTNode<T> **lastNode)
+		{
+			if (!node)
+				return (NULL);
+			if (to_find == node->data)
+				return (node);
+			*lastNode = node;
+			if (to_find < node->data)
+				return (findInNode(to_find, node->left, lastNode));
+			return (findInNode(to_find, node->right, lastNode));
+		}
+
+		template <class T>
+		BTNode<T> *findSmallestNode(BTNode<T> *node)
+		{
+			if (node)
+			{
+				while (node->left)
+					node = node->left;
+			}
+			return node;
+		}
+
+		template <class T>
+		BTNode<T> *findBiggestNode(BTNode<T> *node)
+		{
+			if (node)
+			{
+				while (node->right)
+					node = node->right;
+			}
+			return node;
+		}
+
+		template <class T>
+		pair<ft::BTNode<T> *, bool>addNode(const T& _data, BTNode<T> **root) //There's much to do here...
+		{
+			BTNode<T> *aux;
+
+			if (!*root)
+			{
+				*root = new BTNode<T>(_data);
+				return ft::make_pair(*root, true);
+			}
+			if (findInNode(_data, *root, &aux))
+				return ft::make_pair(aux, false);
+			return(ft::make_pair(new BTNode<T>(_data, aux), true));
+		}
 }
 #endif
