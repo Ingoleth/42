@@ -49,6 +49,7 @@ int main()
 	map.insert(ft::make_pair(1, "Hello"));
 	map.insert(ft::make_pair(2, "Goodbye"));
 	map.insert(ft::make_pair(0, "Hey listen!"));
+	map.debugMap();
 	ft::map<int, std::string>::iterator it = map.begin();
 	std::cout << it->second << std::endl;
 	

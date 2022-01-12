@@ -154,6 +154,13 @@ namespace ft
 		return (a == b || a > b);
 	}
 
+	template <typename T1, typename T2>
+	std::ostream &operator<<( std::ostream & o, const pair<T1, T2> &p)
+	{
+		o << p.first << " " << p.second;
+		return o;
+	}
+
 	template <class T1, class T2>
 	ft::pair <T1, T2> make_pair(T1 first, T2 second)
 	{

@@ -239,6 +239,11 @@ namespace ft
 		swap(this->_mem, x._mem);
 	}
 
+	void debugMap()
+	{
+		tree->displayTree(tree);
+	}
+
 	/*
 	** --------------------------------- OBSERVERS ---------------------------------
 	*/
