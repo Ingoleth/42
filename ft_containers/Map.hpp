@@ -21,16 +21,13 @@ namespace ft
 			typedef std::ptrdiff_t													difference_type;
 			typedef std::bidirectional_iterator_tag									iterator_category;
 
-		protected:
-			pointer p;
-
 		MapIterator(): p(0) {}
 
 		MapIterator(const pointer _p): p(_p) {}
 
 		MapIterator(MapIterator const &src): p(src.p) {}
 
-		virtual ~MapIterator() {}
+		~MapIterator() {}
 
 		BTNode<value_type> *base( void )
 		{
@@ -88,6 +85,9 @@ namespace ft
 			return (*this);
 		}
 		*/
+
+		protected:
+			pointer p;
 	};
 
 	template<class _Key, class _Tp, class _Compare = std::less<_Key>, class _Alloc = std::allocator<ft::pair<const _Key, _Tp> > >
@@ -197,7 +197,7 @@ namespace ft
 
 	pair<iterator,bool> insert (const value_type& val)
 	{
-		tree->add(val, &tree);
+		return (tree->add(val, &tree));
 	}
 
 	iterator insert (iterator position, const value_type& val)

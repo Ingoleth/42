@@ -20,21 +20,19 @@ namespace ft
 			right = 0;
 		}
 
-		BTNode(const T& _data)
+		BTNode(const T& _data) : data(_data)
 		{
 			top = 0;
 			left = 0;
 			right = 0;
-			data = _data;
 		}
 
-		BTNode(const T& _data, BTNode *parent) //Assumes that data is not equal to parent data; Sets the parents data pointer to the instance;
+		BTNode(const T& _data, BTNode *parent) : data(_data) //Assumes that data is not equal to parent data; Sets the parents data pointer to the instance;
 		{
 
 			top = parent;
 			left = 0;
 			right = 0;
-			data = _data;
 			if (parent) // Might not be Technically needed...
 			{
 				if (parent->data > data)
@@ -102,11 +100,11 @@ namespace ft
 			if (!*root)
 			{
 				*root = new BTNode(_data);
-				return make_pair(*root, true);
+				return ft::make_pair(*root, true);
 			}
 			if (find(_data, *root, &aux))
-				return make_pair(aux, false);
-			return(make_pair(new BTNode(_data, aux), true));
+				return ft::make_pair(aux, false);
+			return(ft::make_pair(new BTNode(_data, aux), true));
 		}
 
 		void remove(const T& _data, BTNode **root)
