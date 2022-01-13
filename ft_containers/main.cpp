@@ -4,7 +4,7 @@
 #include "stack.hpp"
 #include "vector.hpp"
 #include "BinaryTree.hpp"
-#include "Map.hpp"
+#include "map.hpp"
 #include <map>
 #include "tests/tests.hpp"
 #include <string>

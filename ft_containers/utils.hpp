@@ -1,6 +1,8 @@
 # ifndef CONTAINERS_UTILS
 # define CONTAINERS_UTILS
 
+#include <iostream>
+
 //template <typename T>
 //static const bool is_integer;
 namespace ft

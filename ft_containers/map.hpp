@@ -163,12 +163,12 @@ namespace ft
 	*/
 		iterator begin()
 		{
-			return (tree->findSmallestNode(tree));
+			return (iterator(tree->findSmallestNode(tree)));
 		}
 
 		const_iterator begin() const
 		{
-			return (tree->findSmallestNode(tree));
+			return (const_iterator(tree->findSmallestNode(tree)));
 		}
 
 		iterator end()
@@ -178,7 +178,7 @@ namespace ft
 
 		const_iterator end() const //TODO: Figure out how to handle end...
 		{
-			return (iterator(tree->findBiggestNode(tree)));
+			return (const_iterator(tree->findBiggestNode(tree)));
 		}
 
 		reverse_iterator rbegin()
