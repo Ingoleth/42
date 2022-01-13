@@ -240,8 +240,8 @@ namespace ft
 	{
 		binary_tree aux;
 		removeGhost();
-		BTNode <value_type>*ptr = position.base();
-		if (ptr->findSmallest()->data < val)
+		binary_tree ptr = position.base();
+		if (_compare((ptr->findSmallestNode(ptr)->data).first, val.first))
 			aux = addNode(val, &ptr).first;
 		else
 			aux = addNode(val, &tree).first;
