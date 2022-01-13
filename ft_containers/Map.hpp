@@ -62,15 +62,12 @@ namespace ft
 		{
 			MapIterator tmp(*this);
 			this->p = p->getNext(p);
-			//If (0) do something?
 			return (tmp);
 		}
 
 		MapIterator &operator++()
 		{
-			std::cout << "This also me\n";
 			this->p = p->getNext(p);
-			//If (0) do something?
 			return (*this);
 		}
 
@@ -78,14 +75,12 @@ namespace ft
 		{
 			MapIterator tmp(*this);
 			this->p = p->getPrevious(p);
-			//If (0) do something?
 			return (tmp);
 		}
 
 		MapIterator &operator--()
 		{
-			this->p = p->getNext(p);
-			//If (0) do something?
+			this->p = p->getPrevious(p);
 			return (*this);
 		}
 
@@ -96,14 +91,13 @@ namespace ft
 	template<typename T, typename U>
 	bool operator==(MapIterator<T> const &a, MapIterator<U> const &b)
 	{
-		std::cout << "patata\n";
-		return (a.base()->data == b.base()->data);
+		return (a.base() == b.base());
 	}
 
 	template<typename T, typename U>
 	bool operator!=(MapIterator<T> const &a, MapIterator<U> const &b)
 	{
-		return (a.base()->data != b.base()->data);
+		return (a.base() != b.base());
 	}
 
 	template<class _Key, class _Tp, class _Compare = std::less<_Key>, class _Alloc = std::allocator<ft::pair<const _Key, _Tp> > >
@@ -152,11 +146,15 @@ namespace ft
 	** --------------------------------- CONSTRUCTOR ---------------------------------
 	*/
 
-		map() : tree(NULL), _mem(), _compare(), _allocator() {}
+		map() : _mem(), _compare(), _allocator()
+		{
+			ghost = new BTNode<value_type>();
+			tree = ghost;
+		}
 
 		~map()
 		{
-			if (tree)
+			if (tree) //Probably not needed...
 				delete tree;
 		}
 
@@ -175,13 +173,12 @@ namespace ft
 
 		iterator end()
 		{
-			std::cout << "This me\n";
-			return (iterator());
+			return (iterator(tree->findBiggestNode(tree)));
 		}
 
 		const_iterator end() const //TODO: Figure out how to handle end...
 		{
-			return (iterator());
+			return (iterator(tree->findBiggestNode(tree)));
 		}
 
 		reverse_iterator rbegin()
@@ -210,12 +207,12 @@ namespace ft
 
 	bool empty() const
 	{
-		return (!static_cast <bool> (tree));
+		return (tree != ghost);
 	}
 
 	size_type size ( void ) const
 	{
-		return (tree->size(tree));
+		return (tree->size(tree) - 1);
 	}
 
 	size_type   max_size(void) const //handle allocator stuff...
@@ -233,25 +230,30 @@ namespace ft
 
 	pair<iterator,bool> insert (const value_type& val)
 	{
+		removeGhost();
 		ft::pair<BTNode<value_type> *, bool> ret = addNode(val, &tree);
-
+		insertGhost();
 		return (ft::make_pair(iterator(ret.first), ret.second));
 	}
 
 	iterator insert (iterator position, const value_type& val)
 	{
+		binary_tree aux;
+		removeGhost();
 		BTNode <value_type>*ptr = position.base();
 		if (ptr->findSmallest()->data < val)
-			addNode(val, &ptr);
+			aux = addNode(val, &ptr).first;
 		else
-			addNode(val, &tree);
+			aux = addNode(val, &tree).first;
+		insertGhost();
+		return (iterator(aux));
 	}
 
 	template <class InputIterator>
 	void insert (InputIterator first, InputIterator last)
 	{
 		for (; first != last; first++)
-			addNode(*first, &tree);
+			insert(*first);
 	}
 
 	void erase (iterator position)
@@ -339,6 +341,7 @@ namespace ft
 		allocator_type		_mem;
 		key_compare			_compare;
 		allocator_type		_allocator;
+		binary_tree			ghost;
 	
 	private:
 
@@ -444,6 +447,24 @@ namespace ft
 				insert_node(aux->right, aux->top);
 			}
 			delete aux;
+		}
+
+		void removeGhost()
+		{
+			if (tree != ghost)
+				ghost->top->right = NULL;
+			else
+				tree = NULL;
+		}
+
+		void insertGhost()
+		{
+			binary_tree aux = tree->findBiggestNode(tree);
+			if (aux)
+				aux->right = ghost;
+			else
+				tree = ghost;
+			ghost->top = aux;
 		}
 	};
 
