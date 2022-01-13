@@ -29,7 +29,7 @@ namespace ft
 
 		~MapIterator() {}
 
-		BTNode<value_type> *base( void )
+		BTNode<value_type> *base( void ) const
 		{
 			return (p);
 		}
@@ -58,37 +58,53 @@ namespace ft
 			return (&p->data);
 		}
 
-		/*
-			MapIterator operator++(int)
+		MapIterator operator++(int)
 		{
 			MapIterator tmp(*this);
-			++this->p;
+			this->p = p->getNext(p);
+			//If (0) do something?
 			return (tmp);
 		}
 
 		MapIterator &operator++()
 		{
-			++this->p;
+			std::cout << "This also me\n";
+			this->p = p->getNext(p);
+			//If (0) do something?
 			return (*this);
 		}
 
 		MapIterator operator--(int)
 		{
 			MapIterator tmp(*this);
-			--this->p;
+			this->p = p->getPrevious(p);
+			//If (0) do something?
 			return (tmp);
 		}
 
 		MapIterator &operator--()
 		{
-			--this->p;
+			this->p = p->getNext(p);
+			//If (0) do something?
 			return (*this);
 		}
-		*/
 
 		protected:
 			BTNode<value_type> *p;
 	};
+
+	template<typename T, typename U>
+	bool operator==(MapIterator<T> const &a, MapIterator<U> const &b)
+	{
+		std::cout << "patata\n";
+		return (a.base()->data == b.base()->data);
+	}
+
+	template<typename T, typename U>
+	bool operator!=(MapIterator<T> const &a, MapIterator<U> const &b)
+	{
+		return (a.base()->data != b.base()->data);
+	}
 
 	template<class _Key, class _Tp, class _Compare = std::less<_Key>, class _Alloc = std::allocator<ft::pair<const _Key, _Tp> > >
 	class map
@@ -159,12 +175,13 @@ namespace ft
 
 		iterator end()
 		{
-			return (0);
+			std::cout << "This me\n";
+			return (iterator());
 		}
 
 		const_iterator end() const //TODO: Figure out how to handle end...
 		{
-			return (0);
+			return (iterator());
 		}
 
 		reverse_iterator rbegin()

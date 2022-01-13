@@ -53,9 +53,12 @@ int main()
 	map.insert(b);
 	map.insert(c);
 	map.insert(c);
-	map.debugMap();
-	ft::map<int, std::string>::iterator it = map.begin();
-	std::cout << it->second << std::endl;
+;
+	for (ft::map<int, std::string>::iterator it = map.begin(); it != map.end(); it++)
+	{
+		std::cout << *it << std::endl;
+	}
+	
 	
 	return 0;
 }

@@ -143,7 +143,7 @@ namespace ft
 	}
 
 	template<typename T>
-	bool operator==(VectorIterator<T> const &a, T *const &b)
+	bool operator==(VectorIterator<T> const &a, T *const &b) //Don't think its necessary
 	{
 		return (a.base() == b);
 	}
