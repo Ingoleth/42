@@ -117,6 +117,7 @@ namespace ft
 		{
 			first = other.first;
 			second = other.second;
+			return (*this);
 		}
 	};
 

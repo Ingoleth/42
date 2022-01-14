@@ -9,7 +9,7 @@
 
 namespace ft
 {
-	template<typename T>
+	template<typename T, class node_type>
 	class MapIterator : public IteratorTrait<T>
 	{
 		public:
@@ -23,13 +23,13 @@ namespace ft
 
 		MapIterator(): p(0) {}
 
-		MapIterator(BTNode<value_type> *_p): p(_p) {}
+		MapIterator(node_type *_p): p(_p) {}
 
 		MapIterator(MapIterator const &src): p(src.p) {}
 
 		~MapIterator() {}
 
-		BTNode<value_type> *base( void ) const
+		node_type *base( void ) const
 		{
 			return (p);
 		}
@@ -85,17 +85,17 @@ namespace ft
 		}
 
 		protected:
-			BTNode<value_type> *p;
+			node_type *p;
 	};
 
-	template<typename T, typename U>
-	bool operator==(MapIterator<T> const &a, MapIterator<U> const &b)
+	template<typename T, typename nodeT, typename U, typename nodeU>
+	bool operator==(MapIterator<T, nodeT> const &a, MapIterator<U, nodeU> const &b)
 	{
 		return (a.base() == b.base());
 	}
 
-	template<typename T, typename U>
-	bool operator!=(MapIterator<T> const &a, MapIterator<U> const &b)
+	template<typename T, typename nodeT, typename U, typename nodeU>
+	bool operator!=(MapIterator<T, nodeT> const &a, MapIterator<U, nodeT> const &b)
 	{
 		return (a.base() != b.base());
 	}
@@ -106,22 +106,22 @@ namespace ft
 
 	public:
 
-		typedef _Key											key_type;
-		typedef _Tp												mapped_type;
-		typedef ft::pair<const _Key, _Tp>						value_type;
-		typedef _Compare										key_compare;
-		typedef _Alloc											allocator_type;
-		typedef typename allocator_type::pointer				pointer;
-		typedef typename allocator_type::const_pointer			const_pointer;
-		typedef typename allocator_type::reference				reference;
-		typedef typename allocator_type::const_reference		const_reference;
-		typedef BTNode<value_type>	*							binary_tree;
+		typedef _Key													key_type;
+		typedef _Tp														mapped_type;
+		typedef ft::pair<const _Key, _Tp>								value_type;
+		typedef _Compare												key_compare;
+		typedef _Alloc													allocator_type;
+		typedef typename allocator_type::pointer						pointer;
+		typedef typename allocator_type::const_pointer					const_pointer;
+		typedef typename allocator_type::reference						reference;
+		typedef typename allocator_type::const_reference				const_reference;
+		typedef BTNode<value_type>	*									binary_tree;
 
-		typedef ft::MapIterator<value_type>						iterator;
-		typedef ft::MapIterator<const value_type>				const_iterator;
-		typedef typename ft::ReverseIterator<iterator>			reverse_iterator;
-		typedef typename ft::ReverseIterator<const_iterator>	const_reverse_iterator;
-		typedef typename allocator_type::size_type				size_type;
+		typedef ft::MapIterator<value_type, BTNode<value_type> >		iterator;
+		typedef ft::MapIterator<const value_type, BTNode<value_type> >	const_iterator;
+		typedef typename ft::ReverseIterator<iterator>					reverse_iterator;
+		typedef typename ft::ReverseIterator<const_iterator>			const_reverse_iterator;
+		typedef typename allocator_type::size_type						size_type;
 		//typedef typename _Rep_type::difference_type			difference_type;
 
 		class value_compare
