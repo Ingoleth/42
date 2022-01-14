@@ -182,6 +182,16 @@ namespace ft
 				delete tree;
 		}
 
+		map& operator=( const map& other )
+		{
+			removeGhost();
+			if (tree)
+				delete tree;
+			tree = other.tree->copy(tree);
+			insertGhost();
+			return (*this);
+		}
+
 	/*									 
 	** --------------------------------- ITERATORS ----------------------------------
 	*/
@@ -248,9 +258,21 @@ namespace ft
 	** ------------------------------ ELEMENT ACCESS -------------------------------
 	*/
 
+		value_type& operator[]( const _Key& key )
+		{
+			return insert(std::make_pair(key, value_type())).first->second;
+		}
+
 	/*
 	** --------------------------------- MODIFIERS ---------------------------------
 	*/
+
+	void clear()
+	{
+		removeGhost();
+		delete tree;
+		tree = ghost;
+	}
 
 	pair<iterator,bool> insert (const value_type& val)
 	{
