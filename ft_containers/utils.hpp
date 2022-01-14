@@ -119,6 +119,18 @@ namespace ft
 			second = other.second;
 			return (*this);
 		}
+
+		pair& operator=( const T1& value )
+		{
+			first = value;
+			return (*this);
+		}
+
+		pair& operator=( const T2& value )
+		{
+			second = value;
+			return (*this);
+		}
 	};
 
 	template <typename T1, typename T2>
