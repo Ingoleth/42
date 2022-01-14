@@ -1,8 +1,10 @@
 #ifndef CONTAINERS_MAP_HPP
 # define CONTAINERS_MAP_HPP
 
-# include <functional>
-# include <memory>
+#include <functional> // less
+#include <memory> // allocator
+#include <cstdlib>
+#include <limits> // numeric_limits
 
 # include "Iterator.hpp"
 # include "BinaryTree.hpp"
@@ -25,7 +27,8 @@ namespace ft
 
 		MapIterator(node_type *_p): p(_p) {}
 
-		MapIterator(MapIterator const &src): p(src.p) {}
+		template <class U>
+		MapIterator(MapIterator<U, node_type> const &src): p(src.base()) {} //Check with Garrafa...
 
 		~MapIterator() {}
 
@@ -95,7 +98,7 @@ namespace ft
 	}
 
 	template<typename T, typename nodeT, typename U, typename nodeU>
-	bool operator!=(MapIterator<T, nodeT> const &a, MapIterator<U, nodeT> const &b)
+	bool operator!=(MapIterator<T, nodeT> const &a, MapIterator<U, nodeU> const &b)
 	{
 		return (a.base() != b.base());
 	}
@@ -122,7 +125,7 @@ namespace ft
 		typedef typename ft::ReverseIterator<iterator>					reverse_iterator;
 		typedef typename ft::ReverseIterator<const_iterator>			const_reverse_iterator;
 		typedef typename allocator_type::size_type						size_type;
-		//typedef typename _Rep_type::difference_type			difference_type;
+		typedef std::ptrdiff_t											difference_type;
 
 		class value_compare
 		{
@@ -146,10 +149,31 @@ namespace ft
 	** --------------------------------- CONSTRUCTOR ---------------------------------
 	*/
 
+		//explicit map( const _Compare& comp, const _Alloc& alloc = Alloc() );
+
 		map() : _mem(), _compare(), _allocator()
 		{
 			ghost = new BTNode<value_type>();
 			tree = ghost;
+		}
+
+		template <class InputIterator>
+		map( InputIterator first, InputIterator last, const _Compare& comp = _Compare(), const _Alloc& alloc = _Alloc() ): _compare(comp), _allocator(alloc)
+		{
+			ghost = new BTNode<value_type>();
+			tree = ghost;
+
+			while (first != last)
+			{
+				insert(*first);
+				first++;
+			}
+		};
+
+		map(const map &src) : _mem(src._mem), _compare(src._compare), _allocator(src._allocator)
+		{
+			tree = src.tree->copy(src.tree);
+			ghost = tree->findBiggestNode(tree);
 		}
 
 		~map()
@@ -173,12 +197,12 @@ namespace ft
 
 		iterator end()
 		{
-			return (iterator(tree->findBiggestNode(tree)));
+			return (iterator(ghost));
 		}
 
 		const_iterator end() const //TODO: Figure out how to handle end...
 		{
-			return (const_iterator(tree->findBiggestNode(tree)));
+			return (const_iterator(ghost));
 		}
 
 		reverse_iterator rbegin()
@@ -217,7 +241,7 @@ namespace ft
 
 	size_type   max_size(void) const //handle allocator stuff...
 	{
-		return _mem.max_size();
+		return std::numeric_limits<difference_type>::max() / (sizeof(BTNode<value_type>));
 	}
 
 	/*
@@ -241,7 +265,7 @@ namespace ft
 		binary_tree aux;
 		removeGhost();
 		binary_tree ptr = position.base();
-		if (_compare((ptr->findSmallestNode(ptr)->data).first, val.first))
+		if (ptr != ghost && _compare((ptr->findSmallestNode(ptr)->data).first, val.first))
 			aux = addNode(val, &ptr).first;
 		else
 			aux = addNode(val, &tree).first;
@@ -263,6 +287,7 @@ namespace ft
 
 	/*size_type erase (const key_type& k)
 	{
+		size--;
 	}*/
 	
 	void erase (iterator first, iterator last) //How da fuck do I remove stuff without you removing all the things?
@@ -277,7 +302,7 @@ namespace ft
 		swap(this->_mem, x._mem);
 	}
 
-	void debugMap()
+	void debugMap() //TODO: Remove;
 	{
 		tree->displayTree(tree);
 	}
@@ -349,9 +374,9 @@ namespace ft
 		{
 			if (!node)
 				return (NULL);
-			if (to_find == node->data)
+			if (to_find.first == node->data.first)
 				return (node);
-			if (_compare(to_find.first, (node->data).first))
+			if (_compare(to_find.first, node->data.first))
 				return (findInNode(to_find, node->left));
 			return (findInNode(to_find, node->right));
 		}
@@ -360,9 +385,9 @@ namespace ft
 		{
 			if (!node)
 				return (NULL);
-			if (to_find == node->data)
-				return (node);
 			*lastNode = node;
+			if (to_find.first == node->data.first)
+				return (node);
 			if(_compare(to_find.first, (node->data).first))
 
 				return (findInNode(to_find, node->left, lastNode));
