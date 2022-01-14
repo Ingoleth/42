@@ -260,7 +260,7 @@ namespace ft
 
 		value_type& operator[]( const _Key& key )
 		{
-			return insert(std::make_pair(key, value_type())).first->second;
+			return insert(ft::make_pair(key, value_type())).first->second;
 		}
 
 	/*
@@ -304,13 +304,13 @@ namespace ft
 
 	void erase (iterator position)
 	{
-		tree->remove(*position, tree);
+		removeNode(*position, tree);
 	}
 
-	/*size_type erase (const key_type& k)
+	size_type erase (const key_type& k)
 	{
-		size--;
-	}*/
+		return (removeNode(BTNode<value_type>(ft::make_pair(k, _Tp())), tree));
+	}
 	
 	void erase (iterator first, iterator last) //How da fuck do I remove stuff without you removing all the things?
 	{
@@ -472,12 +472,12 @@ namespace ft
 			balanceTree(&(*Node)->right);
 		}
 
-		void removeNode(const value_type& _data, binary_tree *root)
+		bool removeNode(const value_type& _data, binary_tree *root)
 		{
 			binary_tree aux = NULL;
 
 			if (!*root || !(aux = findInNode(_data, *root)))
-				return ;
+				return false;
 			if (*root == aux)
 			{
 				*root = (*root)->right;
@@ -494,6 +494,7 @@ namespace ft
 				insert_node(aux->right, aux->top);
 			}
 			delete aux;
+			return true;
 		}
 
 		void removeGhost()

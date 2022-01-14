@@ -99,16 +99,14 @@ namespace ft
 
 		pair(): first(first_type()), second(second_type()) {}
 
-		// copy
-
 		pair (const pair<T1,T2>& pr): //Might not be needed?
 			first(pr.first),
 			second(pr.second) {}
 
-		template <class U, class V>
+		/*template <class U, class V> 
 			pair (const pair<U,V>& pr):
 				first(pr.first),
-				second(pr.second) {}
+				second(pr.second) {}*/
 	
 		// initialization
 		pair (const first_type& a, const second_type& b): first(first_type(a)), second(second_type(b)) {}
