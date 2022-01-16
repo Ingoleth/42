@@ -103,10 +103,10 @@ namespace ft
 			first(pr.first),
 			second(pr.second) {}
 
-		/*template <class U, class V> 
+		template <class U, class V> 
 			pair (const pair<U,V>& pr):
 				first(pr.first),
-				second(pr.second) {}*/
+				second(pr.second) {}
 	
 		// initialization
 		pair (const first_type& a, const second_type& b): first(first_type(a)), second(second_type(b)) {}
@@ -118,54 +118,31 @@ namespace ft
 			return (*this);
 		}
 
-		pair& operator=( const T1& value )
-		{
-			first = value;
-			return (*this);
-		}
-
-		pair& operator=( const T2& value )
-		{
-			second = value;
-			return (*this);
-		}
 	};
 
-	template <typename T1, typename T2>
-	bool operator==(const pair<T1, T2> &a, const pair<T1, T2> &b)
-	{
-		return (a.first == b.first && a.second == b.second);
-	}
+		template <class T1, class T2>
+		bool operator== (const pair<T1,T2>& lhs, const pair<T1,T2>& rhs)
+		{ return lhs.first == rhs.first && lhs.second == rhs.second; }
 
-	template <typename T1, typename T2>
-	bool operator<(const pair<T1, T2> &a, const pair<T1, T2> &b)
-	{
-		return a.first < b.first || (!(b.first < a.first) && a.second < b.second);
-	}
-
-	template <typename T1, typename T2>
-	bool operator>(const pair<T1, T2> &a, const pair<T1, T2> &b)
-	{
-		return (b < a);
-	}
+	template <class T1, class T2>
+		bool operator!= (const pair<T1,T2>& lhs, const pair<T1,T2>& rhs)
+		{ return !(lhs == rhs); }
 	
-	template <typename T1, typename T2>
-	bool operator!=(const pair<T1, T2> &a, const pair<T1, T2> &b)
-	{
-		return (!(a == b));
-	}
+	template <class T1, class T2>
+		bool operator< (const pair<T1,T2>& lhs, const pair<T1,T2>& rhs)
+		{ return lhs.first < rhs.first || (!(rhs.first < lhs.first) && lhs.second < rhs.second); }
 
-	template <typename T1, typename T2>
-	bool operator<=(const pair<T1, T2> &a, const pair<T1, T2> &b)
-	{
-		return (!(b < a));
-	}
+	template <class T1, class T2>
+		bool operator<= (const pair<T1,T2>& lhs, const pair<T1,T2>& rhs)
+		{ return !(rhs < lhs); }
 
-	template <typename T1, typename T2>
-	bool operator>=(const pair<T1, T2> &a, const pair<T1, T2> &b)
-	{
-		return (!(b > a));
-	}
+	template <class T1, class T2>
+		bool operator> (const pair<T1,T2>& lhs, const pair<T1,T2>& rhs)
+		{ return rhs < lhs; }
+
+	template <class T1, class T2>
+		bool operator>= (const pair<T1,T2>& lhs, const pair<T1,T2>& rhs)
+		{ return !(lhs < rhs); }
 
 	template <typename T1, typename T2>
 	std::ostream &operator<<( std::ostream & o, const pair<T1, T2> &p)
@@ -184,20 +161,31 @@ namespace ft
 	** --------------------------------- EQUALS ----------------------------------
 	*/
 
-	template< class InputIt1, class InputIt2 > // Is iterator check?
-	bool equal( InputIt1 first1, InputIt1 last1, InputIt2 first2, InputIt2 last2 )
-	{
-		while (first1 != last1)
+	template <class InputIterator1, class InputIterator2>
+		bool	equal (InputIterator1 first1, InputIterator1 last1, InputIterator2 first2)
 		{
-			if (first2 == last2)
-				return (false);
-			if (*first1 != *first2)
-				return (false);
-			first1++;
-			first2++;
+			while (first1 != last1)
+			{
+				if (!(*first1 == *first2))
+					return (false);
+				++first1;
+				++first2;
+			}
+			return (true);
 		}
-		return (first2 == last2);
-	}
+
+	template <class InputIterator1, class InputIterator2, class BinaryPredicate>
+		bool	equal (InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, BinaryPredicate pred)
+		{
+			while (first1 != last1)
+			{
+				if (!pred(*first1, *first2))
+					return (false);
+				++first1;
+				++first2;
+			}
+			return (true);
+		}
 
 	/*
 	** --------------------------------- LEXICOGRAPHICAL ----------------------------------

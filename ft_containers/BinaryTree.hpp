@@ -27,20 +27,6 @@ namespace ft
 			right = 0;
 		}
 
-		BTNode(const T& _data, BTNode *parent) : data(_data)
-		{
-			top = parent;
-			left = 0;
-			right = 0;
-			if (parent)
-			{
-				if (parent->data > data)
-					parent->left = this;
-				else
-					parent->right = this;
-			}
-		}
-
 		~BTNode()
 		{
 			if (left)

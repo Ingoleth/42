@@ -27,10 +27,14 @@ namespace ft
 
 		MapIterator(node_type *_p): p(_p) {}
 
-		template <class U>
-		MapIterator(MapIterator<U, node_type> const &src): p(src.base()) {} //Check with Garrafa...
+		MapIterator(MapIterator const &src): p(src.base()) {} //Check with Garrafa...
 
 		~MapIterator() {}
+
+		operator	MapIterator<const T, node_type>(void) const
+		{
+			return (MapIterator<const T, node_type>(p));
+		}
 
 		node_type *base( void ) const
 		{
@@ -210,7 +214,7 @@ namespace ft
 			return (iterator(ghost));
 		}
 
-		const_iterator end() const //TODO: Figure out how to handle end...
+		const_iterator end() const
 		{
 			return (const_iterator(ghost));
 		}
@@ -258,10 +262,11 @@ namespace ft
 	** ------------------------------ ELEMENT ACCESS -------------------------------
 	*/
 
-		value_type& operator[]( const _Key& key )
-		{
-			return insert(ft::make_pair(key, value_type())).first->second;
-		}
+	mapped_type	&operator[] (const key_type &key)
+	{
+		return (*((this->insert(ft::make_pair(key, mapped_type()))).first)).second;
+	}
+
 
 	/*
 	** --------------------------------- MODIFIERS ---------------------------------
@@ -302,26 +307,31 @@ namespace ft
 			insert(*first);
 	}
 
-	void erase (iterator position)
+	template<class InputIterator>
+	void erase (InputIterator position)
 	{
-		removeNode(*position, tree);
+		removeNode(*position, &tree);
 	}
 
 	size_type erase (const key_type& k)
 	{
-		return (removeNode(BTNode<value_type>(ft::make_pair(k, _Tp())), tree));
+		return (removeNode(ft::make_pair(k, mapped_type()), &tree));
 	}
 	
-	void erase (iterator first, iterator last) //How da fuck do I remove stuff without you removing all the things?
+template<class InputIterator>
+	void erase (InputIterator first, InputIterator last) //How da fuck do I remove stuff without you removing all the things?
 	{
-		for (iterator aux = first++; first != last; first = aux)
-			erase(first);
+		for (InputIterator aux = first++; first != last; first = aux)
+			removeNode(*first, &tree);
 	}
 
-	void swap (ft::map< _Key, _Tp, key_compare, _Alloc>& x)
+	void swap (map& x)
 	{
-		swap(this->tree, x.tree);
-		swap(this->_mem, x._mem);
+		std::swap(tree, x.tree);
+		std::swap(_mem, x._mem);
+		std::swap(_compare, x._compare);
+		std::swap(_allocator, x._allocator);
+		std::swap(ghost, x.ghost);
 	}
 
 	void debugMap() //TODO: Remove;
@@ -344,18 +354,18 @@ namespace ft
 
 		iterator find (const key_type& k)
 		{
-			iterator it = tree->findInNode(k, tree);
+			iterator it = findInNode(k, tree);
 
-			if (it)
+			if (it.base())
 				return it;
 			return end();
 		}
 
 		const_iterator find (const key_type& k) const
 		{
-			iterator it = tree->findInNode(k, tree);
+			iterator it = findInNode(k, tree);
 
-			if (it)
+			if (it.base())
 				return it;
 			return end();
 		}
@@ -365,14 +375,56 @@ namespace ft
 			return (static_cast <size_type> (static_cast <bool> (findInNode(k, tree))));
 		}
 
-		iterator lower_bound (const key_type& k); //Think it through
-		const_iterator lower_bound (const key_type& k) const; //think it through
-		iterator upper_bound (const key_type& k);
-		const_iterator upper_bound (const key_type& k) const;
+		//Returns an iterator pointing to the first element that is not less than (i.e. greater or equal to) key.
+		iterator lower_bound (const key_type& k)
+		{
+			binary_tree aux;
 
-		//pair<const_iterator,const_iterator>	equal_range (const key_type& k) const;
+			aux = tree->findSmallestNode(tree);
+			while (aux != ghost && aux->data.first != k)
+				aux = aux->getNext(aux);
+			return (aux);
+		}
+
+		const_iterator lower_bound (const key_type& k) const
+		{
+			binary_tree aux;
+
+			aux = tree->findSmallestNode(tree);
+			while (aux != ghost && aux->data.first != k)
+				aux = aux->getNext(aux);
+			return (aux);
+		}
+
+		iterator upper_bound (const key_type& k)
+		{
+			binary_tree aux;
+
+			aux = tree->findSmallestNode(tree);
+			while (aux != ghost &&_compare(aux->data.first, k))
+				aux = aux->getNext(aux);
+			return (aux);
+		}
+
+		const_iterator upper_bound (const key_type& k) const
+		{
+			binary_tree aux;
+
+			aux = tree->findSmallestNode(tree);
+			while (aux != ghost && _compare(aux->data.first, k))
+				aux = aux->getNext(aux);
+			return (aux);
+		}
+
+		ft::pair<const_iterator,const_iterator>	equal_range (const key_type& k) const
+		{
+			return (ft::make_pair(lower_bound(k), upper_bound(k)));
+		}
 		
-		//pair<iterator,iterator>	equal_range (const key_type& k);
+		ft::pair<iterator,iterator>	equal_range (const key_type& k)
+		{
+			return (ft::make_pair(lower_bound(k), upper_bound(k)));
+		}
 
 	/*
 	** --------------------------------- ALLOCATOR ---------------------------------
@@ -392,25 +444,25 @@ namespace ft
 	
 	private:
 
-		binary_tree findInNode(value_type to_find, binary_tree node)
+		binary_tree findInNode(const key_type &to_find, binary_tree node) const
 		{
 			if (!node)
 				return (NULL);
-			if (to_find.first == node->data.first)
+			if (to_find == node->data.first)
 				return (node);
-			if (_compare(to_find.first, node->data.first))
+			if (_compare(to_find, node->data.first))
 				return (findInNode(to_find, node->left));
 			return (findInNode(to_find, node->right));
 		}
 
-		binary_tree findInNode(value_type to_find, binary_tree node, binary_tree *lastNode)
+		binary_tree findInNode(const key_type &to_find, const binary_tree &node, binary_tree &lastNode) const
 		{
 			if (!node)
 				return (NULL);
-			*lastNode = node;
-			if (to_find.first == node->data.first)
+			lastNode = node;
+			if (to_find == node->data.first)
 				return (node);
-			if(_compare(to_find.first, (node->data).first))
+			if(_compare(to_find, (node->data).first))
 
 				return (findInNode(to_find, node->left, lastNode));
 			return (findInNode(to_find, node->right, lastNode));
@@ -425,16 +477,28 @@ namespace ft
 				*root = new BTNode<value_type>(_data);
 				return ft::make_pair(*root, true);
 			}
-			if (findInNode(_data, *root, &aux))
+			if (findInNode(_data.first, *root, aux))
 				return ft::make_pair(aux, false);
-			return(ft::make_pair(new BTNode<value_type>(_data, aux), true));
+			if (_data.first < aux->data.first)
+			{
+					aux->left = new BTNode<value_type>(_data);
+					aux->left->top = aux;
+					aux = aux->left;
+			}
+			else
+			{
+					aux->right = new BTNode<value_type>(_data);
+					aux->right->top = aux;
+					aux = aux->right;
+			}
+			return(ft::make_pair(aux, true));
 		}
 
 		void insert_node(binary_tree node, binary_tree parent)
 		{
 			if (!node || !parent)
 				return ;
-			findInNode(node->data, parent, &parent);
+			findInNode(node->data.first, parent, parent);
 			if (_compare((parent->data).first, (node->data).first))
 				parent->right = node;
 			else
@@ -476,7 +540,8 @@ namespace ft
 		{
 			binary_tree aux = NULL;
 
-			if (!*root || !(aux = findInNode(_data, *root)))
+			removeGhost();
+			if (!*root || !(aux = findInNode(_data.first, *root)))
 				return false;
 			if (*root == aux)
 			{
@@ -486,14 +551,17 @@ namespace ft
 			}
 			else
 			{
-				if (aux->top->data < aux->data)
+				if (_compare(aux->top->data.first, aux->data.first))
 					aux->top->right = NULL;
 				else
 					aux->top->left = NULL;
 				insert_node(aux->left, aux->top);
 				insert_node(aux->right, aux->top);
 			}
+			aux->right = NULL;
+			aux->left = NULL;
 			delete aux;
+			insertGhost();
 			return true;
 		}
 
@@ -515,6 +583,43 @@ namespace ft
 			ghost->top = aux;
 		}
 	};
+
+		template <class Key, class T, class Compare, class Alloc>
+		bool operator== ( const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs )
+		{
+			return (lhs.size() == rhs.size() && ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
+		}
+
+		template <class Key, class T, class Compare, class Alloc>
+		bool operator!= ( const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs )
+		{
+			return !(lhs == rhs);
+		}
+
+		template <class Key, class T, class Compare, class Alloc>
+		bool operator< ( const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs )
+		{
+			return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+		}
+
+		template <class Key, class T, class Compare, class Alloc>
+		bool operator<= ( const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs )
+		{
+			return !(rhs < lhs);
+		}
+
+		template <class Key, class T, class Compare, class Alloc>
+		bool operator> ( const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs )
+		{
+			return (rhs < lhs);
+		}
+
+		template <class Key, class T, class Compare, class Alloc>
+		bool operator>= ( const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs )
+		{
+			return !(lhs < rhs);
+		}
+
 
 /*
 ** -------------------------------- LOGICAL OPERATORS ------------------------------

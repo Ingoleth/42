@@ -584,7 +584,7 @@ namespace ft
 	{
 		if (a.size() != b.size())
 				return (false);
-		return(equal(a.begin(), a.end(), b.begin(), b.end()));
+		return(equal(a.begin(), a.end(), b.begin()));
 	}
 
 	template <typename T>
