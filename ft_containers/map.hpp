@@ -559,9 +559,9 @@ template<class InputIterator>
 				}
 				Node->top = aux->top;
 				insert_node(aux, Node);
+				return balanceTreeNode(Node);
 			}
 			else return (Node);
-			return balanceTreeNode(Node);
 		}
 
 		bool removeNode(const value_type& _data, binary_tree_ptr *root)
