@@ -122,7 +122,7 @@ namespace ft
 		typedef typename allocator_type::const_pointer					const_pointer;
 		typedef typename allocator_type::reference						reference;
 		typedef typename allocator_type::const_reference				const_reference;
-		typedef BTNode<value_type>	*									binary_tree;
+		typedef BTNode<value_type>	*									binary_tree_ptr;
 
 		typedef ft::MapIterator<value_type, BTNode<value_type> >		iterator;
 		typedef ft::MapIterator<const value_type, BTNode<value_type> >	const_iterator;
@@ -289,9 +289,9 @@ namespace ft
 
 	iterator insert (iterator position, const value_type& val)
 	{
-		binary_tree aux;
+		binary_tree_ptr aux;
 		removeGhost();
-		binary_tree ptr = position.base();
+		binary_tree_ptr ptr = position.base();
 		if (ptr != ghost && _compare((ptr->findSmallestNode(ptr)->data).first, val.first))
 			aux = addNode(val, &ptr).first;
 		else
@@ -339,6 +339,14 @@ template<class InputIterator>
 		tree->displayTree(tree);
 	}
 
+	void balanceMap()
+	{
+		removeGhost();
+		tree = balanceTreeNode(tree);
+		insertGhost();
+	}
+
+
 	/*
 	** --------------------------------- OBSERVERS ---------------------------------
 	*/
@@ -378,27 +386,7 @@ template<class InputIterator>
 		//Returns an iterator pointing to the first element that is not less than (i.e. greater or equal to) key.
 		iterator lower_bound (const key_type& k)
 		{
-			binary_tree aux;
-
-			aux = tree->findSmallestNode(tree);
-			while (aux != ghost && aux->data.first != k)
-				aux = aux->getNext(aux);
-			return (aux);
-		}
-
-		const_iterator lower_bound (const key_type& k) const
-		{
-			binary_tree aux;
-
-			aux = tree->findSmallestNode(tree);
-			while (aux != ghost && aux->data.first != k)
-				aux = aux->getNext(aux);
-			return (aux);
-		}
-
-		iterator upper_bound (const key_type& k)
-		{
-			binary_tree aux;
+			binary_tree_ptr aux;
 
 			aux = tree->findSmallestNode(tree);
 			while (aux != ghost &&_compare(aux->data.first, k))
@@ -406,24 +394,60 @@ template<class InputIterator>
 			return (aux);
 		}
 
-		const_iterator upper_bound (const key_type& k) const
+		const_iterator lower_bound (const key_type& k) const
 		{
-			binary_tree aux;
+			binary_tree_ptr aux;
 
 			aux = tree->findSmallestNode(tree);
-			while (aux != ghost && _compare(aux->data.first, k))
+			while (aux != ghost &&_compare(aux->data.first, k))
+				aux = aux->getNext(aux);
+			return (aux);
+		}
+
+		iterator upper_bound (const key_type& k)
+		{
+			binary_tree_ptr aux;
+
+			aux = tree->findSmallestNode(tree);
+			while (aux != ghost &&_compare(k, aux->data.first))
+				aux = aux->getNext(aux);
+			return (aux);
+		}
+
+		const_iterator upper_bound (const key_type& k) const
+		{
+			binary_tree_ptr aux;
+
+			aux = tree->findSmallestNode(tree);
+			while (aux != ghost &&_compare(k, aux->data.first))
 				aux = aux->getNext(aux);
 			return (aux);
 		}
 
 		ft::pair<const_iterator,const_iterator>	equal_range (const key_type& k) const
 		{
-			return (ft::make_pair(lower_bound(k), upper_bound(k)));
+			binary_tree_ptr aux;
+
+			aux = tree->findSmallestNode(tree);
+			while (aux != ghost && _compare(aux->data.first, k))
+				aux = aux->getNext(aux);
+			if (_are_equivalent(aux->data.first, k))
+				return ft::make_pair(aux, aux->getNext(aux));
+			else
+				return ft::make_pair(aux, aux);
 		}
 		
 		ft::pair<iterator,iterator>	equal_range (const key_type& k)
 		{
-			return (ft::make_pair(lower_bound(k), upper_bound(k)));
+			binary_tree_ptr aux;
+
+			aux = tree->findSmallestNode(tree);
+			while (aux != ghost && _compare(aux->data.first, k))
+				aux = aux->getNext(aux);
+			if (_are_equivalent(aux->data.first, k))
+				return ft::make_pair(aux, aux->getNext(aux));
+			else
+				return ft::make_pair(aux, aux);
 		}
 
 	/*
@@ -436,15 +460,20 @@ template<class InputIterator>
 		}
 
 	protected:
-		binary_tree			tree;
+		binary_tree_ptr			tree;
 		allocator_type		_mem;
 		key_compare			_compare;
 		allocator_type		_allocator;
-		binary_tree			ghost;
+		binary_tree_ptr			ghost;
 	
 	private:
 
-		binary_tree findInNode(const key_type &to_find, binary_tree node) const
+		bool	_are_equivalent(key_type key1, key_type key2) const
+		{
+			return (!_compare(key1, key2) && !_compare(key2, key1));
+		}
+
+		binary_tree_ptr findInNode(const key_type &to_find, binary_tree_ptr node) const
 		{
 			if (!node)
 				return (NULL);
@@ -455,7 +484,7 @@ template<class InputIterator>
 			return (findInNode(to_find, node->right));
 		}
 
-		binary_tree findInNode(const key_type &to_find, const binary_tree &node, binary_tree &lastNode) const
+		binary_tree_ptr findInNode(const key_type &to_find, const binary_tree_ptr &node, binary_tree_ptr &lastNode) const
 		{
 			if (!node)
 				return (NULL);
@@ -468,9 +497,9 @@ template<class InputIterator>
 			return (findInNode(to_find, node->right, lastNode));
 		}
 
-		pair<binary_tree, bool>addNode(const value_type& _data, binary_tree *root)
+		pair<binary_tree_ptr, bool>addNode(const value_type& _data, binary_tree_ptr *root)
 		{
-			binary_tree aux;
+			binary_tree_ptr aux;
 
 			if (!*root)
 			{
@@ -494,7 +523,7 @@ template<class InputIterator>
 			return(ft::make_pair(aux, true));
 		}
 
-		void insert_node(binary_tree node, binary_tree parent)
+		void insert_node(binary_tree_ptr node, binary_tree_ptr parent)
 		{
 			if (!node || !parent)
 				return ;
@@ -506,43 +535,45 @@ template<class InputIterator>
 			node->top = parent;
 		}
 
-		void balanceTree(binary_tree *Node)
+		binary_tree_ptr balanceTreeNode(binary_tree_ptr Node)
 		{
-			if (!*Node)
-				return;
+			if (!Node)
+				return NULL;		
+			Node->left = balanceTreeNode(Node->left);
+			Node->right = balanceTreeNode(Node->right);
+			int imbalance = Node->height(Node->left) - Node->height(Node->right);
 
-			int imbalance = heigth((*Node)->left) - heigth((*Node)->right);
-			binary_tree aux = NULL;
-
-			while (imbalance <= -2)
+			if (imbalance <= -2 || imbalance >= 2)
 			{
-				aux = *Node;
-				*Node = (*Node)->right;
-				(*Node)->top = aux->top;
-				aux->right = NULL;
-				insert_node(aux, *Node);
-				imbalance += 2;
+				binary_tree_ptr aux = NULL;
+				aux = Node;
+				if (imbalance <= -2)
+				{
+					Node = Node->right;
+					aux->right = NULL;
+				}
+				if (imbalance >= 2)
+				{
+					Node = Node->left;
+					aux->left = NULL;
+				}
+				Node->top = aux->top;
+				insert_node(aux, Node);
 			}
-			while (imbalance >= 2)
-			{
-				aux = *Node;
-				*Node = (*Node)->left;
-				(*Node)->top = aux->top;
-				aux->left = NULL;
-				insert_node(aux, *Node);
-				imbalance -= 2;
-			}
-			balanceTree(&(*Node)->left);
-			balanceTree(&(*Node)->right);
+			else return (Node);
+			return balanceTreeNode(Node);
 		}
 
-		bool removeNode(const value_type& _data, binary_tree *root)
+		bool removeNode(const value_type& _data, binary_tree_ptr *root)
 		{
-			binary_tree aux = NULL;
+			binary_tree_ptr aux = NULL;
 
 			removeGhost();
 			if (!*root || !(aux = findInNode(_data.first, *root)))
+			{
+				insertGhost();
 				return false;
+			}
 			if (*root == aux)
 			{
 				*root = (*root)->right;
@@ -575,7 +606,7 @@ template<class InputIterator>
 
 		void insertGhost()
 		{
-			binary_tree aux = tree->findBiggestNode(tree);
+			binary_tree_ptr aux = tree->findBiggestNode(tree);
 			if (aux)
 				aux->right = ghost;
 			else

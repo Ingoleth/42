@@ -49,11 +49,11 @@ namespace ft
 			return (1 + depth(node->top));
 		}
 
-		size_t heigth(BTNode *node)
+		size_t height(BTNode *node)
 		{
 			if (node == 0)
 				return (0);
-			return(1 + std::max(heigth(node->left), heigth(node->right)));
+			return(1 + std::max(height(node->left), height(node->right)));
 		}
 
 		BTNode *findSmallestNode(BTNode *node)
