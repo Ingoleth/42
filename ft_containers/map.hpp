@@ -27,7 +27,7 @@ namespace ft
 
 		MapIterator(node_type *_p): p(_p) {}
 
-		MapIterator(MapIterator const &src): p(src.base()) {} //Check with Garrafa...
+		MapIterator(MapIterator const &src): p(src.p) {}
 
 		~MapIterator() {}
 
@@ -162,7 +162,7 @@ namespace ft
 		}
 
 		template <class InputIterator>
-		map( InputIterator first, InputIterator last, const _Compare& comp = _Compare(), const _Alloc& alloc = _Alloc() ): _compare(comp), _allocator(alloc)
+		map(InputIterator first, InputIterator last, const _Compare& comp = _Compare(), const _Alloc& alloc = _Alloc() ): _compare(comp), _allocator(alloc)
 		{
 			ghost = new BTNode<value_type>();
 			tree = ghost;
@@ -188,11 +188,10 @@ namespace ft
 
 		map& operator=( const map& other )
 		{
-			removeGhost();
 			if (tree)
 				delete tree;
-			tree = other.tree->copy(tree);
-			insertGhost();
+			tree = other.tree->copy(other.tree);
+			ghost = tree->findBiggestNode(tree);
 			return (*this);
 		}
 
@@ -538,30 +537,32 @@ template<class InputIterator>
 		binary_tree_ptr balanceTreeNode(binary_tree_ptr Node)
 		{
 			if (!Node)
-				return NULL;		
-			Node->left = balanceTreeNode(Node->left);
-			Node->right = balanceTreeNode(Node->right);
-			int imbalance = Node->height(Node->left) - Node->height(Node->right);
+				return NULL;
+			int imbalance;
+			binary_tree_ptr aux;
 
-			if (imbalance <= -2 || imbalance >= 2)
+			while (true)
 			{
-				binary_tree_ptr aux = NULL;
+				imbalance = Node->height(Node->left) - Node->height(Node->right);
 				aux = Node;
 				if (imbalance <= -2)
 				{
 					Node = Node->right;
 					aux->right = NULL;
 				}
-				if (imbalance >= 2)
+				else if (imbalance >= 2)
 				{
 					Node = Node->left;
 					aux->left = NULL;
 				}
+				else
+					break ;
 				Node->top = aux->top;
 				insert_node(aux, Node);
-				return balanceTreeNode(Node);
 			}
-			else return (Node);
+			Node->left = balanceTreeNode(Node->left);
+			Node->right = balanceTreeNode(Node->right);
+			return (Node);
 		}
 
 		bool removeNode(const value_type& _data, binary_tree_ptr *root)
