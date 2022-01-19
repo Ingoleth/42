@@ -278,7 +278,7 @@ namespace ft
 		tree = ghost;
 	}
 
-	pair<iterator,bool> insert (const value_type& val)
+	pair<iterator,bool> insert(const value_type& val)
 	{
 		removeGhost();
 		ft::pair<BTNode<value_type> *, bool> ret = addNode(val, &tree);
@@ -286,7 +286,7 @@ namespace ft
 		return (ft::make_pair(iterator(ret.first), ret.second));
 	}
 
-	iterator insert (iterator position, const value_type& val)
+	iterator insert(iterator position, const value_type& val)
 	{
 		binary_tree_ptr aux;
 		removeGhost();
@@ -300,7 +300,7 @@ namespace ft
 	}
 
 	template <class InputIterator>
-	void insert (InputIterator first, InputIterator last)
+	void insert(InputIterator first, InputIterator last)
 	{
 		for (; first != last; first++)
 			insert(*first);
@@ -491,7 +491,6 @@ template<class InputIterator>
 			if (to_find == node->data.first)
 				return (node);
 			if(_compare(to_find, (node->data).first))
-
 				return (findInNode(to_find, node->left, lastNode));
 			return (findInNode(to_find, node->right, lastNode));
 		}
@@ -507,7 +506,7 @@ template<class InputIterator>
 			}
 			if (findInNode(_data.first, *root, aux))
 				return ft::make_pair(aux, false);
-			if (_data.first < aux->data.first)
+			if (_compare(_data.first, aux->data.first))
 			{
 					aux->left = new BTNode<value_type>(_data);
 					aux->left->top = aux;
