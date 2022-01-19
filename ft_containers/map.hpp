@@ -244,7 +244,7 @@ namespace ft
 
 	bool empty() const
 	{
-		return (tree != ghost);
+		return (tree == ghost);
 	}
 
 	size_type size ( void ) const
