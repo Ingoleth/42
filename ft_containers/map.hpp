@@ -405,20 +405,17 @@ template<class InputIterator>
 
 		iterator upper_bound (const key_type& k)
 		{
-			binary_tree_ptr aux;
-
-			aux = tree->findSmallestNode(tree);
-			while (aux != ghost &&_compare(k, aux->data.first))
+			binary_tree_ptr aux = tree->findSmallestNode(tree);
+			while (aux != ghost && !_compare(k, aux->data.first))
 				aux = aux->getNext(aux);
 			return (aux);
 		}
 
 		const_iterator upper_bound (const key_type& k) const
 		{
-			binary_tree_ptr aux;
+			binary_tree_ptr aux = tree->findSmallestNode(tree);
 
-			aux = tree->findSmallestNode(tree);
-			while (aux != ghost &&_compare(k, aux->data.first))
+			while (aux != ghost && !_compare(k, aux->data.first))
 				aux = aux->getNext(aux);
 			return (aux);
 		}
