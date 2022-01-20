@@ -291,7 +291,7 @@ namespace ft
 		binary_tree_ptr aux;
 		removeGhost();
 		binary_tree_ptr ptr = position.base();
-		if (ptr != ghost && _compare((ptr->findSmallestNode(ptr)->data).first, val.first))
+		if (ptr != ghost && _compare((val.first, ptr->findSmallestNode(ptr)->data).first))
 			aux = addNode(val, &ptr).first;
 		else
 			aux = addNode(val, &tree).first;
