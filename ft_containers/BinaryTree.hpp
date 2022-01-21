@@ -27,13 +27,7 @@ namespace ft
 			right = 0;
 		}
 
-		~BTNode()
-		{
-			if (left)
-				delete left;
-			if (right)
-				delete right;
-		}
+		~BTNode() {}
 
 		size_t size(BTNode *node)
 		{
@@ -104,20 +98,6 @@ namespace ft
 				currentNode = currentNode->top;
 			}
 			return (0);
-		}
-
-		BTNode *copy(BTNode *node)
-		{
-			if (!node)
-				return (0);
-			BTNode *aux = new BTNode(node->data);
-			aux->left = copy(node->left);
-			if (aux->left)
-				aux->left->top = aux;
-			aux->right = copy(node->right);
-			if (aux->right)
-				aux->right->top = aux;
-			return (aux);
 		}
 
 		void displayNodeInfo()

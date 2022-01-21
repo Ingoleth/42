@@ -153,18 +153,19 @@ namespace ft
 	** --------------------------------- CONSTRUCTOR ---------------------------------
 	*/
 
-		//explicit map( const _Compare& comp, const _Alloc& alloc = Alloc() );
-
-		map() : _mem(), _compare(), _allocator()
+		explicit map(const key_compare& comp = key_compare(),
+			const allocator_type& alloc = allocator_type()) : _allocator(alloc), _compare(comp)
 		{
-			ghost = new BTNode<value_type>();
+			ghost = _allocator.allocate(1);
+			_allocator.construct(ghost, node_type());
 			tree = ghost;
 		}
 
 		template <class InputIterator>
-		map(InputIterator first, InputIterator last, const _Compare& comp = _Compare(), const _Alloc& alloc = _Alloc() ): _compare(comp), _allocator(alloc)
+		map(InputIterator first, InputIterator last, const _Compare& comp = key_compare(), const allocator_type& alloc = allocator_type() ): _allocator(alloc), _compare(comp)
 		{
-			ghost = new BTNode<value_type>();
+			ghost = _allocator.allocate(1);
+			_allocator.construct(ghost, node_type());
 			tree = ghost;
 
 			while (first != last)
@@ -174,23 +175,23 @@ namespace ft
 			}
 		};
 
-		map(const map &src) : _mem(src._mem), _compare(src._compare), _allocator(src._allocator)
+		map(const map &src) : _allocator(src._allocator), _compare(src._compare)
 		{
-			tree = src.tree->copy(src.tree);
+			tree = copy(src.tree);
 			ghost = tree->findBiggestNode(tree);
 		}
 
 		~map()
 		{
 			if (tree) //Probably not needed...
-				delete tree;
+				deleteTree(tree);
 		}
 
 		map& operator=( const map& other )
 		{
 			if (tree)
-				delete tree;
-			tree = other.tree->copy(other.tree);
+				deleteTree(tree);
+			tree = copy(other.tree);
 			ghost = tree->findBiggestNode(tree);
 			return (*this);
 		}
@@ -252,7 +253,7 @@ namespace ft
 		return (tree->size(tree) - 1);
 	}
 
-	size_type   max_size(void) const //handle allocator stuff...
+	size_type   max_size(void) const
 	{
 		return std::numeric_limits<difference_type>::max() / (sizeof(BTNode<value_type>));
 	}
@@ -289,6 +290,7 @@ namespace ft
 	iterator insert(iterator position, const value_type& val)
 	{
 		binary_tree_ptr aux;
+
 		removeGhost();
 		binary_tree_ptr ptr = position.base();
 		if (ptr != ghost && _compare((val.first, ptr->findSmallestNode(ptr)->data).first))
@@ -327,9 +329,8 @@ template<class InputIterator>
 	void swap (map& x)
 	{
 		std::swap(tree, x.tree);
-		std::swap(_mem, x._mem);
-		std::swap(_compare, x._compare);
 		std::swap(_allocator, x._allocator);
+		std::swap(_compare, x._compare);
 		std::swap(ghost, x.ghost);
 	}
 
@@ -452,14 +453,16 @@ template<class InputIterator>
 
 		allocator_type get_allocator() const
 		{
-			return (_mem);
+			return (_allocator);
 		}
 
 	protected:
+
+		typedef BTNode<value_type> node_type;
+
 		binary_tree_ptr			tree;
-		allocator_type		_mem;
-		key_compare			_compare;
-		allocator_type		_allocator;
+		typename _Alloc::template rebind<node_type>::other	_allocator;
+		key_compare				_compare;
 		binary_tree_ptr			ghost;
 	
 	private:
@@ -498,20 +501,23 @@ template<class InputIterator>
 
 			if (!*root)
 			{
-				*root = new BTNode<value_type>(_data);
+				*root = _allocator.allocate(1);
+				_allocator.construct(*root, node_type(_data));
 				return ft::make_pair(*root, true);
 			}
 			if (findInNode(_data.first, *root, aux))
 				return ft::make_pair(aux, false);
 			if (_compare(_data.first, aux->data.first))
 			{
-					aux->left = new BTNode<value_type>(_data);
+					aux->left = _allocator.allocate(1);
+					_allocator.construct(aux->left, node_type(_data));
 					aux->left->top = aux;
 					aux = aux->left;
 			}
 			else
 			{
-					aux->right = new BTNode<value_type>(_data);
+					aux->right = _allocator.allocate(1);
+					_allocator.construct(aux->right, node_type(_data));
 					aux->right->top = aux;
 					aux = aux->right;
 			}
@@ -588,7 +594,8 @@ template<class InputIterator>
 			}
 			aux->right = NULL;
 			aux->left = NULL;
-			delete aux;
+			_allocator.destroy(aux);
+			_allocator.deallocate(aux, 1);
 			insertGhost();
 			return true;
 		}
@@ -609,6 +616,32 @@ template<class InputIterator>
 			else
 				tree = ghost;
 			ghost->top = aux;
+		}
+
+		binary_tree_ptr copy(binary_tree_ptr node)
+		{
+			if (!node)
+				return (0);
+
+			binary_tree_ptr aux = _allocator.allocate(1);
+			_allocator.construct(aux, node_type(node->data));
+			aux->left = copy(node->left);
+			if (aux->left)
+				aux->left->top = aux;
+			aux->right = copy(node->right);
+			if (aux->right)
+				aux->right->top = aux;
+			return (aux);
+		}
+
+		void deleteTree(binary_tree_ptr node)
+		{
+			if (!node)
+				return ;
+			deleteTree(node->left);
+			deleteTree(node->right);
+			_allocator.destroy(node);
+			_allocator.deallocate(node, 1);
 		}
 	};
 
