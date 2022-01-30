@@ -15,6 +15,59 @@ namespace ft
 
 		Node() : data(), parent(), left(), right(), color(){}
 		Node(T _data, bool _color) : data(_data), parent(), left(), right(), color(_color){}
+
+		Node<T> *minimum(Node<T> *node) const
+		{
+			if (node)
+			{
+				while (node->left != NULL && node->left->left != NULL)
+					node = node->left;
+			}
+			return node;
+		}
+
+		// find the node with the maximum key
+		Node<T> *maximum(Node<T> *node) const
+		{
+			if (node)
+			{
+				while (node->right != NULL && node->right->right != NULL)
+					node = node->right;
+			}
+			return node;
+		}
+
+		Node<T> *getNext(Node<T> *currentNode) const
+		{
+			if (currentNode->right->right != NULL)
+				return (minimum(currentNode->right));
+			Node<T> * aux = currentNode->right;
+			while (true)
+			{
+				if (!currentNode->parent)
+					break;
+				if (currentNode->parent->left == currentNode)
+					return (currentNode->parent);
+				currentNode = currentNode->parent;
+			}
+			return (aux);
+		}
+
+		Node<T> *getPrevious(Node<T> *currentNode) const
+		{
+			if (currentNode->left->left != NULL)
+				return (maximum(currentNode->left));
+			Node<T> * aux = currentNode->right;
+			while (true)
+			{
+				if (!currentNode->parent)
+					break;
+				if (currentNode->parent->right == currentNode)
+					return (currentNode->parent);
+				currentNode = currentNode->parent;
+			}
+			return (aux);
+		}
 	};
 
 	// class RBTree implements the operations in Red Black Tree
@@ -23,11 +76,14 @@ namespace ft
 	{
 
 	private:
-		typedef ft::pair<_Key, _Tp> element;
-		typedef Node<ft::pair<_Key, _Tp> > *NodePtr;
+		typedef ft::pair<const _Key, _Tp> element;
+		typedef Node< element > nodeType;
+		typedef nodeType *NodePtr;
+		
 		NodePtr root;
 		NodePtr TNULL;
 		_Compare _compare;
+		typename _Alloc::template rebind<nodeType>::other	_allocator;
 
 		// initializes the nodes with appropiate values
 		// all the pointers are set to point to null
@@ -70,7 +126,7 @@ namespace ft
 			} 
 		}
 
-		NodePtr searchTreeHelper(NodePtr node, _Key key)
+		NodePtr searchTreeHelper(NodePtr node, _Key key) const
 		{
 			if (node == TNULL)
 				return NULL;
@@ -239,6 +295,14 @@ namespace ft
 			root->color = 0;
 		}
 
+		size_t sizeHelper(NodePtr node) const
+		{
+			if (node == TNULL)
+				return 0;
+			int i = 1 + sizeHelper(node->left) + sizeHelper(node->right);
+			return (i);
+		}
+
 		void printHelper(NodePtr root, std::string indent, bool last)
 		{
 			// print the tree structure on the screen
@@ -270,21 +334,25 @@ namespace ft
 				deletetree(node->left);
 			if (node->right != TNULL)
 				deletetree(node->right);
-			delete node;
+			_allocator.destroy(node);
+			_allocator.deallocate(node, 1);
 		}
 
 	public:
 		typedef ft::Node<ft::pair<int, int> > *element_ptr;
 
-		RBTree() : _compare()
+		RBTree(const _Compare& comp = _Compare(),
+			const _Alloc& alloc = _Alloc()) : _compare(comp), _allocator(alloc)
 		{
-			TNULL = new Node<element>; //TODO: Change so allocator is used;
+			TNULL = _allocator.allocate(1);
+			_allocator.construct(TNULL, nodeType());
 			root = TNULL;
 		}
 
-		RBTree(const RBTree &src) : _compare(src._compare)
+		RBTree(const RBTree &src) : _compare(src._compare), _allocator(src._allocator)
 		{
-			TNULL = new Node<element>; //TODO: Change so allocator is used;
+			TNULL = _allocator.allocate(1);
+			_allocator.construct(TNULL, nodeType());
 			root = copy(src.getRoot(), src.getTNull(), TNULL);
 		}
 
@@ -292,14 +360,15 @@ namespace ft
 		{
 			if (root != TNULL)
 				deletetree(root);
-			delete TNULL;
+			_allocator.destroy(TNULL);
+			_allocator.deallocate(TNULL, 1);
 		}
 
 		RBTree &operator=(RBTree const &src)
 		{
 			if (this->root != TNULL)
 				deletetree(root);
-			root = copy(src.getRoot(), src.getTNULL(), TNULL);
+			root = copy(src.getRoot(), src.getTNull(), TNULL);
 			return (*this);
 		}
 
@@ -323,15 +392,15 @@ namespace ft
 
 		// search the tree for the key k
 		// and return the corresponding node
-		NodePtr searchTree(_Key key)
+		NodePtr searchTree(_Key key) const
 		{
 			return searchTreeHelper(this->root, key);
 		}
 
 		// find the node with the minimum key
-		NodePtr minimum(NodePtr node)
+		NodePtr minimum(NodePtr node) const
 		{
-			if (node)
+			if (node != TNULL)
 			{
 				while (node->left != TNULL)
 				{
@@ -342,9 +411,9 @@ namespace ft
 		}
 
 		// find the node with the maximum key
-		NodePtr maximum(NodePtr node)
+		NodePtr maximum(NodePtr node) const
 		{
-			if (node)
+			if (node != TNULL)
 			{
 				while (node->right != TNULL)
 				{
@@ -431,17 +500,18 @@ namespace ft
 
 		// insert the key to the tree in its appropriate position
 		// and fix the tree
-		NodePtr insert(element data) {
+		ft::pair<NodePtr, bool>
+		insert(element data)
+		{
+			NodePtr node;
 			// Ordinary Binary Search Insertion
-			if (root != TNULL && searchTree(data.first))
-				return NULL;
+			if (root != TNULL && (node = searchTree(data.first)))
+				return ft::make_pair(node, false);
 
-			NodePtr node = new Node<element>;
-			node->parent = NULL;
-			node->data = data;
+			node = _allocator.allocate(1);
+			_allocator.construct(node, nodeType(data, 1)); // new node must be red
 			node->left = TNULL;
 			node->right = TNULL;
-			node->color = 1; // new node must be red
 
 			NodePtr y = NULL;
 			NodePtr x = this->root;
@@ -454,7 +524,6 @@ namespace ft
 				else
 					x = x->right;
 			}
-
 			// y is parent of x
 			node->parent = y;
 			if (y == NULL)
@@ -463,21 +532,24 @@ namespace ft
 				y->left = node;
 			else
 				y->right = node;
-
 			// if new node is a root node, simply return
-			if (node->parent == NULL){
+			if (node->parent == NULL)
+			{
 				node->color = 0;
-				return node;
+				TNULL->parent = maximum(root);
+				return ft::make_pair(node, true);
 			}
-
 			// if the grandparent is null, simply return
-			if (node->parent->parent == NULL) {
-				return node;
+			if (node->parent->parent == NULL)
+			{
+				TNULL->parent = maximum(root);
+				return ft::make_pair(node, true);
 			}
 
 			// Fix the tree
 			fixInsert(node);
-			return node;
+			TNULL->parent = maximum(root);
+			return ft::make_pair(node, true);
 		}
 
 		NodePtr getRoot() const
@@ -489,14 +561,19 @@ namespace ft
 			return this->TNULL;
 		}
 
+		_Compare getCompare() const
+		{
+			return this->_compare;
+		}
+
 		// delete the node from the tree
-		void deleteNode(_Key key)
+		bool deleteNode(_Key key)
 		{
 			NodePtr z;
 			NodePtr x, y;
 			
 			if (!(z = searchTree(key)))
-				return;
+				return (false);
 			y = z;
 			int y_original_color = y->color;
 			if (z->left == TNULL)
@@ -527,12 +604,15 @@ namespace ft
 				y->left->parent = y;
 				y->color = z->color;
 			}
-			delete z;
+			_allocator.destroy(z);
+			_allocator.deallocate(z, 1);
 			if (y_original_color == 0)
 				fixDelete(x);
+			TNULL->parent = maximum(root);
+			return (true);
 		}
 
-		NodePtr getNext(NodePtr currentNode)
+		NodePtr getNext(NodePtr currentNode) const
 		{
 			if (currentNode->right != TNULL)
 				return (minimum(currentNode->right));
@@ -544,10 +624,10 @@ namespace ft
 					return (currentNode->parent);
 				currentNode = currentNode->parent;
 			}
-			return (0);
+			return (TNULL);
 		}
 		
-		NodePtr getPrevious(NodePtr currentNode)
+		NodePtr getPrevious(NodePtr currentNode) const
 		{
 			if (currentNode->left != TNULL)
 				return (maximum(currentNode->left));
@@ -564,9 +644,8 @@ namespace ft
 
 		NodePtr copy(NodePtr node, NodePtr prevTNull, NodePtr NewTNull)
 		{
-			//NodePtr aux = _allocator.allocate(1);
-			//_allocator.construct(aux, node_type(node->data));
-			NodePtr aux = new Node<element>(node->data, node->color); //TODO: Change
+			NodePtr aux = _allocator.allocate(1);
+			_allocator.construct(aux, nodeType(node->data, node->color));
 			if (node->left == prevTNull)
 				aux->left = NewTNull;
 			else
@@ -582,6 +661,24 @@ namespace ft
 				aux->right->parent = aux;
 			}
 			return (aux);
+		}
+
+		bool empty ( void ) const
+		{
+			if (root == TNULL)
+				return true;
+			return false;
+		}
+
+		size_t size( void ) const
+		{
+			return sizeHelper(this->root);
+		}
+
+		void clear( void )
+		{
+			this->deletetree(root);
+			root = TNULL;
 		}
 
 		// print the tree structure on the screen

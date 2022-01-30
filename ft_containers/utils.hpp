@@ -201,6 +201,17 @@ namespace ft
 		}
 		return (first1 == last1) && (first2 != last2);
 	}
+
+	template<typename _Tp>
+    struct greater : public std::binary_function<_Tp, _Tp, bool>
+    {
+    	bool operator()(const _Tp& __x, const _Tp& __y) const
+		{
+			return __y < __x;
+		}
+    };
+
+
 }
 
 # endif
