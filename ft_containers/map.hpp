@@ -315,7 +315,7 @@ template<class InputIterator>
 
 	void swap (map& x) //Todo?
 	{
-		std::swap(tree, x.tree);
+		tree.swap(x.tree);
 	}
 
 	/*

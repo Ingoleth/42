@@ -682,10 +682,18 @@ namespace ft
 		}
 
 		// print the tree structure on the screen
-		void prettyPrint() {
-			if (root) {
+		void prettyPrint()
+		{
+			if (root)
+			{
 				printHelper(this->root, "", true);
 			}
+		}
+
+		void swap(RBTree &src)
+		{
+			std::swap(src.root, root);
+			std::swap(src.TNULL, TNULL);
 		}
 
 	};
