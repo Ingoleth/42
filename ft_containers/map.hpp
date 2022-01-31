@@ -302,10 +302,15 @@ namespace ft
 	}
 	
 template<class InputIterator>
-	void erase (InputIterator first, InputIterator last) //How da fuck do I remove stuff without you removing all the things?
+	void erase (InputIterator first, InputIterator last)
 	{
-		for (InputIterator aux = first; first != last; first = aux, aux++)
-			erase(first);
+		iterator it = first;
+		while (first != last)
+		{
+			++first;
+			erase(it);
+			it = first;
+		}
 	}
 
 	void swap (map& x) //Todo?
