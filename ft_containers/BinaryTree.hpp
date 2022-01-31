@@ -146,9 +146,15 @@ namespace ft
 			NodePtr s;
 			while (x != root && x->color == 0)
 			{
+				if (x == TNULL) //TODO: Check logic and all that... My guess is that the rand got the value of TNULL...
+					return ;
 				if (x == x->parent->left)
 				{
+					if (x->parent->right == TNULL) //TODO: Check logic as well;
+						return ;
 					s = x->parent->right;
+					if (s== TNULL) //TODO: Check logic as well;
+						return ;
 					if (s->color == 1)
 					{
 						// case 3.1
@@ -156,9 +162,12 @@ namespace ft
 						x->parent->color = 1;
 						leftRotate(x->parent);
 						s = x->parent->right;
+						if (s== TNULL) //TODO: Check logic as well;
+							return ;
+	
 					}
 
-					if (s->left->color == 0 && s->right->color == 0)
+					if ( s->left->color == 0 && s->right->color == 0)
 					{
 						// case 3.2
 						s->color = 1;
@@ -172,6 +181,8 @@ namespace ft
 							s->color = 1;
 							rightRotate(s);
 							s = x->parent->right;
+							if (s== TNULL) //TODO: Check logic as well;
+								return ;
 						} 
 
 						// case 3.4
@@ -185,6 +196,8 @@ namespace ft
 				else
 				{
 					s = x->parent->left;
+					if (s== TNULL) //TODO: Check logic as well;
+						return ;
 					if (s->color == 1)
 					{
 						// case 3.1
@@ -192,6 +205,9 @@ namespace ft
 						x->parent->color = 1;
 						rightRotate(x->parent);
 						s = x->parent->left;
+						if (s== TNULL) //TODO: Check logic as well;
+							return ;
+
 					}
 
 					if (s->right->color == 0 && s->right->color == 0)
@@ -208,6 +224,8 @@ namespace ft
 							s->color = 1;
 							leftRotate(s);
 							s = x->parent->left;
+							if (s== TNULL) //TODO: Check logic as well;
+								return ;
 						} 
 
 						// case 3.4
