@@ -39,7 +39,7 @@ namespace ft
 
 		Node<T> *getNext(Node<T> *currentNode) const
 		{
-			if (currentNode->right->right != NULL)
+			if (currentNode->right && currentNode->right->right != NULL)
 				return (minimum(currentNode->right));
 			Node<T> * aux = currentNode->right;
 			while (true)
@@ -55,7 +55,7 @@ namespace ft
 
 		Node<T> *getPrevious(Node<T> *currentNode) const
 		{
-			if (currentNode->left->left != NULL)
+			if (currentNode->left && currentNode->left->left != NULL)
 				return (maximum(currentNode->left));
 			Node<T> * aux = currentNode->right;
 			while (true)
