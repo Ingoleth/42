@@ -66,6 +66,9 @@ void test_init_times()
 
 int main (void)
 {
+	test_vector();
 	test_init_times();
+	test_stack();
+	test_map();
 	return (0);
 }

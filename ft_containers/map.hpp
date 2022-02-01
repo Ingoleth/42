@@ -273,36 +273,30 @@ namespace ft
 
 	iterator insert(iterator position, const value_type& val) //TODO:hmmmmm
 	{
-		nodePtr aux;
-
-		aux = tree->searchTree(position->base(), val);
-		if (aux)
-			tree->deleteNode(aux, val);
-		else
-			tree->deleteNode(val);
-		
+			static_cast<void>(position);
+			ft::pair<nodePtr, bool> ret = tree.insert(val);
+			return (iterator(ret.first));
 	}
 
 	template <class InputIterator>
-	void insert(InputIterator first, InputIterator last)
+	void insert(InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type * = NULL)
 	{
 		for (; first != last; first++)
 			insert(*first);
-	}
-
-	template<class InputIterator>
-	void erase (InputIterator position)
-	{
-		tree.deleteNode((*position).first);
 	}
 
 	size_type erase (const key_type& k)
 	{
 		return (tree.deleteNode(k));
 	}
+
+	void erase (iterator position)
+	{
+		tree.deleteNode(position->first);
+	}
 	
 template<class InputIterator>
-	void erase (InputIterator first, InputIterator last)
+	void erase (InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type * = NULL)
 	{
 		iterator it = first;
 		while (first != last)

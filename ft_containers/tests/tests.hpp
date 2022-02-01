@@ -9,6 +9,7 @@
 # include <iostream>
 # include "../vector.hpp"
 # include "../stack.hpp"
+# include "../map.hpp"
 
 # ifdef __linux__
 #  define RESET "\e[0m"
@@ -26,6 +27,7 @@
 
 # define GOOD "✓"
 # define FAIL "❌"
+# define MARGIN 120
 
 void	test_vector(void);
 void	test_list(void);
@@ -35,7 +37,7 @@ void	test_queue(void);
 
 inline void print_header(std::string str)
 {
-	int margin = (40 - str.length()) / 2;
+	int margin = (MARGIN + 2 - str.length()) / 2;
 	int width = (margin * 2 + str.length()) + 2;
 	std::cout << BLUE << std::endl;
 	std::cout << std::string(width, '*') << std::endl;
@@ -47,7 +49,7 @@ inline void print_header(std::string str)
 template <typename T>
 inline void check(std::string name, T a, T b)
 {
-	std::string margin(38 - name.length(), ' ');
+	std::string margin(MARGIN - name.length(), ' ');
 	if (a == b)
 		std::cout << name << ": " << margin << BOLD << GREEN << GOOD << RESET << std::endl;
 	else
@@ -56,7 +58,7 @@ inline void check(std::string name, T a, T b)
 
 inline void check(std::string name, bool good)
 {
-	std::string margin(38 - name.length(), ' ');
+	std::string margin(MARGIN - name.length(), ' ');
 	if (good)
 		std::cout << name << ": " << margin << BOLD << GREEN << GOOD << RESET << std::endl;
 	else

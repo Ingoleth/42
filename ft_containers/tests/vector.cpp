@@ -272,6 +272,9 @@ static void operators(void)
 
 void	test_vector(void)
 {
+	std::cout << "\n\n\n";
+	std::cout << " ---------------- VECTOR -----------------\n";
+	std::cout << "\n\n";
 	print_header("Vector");
 
 	default_constructor();

@@ -5,6 +5,7 @@
 # include "utils.hpp"
 # include "Iterator.hpp"
 # include <limits>
+# include <sstream>
 
 namespace ft
 {
@@ -382,15 +383,25 @@ namespace ft
 		
 			reference at (size_t n)
 			{
-				if (n >= _storedElems) // check
-					throw (std::out_of_range("Because reasons")); //Change!!!!
+				if (n >= _storedElems)
+				{
+					std::stringstream exception_message;
+					exception_message << "vector::_range_check: n (which is " << n << ""
+					") >= this->size() (which is " << _storedElems << ")";
+					throw std::out_of_range(exception_message.str());
+				}
 				return (_array[n]);
 			}
 		
 			const_reference	at(size_t n) const
 			{
-				if (n >= _capacity)
-					throw (std::out_of_range("Because reasons"));
+				if (n >= _storedElems)
+				{
+					std::stringstream exception_message;
+					exception_message << "vector::_range_check: n (which is " << n << ""
+					") >= this->size() (which is " << _storedElems << ")";
+					throw std::out_of_range(exception_message.str());
+				}
 				return (_array[n]);
 			}
 
