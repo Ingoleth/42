@@ -8,6 +8,7 @@
 
 # include "Iterator.hpp"
 # include "BinaryTree.hpp"
+# include <map>
 
 namespace ft
 {
@@ -270,18 +271,17 @@ namespace ft
 		return (ft::make_pair(iterator(ret.first), ret.second));
 	}
 
-	/*iterator insert(iterator position, const value_type& val) //TODO:hmmmmm
+	iterator insert(iterator position, const value_type& val) //TODO:hmmmmm
 	{
-		binary_tree_ptr aux;
+		nodePtr aux;
 
-		binary_tree_ptr ptr = position.base();
-		if (ptr != ghost && _compare((val.first, ptr->findSmallestNode(ptr)->data).first))
-			aux = addNode(val, &ptr).first;
+		aux = tree->searchTree(position->base(), val);
+		if (aux)
+			tree->deleteNode(aux, val);
 		else
-			aux = addNode(val, &tree).first;
-		insertGhost();
-		return (iterator(aux));
-	}*/
+			tree->deleteNode(val);
+		
+	}
 
 	template <class InputIterator>
 	void insert(InputIterator first, InputIterator last)
@@ -441,8 +441,20 @@ template<class InputIterator>
 		}
 	};
 
+		template <class Key, class T, class Compare1, class Alloc1, class Compare2, class Alloc2>
+		bool operator== ( const ft::map<Key,T,Compare1,Alloc1>& lhs, const std::map<Key,T,Compare2,Alloc2>& rhs )
+		{
+			return (lhs.size() == rhs.size() && ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
+		}
+
+		template <class Key, class T, class Compare1, class Alloc1, class Compare2, class Alloc2>
+		bool operator== ( const std::map<Key,T,Compare1,Alloc1>& lhs, const ft::map<Key,T,Compare2,Alloc2>& rhs )
+		{
+			return (lhs.size() == rhs.size() && ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
+		}
+
 		template <class Key, class T, class Compare, class Alloc>
-		bool operator== ( const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs )
+		bool operator== ( const ft::map<Key,T,Compare,Alloc>& lhs, const ft::map<Key,T,Compare,Alloc>& rhs )
 		{
 			return (lhs.size() == rhs.size() && ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
 		}

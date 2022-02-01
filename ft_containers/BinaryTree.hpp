@@ -415,6 +415,11 @@ namespace ft
 			return searchTreeHelper(this->root, key);
 		}
 
+		NodePtr searchTree(NodePtr node, _Key key) const
+		{
+			return searchTreeHelper(node, key);
+		}
+
 		// find the node with the minimum key
 		NodePtr minimum(NodePtr node) const
 		{
@@ -584,14 +589,10 @@ namespace ft
 			return this->_compare;
 		}
 
-		// delete the node from the tree
-		bool deleteNode(_Key key)
+		void deleteNodeHelper(NodePtr z)
 		{
-			NodePtr z;
 			NodePtr x, y;
-			
-			if (!(z = searchTree(key)))
-				return (false);
+
 			y = z;
 			int y_original_color = y->color;
 			if (z->left == TNULL)
@@ -627,7 +628,23 @@ namespace ft
 			if (y_original_color == 0)
 				fixDelete(x);
 			TNULL->parent = maximum(root);
-			return (true);
+		}
+
+		// delete the node from the tree
+		bool deleteNode(_Key key)
+		{
+			NodePtr z;
+			
+			if (!(z = searchTree(key)))
+				return (false);
+			deleteNodeHelper(z);
+			return(true);
+		}
+
+		bool deleteNode(NodePtr node)
+		{
+			deleteNodeHelper(node);
+			return(true);
 		}
 
 		NodePtr getNext(NodePtr currentNode) const

@@ -53,7 +53,8 @@ namespace ft
 	//and so on...
 
 	template<typename T> //FIXME: creo que no lo utilizo
-	struct	has_iterator_category {
+	struct	has_iterator_category
+	{
 		typedef char yes[1];
 		typedef char no[2];
 
@@ -103,6 +104,12 @@ namespace ft
 			first(pr.first),
 			second(pr.second) {}
 
+		
+		template <class U1, class U2>
+		pair (const std::pair<U1,U2>& pr):
+			first(pr.first),
+			second(pr.second) {}
+
 		template <class U, class V> 
 			pair (const pair<U,V>& pr):
 				first(pr.first),
@@ -118,10 +125,23 @@ namespace ft
 			return (*this);
 		}
 
+		operator std::pair<first_type, second_type>() const
+		{
+			return std::make_pair(first, second);
+		}
+
 	};
 
 		template <class T1, class T2>
 		bool operator== (const pair<T1,T2>& lhs, const pair<T1,T2>& rhs)
+		{ return lhs.first == rhs.first && lhs.second == rhs.second; }
+
+		template <class T1, class T2>
+		bool operator== (const ft::pair<T1,T2>& lhs, const std::pair<T1,T2>& rhs)
+		{ return lhs.first == rhs.first && lhs.second == rhs.second; }
+
+		template <class T1, class T2>
+		bool operator== (const std::pair<T1,T2>& lhs, const ft::pair<T1,T2>& rhs)
 		{ return lhs.first == rhs.first && lhs.second == rhs.second; }
 
 	template <class T1, class T2>
