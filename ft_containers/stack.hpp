@@ -4,7 +4,7 @@
 
 namespace ft
 {
-	template < class T, class _Sequence = vector<T> >
+	template < class T, class _Sequence = ft::vector<T> >
 	class stack
 	{
 	public:
@@ -17,8 +17,6 @@ namespace ft
 		typedef             _Sequence                   container_type;
 
 		explicit stack(const container_type &src = container_type()) : data(src) {};
-
-			  ~stack() {};
 
 		bool empty() const
 		{

@@ -358,9 +358,11 @@ namespace ft
 
 				if (n <= _capacity) //|| n > max_size()) //throw length error
 					return ;
+				if (_capacity * 2 > n)
+					n = _capacity * 2;
 				aux_ptr = _mem.allocate(n, _array);
 				for (size_t i = 0; i < _storedElems; i++)
-					aux_ptr[i] = _array[i];
+					_mem.construct(&aux_ptr[i], _array[i]);
 				if (_array) //Might not be needed
 					_mem.deallocate(_array, _capacity);
 				_array = aux_ptr;
@@ -548,7 +550,7 @@ namespace ft
 				{
 					if (_storedElems + 1 > _capacity)
 						reserve(_storedElems + 1);
-					_mem.construct(&*end(), val);
+					_mem.construct(&_array[_storedElems], val);
 					_storedElems++;
 				}
 			}

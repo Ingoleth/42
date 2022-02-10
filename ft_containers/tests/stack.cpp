@@ -35,7 +35,7 @@ static void front_back(void)
 
 void test_stack(void)
 {
-	print_header("stack");
+	print_header("STACK", true);
 	constructors();
 	front_back();
 }

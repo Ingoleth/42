@@ -114,7 +114,9 @@ static void access_operator(void)
 	}
 	catch (std::exception &e)
 	{
-		std::cout << e.what() << ": " << std::string(7, ' ') << BOLD << GREEN << GOOD << RESET << std::endl;
+		std::cout << ": " << std::string(MARGIN - 2, ' ') << BOLD << GREEN << GOOD << RESET << std::endl;
+		std::cout << "Execution thrown:\n";
+		std::cout << e.what() <<std::endl;
 	}
 	try
 	{
@@ -122,7 +124,9 @@ static void access_operator(void)
 	}
 	catch (std::exception &e)
 	{
-		std::cout << e.what() << ": " << std::string(20, ' ') << BOLD << GREEN << GOOD << RESET << std::endl;
+		std::cout << std::string(20, ' ') << BOLD << GREEN << GOOD << RESET << std::endl;
+		std::cout << "Execution thrown:\n";
+		std::cout << e.what() <<std::endl;
 	}
 	try
 	{
@@ -130,7 +134,9 @@ static void access_operator(void)
 	}
 	catch (std::exception &e)
 	{
-		std::cout << e.what() << ": " << std::string(8, ' ') << BOLD << GREEN << GOOD << RESET << std::endl;
+		std::cout << std::string(8, ' ') << BOLD << GREEN << GOOD << RESET << std::endl;
+		std::cout << "Execution thrown:\n";
+		std::cout << e.what() <<std::endl;
 	}
 	try
 	{
@@ -138,7 +144,9 @@ static void access_operator(void)
 	}
 	catch (std::exception &e)
 	{
-		std::cout << e.what() << ": " << std::string(21, ' ') << BOLD << GREEN << GOOD << RESET << std::endl;
+		std::cout << std::string(21, ' ') << BOLD << GREEN << GOOD << RESET << std::endl;
+		std::cout << "Execution thrown:\n";
+		std::cout << e.what() <<std::endl;
 	}
 }
 
@@ -272,10 +280,7 @@ static void operators(void)
 
 void	test_vector(void)
 {
-	std::cout << "\n\n\n";
-	std::cout << " ---------------- VECTOR -----------------\n";
-	std::cout << "\n\n";
-	print_header("Vector");
+	print_header("VECTOR", true);
 
 	default_constructor();
 	copy_constructor();
