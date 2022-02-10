@@ -20,5 +20,6 @@ int main (void)
 	test_stack();
 	test_map();
 	test_exec_time();
+	test_leaks();
 	return (0);
 }

@@ -114,7 +114,7 @@ static void access_operator(void)
 	}
 	catch (std::exception &e)
 	{
-		std::cout << ": " << std::string(MARGIN - 2, ' ') << BOLD << GREEN << GOOD << RESET << std::endl;
+		std::cout << ": " << std::string(MARGIN - 12, ' ') << BOLD << GREEN << GOOD << RESET << std::endl;
 		std::cout << "Execution thrown:\n";
 		std::cout << e.what() <<std::endl;
 	}
@@ -124,7 +124,7 @@ static void access_operator(void)
 	}
 	catch (std::exception &e)
 	{
-		std::cout << std::string(20, ' ') << BOLD << GREEN << GOOD << RESET << std::endl;
+		std::cout << std::string(MARGIN - 10, ' ') << BOLD << GREEN << GOOD << RESET << std::endl;
 		std::cout << "Execution thrown:\n";
 		std::cout << e.what() <<std::endl;
 	}
@@ -134,7 +134,7 @@ static void access_operator(void)
 	}
 	catch (std::exception &e)
 	{
-		std::cout << std::string(8, ' ') << BOLD << GREEN << GOOD << RESET << std::endl;
+		std::cout << std::string(MARGIN - 9, ' ') << BOLD << GREEN << GOOD << RESET << std::endl;
 		std::cout << "Execution thrown:\n";
 		std::cout << e.what() <<std::endl;
 	}
@@ -144,7 +144,7 @@ static void access_operator(void)
 	}
 	catch (std::exception &e)
 	{
-		std::cout << std::string(21, ' ') << BOLD << GREEN << GOOD << RESET << std::endl;
+		std::cout << std::string(MARGIN - 9, ' ') << BOLD << GREEN << GOOD << RESET << std::endl;
 		std::cout << "Execution thrown:\n";
 		std::cout << e.what() <<std::endl;
 	}

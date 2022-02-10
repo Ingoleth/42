@@ -27,29 +27,23 @@
 
 # define GOOD "✅"
 # define FAIL "❌"
-# define MARGIN 120
+# define MARGIN 85
+# define TEST_SIZE 1000000
 
 void	test_vector(void);
 void	test_map(void);
 void	test_stack(void);
 void	test_exec_time();
+void	test_leaks();
 
-inline void print_header(std::string str)
+inline void print_header(std::string str, bool green = false)
 {
 	int margin = (MARGIN - str.length()) / 2;
-	std::cout << BLUE << std::endl;
+	std::cout << (green ? GREEN : BLUE);
+	if (green)
+		std::cout << std::endl;
 	std::cout << std::endl;
-	std::cout << std::string(margin, ' ') << str << std::string(margin, ' ') << std::endl;
-	std::cout << std::endl;
-	std::cout << RESET;
-};
-
-inline void print_header(std::string str, bool green)
-{
-	int margin = (MARGIN - str.length()) / 2;
-	std::cout << (green ? GREEN : BLUE) << std::endl;
-	std::cout << std::endl;
-	std::cout << std::string(margin, ' ') << str << std::string(margin, ' ') << std::endl;
+	std::cout << std::string(margin, '-') << ' ' << str << ' ' << std::string(margin, '-') << std::endl;
 	std::cout << std::endl;
 	std::cout << RESET;
 };

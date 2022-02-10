@@ -73,13 +73,13 @@ namespace ft
 		VectorIterator operator++(int)
 		{
 			VectorIterator tmp(*this);
-			++this->p;
+			this->p++;
 			return (tmp);
 		}
 
 		VectorIterator &operator++()
 		{
-			++this->p;
+			this->p++;
 			return (*this);
 		}
 

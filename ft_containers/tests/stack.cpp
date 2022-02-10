@@ -11,10 +11,6 @@ static void constructors(void)
 
 static void front_back(void)
 {
-	
-	std::cout << "\n\n\n";
-	std::cout << " ---------------- STACK -----------------\n";
-	std::cout << "\n\n";
 	print_header("Front / Back / Push / Pop");
 	ft::stack<int> q1;
 	std::stack<int> q2;

@@ -12,8 +12,8 @@ void test_vector_exec_times()
 	std::vector<long> stl_container;
 
 	long seed = time(NULL);
-	long size = 100000;
-	std::cout << "semilla: " << seed << std::endl;
+	long size = TEST_SIZE;
+	std::cout << "semilla: " << seed << std::endl << std::endl;
 	std::cout << "Tested size: " << size << std::endl;
 	srand(seed);
 	std::vector<long> values;
@@ -62,8 +62,8 @@ void test_stack_exec_times()
 	std::stack<long> stl_container;
 
 	long seed = time(NULL);
-	long size = 100000;
-	std::cout << "semilla: " << seed << std::endl;
+	long size = TEST_SIZE;
+	std::cout << "semilla: " << seed << std::endl << std::endl;
 	std::cout << "Tested size: " << size << std::endl;
 	srand(seed);
 	std::vector<long> values;
@@ -102,8 +102,8 @@ void test_map_exec_times()
 	std::map<long, int> stl_container;
 
 	long seed = time(NULL);
-	long size = 100000;
-	std::cout << "semilla: " << seed << std::endl;
+	long size = TEST_SIZE;
+	std::cout << "semilla: " << seed << std::endl << std::endl;
 	std::cout << "Tested size: " << size << std::endl;
 	srand(seed);
 	std::vector<long> values;
@@ -154,4 +154,11 @@ void test_exec_time()
 	test_stack_exec_times();
 	print_header("MAP EXECUTION TIMES", true);
 	test_map_exec_times();
+	std::cout << "Hello\n";
+}
+
+void test_leaks()
+{
+	print_header("LEAKS", true);
+	system("leaks ft_containers");
 }

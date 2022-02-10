@@ -359,6 +359,11 @@ namespace ft
 	public:
 		typedef ft::Node<ft::pair<int, int> > *element_ptr;
 
+		size_t	max_size(void) const
+		{
+			return _allocator.max_size();
+		}
+
 		RBTree(const _Compare& comp = _Compare(),
 			const _Alloc& alloc = _Alloc()) : _compare(comp), _allocator(alloc)
 		{
