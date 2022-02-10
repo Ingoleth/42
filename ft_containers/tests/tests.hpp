@@ -36,17 +36,7 @@ void	test_stack(void);
 void	test_exec_time();
 void	test_leaks();
 
-inline void print_header(std::string str, bool green = false)
-{
-	int margin = (MARGIN - str.length()) / 2;
-	std::cout << (green ? GREEN : BLUE);
-	if (green)
-		std::cout << std::endl;
-	std::cout << std::endl;
-	std::cout << std::string(margin, '-') << ' ' << str << ' ' << std::string(margin, '-') << std::endl;
-	std::cout << std::endl;
-	std::cout << RESET;
-};
+void print_header(std::string str, bool green = false);
 
 template <typename T>
 inline void check(std::string name, T a, T b)
@@ -70,10 +60,6 @@ inline void check(std::string name, bool good)
 template <typename T>
 bool operator==(ft::vector<T> &a, std::vector<T> &b)
 {
-	/*std::cout << a.size() << std::endl;
-	std::cout << b.size() << std::endl;
-	std::cout << a.empty() << std::endl;
-	std::cout << b.empty() << std::endl;*/
 	if (a.size() != b.size())
 		return (false);
 	if (a.empty() != b.empty())
