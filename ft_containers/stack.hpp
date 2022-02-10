@@ -48,23 +48,23 @@ namespace ft
 			data.pop_back();
 		}
 
-	template <class Tn, class _SequenceN>
-	friend bool operator==(const stack <Tn, _SequenceN> &a, const stack <Tn, _SequenceN> &b);
+		template <class Tn, class _SequenceN>
+		friend bool operator==(const stack <Tn, _SequenceN> &a, const stack <Tn, _SequenceN> &b);
 
-	template <class Tn, class _SequenceN>
-	friend	bool operator!=(const stack <Tn, _SequenceN> &a, const stack <Tn, _SequenceN> &b);
+		template <class Tn, class _SequenceN>
+		friend	bool operator!=(const stack <Tn, _SequenceN> &a, const stack <Tn, _SequenceN> &b);
 
-	template <class Tn, class _SequenceN>
-	friend	bool operator<(const stack <Tn, _SequenceN> &a, const stack <Tn, _SequenceN> &b);
+		template <class Tn, class _SequenceN>
+		friend	bool operator<(const stack <Tn, _SequenceN> &a, const stack <Tn, _SequenceN> &b);
 
-	template <class Tn, class _SequenceN>
-	friend	bool operator>(const stack <Tn, _SequenceN> &a, const stack <Tn, _SequenceN> &b);
+		template <class Tn, class _SequenceN>
+		friend	bool operator>(const stack <Tn, _SequenceN> &a, const stack <Tn, _SequenceN> &b);
 
-	template <class Tn, class _SequenceN>
-	friend	bool operator>=(const stack <Tn, _SequenceN> &a, const stack <Tn, _SequenceN> &b);
+		template <class Tn, class _SequenceN>
+		friend	bool operator>=(const stack <Tn, _SequenceN> &a, const stack <Tn, _SequenceN> &b);
 
-	template <class Tn, class _SequenceN>
-	friend	bool operator<=(const stack <Tn, _SequenceN> &a, const stack <Tn, _SequenceN> &b);
+		template <class Tn, class _SequenceN>
+		friend	bool operator<=(const stack <Tn, _SequenceN> &a, const stack <Tn, _SequenceN> &b);
 
 		protected:
 			container_type data;
