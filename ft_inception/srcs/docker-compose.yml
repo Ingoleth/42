@@ -1,0 +1,66 @@
+services:
+  nginx:
+    networks:
+      - inception
+    build: ./nginx
+    restart: on-failure
+    ports:
+      - "443:443"
+    volumes:
+      - ${VOLUMES_PATH}/wordpress:/var/www/html/wordpress
+  
+  wordpress:
+    networks:
+      - inception
+    build: ./wordpress
+    restart: on-failure
+    ports:
+      - "9000"
+    volumes:
+      - ${VOLUMES_PATH}/wordpress:/var/www/html/wordpress
+    environment:
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - WP_DATABASE=${WP_DATABASE}
+      - WP_TITLE=${WP_TITLE}
+      - WP_ADMIN=${WP_ADMIN}
+      - WP_ADMIN_PASSWORD=${WP_ADMIN_PASSWORD}
+      - WP_ADMIN_EMAIL=${WP_ADMIN_EMAIL}
+      - WP_USER=${WP_USER}
+      - WP_USER_PASSWORD=${WP_USER_PASSWORD}
+      - WP_USER_EMAIL=${WP_USER_EMAIL}
+      - $DOMAIN_NAME=${DOMAIN_NAME}
+    depends_on:
+      - mariadb
+  
+  mariadb:
+    networks:
+      - inception
+    build: ./mariadb
+    restart: on-failure
+    ports:
+      - "3306"
+    volumes:
+      - ${VOLUMES_PATH}/mariadb:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - WP_DATABASE=${WP_DATABASE}
+
+networks:
+  inception:
+
+volumes:
+  volume-mariadb:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: ${VOLUMES_PATH}/mariadb
+  volume-wordpress:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: ${VOLUMES_PATH}/wordpress
