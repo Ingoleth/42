@@ -4,7 +4,7 @@
 
 namespace ft
 {
-	template < class T, class _Sequence = vector<T> >
+	template < class T, class _Sequence = ft::vector<T> >
 	class stack
 	{
 	public:
@@ -17,8 +17,6 @@ namespace ft
 		typedef             _Sequence                   container_type;
 
 		explicit stack(const container_type &src = container_type()) : data(src) {};
-
-			  ~stack() {};
 
 		bool empty() const
 		{
@@ -50,23 +48,23 @@ namespace ft
 			data.pop_back();
 		}
 
-	template <class Tn, class _SequenceN>
-	friend bool operator==(const stack <Tn, _SequenceN> &a, const stack <Tn, _SequenceN> &b);
+		template <class Tn, class _SequenceN>
+		friend bool operator==(const stack <Tn, _SequenceN> &a, const stack <Tn, _SequenceN> &b);
 
-	template <class Tn, class _SequenceN>
-	friend	bool operator!=(const stack <Tn, _SequenceN> &a, const stack <Tn, _SequenceN> &b);
+		template <class Tn, class _SequenceN>
+		friend	bool operator!=(const stack <Tn, _SequenceN> &a, const stack <Tn, _SequenceN> &b);
 
-	template <class Tn, class _SequenceN>
-	friend	bool operator<(const stack <Tn, _SequenceN> &a, const stack <Tn, _SequenceN> &b);
+		template <class Tn, class _SequenceN>
+		friend	bool operator<(const stack <Tn, _SequenceN> &a, const stack <Tn, _SequenceN> &b);
 
-	template <class Tn, class _SequenceN>
-	friend	bool operator>(const stack <Tn, _SequenceN> &a, const stack <Tn, _SequenceN> &b);
+		template <class Tn, class _SequenceN>
+		friend	bool operator>(const stack <Tn, _SequenceN> &a, const stack <Tn, _SequenceN> &b);
 
-	template <class Tn, class _SequenceN>
-	friend	bool operator>=(const stack <Tn, _SequenceN> &a, const stack <Tn, _SequenceN> &b);
+		template <class Tn, class _SequenceN>
+		friend	bool operator>=(const stack <Tn, _SequenceN> &a, const stack <Tn, _SequenceN> &b);
 
-	template <class Tn, class _SequenceN>
-	friend	bool operator<=(const stack <Tn, _SequenceN> &a, const stack <Tn, _SequenceN> &b);
+		template <class Tn, class _SequenceN>
+		friend	bool operator<=(const stack <Tn, _SequenceN> &a, const stack <Tn, _SequenceN> &b);
 
 		protected:
 			container_type data;

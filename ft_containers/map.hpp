@@ -243,7 +243,7 @@ namespace ft
 
 	size_type   max_size(void) const
 	{
-		return std::numeric_limits<difference_type>::max() / (sizeof(nodeType));
+		return tree.max_size();
 	}
 
 	/*
