@@ -9,5 +9,5 @@ down:
 clean:
 	docker-compose --file 'srcs/docker-compose.yml' down --timeout 2
 	# docker prune
-	@rm -rf ${VOLUMES_PATH}
+	rm -rf ${VOLUMES_PATH}
 	echo "Volumes on ${VOLUMES_PATH} were removed"

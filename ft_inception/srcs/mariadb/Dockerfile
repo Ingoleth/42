@@ -1,6 +1,8 @@
 #Pulls base container image;
 FROM debian:buster
 
+RUN groupadd -r mysql && useradd -r -g mysql mysql
+
 #Installs base dependencies
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y update > /dev/null && apt-get -y upgrade > /dev/null
 

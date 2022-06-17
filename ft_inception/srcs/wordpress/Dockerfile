@@ -24,4 +24,4 @@ RUN mkdir -p /var/run/php
 EXPOSE 9000
 
 #Command with which the container is initializated
-ENTRYPOINT ["sh", "/entrypoint.sh"]
+ENTRYPOINT ["bash", "/entrypoint.sh"]
